@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include "CheckMethod.h"
-#include "CheckMethodBase.h"
-#include "CheckMethodLogin.h"
-#include "CheckMethodMemory.h"
+class CheckMethod;
+class CheckMethodBase;
+class CheckMethodLogin;
+class CheckMethodMemory;
 
 class IKeyChecker {
 	public:

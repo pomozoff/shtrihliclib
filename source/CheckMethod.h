@@ -8,16 +8,19 @@ class IKeyChecker;
 
 class CheckMethod {
 	public:
-		CheckMethod create_check_method_login(const unsigned long program_number);
-		CheckMethod create_check_method_login(const unsigned long program_number, const bool allow_to_login_on_previous_key);
-		CheckMethod create_check_method_memory(const unsigned long offset, const char *memory, CheckMethodLogin logged_in_method);
-		CheckMethod create_check_method_base();
+		static CheckMethod create_check_method_login(const unsigned long program_number);
+		static CheckMethod create_check_method_login(const unsigned long program_number, const bool allow_to_login_on_previous_key);
+		static CheckMethod create_check_method_memory(const unsigned long offset, const char *memory, CheckMethodLogin logged_in_method);
+		static CheckMethod create_check_method_base();
 
-		bool check(IKeyChecker key_checker);
+		virtual bool check(IKeyChecker key_checker) = 0;
 
 		virtual ~CheckMethod(void);
 	protected:
 		CheckMethod(void);
+
+		virtual check_method_t check_method_type() final = 0;
+		virtual bool process_check_result(bool last_check_is_success) final;
 	private:
 		check_method_t m_check_method;
 
@@ -27,7 +30,4 @@ class CheckMethod {
 
 		unsigned int m_check_count_before_error;
 		unsigned int m_checks_count;
-
-		check_method_t check_method_type();
-		bool process_check_result(bool is_check_successed);
 };
