@@ -1,0 +1,43 @@
+﻿Build started 27.01.2014 15:17:53.
+     1>Project "Y:\Work\LicLib\source\LicLib.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\LicLib.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\LicLib.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CheckMethod.cpp CheckMethodBase.cpp CheckMethodLogin.cpp CheckMethodMemory.cpp Granule.cpp ICheckMethodsManager.cpp ICheckMethodsViewer.cpp IGranulesManager.cpp IKeyChecker.cpp IProtectKey.cpp KeyChecker.cpp LicenseBlock.cpp LicenseBlockManager.cpp ProtectKey.cpp
+         ProtectKey.cpp
+         LicenseBlockManager.cpp
+         LicenseBlock.cpp
+         KeyChecker.cpp
+         IProtectKey.cpp
+         IKeyChecker.cpp
+         IGranulesManager.cpp
+         ICheckMethodsViewer.cpp
+         ICheckMethodsManager.cpp
+         Granule.cpp
+         CheckMethodMemory.cpp
+         CheckMethodLogin.cpp
+         CheckMethodBase.cpp
+         CheckMethod.cpp
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"Y:\Work\LicLib\Debug\LicLib.lib" /NOLOGO Debug\CheckMethod.obj
+         Debug\CheckMethodBase.obj
+         Debug\CheckMethodLogin.obj
+         Debug\CheckMethodMemory.obj
+         Debug\Granule.obj
+         Debug\ICheckMethodsManager.obj
+         Debug\ICheckMethodsViewer.obj
+         Debug\IGranulesManager.obj
+         Debug\IKeyChecker.obj
+         Debug\IProtectKey.obj
+         Debug\KeyChecker.obj
+         Debug\LicenseBlock.obj
+         Debug\LicenseBlockManager.obj
+         Debug\ProtectKey.obj
+         Debug\stdafx.obj
+         LicLib.vcxproj -> Y:\Work\LicLib\Debug\LicLib.lib
+     1>Done Building Project "Y:\Work\LicLib\source\LicLib.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.82
