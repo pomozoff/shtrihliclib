@@ -1,6 +1,7 @@
 *.user
 *.ncb
 *.suo
-*/Debug/*
+Debug/*
+sources/Debug/*
 bin/*
 tmp/*
