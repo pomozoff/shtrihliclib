@@ -2,6 +2,10 @@
 *.ncb
 *.suo
 Debug/*
-sources/Debug/*
+Release/*
+source/Debug/*
+source/Release/*
+tests/Debug/*
+tests/Release/*
 bin/*
 tmp/*
