@@ -1,13 +1,11 @@
 
 #pragma once
 
-#include "gtest\gtest.h"
+#include "CheckMethodTest.h"
 #include "CheckMethodLogin.h"
 
-class CheckMethodLoginTest : public ::testing::Test {
+class CheckMethodLoginTest : public CheckMethodTest {
 	public:
 		CheckMethodLoginTest();
 		~CheckMethodLoginTest();
-	protected:
-		CheckMethod* m_check_method;
 };
