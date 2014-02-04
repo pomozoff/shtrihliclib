@@ -27,9 +27,9 @@ shtrih_test_liclib.cpp
 /////////////////////////////////////////////////////////////////////////////
 Other standard files:
 
-StdAfx.h, StdAfx.cpp
+stdafx.h, stdafx.cpp
     These files are used to build a precompiled header (PCH) file
-    named shtrih_test_liclib.pch and a precompiled types file named StdAfx.obj.
+    named shtrih_test_liclib.pch and a precompiled types file named stdafx.obj.
 
 /////////////////////////////////////////////////////////////////////////////
 Other notes:

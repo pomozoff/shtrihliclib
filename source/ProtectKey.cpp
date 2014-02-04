@@ -1,5 +1,5 @@
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ProtectKey.h"
 
 ProtectKey::ProtectKey(void) {

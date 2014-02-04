@@ -1,5 +1,7 @@
 
 #include "stdafx.h"
+
+#include "KeyChecker.h"
 #include "CheckMethodBaseTest.h"
 
 CheckMethodBaseTest::CheckMethodBaseTest() {
@@ -9,7 +11,8 @@ CheckMethodBaseTest::~CheckMethodBaseTest() {
 }
 
 TEST_F(CheckMethodBaseTest, check) {
-	bool successful_checked = m_check_method->check(0);
+	KeyChecker keyChecker;
+	bool successful_checked = m_check_method->check(keyChecker);
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodBaseTest, check_method_type) {
@@ -20,4 +23,5 @@ TEST_F(CheckMethodBaseTest, process_check_result) {
 	CheckMethodBaseTestable* check_method = new CheckMethodBaseTestable();
 	bool check_is_successful = check_method->process_check_result(true);
 	ASSERT_TRUE(check_is_successful);
+	delete check_method;
 }

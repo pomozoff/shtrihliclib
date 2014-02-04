@@ -1,5 +1,7 @@
 
 #include "stdafx.h"
+
+#include "KeyChecker.h"
 #include "CheckMethodLoginTest.h"
 
 CheckMethodLoginTest::CheckMethodLoginTest() {
@@ -9,7 +11,8 @@ CheckMethodLoginTest::~CheckMethodLoginTest() {
 }
 
 TEST_F(CheckMethodLoginTest, check) {
-	bool successful_checked = m_check_method->check(0);
+	KeyChecker keyChecker;
+	bool successful_checked = m_check_method->check(keyChecker);
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_method_type) {

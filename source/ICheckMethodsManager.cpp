@@ -1,5 +1,5 @@
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ICheckMethodsManager.h"
 
 ICheckMethodsManager::ICheckMethodsManager(void) {

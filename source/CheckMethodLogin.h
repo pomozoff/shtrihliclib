@@ -5,14 +5,13 @@
 
 class CheckMethodLogin : public CheckMethod {
 	public:
-		CheckMethodLogin(const unsigned long feature, const bool allow_to_login_on_previous_key);
+		CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key);
 		~CheckMethodLogin(void);
 
-		virtual bool check(const IKeyChecker* key_checker) final;
-		virtual check_method_t check_method_type(void) final;
+		virtual bool check(const IKeyChecker& key_checker) override final;
 	protected:
-		CheckMethodLogin(const unsigned long feature);
+		CheckMethodLogin(const feature_t feature) : CheckMethodLogin(feature, false) {};
 	private:
-		unsigned long m_feature;
+		feature_t m_feature;
 		bool m_allow_to_login_on_previous_key;
 };

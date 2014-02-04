@@ -1,21 +1,17 @@
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "CheckMethodLogin.h"
 #include "IKeyChecker.h"
 
-CheckMethodLogin::CheckMethodLogin(const unsigned long feature, const bool allow_to_login_on_previous_key) {
-	CheckMethodLogin::CheckMethodLogin(feature);
-	m_allow_to_login_on_previous_key = allow_to_login_on_previous_key;
-}
-CheckMethodLogin::CheckMethodLogin(const unsigned long feature) {
+CheckMethodLogin::CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key) {
+	m_check_method = CHECK_METHOD_LOGIN;
 	m_feature = feature;
+	m_allow_to_login_on_previous_key = allow_to_login_on_previous_key;
 }
 CheckMethodLogin::~CheckMethodLogin(void) {
 }
 
-bool CheckMethodLogin::check(const IKeyChecker* key_checker) {
+bool CheckMethodLogin::check(const IKeyChecker& key_checker) {
+	//bool logged_in = key_checker->isAbleToLogin(this);
 	return false;
 };
-check_method_t CheckMethodLogin::check_method_type(void) {
-	return CHECK_METHOD_LOGIN;
-}
