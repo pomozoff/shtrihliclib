@@ -19,7 +19,7 @@ CheckMethod* CheckMethod::create_check_method_login(const feature_t feature) {
 CheckMethod* CheckMethod::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) {
 	return new CheckMethodLogin(feature, allow_to_login_on_previous_key);
 }
-CheckMethod* CheckMethod::create_check_method_memory(const offset_t offset, const std::vector<byte_t>* value, const CheckMethodLogin* logged_in_method) {
+CheckMethod* CheckMethod::create_check_method_memory(const offset_t offset, const std::vector<byte_t>& value, const CheckMethodLogin& logged_in_method) {
 	return new CheckMethodMemory(offset, value, logged_in_method);
 }
 

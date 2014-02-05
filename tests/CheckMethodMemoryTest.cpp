@@ -11,7 +11,7 @@ CheckMethodMemoryTest::CheckMethodMemoryTest() {
 	
 	CheckMethodLogin *check_method_login = (CheckMethodLogin *)CheckMethod::create_check_method_login(15, true);
 	
-	m_check_method = CheckMethod::create_check_method_memory(m_offset_for_constructor_test, &m_value_for_constructor_test, check_method_login);
+	m_check_method = CheckMethod::create_check_method_memory(m_offset_for_constructor_test, m_value_for_constructor_test, *check_method_login);
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest() {
 }

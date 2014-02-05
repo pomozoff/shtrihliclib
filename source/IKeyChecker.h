@@ -10,11 +10,11 @@ class IKeyChecker {
 	public:
 		virtual ~IKeyChecker(void);
 
-		virtual bool is_able_to_login(CheckMethodLogin* checkMethod) const = 0;
+		virtual bool is_able_to_login(const CheckMethodLogin& checkMethod) const = 0;
 	protected:
 		IKeyChecker(void);
 	private:
-		bool is_same_memory(CheckMethodMemory* checkMethod);
-		bool logout_key(CheckMethodLogin* checkMethod);
-		bool is_key_available(CheckMethodBase* checkMethod);
+		bool is_same_memory(const CheckMethodMemory& checkMethod);
+		bool logout_key(const CheckMethodLogin& checkMethod);
+		bool is_key_available(const CheckMethodBase& checkMethod);
 };

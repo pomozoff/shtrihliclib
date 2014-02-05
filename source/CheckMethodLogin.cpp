@@ -12,6 +12,6 @@ CheckMethodLogin::~CheckMethodLogin(void) {
 }
 
 bool const CheckMethodLogin::check(const IKeyChecker& key_checker) {
-	bool logged_in = key_checker.is_able_to_login(this);
+	bool logged_in = key_checker.is_able_to_login(*this);
 	return false;
 };
