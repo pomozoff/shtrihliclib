@@ -13,6 +13,6 @@ CheckMethodMemory::CheckMethodMemory(const offset_t offset, const std::vector<by
 CheckMethodMemory::~CheckMethodMemory(void) {
 }
 
-bool const CheckMethodMemory::check(const IKeyChecker& key_checker) const {
+const bool CheckMethodMemory::check(const IKeyChecker& key_checker) const {
 	return false;
 };

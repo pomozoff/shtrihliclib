@@ -8,7 +8,7 @@ class CheckMethodMemory : public CheckMethod {
 		CheckMethodMemory(const feature_t offset, const std::vector<byte_t>& value, const CheckMethodLogin& logged_in_method);
 		~CheckMethodMemory(void);
 
-		virtual bool const check(const IKeyChecker& key_checker) const override final;
+		virtual const bool check(const IKeyChecker& key_checker) const override final;
 	protected:
 	private:
 		offset_t m_offset;

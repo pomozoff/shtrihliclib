@@ -19,7 +19,7 @@ class CheckMethod {
 		static CheckMethod* create_check_method_memory(const offset_t offset, const std::vector<byte_t>& value, const CheckMethodLogin& logged_in_method);
 		static CheckMethod* create_check_method_base(void);
 
-		virtual bool const check(const IKeyChecker& key_checker) const = 0;
+		virtual const bool check(const IKeyChecker& key_checker) const = 0;
 		virtual const check_method_t check_method_type(void) const final;
 
 		virtual ~CheckMethod(void);
