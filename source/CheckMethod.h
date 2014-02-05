@@ -3,7 +3,7 @@
 
 #include <vector>
 
-typedef enum { CHECK_METHOD_BASE, CHECK_METHOD_LOGIN, CHECK_METHOD_MEMORY } check_method_t;
+enum class CheckMethodType { Base, Login, Memory };
 
 using byte_t = unsigned char;
 using offset_t = unsigned long;
@@ -20,11 +20,11 @@ class CheckMethod {
 		static CheckMethod* create_check_method_base(void);
 
 		virtual const bool check(const IKeyChecker& key_checker) const = 0;
-		virtual const check_method_t check_method_type(void) const final;
+		virtual const CheckMethodType check_method_type(void) const final;
 
 		virtual ~CheckMethod(void);
 	protected:
-		check_method_t m_check_method;
+		CheckMethodType m_check_method;
 
 		CheckMethod(void);
 

@@ -4,7 +4,7 @@
 #include "IKeyChecker.h"
 
 CheckMethodLogin::CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key) {
-	m_check_method = CHECK_METHOD_LOGIN;
+	m_check_method = CheckMethodType::Login;
 	m_feature = feature;
 	m_allow_to_login_on_previous_key = allow_to_login_on_previous_key;
 }

@@ -4,7 +4,7 @@
 #include "IKeyChecker.h"
 
 CheckMethodBase::CheckMethodBase(void) {
-	m_check_method = CHECK_METHOD_BASE;
+	m_check_method = CheckMethodType::Base;
 }
 CheckMethodBase::~CheckMethodBase(void) {
 }

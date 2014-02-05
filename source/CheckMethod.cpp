@@ -23,7 +23,7 @@ CheckMethod* CheckMethod::create_check_method_memory(const offset_t offset, cons
 	return new CheckMethodMemory(offset, value, logged_in_method);
 }
 
-const check_method_t CheckMethod::check_method_type(void) const {
+const CheckMethodType CheckMethod::check_method_type(void) const {
 	return m_check_method;
 }
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
