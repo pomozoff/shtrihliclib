@@ -8,7 +8,7 @@ class CheckMethodBase : public CheckMethod {
 		CheckMethodBase(void);
 		~CheckMethodBase(void);
 
-		virtual const bool check(const IKeyChecker& key_checker) override final;
+		virtual const bool check(const IKeyChecker& key_checker) const override final;
 	protected:
 	private:
 };
