@@ -11,7 +11,7 @@ CheckMethodLogin::CheckMethodLogin(const feature_t feature, const bool allow_to_
 CheckMethodLogin::~CheckMethodLogin(void) {
 }
 
-bool const CheckMethodLogin::check(const IKeyChecker& key_checker) const {
+const bool CheckMethodLogin::check(const IKeyChecker& key_checker) const {
 	bool logged_in = key_checker.is_able_to_login(*this);
 	return false;
 };
