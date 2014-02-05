@@ -10,7 +10,7 @@ class IKeyChecker {
 	public:
 		virtual ~IKeyChecker(void);
 
-		virtual bool isAbleToLogin(CheckMethodLogin* checkMethod) const = 0;
+		virtual bool is_able_to_login(CheckMethodLogin* checkMethod) const = 0;
 	protected:
 		IKeyChecker(void);
 	private:

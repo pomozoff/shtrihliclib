@@ -10,5 +10,5 @@ class KeyChecker : public IKeyChecker, ICheckMethodsManager, ICheckMethodsViewer
 		KeyChecker(void);
 		~KeyChecker(void);
 	private:
-		virtual bool isAbleToLogin(CheckMethodLogin* checkMethod) const override;
+		virtual bool is_able_to_login(CheckMethodLogin* checkMethod) const override;
 };
