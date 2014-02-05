@@ -7,6 +7,6 @@ KeyChecker::KeyChecker(void){
 KeyChecker::~KeyChecker(void){
 }
 
-bool KeyChecker::isAbleToLogin(CheckMethodLogin* checkMethod) {
+bool KeyChecker::isAbleToLogin(CheckMethodLogin* checkMethod) const {
 	return false;
 }
