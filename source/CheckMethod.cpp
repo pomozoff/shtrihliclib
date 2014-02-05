@@ -32,7 +32,7 @@ bool CheckMethod::process_check_result(const bool last_check_is_success) {
 		return true;
 	}
 
-	bool give_a_try_one_more_time = m_current_check_number <= m_max_check_count_with_error;
+	bool give_a_try_one_more_time = m_current_check_number <= m_max_check_number;
 	if (give_a_try_one_more_time) {
 		m_current_check_number++;
 	}

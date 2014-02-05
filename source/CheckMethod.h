@@ -34,6 +34,6 @@ class CheckMethod {
 		bool m_is_check_method_for_NFR;
 		bool m_is_check_method_for_license;
 
-		const unsigned int m_max_check_count_with_error = 3;
+		const unsigned int m_max_check_number = 3;
 		unsigned int m_current_check_number;
 };
