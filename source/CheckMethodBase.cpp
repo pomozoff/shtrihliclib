@@ -1,10 +1,11 @@
-
+﻿
 #include "stdafx.h"
 #include "CheckMethodBase.h"
 #include "IKeyChecker.h"
 
-CheckMethodBase::CheckMethodBase(void) {
-	m_check_method = CheckMethodType::Base;
+CheckMethodBase::CheckMethodBase(void) :
+m_check_method(CheckMethodType::Base)
+{
 }
 CheckMethodBase::~CheckMethodBase(void) {
 }
