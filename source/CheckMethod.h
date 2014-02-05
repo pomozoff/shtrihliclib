@@ -28,12 +28,12 @@ class CheckMethod {
 
 		CheckMethod(void);
 
-		virtual const bool process_check_result(const bool last_check_is_success) final;
+		virtual const bool process_check_result(const bool last_check_is_success) const final;
 	private:
 		bool m_logout_after_check;
 		bool m_is_check_method_for_NFR;
 		bool m_is_check_method_for_license;
 
 		const unsigned int m_max_check_number = 3;
-		unsigned int m_current_check_number;
+		mutable unsigned int m_current_check_number;
 };
