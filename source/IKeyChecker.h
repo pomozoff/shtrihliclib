@@ -14,7 +14,7 @@ class IKeyChecker {
 	protected:
 		IKeyChecker(void);
 	private:
-		bool isSameMemory(CheckMethodMemory* checkMethod);
-		bool logoutKey(CheckMethodLogin* checkMethod);
-		bool isKeyAvailable(CheckMethodBase* checkMethod);
+		bool is_same_memory(CheckMethodMemory* checkMethod);
+		bool logout_key(CheckMethodLogin* checkMethod);
+		bool is_key_available(CheckMethodBase* checkMethod);
 };
