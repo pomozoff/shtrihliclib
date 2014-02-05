@@ -20,7 +20,7 @@ class CheckMethod {
 		static CheckMethod* create_check_method_base(void);
 
 		virtual bool const check(const IKeyChecker& key_checker) = 0;
-		virtual check_method_t check_method_type(void) final;
+		virtual const check_method_t check_method_type(void) const final;
 
 		virtual ~CheckMethod(void);
 	protected:
