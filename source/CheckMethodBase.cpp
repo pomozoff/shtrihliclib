@@ -9,6 +9,6 @@ CheckMethodBase::CheckMethodBase(void) {
 CheckMethodBase::~CheckMethodBase(void) {
 }
 
-bool CheckMethodBase::check(const IKeyChecker& key_checker) {
+bool const CheckMethodBase::check(const IKeyChecker& key_checker) {
 	return false;
 };

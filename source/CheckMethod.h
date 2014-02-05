@@ -19,7 +19,7 @@ class CheckMethod {
 		static CheckMethod* create_check_method_memory(const offset_t offset, const std::vector<byte_t>* value, const CheckMethodLogin* logged_in_method);
 		static CheckMethod* create_check_method_base(void);
 
-		virtual bool check(const IKeyChecker& key_checker) = 0;
+		virtual bool const check(const IKeyChecker& key_checker) = 0;
 		virtual check_method_t check_method_type(void) final;
 
 		virtual ~CheckMethod(void);
@@ -28,7 +28,7 @@ class CheckMethod {
 
 		CheckMethod(void);
 
-		virtual bool process_check_result(const bool last_check_is_success) final;
+		virtual const bool process_check_result(const bool last_check_is_success) final;
 	private:
 		bool m_logout_after_check;
 		bool m_is_check_method_for_NFR;

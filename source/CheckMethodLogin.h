@@ -8,7 +8,7 @@ class CheckMethodLogin : public CheckMethod {
 		CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key);
 		~CheckMethodLogin(void);
 
-		virtual bool check(const IKeyChecker& key_checker) override final;
+		virtual bool const check(const IKeyChecker& key_checker) override final;
 	protected:
 		CheckMethodLogin(const feature_t feature) : CheckMethodLogin(feature, false) {};
 	private:

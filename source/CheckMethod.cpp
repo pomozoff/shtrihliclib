@@ -26,7 +26,7 @@ CheckMethod* CheckMethod::create_check_method_memory(const offset_t offset, cons
 check_method_t CheckMethod::check_method_type(void) {
 	return m_check_method;
 }
-bool CheckMethod::process_check_result(const bool last_check_is_success) {
+const bool CheckMethod::process_check_result(const bool last_check_is_success) {
 	if (last_check_is_success) {
 		m_current_check_number = 0;
 		return true;
