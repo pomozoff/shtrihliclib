@@ -5,5 +5,4 @@
 CheckMethodTest::CheckMethodTest() {
 }
 CheckMethodTest::~CheckMethodTest() {
-	delete m_check_method;
 }

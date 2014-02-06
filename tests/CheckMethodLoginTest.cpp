@@ -5,7 +5,8 @@
 #include "CheckMethodLoginTest.h"
 
 CheckMethodLoginTest::CheckMethodLoginTest() {
-	m_check_method = CheckMethod::create_check_method_login(0);
+	auto key_checker = std::make_unique<KeyChecker>();
+	m_check_method = key_checker->create_check_method_login(0, false);
 }
 CheckMethodLoginTest::~CheckMethodLoginTest() {
 }

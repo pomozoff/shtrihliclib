@@ -5,7 +5,8 @@
 #include "CheckMethodBaseTest.h"
 
 CheckMethodBaseTest::CheckMethodBaseTest() {
-	m_check_method = CheckMethod::create_check_method_base();
+	auto key_checker = std::make_unique<KeyChecker>();
+	m_check_method = key_checker->create_check_method_base();
 }
 CheckMethodBaseTest::~CheckMethodBaseTest() {
 }
@@ -20,8 +21,7 @@ TEST_F(CheckMethodBaseTest, check_method_type) {
 	ASSERT_TRUE(check_method_type == CheckMethodType::Base);
 }
 TEST_F(CheckMethodBaseTest, process_check_result) {
-	CheckMethodBaseTestable* check_method = new CheckMethodBaseTestable();
+	std::unique_ptr<CheckMethodBaseTestable> check_method = std::make_unique<CheckMethodBaseTestable>();
 	bool check_is_successful = check_method->process_check_result(true);
 	ASSERT_TRUE(check_is_successful);
-	delete check_method;
 }

@@ -1,7 +1,8 @@
 ﻿
 #include "stdafx.h"
+
 #include "CheckMethodLogin.h"
-#include "IKeyChecker.h"
+#include "KeyChecker.h"
 
 CheckMethodLogin::CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key) :
 m_check_method(CheckMethodType::Login),

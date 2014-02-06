@@ -2,6 +2,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 enum class CheckMethodType { Base, Login, Memory };
 
@@ -14,11 +15,6 @@ class IKeyChecker;
 
 class CheckMethod {
 	public:
-		static CheckMethod* create_check_method_login(const feature_t feature);
-		static CheckMethod* create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key);
-		static CheckMethod* create_check_method_memory(const offset_t offset, const std::vector<byte_t>& value, const CheckMethodLogin& logged_in_method);
-		static CheckMethod* create_check_method_base(void);
-
 		virtual const bool check(const IKeyChecker& key_checker) const = 0;
 		virtual const CheckMethodType check_method_type(void) const final;
 

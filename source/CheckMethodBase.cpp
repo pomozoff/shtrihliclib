@@ -1,7 +1,8 @@
 ﻿
 #include "stdafx.h"
+
 #include "CheckMethodBase.h"
-#include "IKeyChecker.h"
+#include "KeyChecker.h"
 
 CheckMethodBase::CheckMethodBase(void) :
 m_check_method(CheckMethodType::Base)

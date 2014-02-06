@@ -9,9 +9,10 @@ CheckMethodMemoryTest::CheckMethodMemoryTest() {
 	m_value_for_constructor_test.clear();
 	m_value_for_constructor_test.insert(m_value_for_constructor_test.end(), *tmp);
 	
-	CheckMethodLogin *check_method_login = (CheckMethodLogin *)CheckMethod::create_check_method_login(15, true);
+	auto key_checker = std::make_unique<KeyChecker>();
+	auto check_method_login = key_checker->create_check_method_login(15, true);
 	
-	m_check_method = CheckMethod::create_check_method_memory(m_offset_for_constructor_test, m_value_for_constructor_test, *check_method_login);
+	m_check_method = key_checker->create_check_method_memory(m_offset_for_constructor_test, m_value_for_constructor_test, check_method_login);
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest() {
 }

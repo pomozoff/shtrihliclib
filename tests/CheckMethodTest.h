@@ -1,6 +1,8 @@
 ﻿
 #pragma once
 
+#include <memory>
+
 #include "gtest\gtest.h"
 #include "CheckMethod.h"
 
@@ -9,5 +11,5 @@ class CheckMethodTest : public ::testing::Test {
 		CheckMethodTest();
 		virtual ~CheckMethodTest();
 	protected:
-		CheckMethod* m_check_method;
+		std::unique_ptr<CheckMethod> m_check_method;
 };
