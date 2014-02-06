@@ -1,5 +1,6 @@
 ﻿
 #include "stdafx.h"
+
 #include "LicenseBlockManager.h"
 
 LicenseBlockManager::LicenseBlockManager(void) {
