@@ -10,7 +10,6 @@ class CheckMethodLogin : public CheckMethod {
 
 		virtual const bool check(const IKeyChecker& key_checker) const override final;
 	protected:
-		CheckMethodLogin(const feature_t feature) : CheckMethodLogin(feature, false) {};
 	private:
 		// Наследование из базового класса CheckMethod
 		CheckMethodType m_check_method;
