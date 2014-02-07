@@ -9,6 +9,7 @@
 KeyChecker::KeyChecker(void) {
 }
 KeyChecker::~KeyChecker(void) {
+	m_handles.clear();
 }
 
 std::shared_ptr<CheckMethod> KeyChecker::create_check_method_base(void) const {

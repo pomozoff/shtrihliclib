@@ -22,6 +22,7 @@ class KeyChecker : public IKeyChecker, ICheckMethodsManager, ICheckMethodsViewer
 		virtual void set_max_check_number(check_number_t check_number) const final;
 	private:
 		mutable std::vector<std::shared_ptr<CheckMethod>> m_check_methods;
+		std::map<std::shared_ptr<CheckMethodLogin>, handle_t> m_handles;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
