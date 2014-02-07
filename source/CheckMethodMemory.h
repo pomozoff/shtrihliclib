@@ -16,4 +16,5 @@ class CheckMethodMemory : public CheckMethod, public std::enable_shared_from_thi
 	private:
 		offset_t m_offset;
 		std::vector<byte_t> m_value;
+		std::shared_ptr<CheckMethod> m_logged_in_method;
 };
