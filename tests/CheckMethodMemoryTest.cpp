@@ -6,20 +6,21 @@
 
 CheckMethodMemoryTest::CheckMethodMemoryTest() {
 	byte_t tmp[] = { 0x10, 0xfe, 0x4a, 0x83 };
-	m_value_for_constructor_test.clear();
-	m_value_for_constructor_test.insert(m_value_for_constructor_test.end(), *tmp);
+	
+	std::unique_ptr<std::vector<byte_t>> value_for_constructor_test;
+	value_for_constructor_test->insert(value_for_constructor_test->end(), *tmp);
 	
 	auto key_checker = std::make_unique<KeyChecker>();
 	auto check_method_login = key_checker->create_check_method_login(15, true);
 	
-	m_check_method = key_checker->create_check_method_memory(m_offset_for_constructor_test, m_value_for_constructor_test, check_method_login);
+	m_check_method = key_checker->create_check_method_memory(m_offset_for_constructor_test, std::move(value_for_constructor_test), std::move(check_method_login));
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest() {
 }
 
 TEST_F(CheckMethodMemoryTest, check) {
-	KeyChecker keyChecker;
-	bool successful_checked = m_check_method->check(keyChecker);
+	auto key_checker = std::make_unique<KeyChecker>();
+	bool successful_checked = m_check_method->check(std::move(key_checker));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodMemoryTest, check_method_type) {

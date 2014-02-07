@@ -1,5 +1,6 @@
 ﻿
 #include "stdafx.h"
+#include <memory>
 
 #include "KeyChecker.h"
 #include "CheckMethodBaseTest.h"
@@ -12,8 +13,8 @@ CheckMethodBaseTest::~CheckMethodBaseTest() {
 }
 
 TEST_F(CheckMethodBaseTest, check) {
-	KeyChecker keyChecker;
-	bool successful_checked = m_check_method->check(keyChecker);
+	auto key_checker = std::make_unique<KeyChecker>();
+	bool successful_checked = m_check_method->check(std::move(key_checker));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodBaseTest, check_method_type) {

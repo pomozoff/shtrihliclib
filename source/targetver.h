@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿
+#pragma once
 
 // The following macros define the minimum required platform.  The minimum required platform
 // is the earliest version of Windows, Internet Explorer etc. that has the necessary features to run 
@@ -10,4 +11,3 @@
 #ifndef _WIN32_WINNT            // Specifies that the minimum required platform is Windows Vista.
 #define _WIN32_WINNT 0x0600     // Change this to the appropriate value to target other versions of Windows.
 #endif
-

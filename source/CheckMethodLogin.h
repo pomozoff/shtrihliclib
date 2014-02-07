@@ -3,12 +3,12 @@
 
 #include "CheckMethod.h"
 
-class CheckMethodLogin : public CheckMethod {
+class CheckMethodLogin : public CheckMethod, std::enable_shared_from_this<CheckMethodLogin> {
 	public:
 		CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key);
 		~CheckMethodLogin(void);
 
-		virtual const bool check(const IKeyChecker& key_checker) const override final;
+		virtual const bool check(const std::unique_ptr<IKeyChecker> key_checker) const override final;
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod

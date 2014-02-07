@@ -12,8 +12,8 @@ CheckMethodLoginTest::~CheckMethodLoginTest() {
 }
 
 TEST_F(CheckMethodLoginTest, check) {
-	KeyChecker keyChecker;
-	bool successful_checked = m_check_method->check(keyChecker);
+	auto key_checker = std::make_unique<KeyChecker>();
+	bool successful_checked = m_check_method->check(std::move(key_checker));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_method_type) {

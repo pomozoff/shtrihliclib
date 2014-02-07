@@ -15,7 +15,7 @@ class IKeyChecker;
 
 class CheckMethod {
 	public:
-		virtual const bool check(const IKeyChecker& key_checker) const = 0;
+		virtual const bool check(const std::unique_ptr<IKeyChecker> key_checker) const = 0;
 		virtual const CheckMethodType check_method_type(void) const final;
 
 		virtual ~CheckMethod(void);
