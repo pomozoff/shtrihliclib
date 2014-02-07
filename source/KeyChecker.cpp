@@ -6,9 +6,9 @@
 #include "CheckMethodLogin.h"
 #include "CheckMethodMemory.h"
 
-KeyChecker::KeyChecker(void){
+KeyChecker::KeyChecker(void) {
 }
-KeyChecker::~KeyChecker(void){
+KeyChecker::~KeyChecker(void) {
 }
 
 std::shared_ptr<CheckMethod> KeyChecker::create_check_method_base(void) const {
