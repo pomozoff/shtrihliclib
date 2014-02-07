@@ -9,6 +9,7 @@
 KeyChecker::KeyChecker(void) {
 }
 KeyChecker::~KeyChecker(void) {
+	m_check_methods.clear();
 	m_handles.clear();
 }
 

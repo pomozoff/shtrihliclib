@@ -20,6 +20,7 @@ class KeyChecker : public IKeyChecker, ICheckMethodsManager, ICheckMethodsViewer
 		std::shared_ptr<CheckMethod> create_check_method_memory(const offset_t offset, std::vector<byte_t>& value, std::shared_ptr<CheckMethod> logged_in_method) const;
 	protected:
 		virtual void set_max_check_number(check_number_t check_number) const final;
+		virtual void logout(void) const;
 	private:
 		mutable std::vector<std::shared_ptr<CheckMethod>> m_check_methods;
 		std::map<std::shared_ptr<CheckMethodLogin>, handle_t> m_handles;
