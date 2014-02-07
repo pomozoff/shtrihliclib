@@ -33,7 +33,7 @@ const bool KeyChecker::is_base_key_available(const std::shared_ptr<const CheckMe
 	return false;
 }
 const bool KeyChecker::is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
-	return false;
+	return logout_key(checkMethod);
 }
 const bool KeyChecker::is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const {
 	return false;
