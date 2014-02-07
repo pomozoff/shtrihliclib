@@ -5,7 +5,7 @@
 
 class CheckMethodMemory : public CheckMethod, std::enable_shared_from_this<CheckMethodMemory> {
 	public:
-		CheckMethodMemory(const feature_t offset, const std::vector<byte_t>& value, const std::unique_ptr<CheckMethod> logged_in_method);
+		CheckMethodMemory(const feature_t offset, const std::vector<byte_t>& value, const std::shared_ptr<CheckMethod> logged_in_method);
 		~CheckMethodMemory(void);
 
 		virtual const bool check(const std::unique_ptr<IKeyChecker> key_checker) const override final;
