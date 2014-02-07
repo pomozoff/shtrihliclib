@@ -39,3 +39,9 @@ const bool KeyChecker::is_same_memory(const std::shared_ptr<const CheckMethodMem
 const bool KeyChecker::logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
 	return false;
 }
+
+void KeyChecker::set_max_check_number(check_number_t check_number) const {
+	for (const auto& element : m_check_methods) {
+		element->set_max_check_number(check_number);
+	}
+}

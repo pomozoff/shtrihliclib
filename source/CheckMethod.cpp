@@ -24,3 +24,6 @@ const bool CheckMethod::process_check_result(const bool last_check_is_success) c
 
 	return give_a_try_one_more_time;
 }
+void CheckMethod::set_max_check_number(check_number_t check_number) const {
+	m_max_check_number = check_number;
+}
