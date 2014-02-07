@@ -25,6 +25,9 @@ std::unique_ptr<CheckMethod> KeyChecker::create_check_method_memory(const offset
 	return check_method;
 }
 
+const bool KeyChecker::is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const {
+	return false;
+}
 const bool KeyChecker::is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
 	return false;
 }
@@ -32,8 +35,5 @@ const bool KeyChecker::is_same_memory(const std::shared_ptr<const CheckMethodMem
 	return false;
 }
 const bool KeyChecker::logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
-	return false;
-}
-const bool KeyChecker::is_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const {
 	return false;
 }
