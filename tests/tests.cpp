@@ -1,5 +1,6 @@
 ﻿
 #include "stdafx.h"
+
 #include "gtest/gtest.h"
 #include "CheckMethodBaseTest.h"
 

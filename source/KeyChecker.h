@@ -16,7 +16,7 @@ class KeyChecker : public IKeyChecker, ICheckMethodsManager, ICheckMethodsViewer
 
 		std::unique_ptr<CheckMethod> create_check_method_base(void) const;
 		std::unique_ptr<CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
-		std::unique_ptr<CheckMethod> create_check_method_memory(const offset_t offset, std::unique_ptr<std::vector<byte_t>> value, std::unique_ptr<CheckMethod> logged_in_method) const;
+		std::unique_ptr<CheckMethod> create_check_method_memory(const offset_t offset, std::vector<byte_t>& value, std::unique_ptr<CheckMethod> logged_in_method) const;
 	private:
 		mutable std::vector<std::unique_ptr<CheckMethod>> m_check_methods;
 

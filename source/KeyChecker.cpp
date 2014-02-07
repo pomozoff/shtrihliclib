@@ -20,7 +20,7 @@ std::unique_ptr<CheckMethod> KeyChecker::create_check_method_login(const feature
 	std::unique_ptr<CheckMethod> check_method = std::make_unique<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
 	return check_method;
 }
-std::unique_ptr<CheckMethod> KeyChecker::create_check_method_memory(const offset_t offset, std::unique_ptr<std::vector<byte_t>> value, std::unique_ptr<CheckMethod> logged_in_method) const {
+std::unique_ptr<CheckMethod> KeyChecker::create_check_method_memory(const offset_t offset, std::vector<byte_t>& value, std::unique_ptr<CheckMethod> logged_in_method) const {
 	std::unique_ptr<CheckMethod> check_method = std::make_unique<CheckMethodMemory>(offset, std::move(value), std::move(logged_in_method));
 	return check_method;
 }
