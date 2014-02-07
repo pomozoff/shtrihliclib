@@ -6,9 +6,10 @@
 
 enum class CheckMethodType { Base, Login, Memory };
 
-using byte_t = unsigned char;
-using offset_t = unsigned long;
+using byte_t    = unsigned char;
+using offset_t  = unsigned long;
 using feature_t = unsigned long;
+using handle_t  = unsigned long;
 
 class CheckMethodLogin;
 class IKeyChecker;

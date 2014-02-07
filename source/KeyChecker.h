@@ -1,8 +1,9 @@
 ﻿
 #pragma once
 
-#include <vector>
 #include <memory>
+#include <vector>
+#include <map>
 
 #include "IKeyChecker.h"
 #include "ICheckMethodsManager.h"
