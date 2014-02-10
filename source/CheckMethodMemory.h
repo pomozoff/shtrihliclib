@@ -8,7 +8,7 @@ class CheckMethodMemory final : public CheckMethod, public std::enable_shared_fr
 		CheckMethodMemory(const feature_t offset, const std::vector<byte_t>& value, const std::shared_ptr<CheckMethod> logged_in_method);
 		~CheckMethodMemory(void);
 
-		virtual const bool check(const std::unique_ptr<IKeyChecker> key_checker) const override final;
+		virtual const bool check(const std::shared_ptr<const IKeyChecker> key_checker) const override final;
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod

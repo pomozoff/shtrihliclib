@@ -5,7 +5,7 @@
 #include "KeyChecker.h"
 #include "Granule.h"
 
-class ProtectKey : public IProtectKey, public KeyChecker {
+class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<ProtectKey> {
 	public:
 		ProtectKey(void);
 		~ProtectKey(void);

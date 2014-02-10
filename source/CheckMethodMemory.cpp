@@ -14,7 +14,7 @@ m_logged_in_method(logged_in_method)
 CheckMethodMemory::~CheckMethodMemory(void) {
 }
 
-const bool CheckMethodMemory::check(const std::unique_ptr<IKeyChecker> key_checker) const {
+const bool CheckMethodMemory::check(const std::shared_ptr<const IKeyChecker> key_checker) const {
 	std::shared_ptr<const CheckMethodMemory> sp_this = shared_from_this();
 	bool logged_in = key_checker->is_same_memory(sp_this);
 	return false;
