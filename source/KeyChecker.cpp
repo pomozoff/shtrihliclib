@@ -34,9 +34,12 @@ void KeyChecker::set_max_check_number(check_number_t check_number) const {
 		element->set_max_check_number(check_number);
 	}
 }
-void KeyChecker::logout(void) const {
+void KeyChecker::logout(const bool forced_logout) const {
 	for (const auto& element : m_handles) {
-		logout_key(element.first);
+		auto& check_method = element.first;
+		if (forced_logout || check_method->logout_after_check()) {
+			logout_key(check_method);
+		}
 	}
 }
 

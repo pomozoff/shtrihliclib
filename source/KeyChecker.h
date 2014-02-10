@@ -23,7 +23,7 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 
 		virtual const bool check(void) const = 0;
 		virtual void set_max_check_number(check_number_t check_number) const final;
-		virtual void logout(void) const;
+		virtual void logout(const bool forced_logout) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override = 0;

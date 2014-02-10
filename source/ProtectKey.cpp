@@ -6,7 +6,7 @@
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
-	logout();
+	logout(true);
 	m_granules.clear();
 }
 
@@ -52,11 +52,11 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_list_t 
 
 		bool is_key_found = element->check();
 		if (is_key_found) {
-			element->check_granules();
+			//element->check_granules();
 			element->m_key_delegate = key_delegate;
 		}
 
-		element->check_and_logout();
+		element->logout_after_check();
 		if (is_key_found) {
 			protect_key = element;
 			break;
@@ -84,6 +84,11 @@ const bool ProtectKey::check(void) const {
 	}
 
 	return result;
+}
+const void ProtectKey::logout_after_check(void) const {
+	if (m_logout_after_check) {
+		logout(false);
+	}
 }
 
 /* IKeyChecker Interface */

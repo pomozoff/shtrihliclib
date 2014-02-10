@@ -23,6 +23,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable KeyType m_key_type;
 
 		virtual const bool check(void) const override;
+		const void logout_after_check(void) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
@@ -32,6 +33,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	private:
 		std::vector<const Granule> m_granules;
 		bool m_is_key_base = false;
+		bool m_logout_after_check = false;
 		mutable bool m_is_key_nfr = false;
 		mutable std::shared_ptr<const IProtectKeyDelegate> m_key_delegate;
 
