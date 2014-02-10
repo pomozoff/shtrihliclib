@@ -10,7 +10,7 @@
 #include "ICheckMethodsViewer.h"
 #include "CheckMethod.h"
 
-class KeyChecker : public IKeyChecker, ICheckMethodsManager, ICheckMethodsViewer {
+class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public ICheckMethodsViewer {
 	public:
 		KeyChecker(void);
 		~KeyChecker(void);

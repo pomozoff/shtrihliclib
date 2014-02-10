@@ -4,7 +4,7 @@
 #include "IProtectKey.h"
 #include "KeyChecker.h"
 
-class ProtectKey : public IProtectKey, KeyChecker {
+class ProtectKey : public IProtectKey, public KeyChecker {
 	public:
 		ProtectKey(void);
 		~ProtectKey(void);
