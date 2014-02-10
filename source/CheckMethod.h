@@ -6,10 +6,10 @@
 
 enum class CheckMethodType { Base, Login, Memory };
 
-using byte_t    = unsigned char;
-using offset_t  = unsigned long;
-using feature_t = unsigned long;
-using handle_t  = unsigned long;
+using byte_t    = uint8_t;
+using offset_t  = uint32_t;
+using feature_t = uint32_t;
+using handle_t  = uint32_t;
 
 using check_number_t = unsigned int;
 
