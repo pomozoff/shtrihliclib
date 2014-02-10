@@ -18,10 +18,10 @@ class IKeyChecker;
 
 class CheckMethod {
 	public:
-		virtual const CheckMethodType check_method_type(void) const final;
-		virtual void set_max_check_number(check_number_t check_number) const final;
 		virtual const bool check(const std::shared_ptr<const IKeyChecker> key_checker) const = 0;
+		const CheckMethodType check_method_type(void) const;
 		const bool is_check_method_for_NFR(void) const;
+		void set_max_check_number(check_number_t check_number) const;
 
 		virtual ~CheckMethod(void);
 	protected:
@@ -29,7 +29,7 @@ class CheckMethod {
 
 		CheckMethod(void);
 
-		virtual const bool process_check_result(const bool last_check_is_success) const final;
+		const bool process_check_result(const bool last_check_is_success) const;
 	private:
 		bool m_logout_after_check;
 		bool m_is_check_method_for_NFR;
