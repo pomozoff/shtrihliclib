@@ -14,7 +14,7 @@ class CheckMethodMemory final : public CheckMethod, public std::enable_shared_fr
 		// Наследование из базового класса CheckMethod
 		const CheckMethodType m_check_method = CheckMethodType::Memory;
 	private:
-		offset_t m_offset;
-		std::vector<const byte_t> m_value;
-		std::shared_ptr<const CheckMethod> m_logged_in_method;
+		const offset_t m_offset;
+		const std::vector<const byte_t> m_value;
+		const std::shared_ptr<const CheckMethod> m_logged_in_method;
 };
