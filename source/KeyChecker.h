@@ -15,9 +15,9 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		KeyChecker(void);
 		~KeyChecker(void);
 
-		std::shared_ptr<const CheckMethod> create_check_method_base(void) const;
-		std::shared_ptr<const CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
-		std::shared_ptr<const CheckMethod> create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const;
+		const std::shared_ptr<const CheckMethod> create_check_method_base(void) const;
+		const std::shared_ptr<const CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
+		const std::shared_ptr<const CheckMethod> create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const;
 	protected:
 		mutable std::vector<std::shared_ptr<const CheckMethod>> m_check_methods;
 

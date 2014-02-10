@@ -13,17 +13,17 @@ KeyChecker::~KeyChecker(void) {
 	m_handles.clear();
 }
 
-std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_base(void) const {
+const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_base(void) const {
 	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodBase>();
 	m_check_methods.push_back(check_method);
 	return check_method;
 }
-std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
+const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
 	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
 	m_check_methods.push_back(check_method);
 	return check_method;
 }
-std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const {
+const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const {
 	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodMemory>(offset, std::move(value), logged_in_method);
 	m_check_methods.push_back(check_method);
 	return check_method;
