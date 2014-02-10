@@ -44,6 +44,27 @@ const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key
 
 	return protect_key;
 }
+const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_list_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate) {
+	std::shared_ptr<const IProtectKey> protect_key = nullptr;
+	for (const auto& element : keys_list) {
+		element->set_max_check_number(1);
+		element->m_key_delegate = nullptr;
+
+		bool is_key_found = element->check();
+		if (is_key_found) {
+			element->check_granules();
+			element->m_key_delegate = key_delegate;
+		}
+
+		element->check_and_logout();
+		if (is_key_found) {
+			protect_key = element;
+			break;
+		}
+	}
+
+	return protect_key;
+}
 
 const bool ProtectKey::check(void) const {
 	bool result = false;
