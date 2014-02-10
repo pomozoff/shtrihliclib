@@ -11,6 +11,12 @@ CheckMethod::~CheckMethod(void) {
 const CheckMethodType CheckMethod::check_method_type(void) const {
 	return m_check_method;
 }
+void CheckMethod::set_max_check_number(check_number_t check_number) const {
+	m_max_check_number = check_number;
+}
+const bool CheckMethod::is_check_method_for_NFR(void) const {
+	return m_is_check_method_for_NFR;
+}
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
 	if (last_check_is_success) {
 		m_current_check_number = 0;
@@ -23,7 +29,4 @@ const bool CheckMethod::process_check_result(const bool last_check_is_success) c
 	}
 
 	return give_a_try_one_more_time;
-}
-void CheckMethod::set_max_check_number(check_number_t check_number) const {
-	m_max_check_number = check_number;
 }
