@@ -6,6 +6,9 @@
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
+
+const bool ProtectKey::check(void) const {
+	return false;
 }
 
 /* IKeyChecker Interface */

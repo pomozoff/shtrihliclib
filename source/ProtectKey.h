@@ -9,6 +9,8 @@ class ProtectKey : public IProtectKey, public KeyChecker {
 		ProtectKey(void);
 		~ProtectKey(void);
 	protected:
+		virtual const bool check(void) const override;
+
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
 		virtual const bool is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;

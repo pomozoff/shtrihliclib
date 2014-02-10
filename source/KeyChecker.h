@@ -19,6 +19,7 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		std::shared_ptr<CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
 		std::shared_ptr<CheckMethod> create_check_method_memory(const offset_t offset, std::vector<byte_t>& value, std::shared_ptr<CheckMethod> logged_in_method) const;
 	protected:
+		virtual const bool check(void) const = 0;
 		virtual void set_max_check_number(check_number_t check_number) const final;
 		virtual void logout(void) const;
 
