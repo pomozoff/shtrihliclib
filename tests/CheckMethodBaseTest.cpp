@@ -2,19 +2,19 @@
 #include "stdafx.h"
 #include <memory>
 
-#include "KeyChecker.h"
+#include "ProtectKey.h"
 #include "CheckMethodBaseTest.h"
 
 CheckMethodBaseTest::CheckMethodBaseTest() {
-	auto key_checker = std::make_unique<KeyChecker>();
-	m_check_method = key_checker->create_check_method_base();
+	auto protect_key = std::make_unique<ProtectKey>();
+	m_check_method = protect_key->create_check_method_base();
 }
 CheckMethodBaseTest::~CheckMethodBaseTest() {
 }
 
 TEST_F(CheckMethodBaseTest, check) {
-	auto key_checker = std::make_unique<KeyChecker>();
-	bool successful_checked = m_check_method->check(std::move(key_checker));
+	auto protect_key = std::make_unique<ProtectKey>();
+	bool successful_checked = m_check_method->check(std::move(protect_key));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodBaseTest, check_method_type) {

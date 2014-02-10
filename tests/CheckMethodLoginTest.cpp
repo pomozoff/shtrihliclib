@@ -1,19 +1,19 @@
 ﻿
 #include "stdafx.h"
 
-#include "KeyChecker.h"
+#include "ProtectKey.h"
 #include "CheckMethodLoginTest.h"
 
 CheckMethodLoginTest::CheckMethodLoginTest() {
-	auto key_checker = std::make_unique<KeyChecker>();
-	m_check_method = key_checker->create_check_method_login(0, false);
+	auto protect_key = std::make_unique<ProtectKey>();
+	m_check_method = protect_key->create_check_method_login(0, false);
 }
 CheckMethodLoginTest::~CheckMethodLoginTest() {
 }
 
 TEST_F(CheckMethodLoginTest, check) {
-	auto key_checker = std::make_unique<KeyChecker>();
-	bool successful_checked = m_check_method->check(std::move(key_checker));
+	auto protect_key = std::make_unique<ProtectKey>();
+	bool successful_checked = m_check_method->check(std::move(protect_key));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_method_type) {
