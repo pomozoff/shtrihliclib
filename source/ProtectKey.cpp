@@ -10,6 +10,41 @@ ProtectKey::~ProtectKey(void) {
 	m_granules.clear();
 }
 
+const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key_type) {
+	std::unique_ptr<const ProtectKey> protect_key = nullptr;
+	switch (key_type) {
+		case KeyType::Base:
+			protect_key = nullptr;
+			break;
+		case KeyType::HaspSL:
+			protect_key = nullptr;
+			break;
+		case KeyType::HaspHLLocal:
+			protect_key = nullptr;
+			break;
+		case KeyType::HaspHLNet:
+			protect_key = nullptr;
+			break;
+		case KeyType::RockeyLocal:
+			protect_key = nullptr;
+			break;
+		case KeyType::RockeyNet:
+			protect_key = nullptr;
+			break;
+		case KeyType::FileMapped:
+			protect_key = nullptr;
+			break;
+		default:
+			break;
+	}
+
+	if (nullptr != protect_key) {
+		protect_key->m_key_type = key_type;
+	}
+
+	return protect_key;
+}
+
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
