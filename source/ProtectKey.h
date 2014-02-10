@@ -5,7 +5,7 @@
 #include "KeyChecker.h"
 #include "Granule.h"
 
-class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<ProtectKey> {
+class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<const ProtectKey> {
 	public:
 		ProtectKey(void);
 		~ProtectKey(void);
@@ -18,7 +18,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override;
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
 	private:
-		std::vector<Granule> m_granules;
+		std::vector<const Granule> m_granules;
 		bool m_is_key_base = false;
 		mutable bool m_is_key_nfr = false;
 };

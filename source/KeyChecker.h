@@ -15,11 +15,11 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		KeyChecker(void);
 		~KeyChecker(void);
 
-		std::shared_ptr<CheckMethod> create_check_method_base(void) const;
-		std::shared_ptr<CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
-		std::shared_ptr<CheckMethod> create_check_method_memory(const offset_t offset, std::vector<byte_t>& value, std::shared_ptr<CheckMethod> logged_in_method) const;
+		std::shared_ptr<const CheckMethod> create_check_method_base(void) const;
+		std::shared_ptr<const CheckMethod> create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
+		std::shared_ptr<const CheckMethod> create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const;
 	protected:
-		mutable std::vector<std::shared_ptr<CheckMethod>> m_check_methods;
+		mutable std::vector<std::shared_ptr<const CheckMethod>> m_check_methods;
 
 		virtual const bool check(void) const = 0;
 		virtual void set_max_check_number(check_number_t check_number) const final;
@@ -31,5 +31,5 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override = 0;
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override = 0;
 	private:
-		std::map<std::shared_ptr<CheckMethodLogin>, handle_t> m_handles;
+		std::map<const std::shared_ptr<const CheckMethodLogin>, const handle_t> m_handles;
 };
