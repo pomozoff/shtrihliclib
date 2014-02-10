@@ -43,4 +43,3 @@ const bool ProtectKey::is_same_memory(const std::shared_ptr<const CheckMethodMem
 const bool ProtectKey::logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
 	return false;
 }
-
