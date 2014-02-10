@@ -3,7 +3,7 @@
 
 #include "KeyChecker.h"
 
-class Granule : public KeyChecker {
+class Granule final : public KeyChecker {
 	public:
 		Granule(void);
 		~Granule(void);

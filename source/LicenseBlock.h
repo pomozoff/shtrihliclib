@@ -1,7 +1,7 @@
 ﻿
 #pragma once
 
-class LicenseBlock {
+class LicenseBlock final {
 	public:
 		LicenseBlock(void);
 		~LicenseBlock(void);
