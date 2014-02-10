@@ -3,6 +3,7 @@
 
 #include "IProtectKey.h"
 #include "KeyChecker.h"
+#include "Granule.h"
 
 class ProtectKey : public IProtectKey, public KeyChecker {
 	public:
@@ -16,4 +17,6 @@ class ProtectKey : public IProtectKey, public KeyChecker {
 		virtual const bool is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
 		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override;
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
+	private:
+		std::vector<Granule> m_granules;
 };

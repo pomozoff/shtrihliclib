@@ -6,6 +6,8 @@
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
+	m_granules.clear();
+}
 
 const bool ProtectKey::check(void) const {
 	return false;
