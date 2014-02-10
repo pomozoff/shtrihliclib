@@ -6,6 +6,7 @@
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
+	logout();
 	m_granules.clear();
 }
 
