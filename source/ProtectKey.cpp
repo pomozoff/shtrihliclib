@@ -11,7 +11,23 @@ ProtectKey::~ProtectKey(void) {
 }
 
 const bool ProtectKey::check(void) const {
-	return false;
+	bool result = false;
+	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
+
+	for (const auto& element : m_check_methods) {
+		if (m_is_key_nfr && element->is_check_method_for_NFR()) {
+			return true;
+		}
+
+		result = element->check(sp_this);
+		m_is_key_nfr = result && element->is_check_method_for_NFR();
+
+		if (!result && !element->is_check_method_for_NFR()) {
+			break;
+		}
+	}
+
+	return result;
 }
 
 /* IKeyChecker Interface */

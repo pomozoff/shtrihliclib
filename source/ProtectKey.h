@@ -20,5 +20,5 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	private:
 		std::vector<Granule> m_granules;
 		bool m_is_key_base = false;
-		bool m_is_key_nfr = false;
+		mutable bool m_is_key_nfr = false;
 };
