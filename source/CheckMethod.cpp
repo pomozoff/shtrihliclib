@@ -17,6 +17,9 @@ void CheckMethod::set_max_check_number(check_number_t check_number) const {
 const bool CheckMethod::is_check_method_for_NFR(void) const {
 	return m_is_check_method_for_NFR;
 }
+const bool CheckMethod::logout_after_check(void) const {
+	return m_logout_after_check;
+}
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
 	if (last_check_is_success) {
 		m_current_check_number = 0;
