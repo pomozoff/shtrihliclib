@@ -12,7 +12,7 @@ class CheckMethodMemory final : public CheckMethod, public std::enable_shared_fr
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod
-		CheckMethodType m_check_method;
+		const CheckMethodType m_check_method;
 	private:
 		offset_t m_offset;
 		std::vector<const byte_t> m_value;

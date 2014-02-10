@@ -12,7 +12,7 @@ class CheckMethodLogin final : public CheckMethod, public std::enable_shared_fro
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod
-		CheckMethodType m_check_method;
+		const CheckMethodType m_check_method;
 	private:
 		feature_t m_feature;
 		bool m_allow_to_login_on_previous_key;
