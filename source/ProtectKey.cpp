@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include "ProtectKey.h"
+#include "Granule.h"
 
 ProtectKey::ProtectKey(void) {
 }
@@ -38,13 +39,9 @@ const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key
 			break;
 	}
 
-	if (nullptr != protect_key) {
-		protect_key->m_key_type = key_type;
-	}
-
 	return protect_key;
 }
-const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_list_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate) {
+const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate) {
 	std::shared_ptr<const IProtectKey> protect_key = nullptr;
 	for (const auto& element : keys_list) {
 		element->set_max_check_number(1);
@@ -52,7 +49,7 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_list_t 
 
 		bool is_key_found = element->check();
 		if (is_key_found) {
-			//element->check_granules();
+			element->check_granules();
 			element->m_key_delegate = key_delegate;
 		}
 
@@ -66,6 +63,9 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_list_t 
 	return protect_key;
 }
 
+const bool ProtectKey::is_key_nfr(void) const {
+	return m_is_key_nfr;
+}
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
@@ -85,7 +85,12 @@ const bool ProtectKey::check(void) const {
 
 	return result;
 }
-const void ProtectKey::logout_after_check(void) const {
+void ProtectKey::check_granules(void) const {
+	for (const auto& element : m_granules) {
+		element->check();
+	}
+}
+void ProtectKey::logout_after_check(void) const {
 	if (m_logout_after_check) {
 		logout(false);
 	}

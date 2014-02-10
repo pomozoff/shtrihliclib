@@ -8,22 +8,26 @@
 class ProtectKey;
 class Granule;
 
-using keys_list_t = std::vector<const std::shared_ptr<const ProtectKey>>;
+using keys_t = std::vector<const std::shared_ptr<const ProtectKey>>;
+using granules_t = std::vector<const std::shared_ptr<const Granule>>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
 
 class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<const ProtectKey> {
 	public:
-		ProtectKey(void);
 		~ProtectKey(void);
+		ProtectKey(void);
 
 		static const std::unique_ptr<const ProtectKey> create_key(const KeyType key_type);
-		static const std::shared_ptr<const IProtectKey> find_key(const keys_list_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate);
+		static const std::shared_ptr<const IProtectKey> find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate);
+
+		virtual const bool is_key_nfr(void) const override;
 	protected:
-		mutable KeyType m_key_type;
+		KeyType m_key_type;
 
 		virtual const bool check(void) const override;
-		const void logout_after_check(void) const;
+		void check_granules(void) const;
+		void logout_after_check(void) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
@@ -31,10 +35,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override;
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
 	private:
-		std::vector<const Granule> m_granules;
+		granules_t m_granules;
 		bool m_is_key_base = false;
 		bool m_logout_after_check = false;
 		mutable bool m_is_key_nfr = false;
 		mutable std::shared_ptr<const IProtectKeyDelegate> m_key_delegate;
-
 };
