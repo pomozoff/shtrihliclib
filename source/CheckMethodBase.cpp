@@ -4,9 +4,7 @@
 #include "CheckMethodBase.h"
 #include "KeyChecker.h"
 
-CheckMethodBase::CheckMethodBase(void) :
-m_check_method(CheckMethodType::Base)
-{
+CheckMethodBase::CheckMethodBase(void) {
 }
 CheckMethodBase::~CheckMethodBase(void) {
 }

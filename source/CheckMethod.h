@@ -32,10 +32,10 @@ class CheckMethod {
 
 		const bool process_check_result(const bool last_check_is_success) const;
 	private:
-		bool m_logout_after_check;
-		bool m_is_check_method_for_NFR;
-		bool m_is_check_method_for_license;
+		bool m_logout_after_check = false;
+		bool m_is_check_method_for_NFR = false;
+		bool m_is_check_method_for_license = false;
 
-		mutable check_number_t m_max_check_number = 3;
-		mutable check_number_t m_current_check_number;
+		mutable check_number_t m_max_check_number = 1;
+		mutable check_number_t m_current_check_number = 0;
 };
