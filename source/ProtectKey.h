@@ -4,9 +4,9 @@
 #include "IProtectKey.h"
 #include "IProtectKeyDelegate.h"
 #include "KeyChecker.h"
-#include "Granule.h"
 
 class ProtectKey;
+class Granule;
 
 using keys_list_t = std::vector<const std::shared_ptr<const ProtectKey>>;
 
