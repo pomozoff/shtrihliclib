@@ -12,5 +12,5 @@ class CheckMethodBase final : public CheckMethod, public std::enable_shared_from
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod
-		const CheckMethodType m_check_method = CheckMethodType::Base;
+		const CheckMethodType _check_method = CheckMethodType::Base;
 };

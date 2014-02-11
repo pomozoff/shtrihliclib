@@ -11,17 +11,17 @@ CheckMethodMemoryTest::CheckMethodMemoryTest() {
 	auto protect_key = std::make_unique<const ProtectKey>();
 	auto check_method_login = protect_key->create_check_method_login(15, true);
 	
-	m_check_method = protect_key->create_check_method_memory(m_offset_for_constructor_test, std::move(value_for_constructor_test), check_method_login);
+	_check_method = protect_key->create_check_method_memory(_offset_for_constructor_test, std::move(value_for_constructor_test), check_method_login);
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest() {
 }
 
 TEST_F(CheckMethodMemoryTest, check) {
 	auto protect_key = std::make_unique<const ProtectKey>();
-	bool successful_checked = m_check_method->check(std::move(protect_key));
+	bool successful_checked = _check_method->check(std::move(protect_key));
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodMemoryTest, check_method_type) {
-	CheckMethodType check_method_type = m_check_method->check_method_type();
+	CheckMethodType check_method_type = _check_method->check_method_type();
 	ASSERT_TRUE(check_method_type == CheckMethodType::Memory);
 }

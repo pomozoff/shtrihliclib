@@ -16,7 +16,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		const bool is_granule_nfr_date(void) const;
 	protected:
 	private:
-		const std::string m_id;
-		const std::shared_ptr<const ProtectKey> m_protect_key;
-		bool m_is_granule_nfr_date;
+		const std::string _id;
+		const std::shared_ptr<const ProtectKey> _protect_key;
+		bool _is_granule_nfr_date;
 };

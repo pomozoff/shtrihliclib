@@ -23,7 +23,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		virtual const bool is_key_nfr(void) const override;
 	protected:
-		KeyType m_key_type;
+		KeyType _key_type;
 
 		virtual const bool check(void) const override;
 		void check_granules(void) const;
@@ -35,9 +35,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override;
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
 	private:
-		granules_t m_granules;
-		bool m_is_key_base = false;
-		bool m_logout_after_check = false;
-		mutable bool m_is_key_nfr = false;
-		mutable std::shared_ptr<const IProtectKeyDelegate> m_key_delegate;
+		granules_t _granules;
+		bool _is_key_base = false;
+		bool _logout_after_check = false;
+		mutable bool _is_key_nfr = false;
+		mutable std::shared_ptr<const IProtectKeyDelegate> _key_delegate;
 };

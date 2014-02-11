@@ -9,5 +9,5 @@ class CheckMethodMemoryTest : public CheckMethodTest {
 		CheckMethodMemoryTest();
 		~CheckMethodMemoryTest();
 	private:
-		const offset_t m_offset_for_constructor_test = 3;
+		const offset_t _offset_for_constructor_test = 3;
 };

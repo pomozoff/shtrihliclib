@@ -8,7 +8,7 @@ ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
 	logout(true);
-	m_granules.clear();
+	_granules.clear();
 }
 
 const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key_type) {
@@ -45,12 +45,12 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_
 	std::shared_ptr<const IProtectKey> protect_key = nullptr;
 	for (const auto& element : keys_list) {
 		element->set_max_check_number(1);
-		element->m_key_delegate = nullptr;
+		element->_key_delegate = nullptr;
 
 		bool is_key_found = element->check();
 		if (is_key_found) {
 			element->check_granules();
-			element->m_key_delegate = key_delegate;
+			element->_key_delegate = key_delegate;
 		}
 
 		element->logout_after_check();
@@ -64,19 +64,19 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_
 }
 
 const bool ProtectKey::is_key_nfr(void) const {
-	return m_is_key_nfr;
+	return _is_key_nfr;
 }
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
 
-	for (const auto& element : m_check_methods) {
-		if (m_is_key_nfr && element->is_check_method_for_NFR()) {
+	for (const auto& element : _check_methods) {
+		if (_is_key_nfr && element->is_check_method_for_NFR()) {
 			return true;
 		}
 
 		result = element->check(sp_this);
-		m_is_key_nfr = result && element->is_check_method_for_NFR();
+		_is_key_nfr = result && element->is_check_method_for_NFR();
 
 		if (!result && !element->is_check_method_for_NFR()) {
 			break;
@@ -86,12 +86,12 @@ const bool ProtectKey::check(void) const {
 	return result;
 }
 void ProtectKey::check_granules(void) const {
-	for (const auto& element : m_granules) {
+	for (const auto& element : _granules) {
 		element->check();
 	}
 }
 void ProtectKey::logout_after_check(void) const {
-	if (m_logout_after_check) {
+	if (_logout_after_check) {
 		logout(false);
 	}
 }
