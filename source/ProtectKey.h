@@ -8,9 +8,12 @@
 class ProtectKey;
 class Granule;
 
-using keys_t = std::vector<const std::shared_ptr<const ProtectKey>>;
-using granules_t = std::vector<const std::shared_ptr<const Granule>>;
-using key_delegate_t = std::shared_ptr<const IProtectKeyDelegate>;
+using protect_key_t = std::shared_ptr<const ProtectKey>;
+using protect_keys_t = std::vector<const protect_key_t>;
+using granule_t = std::shared_ptr<const Granule>;
+using granules_t = std::vector<const granule_t>;
+using iprotect_key_delegate_t = std::shared_ptr<const IProtectKeyDelegate>;
+using iprotect_key_t = std::shared_ptr<const IProtectKey>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
 
@@ -20,7 +23,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		ProtectKey(void);
 
 		static const std::unique_ptr<const ProtectKey> create_key(const KeyType key_type);
-		static const std::shared_ptr<const IProtectKey> find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate);
+		static const iprotect_key_t find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate);
 
 		/* IProtectKey Interface */
 		virtual const bool check_license(void) const override;
@@ -40,16 +43,16 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool check(void) const override;
 
 		/* IKeyChecker Interface */
-		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
-		virtual const bool is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
-		virtual const bool is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const override;
-		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
+		virtual const bool is_base_key_available(const check_method_base_t checkMethod) const override;
+		virtual const bool is_able_to_login(const check_method_login_t checkMethod) const override;
+		virtual const bool is_same_memory(const check_method_memory_t checkMethod) const override;
+		virtual const bool logout_key(const check_method_login_t checkMethod) const override;
 	private:
 		granules_t _granules;
 		bool _logout_after_check = false;
 		bool _is_key_base = false;
 		mutable bool _is_key_nfr = false;
-		mutable key_delegate_t _key_delegate;
+		mutable iprotect_key_delegate_t _key_delegate;
 
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;

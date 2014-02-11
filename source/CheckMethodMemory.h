@@ -5,16 +5,16 @@
 
 class CheckMethodMemory final : public CheckMethod, public std::enable_shared_from_this<CheckMethodMemory> {
 	public:
-		CheckMethodMemory(const feature_t offset, const std::vector<const byte_t>& value, const std::shared_ptr<const CheckMethod> logged_in_method);
+		CheckMethodMemory(const feature_t offset, const value_t& value, const check_method_t logged_in_method);
 		~CheckMethodMemory(void);
 
-		virtual const bool check(const std::shared_ptr<const IKeyChecker> key_checker) const override final;
+		virtual const bool check(const ikey_checker_t key_checker) const override final;
 	protected:
 	private:
 		// Наследование из базового класса CheckMethod
 		const CheckMethodType _check_method = CheckMethodType::Memory;
 	private:
-		const offset_t _offset;
-		const std::vector<const byte_t> _value;
-		const std::shared_ptr<const CheckMethod> _logged_in_method;
+		const offset_t _offset = 0;
+		const value_t _value;
+		const check_method_t _logged_in_method = nullptr;
 };

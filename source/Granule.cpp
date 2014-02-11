@@ -4,7 +4,7 @@
 #include "Granule.h"
 #include "ProtectKey.h"
 
-Granule::Granule(const std::string id, const std::shared_ptr<const ProtectKey> protect_key) :
+Granule::Granule(const std::string id, const protect_key_t protect_key) :
 _id(id),
 _protect_key(protect_key)
 {
@@ -14,7 +14,7 @@ Granule::~Granule(void) {
 
 const bool Granule::check(void) const {
 	bool result = false;
-	std::shared_ptr<const Granule> sp_this = shared_from_this();
+	granule_t sp_this = shared_from_this();
 
 	for (const auto& element : _check_methods) {
 		result = result && element->check(sp_this);

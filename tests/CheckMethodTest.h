@@ -11,5 +11,5 @@ class CheckMethodTest : public ::testing::Test {
 		CheckMethodTest();
 		virtual ~CheckMethodTest();
 	protected:
-		std::shared_ptr<const CheckMethod> _check_method;
+		check_method_t _check_method;
 };

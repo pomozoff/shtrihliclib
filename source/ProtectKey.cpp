@@ -41,8 +41,8 @@ const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key
 
 	return protect_key;
 }
-const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate) {
-	std::shared_ptr<const IProtectKey> protect_key = nullptr;
+const iprotect_key_t ProtectKey::find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate) {
+	iprotect_key_t protect_key = nullptr;
 	for (const auto& element : keys_list) {
 		element->set_max_check_number(1);
 		element->_key_delegate = nullptr;
@@ -101,7 +101,7 @@ void ProtectKey::set_logout_after_check(bool logout_after_check) {
 /* KeyChecker Interface */
 const bool ProtectKey::check(void) const {
 	bool result = false;
-	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
+	protect_key_t sp_this = shared_from_this();
 
 	for (const auto& element : _check_methods) {
 		if (_is_key_nfr && element->is_check_method_for_nfr()) {
@@ -120,23 +120,23 @@ const bool ProtectKey::check(void) const {
 }
 
 /* IKeyChecker Interface */
-const bool ProtectKey::is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const {
+const bool ProtectKey::is_base_key_available(const check_method_base_t checkMethod) const {
 	return false;
 }
-const bool ProtectKey::is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
+const bool ProtectKey::is_able_to_login(const check_method_login_t checkMethod) const {
 	return logout_key(checkMethod);
 }
-const bool ProtectKey::is_same_memory(const std::shared_ptr<const CheckMethodMemory> checkMethod) const {
+const bool ProtectKey::is_same_memory(const check_method_memory_t checkMethod) const {
 	return false;
 }
-const bool ProtectKey::logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
+const bool ProtectKey::logout_key(const check_method_login_t checkMethod) const {
 	return false;
 }
 
 /* Private */
 const bool ProtectKey::check_license_with_methods(void) const {
 	bool result = false;
-	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
+	protect_key_t sp_this = shared_from_this();
 
 	for (const auto& element : _check_methods) {
 		if (!element->is_check_method_for_license()) {
@@ -150,7 +150,7 @@ const bool ProtectKey::check_license_with_methods(void) const {
 	return result;
 }
 const bool ProtectKey::recheck_key(void) const {
-	key_delegate_t temp_delegate = _key_delegate;
+	iprotect_key_delegate_t temp_delegate = _key_delegate;
 	_key_delegate = nullptr;
 
 	bool result = check();

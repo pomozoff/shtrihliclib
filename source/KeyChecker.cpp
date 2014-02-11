@@ -13,18 +13,18 @@ KeyChecker::~KeyChecker(void) {
 	_handles.clear();
 }
 
-const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_base(void) const {
-	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodBase>();
+const check_method_t KeyChecker::create_check_method_base(void) const {
+	check_method_t check_method = std::make_shared<CheckMethodBase>();
 	_check_methods.push_back(check_method);
 	return check_method;
 }
-const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
-	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
+const check_method_t KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
+	check_method_t check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
-const std::shared_ptr<const CheckMethod> KeyChecker::create_check_method_memory(const offset_t offset, std::vector<const byte_t>& value, std::shared_ptr<const CheckMethod> logged_in_method) const {
-	std::shared_ptr<const CheckMethod> check_method = std::make_shared<CheckMethodMemory>(offset, std::move(value), logged_in_method);
+const check_method_t KeyChecker::create_check_method_memory(const offset_t offset, value_t& value, check_method_t logged_in_method) const {
+	check_method_t check_method = std::make_shared<CheckMethodMemory>(offset, std::move(value), logged_in_method);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
@@ -44,6 +44,6 @@ void KeyChecker::logout(const bool forced_logout) const {
 }
 
 /* IKeyChecker Interface */
-const bool KeyChecker::is_able_to_login(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
+const bool KeyChecker::is_able_to_login(const check_method_login_t checkMethod) const {
 	return logout_key(checkMethod);
 }

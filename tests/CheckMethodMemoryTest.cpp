@@ -6,7 +6,7 @@
 
 CheckMethodMemoryTest::CheckMethodMemoryTest() {
 	byte_t tmp[] = { 0x10, 0xfe, 0x4a, 0x83 };
-	std::vector<const byte_t> value_for_constructor_test{ *tmp };
+	value_t value_for_constructor_test{ *tmp };
 	
 	auto protect_key = std::make_unique<const ProtectKey>();
 	auto check_method_login = protect_key->create_check_method_login(15, true);
