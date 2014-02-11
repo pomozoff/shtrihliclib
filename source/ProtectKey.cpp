@@ -53,7 +53,7 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_
 			element->_key_delegate = key_delegate;
 		}
 
-		element->logout_after_check();
+		element->try_to_logout();
 		if (is_key_found) {
 			protect_key = element;
 			break;
@@ -90,7 +90,7 @@ void ProtectKey::check_granules(void) const {
 		element->check();
 	}
 }
-void ProtectKey::logout_after_check(void) const {
+void ProtectKey::try_to_logout(void) const {
 	if (_logout_after_check) {
 		logout(false);
 	}

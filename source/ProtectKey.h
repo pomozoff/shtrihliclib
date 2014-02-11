@@ -27,7 +27,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		virtual const bool check(void) const override;
 		void check_granules(void) const;
-		void logout_after_check(void) const;
+		void try_to_logout(void) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
