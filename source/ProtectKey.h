@@ -24,9 +24,8 @@ enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNe
 class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<const ProtectKey> {
 	public:
 		~ProtectKey(void);
-		ProtectKey(void);
 
-		static const std::unique_ptr<const ProtectKey> create_key(const KeyType key_type);
+		static const protect_key_t create_key(const KeyType key_type);
 		static const iprotect_key_t find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate);
 
 		virtual const value_t read_memory(const check_method_memory_t checkMethod) const = 0;
@@ -47,6 +46,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		void set_logout_after_check(bool logout_after_check);
 	protected:
 		KeyType _key_type;
+
+		ProtectKey(void);
 
 		void check_granules(void) const;
 		void try_to_logout(void) const;

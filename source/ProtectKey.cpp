@@ -3,6 +3,7 @@
 
 #include "ProtectKey.h"
 #include "Granule.h"
+#include "ProtectKeyHaspSL.h"
 
 ProtectKey::ProtectKey(void) {
 }
@@ -11,14 +12,14 @@ ProtectKey::~ProtectKey(void) {
 	_granules.clear();
 }
 
-const std::unique_ptr<const ProtectKey> ProtectKey::create_key(const KeyType key_type) {
-	std::unique_ptr<const ProtectKey> protect_key = nullptr;
+const protect_key_t ProtectKey::create_key(const KeyType key_type) {
+	protect_key_t protect_key = nullptr;
 	switch (key_type) {
 		case KeyType::Base:
 			protect_key = nullptr;
 			break;
 		case KeyType::HaspSL:
-			protect_key = nullptr;
+			protect_key = std::make_shared<const ProtectKeyHaspSL>();
 			break;
 		case KeyType::HaspHLLocal:
 			protect_key = nullptr;

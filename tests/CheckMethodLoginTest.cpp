@@ -5,15 +5,15 @@
 #include "CheckMethodLoginTest.h"
 
 CheckMethodLoginTest::CheckMethodLoginTest() {
-	auto protect_key = std::make_unique<const ProtectKey>();
+	auto protect_key = ProtectKey::create_key(KeyType::HaspSL);
 	_check_method = protect_key->create_check_method_login(0, false);
 }
 CheckMethodLoginTest::~CheckMethodLoginTest() {
 }
 
 TEST_F(CheckMethodLoginTest, check) {
-	auto protect_key = std::make_unique<const ProtectKey>();
-	bool successful_checked = _check_method->check(std::move(protect_key));
+	auto protect_key = ProtectKey::create_key(KeyType::HaspSL);
+	bool successful_checked = _check_method->check(protect_key);
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_method_type) {
