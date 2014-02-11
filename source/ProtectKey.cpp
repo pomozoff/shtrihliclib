@@ -63,28 +63,6 @@ const std::shared_ptr<const IProtectKey> ProtectKey::find_key(const keys_t keys_
 	return protect_key;
 }
 
-const bool ProtectKey::is_key_nfr(void) const {
-	return _is_key_nfr;
-}
-const bool ProtectKey::check(void) const {
-	bool result = false;
-	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
-
-	for (const auto& element : _check_methods) {
-		if (_is_key_nfr && element->is_check_method_for_NFR()) {
-			return true;
-		}
-
-		result = element->check(sp_this);
-		_is_key_nfr = result && element->is_check_method_for_NFR();
-
-		if (!result && !element->is_check_method_for_NFR()) {
-			break;
-		}
-	}
-
-	return result;
-}
 void ProtectKey::check_granules(void) const {
 	for (const auto& element : _granules) {
 		element->check();
@@ -100,6 +78,10 @@ void ProtectKey::try_to_logout(void) const {
 const bool ProtectKey::check_license(void) const {
 
 }
+const bool ProtectKey::is_key_nfr(void) const {
+	return _is_key_nfr;
+}
+
 /* Properties */
 const bool ProtectKey::logout_after_check(void) const {
 	return _logout_after_check;
@@ -110,8 +92,26 @@ void ProtectKey::set_logout_after_check(bool logout_after_check) {
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
 }
-const bool ProtectKey::is_key_nfr(void) const {
-	return _is_key_nfr;
+
+/* KeyChecker Interface */
+const bool ProtectKey::check(void) const {
+	bool result = false;
+	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
+
+	for (const auto& element : _check_methods) {
+		if (is_key_nfr() && element->is_check_method_for_NFR()) {
+			return true;
+		}
+
+		result = element->check(sp_this);
+		_is_key_nfr = result && element->is_check_method_for_NFR();
+
+		if (!result && !element->is_check_method_for_NFR()) {
+			break;
+		}
+	}
+
+	return result;
 }
 
 /* IKeyChecker Interface */

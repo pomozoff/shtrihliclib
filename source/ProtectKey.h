@@ -29,13 +29,14 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		const bool logout_after_check(void) const;
 		void set_logout_after_check(bool logout_after_check);
 		const bool is_key_base(void) const;
-		const bool is_key_nfr(void) const;
 	protected:
 		KeyType _key_type;
 
-		virtual const bool check(void) const override;
 		void check_granules(void) const;
 		void try_to_logout(void) const;
+
+		/* KeyChecker Interface */
+		virtual const bool check(void) const override;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const override;
