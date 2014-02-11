@@ -99,14 +99,14 @@ const bool ProtectKey::check(void) const {
 	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
 
 	for (const auto& element : _check_methods) {
-		if (is_key_nfr() && element->is_check_method_for_NFR()) {
+		if (is_key_nfr() && element->is_check_method_for_nfr()) {
 			return true;
 		}
 
 		result = element->check(sp_this);
-		_is_key_nfr = result && element->is_check_method_for_NFR();
+		_is_key_nfr = result && element->is_check_method_for_nfr();
 
-		if (!result && !element->is_check_method_for_NFR()) {
+		if (!result && !element->is_check_method_for_nfr()) {
 			break;
 		}
 	}
