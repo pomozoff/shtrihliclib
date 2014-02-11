@@ -42,8 +42,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const override;
 	private:
 		granules_t _granules;
-		bool _is_key_base = false;
 		bool _logout_after_check = false;
+		bool _is_key_base = false;
 		mutable bool _is_key_nfr = false;
 		mutable std::shared_ptr<const IProtectKeyDelegate> _key_delegate;
 };
