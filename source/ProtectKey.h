@@ -1,6 +1,8 @@
 ﻿
 #pragma once
 
+#include <chrono>
+
 #include "IProtectKey.h"
 #include "IProtectKeyDelegate.h"
 #include "KeyChecker.h"
@@ -14,6 +16,8 @@ using granule_t = std::shared_ptr<const Granule>;
 using granules_t = std::vector<const granule_t>;
 using iprotect_key_delegate_t = std::shared_ptr<const IProtectKeyDelegate>;
 using iprotect_key_t = std::shared_ptr<const IProtectKey>;
+using current_clock_t = std::chrono::system_clock;
+using time_point_t = std::chrono::time_point<current_clock_t>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
 
@@ -51,6 +55,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		granules_t _granules;
 		bool _logout_after_check = false;
 		bool _is_key_base = false;
+		time_point_t _nfr_end_date = current_clock_t::now();
 		mutable bool _is_key_nfr = false;
 		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
