@@ -52,7 +52,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		bool _logout_after_check = false;
 		bool _is_key_base = false;
 		mutable bool _is_key_nfr = false;
-		mutable iprotect_key_delegate_t _key_delegate;
+		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;
