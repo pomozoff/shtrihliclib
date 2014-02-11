@@ -21,6 +21,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const std::unique_ptr<const ProtectKey> create_key(const KeyType key_type);
 		static const std::shared_ptr<const IProtectKey> find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate);
 
+		/* IProtectKey Interface */
+		virtual const bool check_license(void) const override;
 		virtual const bool is_key_nfr(void) const override;
 
 		/* Properties */

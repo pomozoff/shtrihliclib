@@ -96,6 +96,10 @@ void ProtectKey::try_to_logout(void) const {
 	}
 }
 
+/* IProtectKey Interface */
+const bool ProtectKey::check_license(void) const {
+
+}
 /* Properties */
 const bool ProtectKey::logout_after_check(void) const {
 	return _logout_after_check;
