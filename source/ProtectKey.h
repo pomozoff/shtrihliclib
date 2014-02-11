@@ -29,10 +29,18 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const std::unique_ptr<const ProtectKey> create_key(const KeyType key_type);
 		static const iprotect_key_t find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate);
 
+		virtual const value_t read_memory(const check_method_memory_t checkMethod) const = 0;
+
 		/* IProtectKey Interface */
 		virtual const bool check_license(void) const override;
 		virtual const bool is_key_nfr(void) const override;
 		virtual const bool is_key_base(void) const override;
+
+		/* IKeyChecker Interface */
+		virtual const bool is_base_key_available(const check_method_base_t checkMethod) const override;
+		virtual const bool is_able_to_login(const check_method_login_t checkMethod) const override;
+		virtual const bool is_same_memory(const check_method_memory_t checkMethod) const override;
+		virtual const bool logout_key(const check_method_login_t checkMethod) const override;
 
 		/* Properties */
 		const bool logout_after_check(void) const;
@@ -45,12 +53,6 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override;
-
-		/* IKeyChecker Interface */
-		virtual const bool is_base_key_available(const check_method_base_t checkMethod) const override;
-		virtual const bool is_able_to_login(const check_method_login_t checkMethod) const override;
-		virtual const bool is_same_memory(const check_method_memory_t checkMethod) const override;
-		virtual const bool logout_key(const check_method_login_t checkMethod) const override;
 	private:
 		granules_t _granules;
 		bool _logout_after_check = false;

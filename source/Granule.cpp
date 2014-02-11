@@ -36,3 +36,32 @@ const bool Granule::is_granule_nfr_date(void) const {
 }
 
 /* IKeyChecker Interface */
+const bool Granule::is_base_key_available(const check_method_base_t checkMethod) const {
+	return nullptr == _protect_key ? false : _protect_key->is_base_key_available(checkMethod);
+}
+const bool Granule::is_able_to_login(const check_method_login_t checkMethod) const {
+	return nullptr == _protect_key ? false : _protect_key->is_able_to_login(checkMethod);
+}
+const bool Granule::is_same_memory(const check_method_memory_t checkMethod) const {
+	bool result = false;
+
+	if (nullptr == _protect_key) {
+		return false;
+	} else if (_read_memory_to_value) {
+		_value = _protect_key->read_memory(checkMethod);
+		result = _value.size() > 0;
+	} else {
+		_protect_key->is_same_memory(checkMethod);
+	}
+
+	if (_is_granule_nfr_date) {
+		if (2 == _value.size()) {
+
+		}
+	}
+
+	return false;
+}
+const bool Granule::logout_key(const check_method_login_t checkMethod) const {
+	return nullptr == _protect_key ? false : _protect_key->logout_key(checkMethod);
+}
