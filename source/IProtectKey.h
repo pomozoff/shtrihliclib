@@ -10,4 +10,5 @@ class IProtectKey : public IGranulesManager {
 
 		virtual const bool check_license(void) const = 0;
 		virtual const bool is_key_nfr(void) const = 0;
+		virtual const bool is_key_base(void) const = 0;
 };

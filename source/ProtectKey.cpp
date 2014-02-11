@@ -86,6 +86,9 @@ const bool ProtectKey::check_license(void) const {
 const bool ProtectKey::is_key_nfr(void) const {
 	return _is_key_nfr;
 }
+const bool ProtectKey::is_key_base(void) const {
+	return _is_key_base;
+}
 
 /* Properties */
 const bool ProtectKey::logout_after_check(void) const {
@@ -93,9 +96,6 @@ const bool ProtectKey::logout_after_check(void) const {
 }
 void ProtectKey::set_logout_after_check(bool logout_after_check) {
 	_logout_after_check = logout_after_check;
-}
-const bool ProtectKey::is_key_base(void) const {
-	return _is_key_base;
 }
 
 /* KeyChecker Interface */

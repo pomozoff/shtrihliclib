@@ -25,11 +25,11 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		/* IProtectKey Interface */
 		virtual const bool check_license(void) const override;
 		virtual const bool is_key_nfr(void) const override;
+		virtual const bool is_key_base(void) const override;
 
 		/* Properties */
 		const bool logout_after_check(void) const;
 		void set_logout_after_check(bool logout_after_check);
-		const bool is_key_base(void) const;
 	protected:
 		KeyType _key_type;
 
