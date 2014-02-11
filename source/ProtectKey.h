@@ -10,6 +10,7 @@ class Granule;
 
 using keys_t = std::vector<const std::shared_ptr<const ProtectKey>>;
 using granules_t = std::vector<const std::shared_ptr<const Granule>>;
+using key_delegate_t = std::shared_ptr<const IProtectKeyDelegate>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
 
@@ -48,5 +49,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		bool _logout_after_check = false;
 		bool _is_key_base = false;
 		mutable bool _is_key_nfr = false;
-		mutable std::shared_ptr<const IProtectKeyDelegate> _key_delegate;
+		mutable key_delegate_t _key_delegate;
+
+		const bool check_license_with_methods(void) const;
+		const bool recheck_key(void) const;
 };

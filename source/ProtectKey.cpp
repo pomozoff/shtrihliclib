@@ -76,7 +76,12 @@ void ProtectKey::try_to_logout(void) const {
 
 /* IProtectKey Interface */
 const bool ProtectKey::check_license(void) const {
+	if (_is_key_nfr) {
+		return false;
+	}
+	bool result = check_license_with_methods() || recheck_key();
 
+	return result;
 }
 const bool ProtectKey::is_key_nfr(void) const {
 	return _is_key_nfr;
@@ -99,7 +104,7 @@ const bool ProtectKey::check(void) const {
 	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
 
 	for (const auto& element : _check_methods) {
-		if (is_key_nfr() && element->is_check_method_for_nfr()) {
+		if (_is_key_nfr && element->is_check_method_for_nfr()) {
 			return true;
 		}
 
@@ -126,4 +131,34 @@ const bool ProtectKey::is_same_memory(const std::shared_ptr<const CheckMethodMem
 }
 const bool ProtectKey::logout_key(const std::shared_ptr<const CheckMethodLogin> checkMethod) const {
 	return false;
+}
+
+/* Private */
+const bool ProtectKey::check_license_with_methods(void) const {
+	bool result = false;
+	std::shared_ptr<const ProtectKey> sp_this = shared_from_this();
+
+	for (const auto& element : _check_methods) {
+		if (!element->is_check_method_for_license()) {
+			continue;
+		}
+		result = element->check(sp_this);
+		if (!result) {
+			break;
+		}
+	}
+	return result;
+}
+const bool ProtectKey::recheck_key(void) const {
+	key_delegate_t temp_delegate = _key_delegate;
+	_key_delegate = nullptr;
+
+	bool result = check();
+	if (result) {
+		check_granules();
+		_key_delegate = temp_delegate;
+	}
+	try_to_logout();
+
+	return result;
 }
