@@ -96,6 +96,20 @@ void ProtectKey::try_to_logout(void) const {
 	}
 }
 
+/* Properties */
+const bool ProtectKey::logout_after_check(void) const {
+	return _logout_after_check;
+}
+void ProtectKey::set_logout_after_check(bool logout_after_check) {
+	_logout_after_check = logout_after_check;
+}
+const bool ProtectKey::is_key_base(void) const {
+	return _is_key_base;
+}
+const bool ProtectKey::is_key_nfr(void) const {
+	return _is_key_nfr;
+}
+
 /* IKeyChecker Interface */
 const bool ProtectKey::is_base_key_available(const std::shared_ptr<const CheckMethodBase> checkMethod) const {
 	return false;

@@ -22,6 +22,12 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const std::shared_ptr<const IProtectKey> find_key(const keys_t keys_list, const std::shared_ptr<IProtectKeyDelegate> key_delegate);
 
 		virtual const bool is_key_nfr(void) const override;
+
+		/* Properties */
+		const bool logout_after_check(void) const;
+		void set_logout_after_check(bool logout_after_check);
+		const bool is_key_base(void) const;
+		const bool is_key_nfr(void) const;
 	protected:
 		KeyType _key_type;
 
