@@ -12,6 +12,7 @@ _protect_key(protect_key)
 Granule::~Granule(void) {
 }
 
+/* KeyChecker Interface */
 const bool Granule::check(void) const {
 	bool result = false;
 	granule_t sp_this = shared_from_this();
@@ -26,9 +27,12 @@ const bool Granule::check(void) const {
 	return result;
 }
 
+/* Properties */
 void Granule::set_granule_nfr_date(bool is_granule_nfr_date) {
 	_is_granule_nfr_date = is_granule_nfr_date;
 }
 const bool Granule::is_granule_nfr_date(void) const {
 	return _is_granule_nfr_date;
 }
+
+/* IKeyChecker Interface */
