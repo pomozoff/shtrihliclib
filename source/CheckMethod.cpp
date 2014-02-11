@@ -20,6 +20,9 @@ const bool CheckMethod::is_check_method_for_NFR(void) const {
 const bool CheckMethod::logout_after_check(void) const {
 	return _logout_after_check;
 }
+const bool CheckMethod::is_check_method_for_license(void) const {
+	return _is_check_method_for_license;
+}
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
 	if (last_check_is_success) {
 		_current_check_number = 0;

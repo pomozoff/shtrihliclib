@@ -22,6 +22,7 @@ class CheckMethod {
 		const CheckMethodType check_method_type(void) const;
 		const bool is_check_method_for_NFR(void) const;
 		const bool logout_after_check(void) const;
+		const bool is_check_method_for_license(void) const;
 		void set_max_check_number(check_number_t check_number) const;
 
 		virtual ~CheckMethod(void);
