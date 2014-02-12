@@ -4,12 +4,25 @@
 #include "ProtectKey.h"
 #include "Granule.h"
 #include "ProtectKeyHaspSL.h"
+#include "Platform.h"
+
+static const std::string _session_id = ProtectKey::session_id();
+static const size_t _session_id_hash = ProtectKey::session_id_hash();
+static const platform_t _platform = Platform::platform();
 
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
 	logout(true);
 	_granules.clear();
+}
+
+const std::string ProtectKey::session_id(void) {
+	return _platform->computer_name() + _platform->user_name();
+}
+const size_t ProtectKey::session_id_hash(void) {
+	std::hash<std::string> hasher;
+	return hasher(_session_id);
 }
 
 const protect_key_t ProtectKey::create_key(const KeyType key_type) {

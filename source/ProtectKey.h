@@ -23,6 +23,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	public:
 		~ProtectKey(void);
 
+		static const std::string session_id(void);
+		static const size_t session_id_hash(void);
+
 		static const protect_key_t create_key(const KeyType key_type);
 		static const iprotect_key_t find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate);
 
