@@ -90,6 +90,7 @@
     <ClInclude Include="CheckMethodLoginTest.h" />
     <ClInclude Include="CheckMethodMemoryTest.h" />
     <ClInclude Include="CheckMethodTest.h" />
+    <ClInclude Include="LicenseBlockTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -98,6 +99,7 @@
     <ClCompile Include="CheckMethodLoginTest.cpp" />
     <ClCompile Include="CheckMethodMemoryTest.cpp" />
     <ClCompile Include="CheckMethodTest.cpp" />
+    <ClCompile Include="LicenseBlockTest.cpp" />
     <ClCompile Include="tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
