@@ -98,6 +98,9 @@
     <ClCompile Include="KeyChecker.cpp" />
     <ClCompile Include="LicenseBlock.cpp" />
     <ClCompile Include="LicenseBlockManager.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="PlatformLinux.cpp" />
+    <ClCompile Include="PlatformWindows.cpp" />
     <ClCompile Include="ProtectKey.cpp" />
     <ClCompile Include="ProtectKeyHaspSL.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -110,6 +113,7 @@
     <ClInclude Include="CheckMethodBase.h" />
     <ClInclude Include="CheckMethodLogin.h" />
     <ClInclude Include="CheckMethodMemory.h" />
+    <ClInclude Include="DataTypes.h" />
     <ClInclude Include="Granule.h" />
     <ClInclude Include="ICheckMethodsManager.h" />
     <ClInclude Include="ICheckMethodsViewer.h" />
@@ -120,6 +124,9 @@
     <ClInclude Include="KeyChecker.h" />
     <ClInclude Include="LicenseBlock.h" />
     <ClInclude Include="LicenseBlockManager.h" />
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="PlatformLinux.h" />
+    <ClInclude Include="PlatformWindows.h" />
     <ClInclude Include="ProtectKey.h" />
     <ClInclude Include="ProtectKeyHaspSL.h" />
     <ClInclude Include="stdafx.h" />
