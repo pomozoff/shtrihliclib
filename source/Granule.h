@@ -31,4 +31,6 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		bool _is_present = false;
 		bool _read_memory_to_value = false;
 		mutable value_t _value;
+
+		const time_t make_unix_time_from_old_format(value_t value) const;
 };

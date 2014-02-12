@@ -60,6 +60,7 @@ const bool Granule::is_same_memory(const check_method_memory_t checkMethod) cons
 	if (_is_granule_nfr_date) {
 		time_t nfr_end_date;
 		if (2 == _value.size()) {
+			nfr_end_date = make_unix_time_from_old_format(_value);
 		} else {
 			nfr_end_date = time(NULL);
 		}
@@ -70,4 +71,13 @@ const bool Granule::is_same_memory(const check_method_memory_t checkMethod) cons
 }
 const bool Granule::logout_key(const check_method_login_t checkMethod) const {
 	return nullptr == _protect_key ? true : _protect_key->logout_key(checkMethod);
+}
+
+/* Private */
+const time_t Granule::make_unix_time_from_old_format(value_t value) const {
+	if (2 != value.size()) {
+		return 0;
+	}
+
+	return value[0] * 256 + value[1];
 }
