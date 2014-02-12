@@ -21,12 +21,13 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		const check_method_t create_check_method_base(void) const;
 		const check_method_t create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
 		const check_method_t create_check_method_memory(const offset_t offset, value_t& value, check_method_t logged_in_method) const;
+
+		virtual void logout(const bool forced_logout) const;
 	protected:
 		mutable check_methods_t _check_methods;
 
 		virtual const bool check(void) const = 0;
 		virtual void set_max_check_number(check_number_t check_number) const final;
-		virtual void logout(const bool forced_logout) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t checkMethod) const override = 0;
