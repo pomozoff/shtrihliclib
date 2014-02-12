@@ -63,5 +63,5 @@ const bool Granule::is_same_memory(const check_method_memory_t checkMethod) cons
 	return false;
 }
 const bool Granule::logout_key(const check_method_login_t checkMethod) const {
-	return nullptr == _protect_key ? false : _protect_key->logout_key(checkMethod);
+	return nullptr == _protect_key ? true : _protect_key->logout_key(checkMethod);
 }
