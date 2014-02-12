@@ -43,7 +43,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		/* Properties */
 		const bool logout_after_check(void) const;
-		void set_logout_after_check(bool logout_after_check);
+		void set_logout_after_check(const bool logout_after_check);
 	protected:
 		KeyType _key_type;
 

@@ -95,7 +95,7 @@ const bool ProtectKey::is_key_base(void) const {
 const bool ProtectKey::logout_after_check(void) const {
 	return _logout_after_check;
 }
-void ProtectKey::set_logout_after_check(bool logout_after_check) {
+void ProtectKey::set_logout_after_check(const bool logout_after_check) {
 	_logout_after_check = logout_after_check;
 }
 
