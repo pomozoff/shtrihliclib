@@ -26,6 +26,9 @@ const bool Granule::check(void) const {
 
 	return result;
 }
+void Granule::logout(const bool forced_logout) const {
+	return nullptr == _protect_key ? true : _protect_key->logout(forced_logout);
+}
 
 /* Properties */
 void Granule::set_granule_nfr_date(bool is_granule_nfr_date) {

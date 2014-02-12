@@ -16,6 +16,9 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		void set_granule_nfr_date(bool is_granule_nfr_date);
 		const bool is_granule_nfr_date(void) const;
 	protected:
+		/* KeyChecker Interface */
+		virtual void logout(const bool forced_logout) const override final;
+
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t checkMethod) const override;
 		virtual const bool is_able_to_login(const check_method_login_t checkMethod) const override;
