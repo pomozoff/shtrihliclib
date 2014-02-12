@@ -98,6 +98,12 @@ const bool ProtectKey::logout_after_check(void) const {
 void ProtectKey::set_logout_after_check(const bool logout_after_check) {
 	_logout_after_check = logout_after_check;
 }
+const time_t ProtectKey::nfr_end_date(void) const {
+	return _nfr_end_date;
+}
+void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
+	_nfr_end_date = nfr_end_date;
+}
 
 /* KeyChecker Interface */
 const bool ProtectKey::check(void) const {
