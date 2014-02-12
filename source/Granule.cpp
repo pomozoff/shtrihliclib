@@ -58,9 +58,12 @@ const bool Granule::is_same_memory(const check_method_memory_t checkMethod) cons
 	}
 
 	if (_is_granule_nfr_date) {
+		time_t nfr_end_date;
 		if (2 == _value.size()) {
-
+		} else {
+			nfr_end_date = time(NULL);
 		}
+		_protect_key->set_nfr_end_date(nfr_end_date);
 	}
 
 	return false;
