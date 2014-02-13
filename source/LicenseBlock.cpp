@@ -37,8 +37,9 @@ const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, 
 	return buffer;
 }
 const size_t LicenseBlock::hash_value(value_t buffer) {
-	std::hash<byte_t*> hasher;
-	byte_t* p_buffer = &buffer[0];
+	std::string hashed_string = R"()";
+	std::copy(buffer.begin(), buffer.end(), std::back_inserter(hashed_string));
 
-	return hasher(p_buffer);
+	std::hash<std::string> hasher;
+	return hasher(hashed_string);
 }
