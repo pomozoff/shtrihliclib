@@ -3,7 +3,6 @@
 
 #include "gtest\gtest.h"
 #include "LicenseBlock.h"
-#include "ProtectKeyHaspSL.h"
 
 class LicenseBlockTest : public ::testing::Test {
 	public:

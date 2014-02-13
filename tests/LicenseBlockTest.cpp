@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include "LicenseBlockTest.h"
+#include "ProtectKeyHaspSL.h"
 
 LicenseBlockTest::LicenseBlockTest() {
 	_key_memory.resize(ProtectKeyHaspSL::ReadWriteMemorySize);
@@ -9,7 +10,7 @@ LicenseBlockTest::LicenseBlockTest() {
 LicenseBlockTest::~LicenseBlockTest() {
 }
 
-TEST_F(LicenseBlockTest, BlockCreation) {
+TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	time_t some_time = 1392280873;
 	auto license_block = LicenseBlock::create_block_as_buffer_from_string(R"(computer-username)", some_time);
 	ASSERT_EQ(license_block.size(), 16);
