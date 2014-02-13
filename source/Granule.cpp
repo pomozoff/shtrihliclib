@@ -78,6 +78,5 @@ const time_t Granule::make_unix_time_from_old_format(value_t value) const {
 	if (2 != value.size()) {
 		return 0;
 	}
-
 	return value[0] * 256 + value[1];
 }
