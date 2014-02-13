@@ -8,6 +8,8 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		ProtectKeyHaspSL();
 		~ProtectKeyHaspSL();
 
+		static const size_t ReadWriteMemorySize = 4032;
+
 		/* ProtectKey Interface */
 		virtual const value_t read_memory(const check_method_memory_t checkMethod) const override;
 
