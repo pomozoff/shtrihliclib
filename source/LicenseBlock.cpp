@@ -37,17 +37,13 @@ const bool LicenseBlock::place_data_to_buffer_at_offset(const T data, value_t& b
 const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in) {
 	value_t buffer(sizeof_data);
 
-	byte_t* p_buffer_hash = &buffer[0];
-	*p_buffer_hash = hash;
-
-	byte_t* p_buffer_time = &buffer[sizeof_hash];
-	*p_buffer_time = time_logged_in;
+	place_data_to_buffer_at_offset(hash, buffer, 0);
+	place_data_to_buffer_at_offset(time_logged_in, buffer, sizeof_hash);
 
 	size_t crc = hash_value(buffer);
 	buffer.resize(sizeof_data + sizeof_hash);
 
-	byte_t* p_buffer_crc = &buffer[sizeof_data];
-	*p_buffer_crc = crc;
+	place_data_to_buffer_at_offset(crc, buffer, sizeof_data);
 
 	return buffer;
 }
