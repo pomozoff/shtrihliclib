@@ -1,19 +1,16 @@
 ﻿
 #include "stdafx.h"
 
-#include "ProtectKey.h"
 #include "CheckMethodLoginTest.h"
 
 CheckMethodLoginTest::CheckMethodLoginTest() {
-	auto protect_key = ProtectKey::create_key(KeyType::HaspSL);
-	_check_method = protect_key->create_check_method_login(0, false);
+	_check_method = _protect_key_hasp_sl->create_check_method_login(0, false);
 }
 CheckMethodLoginTest::~CheckMethodLoginTest() {
 }
 
 TEST_F(CheckMethodLoginTest, check) {
-	auto protect_key = ProtectKey::create_key(KeyType::HaspSL);
-	bool successful_checked = _check_method->check(protect_key);
+	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_method_type) {
