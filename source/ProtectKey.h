@@ -28,6 +28,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		static const protect_key_t create_key(const KeyType key_type);
 		static const iprotect_key_t find_key(const protect_keys_t keys_list, const iprotect_key_delegate_t key_delegate);
+		static const bool copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset);
 
 		virtual const value_t read_memory(const check_method_memory_t checkMethod) const = 0;
 

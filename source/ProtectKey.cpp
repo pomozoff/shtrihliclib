@@ -77,6 +77,22 @@ const iprotect_key_t ProtectKey::find_key(const protect_keys_t keys_list, const 
 	}
 	return protect_key;
 }
+const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset) {
+	if (source_offset >= source.size()
+		|| destination_offset >= destination.size()
+		|| (source_offset + length) > source.size()
+		|| (destination_offset + length) > destination.size()) {
+		return false;
+	}
+
+	auto source_iterator_begin = source.begin() + source_offset;
+	auto source_iterator_end = source.begin() + source_offset + length;
+	auto destination_iterator = destination.begin() + destination_offset;
+
+	std::copy(source_iterator_begin, source_iterator_end, std::inserter(destination, destination_iterator));
+	
+	return true;
+}
 
 void ProtectKey::check_granules(void) const {
 	for (const auto& element : _granules) {
