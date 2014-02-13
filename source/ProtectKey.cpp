@@ -1,14 +1,16 @@
 ﻿
 #include "stdafx.h"
 
+#include <iterator>
+
 #include "ProtectKey.h"
 #include "Granule.h"
 #include "ProtectKeyHaspSL.h"
 #include "Platform.h"
 
+static const platform_t _platform = Platform::platform();
 static const std::string _session_id = ProtectKey::session_id();
 static const size_t _session_id_hash = ProtectKey::session_id_hash();
-static const platform_t _platform = Platform::platform();
 
 ProtectKey::ProtectKey(void) {
 }
