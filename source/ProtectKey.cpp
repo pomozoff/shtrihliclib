@@ -75,7 +75,6 @@ const iprotect_key_t ProtectKey::find_key(const protect_keys_t keys_list, const 
 			break;
 		}
 	}
-
 	return protect_key;
 }
 
