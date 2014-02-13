@@ -26,4 +26,4 @@ using check_method_base_t = std::shared_ptr<const CheckMethodBase>;
 using check_method_login_t = std::shared_ptr<const CheckMethodLogin>;
 using check_method_memory_t = std::shared_ptr<const CheckMethodMemory>;
 
-using platform_t = std::shared_ptr<Platform>;
+using platform_t = std::shared_ptr<const Platform>;
