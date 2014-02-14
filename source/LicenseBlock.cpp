@@ -84,6 +84,9 @@ const bool LicenseBlock::is_valid() const {
 
 	return computed_hash == block_hash;
 }
+const bool LicenseBlock::is_expired() const {
+	return (!is_valid()) || (difftime(time(NULL), logged_in_time()) > _timeout);
+}
 const time_t LicenseBlock::logged_in_time() const {
 	time_t logged_in = 0;
 	if (!get_data_from_buffer_at_offset(logged_in, _block, sizeof_hash)) {
