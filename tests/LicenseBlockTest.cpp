@@ -32,4 +32,13 @@ TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	ASSERT_EQ(block[14], 191);
 	ASSERT_EQ(block[15],  89);
 }
+TEST_F(LicenseBlockTest, is_expired) {
+	time_t some_time = 1392280873;
+	auto block = LicenseBlock::create_block_as_buffer_from_string(R"(computer-username)", some_time);
+	auto offset = LicenseBlock::sizeof_block * 6;
+	auto timeout_seconds = 30;
+	auto license_block = std::make_shared<LicenseBlock>(block, offset, timeout_seconds);
+
+	auto is_expired = license_block->is_expired();
+	ASSERT_TRUE(is_expired);
 }
