@@ -23,7 +23,7 @@ const value_t LicenseBlock::create_block_as_buffer_from_string(const std::string
 /* Private */
 template <typename T>
 const bool LicenseBlock::place_data_to_buffer_at_offset(const T data, value_t& buffer, const offset_t offset) {
-	if (offset >= buffer.size() || (offset + sizeof data) > buffer.size()) {
+	if ((offset + sizeof data) > buffer.size()) {
 		return false;
 	}
 
