@@ -34,6 +34,20 @@ const bool LicenseBlock::place_data_to_buffer_at_offset(const T data, value_t& b
 
 	return true;
 }
+template <typename T>
+const bool LicenseBlock::get_data_from_buffer_at_offset(T& data, const value_t buffer, const offset_t offset) {
+	if ((offset + sizeof data) > buffer.size()) {
+		return false;
+	}
+
+	auto p_data = static_cast<byte_t*>(static_cast<void*>(&data));
+	auto begin = buffer.begin() + offset;
+	auto end = buffer.begin() + offset + sizeof data;
+
+	std::copy(begin, end, p_data);
+
+	return true;
+}
 const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in) {
 	value_t buffer(sizeof_block);
 
