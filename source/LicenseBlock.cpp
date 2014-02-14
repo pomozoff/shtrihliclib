@@ -5,9 +5,9 @@
 
 #include "LicenseBlock.h"
 
-LicenseBlock::LicenseBlock(const value_t buffer, const offset_t offset, const time_t timeout) :
-_buffer(buffer),
-_offset(offset),
+LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout) :
+_block(block),
+_offset_in_manager(offset),
 _timeout(timeout)
 {
 }
