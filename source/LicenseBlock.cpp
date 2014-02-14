@@ -41,7 +41,7 @@ const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, 
 	place_data_to_buffer_at_offset(time_logged_in, buffer, sizeof_hash);
 
 	size_t crc = hash_value(buffer);
-	buffer.resize(sizeof_data + sizeof_hash);
+	buffer.resize(sizeof_block);
 
 	place_data_to_buffer_at_offset(crc, buffer, sizeof_data);
 
