@@ -71,6 +71,19 @@ const size_t LicenseBlock::hash_value(const value_t buffer, const offset_t offse
 	std::hash<std::string> hasher;
 	return hasher(hashed_string);
 }
+const bool LicenseBlock::is_valid() const {
+	size_t block_hash = 0;
+	if (!get_data_from_buffer_at_offset(block_hash, _block, sizeof_data)) {
+		return false;
+	}
+
+	size_t computed_hash = hash_value(_block, 0, sizeof_data);
+	if (!computed_hash) {
+		return false;
+	}
+
+	return computed_hash == block_hash;
+}
 const time_t LicenseBlock::logged_in_time() const {
 	time_t logged_in = 0;
 	if (!get_data_from_buffer_at_offset(logged_in, _block, sizeof_hash)) {
