@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include <iterator>
+#include <ctime>
 
 #include "LicenseBlock.h"
 
@@ -69,4 +70,11 @@ const size_t LicenseBlock::hash_value(const value_t buffer, const offset_t offse
 
 	std::hash<std::string> hasher;
 	return hasher(hashed_string);
+}
+const time_t LicenseBlock::logged_in_time() const {
+	time_t logged_in = 0;
+	if (!get_data_from_buffer_at_offset(logged_in, _block, sizeof_hash)) {
+		return 0;
+	}
+	return logged_in;
 }

@@ -26,4 +26,5 @@ class LicenseBlock final {
 
 		static const value_t create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in);
 		static const size_t hash_value(const value_t buffer, const offset_t offset, const size_t size);
+		const time_t logged_in_time() const;
 };
