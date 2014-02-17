@@ -74,7 +74,7 @@ const bool Granule::logout_key(const check_method_login_t checkMethod) const {
 }
 
 /* Private */
-const time_t Granule::make_unix_time_from_old_format(value_t value) const {
+const time_t Granule::make_unix_time_from_old_format(const value_t value) const {
 	if (2 != value.size()) {
 		return 0;
 	}

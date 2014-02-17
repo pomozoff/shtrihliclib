@@ -13,7 +13,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		virtual const bool check(void) const override final;
 
 		/* Properties */
-		void set_granule_nfr_date(bool is_granule_nfr_date);
+		void set_granule_nfr_date(const bool is_granule_nfr_date);
 		const bool is_granule_nfr_date(void) const;
 	protected:
 		/* KeyChecker Interface */
@@ -27,10 +27,12 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 	private:
 		const std::string _id;
 		const protect_key_t _protect_key;
+
 		bool _is_granule_nfr_date = false;
 		bool _is_present = false;
 		bool _read_memory_to_value = false;
+
 		mutable value_t _value;
 
-		const time_t make_unix_time_from_old_format(value_t value) const;
+		const time_t make_unix_time_from_old_format(const value_t value) const;
 };

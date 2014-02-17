@@ -16,7 +16,7 @@ class CheckMethod {
 		const bool logout_after_check(void) const;
 		const bool is_check_method_for_nfr(void) const;
 		const bool is_check_method_for_license(void) const;
-		void set_max_check_number(check_number_t check_number) const;
+		void set_max_check_number(const check_number_t check_number) const;
 	protected:
 		CheckMethodType _check_method;
 
