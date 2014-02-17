@@ -32,7 +32,7 @@ TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	ASSERT_EQ(block[14], 191);
 	ASSERT_EQ(block[15],  89);
 }
-TEST_F(LicenseBlockTest, is_expired) {
+TEST_F(LicenseBlockTest, is_expired_true) {
 	time_t some_time = 1392280873;
 	auto block = LicenseBlock::create_block_as_buffer_from_string(R"(computer-username)", some_time);
 	auto offset = LicenseBlock::sizeof_block * 6;
