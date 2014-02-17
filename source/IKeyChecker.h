@@ -1,8 +1,6 @@
 ﻿
 #pragma once
 
-#include <memory>
-
 #include "CheckMethod.h"
 
 class IKeyChecker {
