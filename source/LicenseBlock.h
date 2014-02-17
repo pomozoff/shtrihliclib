@@ -15,6 +15,7 @@ class LicenseBlock final {
 		static const value_t create_block_as_buffer_from_string(const std::string session_id, const time_t time_logged_in);
 
 		const bool is_expired(void) const;
+		const bool is_it_my_block(void) const;
 	protected:
 	private:
 		const value_t _block;

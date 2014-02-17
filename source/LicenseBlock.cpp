@@ -5,6 +5,7 @@
 #include <ctime>
 
 #include "LicenseBlock.h"
+#include "ProtectKey.h"
 
 LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout) :
 _block(block),
@@ -93,4 +94,15 @@ const time_t LicenseBlock::logged_in_time() const {
 		return 0;
 	}
 	return logged_in;
+}
+const bool LicenseBlock::is_it_my_block(void) const {
+	if (!is_valid()) {
+		return false;
+	}
+
+	size_t block_id_hash = 0;
+	if (!get_data_from_buffer_at_offset(_block, 0, block_id_hash)) {
+		return false;
+	}
+	return block_id_hash == ProtectKey::session_id_hash();
 }
