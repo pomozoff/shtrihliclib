@@ -71,3 +71,15 @@ TEST_F(LicenseBlockTest, is_it_my_block_true) {
 	auto is_it_my_block = license_block->is_it_my_block();
 	ASSERT_TRUE(is_it_my_block);
 }
+TEST_F(LicenseBlockTest, is_it_my_block_false) {
+	time_t some_time = 1392280873;
+
+	auto session_id = R"(computer-username)";
+	auto block = LicenseBlock::create_block_as_buffer_from_string(session_id, some_time);
+	auto offset = LicenseBlock::sizeof_block * 7;
+	auto timeout_seconds = 30;
+	auto license_block = std::make_shared<LicenseBlock>(block, offset, timeout_seconds);
+
+	auto is_it_my_block = license_block->is_it_my_block();
+	ASSERT_TRUE(!is_it_my_block);
+}
