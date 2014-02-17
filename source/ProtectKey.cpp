@@ -9,8 +9,8 @@
 #include "Platform.h"
 
 static const platform_t _platform = Platform::platform();
-static const std::string _session_id = ProtectKey::session_id();
-static const size_t _session_id_hash = ProtectKey::session_id_hash();
+static std::string _session_id = R"()";
+static size_t _session_id_hash = 0;
 
 ProtectKey::ProtectKey(void) {
 }
@@ -20,11 +20,17 @@ ProtectKey::~ProtectKey(void) {
 }
 
 const std::string ProtectKey::session_id(void) {
-	return _platform->computer_name() + _platform->user_name();
+	if (_session_id.empty()) {
+		_session_id = _platform->computer_name() + _platform->user_name();
+	}
+	return _session_id;
 }
 const size_t ProtectKey::session_id_hash(void) {
-	std::hash<std::string> hasher;
-	return hasher(_session_id);
+	if (_session_id_hash == 0) {
+		std::hash<std::string> hasher;
+		_session_id_hash = hasher(_session_id);
+	}
+	return _session_id_hash;
 }
 
 const protect_key_t ProtectKey::create_key(const KeyType key_type) {
