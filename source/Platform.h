@@ -13,4 +13,7 @@ class Platform {
 		virtual const std::string user_name(void) const = 0;
 	protected:
 		Platform(void);
+
+		std::string _computer_name;
+		std::string _user_name;
 };
