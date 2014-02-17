@@ -1,7 +1,7 @@
 ﻿
 #pragma once
 
-#include <chrono>
+#include <ctime>
 
 #include "IProtectKey.h"
 #include "IProtectKeyDelegate.h"
