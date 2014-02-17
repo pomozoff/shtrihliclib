@@ -59,3 +59,15 @@ TEST_F(LicenseBlockTest, is_expired_false) {
 	auto is_expired = license_block->is_expired();
 	ASSERT_TRUE(!is_expired);
 }
+TEST_F(LicenseBlockTest, is_it_my_block_true) {
+	time_t some_time = 1392280873;
+
+	auto session_id = ProtectKey::session_id();
+	auto block = LicenseBlock::create_block_as_buffer_from_string(session_id, some_time);
+	auto offset = LicenseBlock::sizeof_block * 7;
+	auto timeout_seconds = 30;
+	auto license_block = std::make_shared<LicenseBlock>(block, offset, timeout_seconds);
+
+	auto is_it_my_block = license_block->is_it_my_block();
+	ASSERT_TRUE(is_it_my_block);
+}
