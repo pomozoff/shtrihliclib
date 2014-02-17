@@ -5,8 +5,8 @@
 
 class CheckMethodMemoryTest : public CheckMethodTest {
 	public:
-		CheckMethodMemoryTest();
-		~CheckMethodMemoryTest();
+		CheckMethodMemoryTest(void);
+		~CheckMethodMemoryTest(void);
 	private:
 		const offset_t _offset_for_constructor_test = 3;
 };

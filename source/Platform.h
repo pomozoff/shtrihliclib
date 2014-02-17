@@ -5,12 +5,12 @@
 
 class Platform {
 	public:
-		virtual ~Platform();
+		virtual ~Platform(void);
 
 		static const platform_t platform(void);
 
 		virtual const std::string computer_name(void) const = 0;
 		virtual const std::string user_name(void) const = 0;
 	protected:
-		Platform();
+		Platform(void);
 };

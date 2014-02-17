@@ -3,10 +3,10 @@
 
 #include "CheckMethodLoginTest.h"
 
-CheckMethodLoginTest::CheckMethodLoginTest() {
+CheckMethodLoginTest::CheckMethodLoginTest(void) {
 	_check_method = _protect_key_hasp_sl->create_check_method_login(0, false);
 }
-CheckMethodLoginTest::~CheckMethodLoginTest() {
+CheckMethodLoginTest::~CheckMethodLoginTest(void) {
 }
 
 TEST_F(CheckMethodLoginTest, check) {

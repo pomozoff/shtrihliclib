@@ -3,9 +3,9 @@
 
 #include "PlatformWindows.h"
 
-PlatformWindows::PlatformWindows() {
+PlatformWindows::PlatformWindows(void) {
 }
-PlatformWindows::~PlatformWindows() {
+PlatformWindows::~PlatformWindows(void) {
 }
 
 const std::string PlatformWindows::computer_name(void) const {

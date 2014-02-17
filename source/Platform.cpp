@@ -5,9 +5,9 @@
 #include "PlatformLinux.h"
 #include "PlatformWindows.h"
 
-Platform::Platform() {
+Platform::Platform(void) {
 }
-Platform::~Platform() {
+Platform::~Platform(void) {
 }
 
 const platform_t Platform::platform(void) {

@@ -3,6 +3,6 @@
 
 class IProtectKeyDelegate {
 	public:
-		IProtectKeyDelegate();
-		virtual ~IProtectKeyDelegate();
+		IProtectKeyDelegate(void);
+		virtual ~IProtectKeyDelegate(void);
 };

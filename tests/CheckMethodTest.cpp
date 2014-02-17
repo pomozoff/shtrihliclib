@@ -3,8 +3,8 @@
 
 #include "CheckMethodTest.h"
 
-CheckMethodTest::CheckMethodTest() {
+CheckMethodTest::CheckMethodTest(void) {
 	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL);
 }
-CheckMethodTest::~CheckMethodTest() {
+CheckMethodTest::~CheckMethodTest(void) {
 }

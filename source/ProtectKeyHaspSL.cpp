@@ -3,9 +3,9 @@
 
 #include "ProtectKeyHaspSL.h"
 
-ProtectKeyHaspSL::ProtectKeyHaspSL() {
+ProtectKeyHaspSL::ProtectKeyHaspSL(void) {
 }
-ProtectKeyHaspSL::~ProtectKeyHaspSL() {
+ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 }
 
 /* ProtectKey Interface */

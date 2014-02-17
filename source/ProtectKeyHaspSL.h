@@ -5,8 +5,8 @@
 
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
-		ProtectKeyHaspSL();
-		~ProtectKeyHaspSL();
+		ProtectKeyHaspSL(void);
+		~ProtectKeyHaspSL(void);
 
 		static const size_t ReadWriteMemorySize = 4032;
 

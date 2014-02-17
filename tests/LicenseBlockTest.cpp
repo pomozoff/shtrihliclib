@@ -4,10 +4,10 @@
 #include "LicenseBlockTest.h"
 #include "ProtectKeyHaspSL.h"
 
-LicenseBlockTest::LicenseBlockTest() {
+LicenseBlockTest::LicenseBlockTest(void) {
 	_key_memory.resize(ProtectKeyHaspSL::ReadWriteMemorySize);
 }
-LicenseBlockTest::~LicenseBlockTest() {
+LicenseBlockTest::~LicenseBlockTest(void) {
 }
 
 TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {

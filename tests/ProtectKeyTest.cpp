@@ -5,10 +5,10 @@
 #include "ProtectKeyHaspSL.h"
 #include "LicenseBlock.h"
 
-ProtectKeyTest::ProtectKeyTest() {
+ProtectKeyTest::ProtectKeyTest(void) {
 	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL);
 }
-ProtectKeyTest::~ProtectKeyTest() {
+ProtectKeyTest::~ProtectKeyTest(void) {
 }
 
 TEST_F(ProtectKeyTest, copy_block_to_buffer) {

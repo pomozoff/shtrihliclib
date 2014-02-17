@@ -6,8 +6,8 @@
 class PlatformWindows : public Platform
 {
 	public:
-		PlatformWindows();
-		~PlatformWindows();
+		PlatformWindows(void);
+		~PlatformWindows(void);
 
 		virtual const std::string computer_name(void) const override;
 		virtual const std::string user_name(void) const override;

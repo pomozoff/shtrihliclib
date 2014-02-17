@@ -3,10 +3,10 @@
 
 #include "CheckMethodBaseTest.h"
 
-CheckMethodBaseTest::CheckMethodBaseTest() {
+CheckMethodBaseTest::CheckMethodBaseTest(void) {
 	_check_method = _protect_key_hasp_sl->create_check_method_base();
 }
-CheckMethodBaseTest::~CheckMethodBaseTest() {
+CheckMethodBaseTest::~CheckMethodBaseTest(void) {
 }
 
 TEST_F(CheckMethodBaseTest, check) {

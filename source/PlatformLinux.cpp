@@ -3,9 +3,9 @@
 
 #include "PlatformLinux.h"
 
-PlatformLinux::PlatformLinux() {
+PlatformLinux::PlatformLinux(void) {
 }
-PlatformLinux::~PlatformLinux() {
+PlatformLinux::~PlatformLinux(void) {
 }
 
 const std::string PlatformLinux::computer_name(void) const {

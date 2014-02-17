@@ -5,6 +5,6 @@
 
 class CheckMethodLoginTest : public CheckMethodTest {
 	public:
-		CheckMethodLoginTest();
-		~CheckMethodLoginTest();
+		CheckMethodLoginTest(void);
+		~CheckMethodLoginTest(void);
 };

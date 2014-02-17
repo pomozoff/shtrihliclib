@@ -5,6 +5,6 @@
 
 class CheckMethodBaseTest : public CheckMethodTest {
 	public:
-		CheckMethodBaseTest();
-		~CheckMethodBaseTest();
+		CheckMethodBaseTest(void);
+		~CheckMethodBaseTest(void);
 };

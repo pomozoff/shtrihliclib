@@ -6,8 +6,8 @@
 
 class LicenseBlockTest : public ::testing::Test {
 	public:
-		LicenseBlockTest();
-		~LicenseBlockTest();
+		LicenseBlockTest(void);
+		~LicenseBlockTest(void);
 	private:
 		value_t _key_memory;
 };
