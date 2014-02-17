@@ -23,7 +23,7 @@ const value_t LicenseBlock::create_block_as_buffer_from_string(const std::string
 
 /* Private */
 template <typename T>
-const bool LicenseBlock::place_data_to_buffer_at_offset(const T data, value_t& buffer, const offset_t offset) {
+const bool LicenseBlock::place_data_to_buffer_at_offset(value_t& buffer, const offset_t offset, const T data) {
 	if ((offset + sizeof data) > buffer.size()) {
 		return false;
 	}
@@ -36,7 +36,7 @@ const bool LicenseBlock::place_data_to_buffer_at_offset(const T data, value_t& b
 	return true;
 }
 template <typename T>
-const bool LicenseBlock::get_data_from_buffer_at_offset(T& data, const value_t buffer, const offset_t offset) {
+const bool LicenseBlock::get_data_from_buffer_at_offset(const value_t buffer, const offset_t offset, T& data) {
 	if ((offset + sizeof data) > buffer.size()) {
 		return false;
 	}
@@ -52,11 +52,11 @@ const bool LicenseBlock::get_data_from_buffer_at_offset(T& data, const value_t b
 const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in) {
 	value_t buffer(sizeof_block);
 
-	place_data_to_buffer_at_offset(hash, buffer, 0);
-	place_data_to_buffer_at_offset(time_logged_in, buffer, sizeof_hash);
+	place_data_to_buffer_at_offset(buffer, 0, hash);
+	place_data_to_buffer_at_offset(buffer, sizeof_hash, time_logged_in);
 
 	size_t crc = hash_value(buffer, 0, sizeof_data);
-	place_data_to_buffer_at_offset(crc, buffer, sizeof_data);
+	place_data_to_buffer_at_offset(buffer, sizeof_data, crc);
 
 	return buffer;
 }
@@ -73,7 +73,7 @@ const size_t LicenseBlock::hash_value(const value_t buffer, const offset_t offse
 }
 const bool LicenseBlock::is_valid() const {
 	size_t block_hash = 0;
-	if (!get_data_from_buffer_at_offset(block_hash, _block, sizeof_data)) {
+	if (!get_data_from_buffer_at_offset(_block, sizeof_data, block_hash)) {
 		return false;
 	}
 
@@ -89,7 +89,7 @@ const bool LicenseBlock::is_expired() const {
 }
 const time_t LicenseBlock::logged_in_time() const {
 	time_t logged_in = 0;
-	if (!get_data_from_buffer_at_offset(logged_in, _block, sizeof_hash)) {
+	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
 		return 0;
 	}
 	return logged_in;
