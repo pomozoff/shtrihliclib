@@ -20,7 +20,7 @@ class LicenseBlock final {
 		const value_t _block;
 		const offset_t _offset_in_manager;
 		const time_t _timeout;
-
+		
 		template <typename T>
 		static const bool place_data_to_buffer_at_offset(value_t& buffer, const offset_t offset, const T data);
 		template <typename T>
