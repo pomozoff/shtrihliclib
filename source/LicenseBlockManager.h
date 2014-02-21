@@ -9,6 +9,5 @@ class LicenseBlockManager final {
 		~LicenseBlockManager(void);
 	private:
 		const license_blocks_t _license_blocks;
-		const time_t _timeout;
 		const size_t _licenses_amount;
 };
