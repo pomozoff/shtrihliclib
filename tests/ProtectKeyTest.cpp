@@ -15,7 +15,7 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	byte_t first_byte = 124;
 	byte_t last_byte = 235;
 	time_t some_time = 1392379203;
-	const value_t block = LicenseBlock::create_block_as_buffer_from_string(R"(computer-user)", some_time);
+	const value_t block = LicenseBlock::block_from_string(R"(computer-user)", some_time);
 	ASSERT_EQ(block[0], first_byte);
 	ASSERT_EQ(block[LicenseBlock::sizeof_block - 1], last_byte);
 

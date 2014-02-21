@@ -12,7 +12,7 @@ class LicenseBlock final {
 		~LicenseBlock(void);
 
 		static const size_t sizeof_block = sizeof_data + sizeof_hash;
-		static const value_t create_block_as_buffer_from_string(const std::string session_id, const time_t time_logged_in);
+		static const value_t block_from_string(const std::string session_id, const time_t time_logged_in);
 
 		const bool is_expired(void) const;
 		const bool is_it_my_block(void) const;
@@ -27,7 +27,7 @@ class LicenseBlock final {
 		template <typename T>
 		static const bool get_data_from_buffer_at_offset(const value_t buffer, const offset_t offset, T& data);
 
-		static const value_t create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in);
+		static const value_t block_from_hash(const size_t hash, const time_t time_logged_in);
 		static const size_t hash_value(const value_t buffer, const offset_t offset, const size_t size);
 
 		const bool is_valid(void) const;

@@ -16,10 +16,10 @@ _timeout(timeout)
 LicenseBlock::~LicenseBlock(void) {
 }
 
-const value_t LicenseBlock::create_block_as_buffer_from_string(const std::string session_id, const time_t time_logged_in) {
+const value_t LicenseBlock::block_from_string(const std::string session_id, const time_t time_logged_in) {
 	std::hash<std::string> hasher;
 	size_t hash = hasher(session_id);
-	return create_block_as_buffer_from_hash(hash, time_logged_in);
+	return block_from_hash(hash, time_logged_in);
 }
 
 /* Private */
@@ -50,7 +50,7 @@ const bool LicenseBlock::get_data_from_buffer_at_offset(const value_t buffer, co
 
 	return true;
 }
-const value_t LicenseBlock::create_block_as_buffer_from_hash(const size_t hash, const time_t time_logged_in) {
+const value_t LicenseBlock::block_from_hash(const size_t hash, const time_t time_logged_in) {
 	value_t buffer(sizeof_block);
 
 	place_data_to_buffer_at_offset(buffer, 0, hash);
