@@ -10,4 +10,6 @@ class LicenseBlockManager final {
 	private:
 		license_blocks_t _license_blocks;
 		const size_t _licenses_amount;
+
+		const license_blocks_t license_blocks_from_buffer(const value_t& buffer, const time_t timeout) const;
 };
