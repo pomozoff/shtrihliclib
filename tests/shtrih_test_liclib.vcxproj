@@ -90,6 +90,7 @@
     <ClInclude Include="CheckMethodLoginTest.h" />
     <ClInclude Include="CheckMethodMemoryTest.h" />
     <ClInclude Include="CheckMethodTest.h" />
+    <ClInclude Include="LicenseBlockManagerTest.h" />
     <ClInclude Include="LicenseBlockTest.h" />
     <ClInclude Include="ProtectKeyTest.h" />
     <ClInclude Include="stdafx.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="CheckMethodLoginTest.cpp" />
     <ClCompile Include="CheckMethodMemoryTest.cpp" />
     <ClCompile Include="CheckMethodTest.cpp" />
+    <ClCompile Include="LicenseBlockManagerTest.cpp" />
     <ClCompile Include="LicenseBlockTest.cpp" />
     <ClCompile Include="ProtectKeyTest.cpp" />
     <ClCompile Include="tests.cpp" />
