@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include "LicenseBlockManagerTest.h"
+#include "LicenseBlock.h"
 
 LicenseBlockManagerTest::LicenseBlockManagerTest() {
 }
@@ -20,4 +21,6 @@ TEST_F(LicenseBlockManagerTest, take_license) {
 	auto license_block = manager->take_license();
 
 	ASSERT_TRUE(nullptr != license_block);
+	ASSERT_TRUE(!license_block->is_expired());
+	ASSERT_TRUE(license_block->is_it_my_block());
 }
