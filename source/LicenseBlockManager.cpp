@@ -60,3 +60,13 @@ const license_block_t LicenseBlockManager::find_my_block(void) const {
 const license_block_t LicenseBlockManager::find_first_free_block(void) const {
 	return find_block(&LicenseBlock::is_expired);
 }
+const license_block_t LicenseBlockManager::take_license(void) const {
+	license_block_t block = find_my_block();
+	if (!block) {
+		block = find_first_free_block();
+	}
+	if (block) {
+		block->update_block(time(NULL));
+	}
+	return block;
+}
