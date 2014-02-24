@@ -57,3 +57,6 @@ const license_block_t LicenseBlockManager::find_block(p_block_func_t function_ch
 const license_block_t LicenseBlockManager::find_my_block(void) const {
 	return find_block(&LicenseBlock::is_it_my_block);
 }
+const license_block_t LicenseBlockManager::find_first_free_block(void) const {
+	return find_block(&LicenseBlock::is_expired);
+}
