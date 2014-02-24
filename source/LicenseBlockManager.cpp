@@ -1,6 +1,10 @@
 ﻿
 #include "stdafx.h"
 
+#include <algorithm>
+#include <memory>
+#include <ctime>
+
 #include "LicenseBlockManager.h"
 #include "LicenseBlock.h"
 
@@ -33,4 +37,19 @@ const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const val
 	} while (buffer_iterator_begin_block < buffer.end());
 
 	return license_blocks;
+}
+const license_block_t LicenseBlockManager::find_block(p_block_func_t function_checker) const {
+	license_block_t found_block = nullptr;
+
+	auto lambda = [&found_block, function_checker](const license_block_t block) mutable ->bool {
+		auto function_check = std::bind(function_checker, block);
+		if (function_check()) {
+			found_block = block;
+			return true;
+		}
+		return false;
+	};
+	std::find_if(_license_blocks.begin(), _license_blocks.end(), lambda);
+
+	return found_block;
 }
