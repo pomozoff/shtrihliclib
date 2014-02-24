@@ -78,7 +78,7 @@ const bool LicenseBlock::is_valid() const {
 		return false;
 	}
 
-	size_t computed_hash = hash_value(_block, 0, sizeof_data);
+	const size_t computed_hash = hash_value(_block, 0, sizeof_data);
 	if (!computed_hash) {
 		return false;
 	}
