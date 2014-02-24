@@ -106,6 +106,6 @@ const bool LicenseBlock::is_it_my_block(void) const {
 	}
 	return block_id_hash == ProtectKey::session_id_hash();
 }
-void LicenseBlock::update_block(const time_t time) {
+void LicenseBlock::update_block(const time_t time) const {
 	_block = block_from_hash(ProtectKey::session_id_hash(), time);
 }
