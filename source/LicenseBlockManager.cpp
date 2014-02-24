@@ -18,7 +18,8 @@ LicenseBlockManager::~LicenseBlockManager(void) {
 
 const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const value_t& buffer, const time_t timeout) const {
 	auto block_size = LicenseBlock::sizeof_block;
-	license_blocks_t license_blocks((sizeof buffer) / block_size);
+	license_blocks_t license_blocks;
+	license_blocks.reserve(buffer.size() / block_size);
 
 	auto buffer_iterator_begin_block = buffer.begin();
 	do {
