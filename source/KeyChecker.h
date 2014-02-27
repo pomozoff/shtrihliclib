@@ -19,7 +19,7 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 
 		const check_method_t create_check_method_base(void) const;
 		const check_method_t create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
-		const check_method_t create_check_method_memory(const offset_t offset, value_t& value, check_method_t logged_in_method) const;
+		const check_method_t create_check_method_memory(const offset_t offset, value_t& value, const check_method_t logged_in_method) const;
 
 		virtual void logout(const bool forced_logout) const;
 	protected:

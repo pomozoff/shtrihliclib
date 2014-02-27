@@ -4,7 +4,7 @@
 #include "CheckMethodMemory.h"
 #include "KeyChecker.h"
 
-CheckMethodMemory::CheckMethodMemory(const offset_t offset, const value_t& value, const check_method_t logged_in_method) :
+CheckMethodMemory::CheckMethodMemory(const offset_t offset, const value_t& value, const check_method_login_t logged_in_method) :
 _offset(offset),
 _value(std::move(value)),
 _logged_in_method(logged_in_method)
