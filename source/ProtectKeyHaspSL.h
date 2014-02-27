@@ -2,13 +2,14 @@
 #pragma once
 
 #include "ProtectKey.h"
+#include "hasp/hasp_api.h"
 
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
 		ProtectKeyHaspSL(void);
 		~ProtectKeyHaspSL(void);
 
-		static const size_t ReadWriteMemorySize = 4032;
+		static const size_t read_write_memory_size = 4032;
 
 		/* ProtectKey Interface */
 		virtual const value_t read_memory(const check_method_memory_t check_method) const override;
