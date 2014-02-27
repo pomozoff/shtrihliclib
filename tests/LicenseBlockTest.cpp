@@ -5,7 +5,7 @@
 #include "ProtectKeyHaspSL.h"
 
 LicenseBlockTest::LicenseBlockTest(void) {
-	_key_memory.resize(ProtectKeyHaspSL::ReadWriteMemorySize);
+	_key_memory.resize(ProtectKeyHaspSL::read_write_memory_size);
 }
 LicenseBlockTest::~LicenseBlockTest(void) {
 }
