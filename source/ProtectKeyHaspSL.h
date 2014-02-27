@@ -11,12 +11,12 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		static const size_t ReadWriteMemorySize = 4032;
 
 		/* ProtectKey Interface */
-		virtual const value_t read_memory(const check_method_memory_t checkMethod) const override;
+		virtual const value_t read_memory(const check_method_memory_t check_method) const override;
 
 		/* IKeyChecker Interface */
-		virtual const bool is_able_to_login(const check_method_login_t checkMethod) const override;
-		virtual const bool is_same_memory(const check_method_memory_t checkMethod) const override;
-		virtual const bool logout_key(const check_method_login_t checkMethod) const override;
+		virtual const bool is_able_to_login(const check_method_login_t check_method) const override;
+		virtual const bool is_same_memory(const check_method_memory_t check_method) const override;
+		virtual const bool logout_key(const check_method_login_t check_method) const override;
 	protected:
 		KeyType _key_type = KeyType::HaspSL;
 	private:

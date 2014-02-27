@@ -44,6 +44,6 @@ void KeyChecker::logout(const bool forced_logout) const {
 }
 
 /* IKeyChecker Interface */
-const bool KeyChecker::is_able_to_login(const check_method_login_t checkMethod) const {
-	return logout_key(checkMethod);
+const bool KeyChecker::is_able_to_login(const check_method_login_t check_method) const {
+	return logout_key(check_method);
 }

@@ -163,16 +163,16 @@ const bool ProtectKey::check(void) const {
 }
 
 /* IKeyChecker Interface */
-const bool ProtectKey::is_base_key_available(const check_method_base_t checkMethod) const {
+const bool ProtectKey::is_base_key_available(const check_method_base_t check_method) const {
 	return false;
 }
-const bool ProtectKey::is_able_to_login(const check_method_login_t checkMethod) const {
-	return logout_key(checkMethod);
+const bool ProtectKey::is_able_to_login(const check_method_login_t check_method) const {
+	return logout_key(check_method);
 }
-const bool ProtectKey::is_same_memory(const check_method_memory_t checkMethod) const {
+const bool ProtectKey::is_same_memory(const check_method_memory_t check_method) const {
 	return false;
 }
-const bool ProtectKey::logout_key(const check_method_login_t checkMethod) const {
+const bool ProtectKey::logout_key(const check_method_login_t check_method) const {
 	return false;
 }
 
