@@ -24,6 +24,7 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		virtual void logout(const bool forced_logout) const;
 	protected:
 		mutable check_methods_t _check_methods;
+		mutable handles_t _handles;
 
 		virtual const bool check(void) const = 0;
 		virtual void set_max_check_number(const check_number_t check_number) const final;
@@ -34,5 +35,4 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		virtual const bool is_same_memory(const check_method_memory_t check_method) const override = 0;
 		virtual const bool logout_key(const check_method_login_t check_method) const override = 0;
 	private:
-		handles_t _handles;
 };
