@@ -50,6 +50,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		void set_nfr_end_date(const time_t nfr_end_date) const;
 	protected:
 		KeyType _key_type;
+		time_t _timeout_check;
+		std::string _key_number;
 
 		ProtectKey(void);
 
