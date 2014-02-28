@@ -37,14 +37,14 @@ ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 
 #pragma region ProtectKey Interface
 const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_method) const {
-	value_t value;
+	value_t buffer;
 	const hasp_handle_t handle = get_handle(check_method->logged_in_method());
 	if (HASP_INVALID_HANDLE_VALUE != handle) {
 		auto offset = check_method->offset();
 		auto length = check_method->value().size();
-		hasp_status_t status = _hasp_read(handle, HASP_FILEID_RO, offset, length, value);
+		hasp_status_t status = _hasp_read(handle, HASP_FILEID_RO, offset, length, buffer);
 	}
-	return value;
+	return buffer;
 }
 #pragma endregion ProtectKey Interface
 
