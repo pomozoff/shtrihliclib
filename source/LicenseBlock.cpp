@@ -48,6 +48,9 @@ const bool LicenseBlock::is_it_my_block(void) const {
 void LicenseBlock::update_block(const time_t time) const {
 	_block = block_from_hash(ProtectKey::session_id_hash(), time);
 }
+void LicenseBlock::make_expired(void) const {
+	update_block(0);
+}
 #pragma endregion Public
 
 #pragma region Private
