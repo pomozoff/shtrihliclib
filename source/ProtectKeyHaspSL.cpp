@@ -28,10 +28,8 @@ static const char* scope =
 static const offset_t offset_licenses_amount = 8;
 #pragma endregion Constants
 
-ProtectKeyHaspSL::ProtectKeyHaspSL(void) :
-_key_number(R"()")
-{
 #pragma region Constructor Destructor
+ProtectKeyHaspSL::ProtectKeyHaspSL(void) {
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 }

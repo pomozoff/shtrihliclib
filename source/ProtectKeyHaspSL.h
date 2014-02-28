@@ -21,7 +21,6 @@ class ProtectKeyHaspSL final : public ProtectKey {
 	protected:
 		// Наследование из базового класса ProtectKey
 		const KeyType _key_type = KeyType::HaspSL;
-		const std::string _key_number;
 		const time_t _timeout_check = 10; // Проверять лицензию каждые 10 секунд
 	private:
 		static const size_t read_only_memory_size = 64;
