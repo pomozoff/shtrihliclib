@@ -11,8 +11,8 @@ class LicenseBlockManager final {
 		~LicenseBlockManager(void);
 
 		const license_block_t take_license(void) const;
-	protected:
 		const license_block_t find_my_block(void) const;
+	protected:
 	private:
 		license_blocks_t _license_blocks;
 		const size_t _licenses_amount;
