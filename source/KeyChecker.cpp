@@ -14,18 +14,18 @@ KeyChecker::~KeyChecker(void) {
 }
 
 const check_method_t KeyChecker::create_check_method_base(void) const {
-	check_method_t check_method = std::make_shared<CheckMethodBase>();
+	auto check_method = std::make_shared<CheckMethodBase>();
 	_check_methods.push_back(check_method);
 	return check_method;
 }
 const check_method_t KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
-	check_method_t check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
+	auto check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
 const check_method_t KeyChecker::create_check_method_memory(const offset_t offset, value_t& value, const check_method_t logged_in_method) const {
 	auto logged_in_method_casted = std::static_pointer_cast<const CheckMethodLogin>(logged_in_method);
-	check_method_t check_method = std::make_shared<CheckMethodMemory>(offset, value, logged_in_method_casted);
+	auto check_method = std::make_shared<CheckMethodMemory>(offset, value, logged_in_method_casted);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
