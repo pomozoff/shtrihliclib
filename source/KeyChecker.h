@@ -14,7 +14,7 @@ using check_methods_t = std::vector<const check_method_t>;
 
 class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public ICheckMethodsViewer {
 	public:
-		~KeyChecker(void);
+		virtual ~KeyChecker(void);
 
 		const check_method_base_t create_check_method_base(void) const;
 		const check_method_login_t create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const;
