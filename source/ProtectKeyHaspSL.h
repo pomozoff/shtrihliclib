@@ -22,13 +22,16 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		// Наследование из базового класса ProtectKey
 		const KeyType _key_type = KeyType::HaspSL;
 		const time_t _timeout_check = 10; // Проверять лицензию каждые 10 секунд
+
+		/* KeyChecker Interface */
+		virtual const handle_t get_handle(const check_method_login_t check_method) const override final;
+		virtual void remove_handle(const check_method_login_t check_method) const override final;
 	private:
 		static const size_t read_only_memory_size = 64;
 		static const time_t license_timeout = 60; // Одна минута
 
 		check_method_login_t _last_loggedin_method;
 
-		const hasp_handle_t get_handle(const check_method_login_t check_method) const;
 		mutable hasp_status_t _last_status;
 
 		const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const;

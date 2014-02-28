@@ -60,10 +60,16 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 }
 #pragma endregion IKeyChecker Interface
 
-const hasp_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check_method) const {
 #pragma region KeyChecker Interface
+const handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check_method) const {
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? HASP_INVALID_HANDLE_VALUE : iterator->second;
+}
+void ProtectKeyHaspSL::remove_handle(const check_method_login_t check_method) const {
+	const auto iterator = _handles.find(check_method);
+	if (_handles.end() != iterator) {
+		_handles.erase(iterator);
+	}
 }
 #pragma endregion KeyChecker Interface
 
