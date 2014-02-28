@@ -33,9 +33,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const value_t read_memory(const check_method_memory_t check_method) const = 0;
 
 		/* IProtectKey Interface */
-		virtual const bool check_license(void) const override;
-		virtual const bool is_key_nfr(void) const override;
-		virtual const bool is_key_base(void) const override;
+		virtual const bool check_license(void) const override final;
+		virtual const bool is_key_nfr(void) const override final;
+		virtual const bool is_key_base(void) const override final;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t check_method) const override;
@@ -59,7 +59,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		void try_to_logout(void) const;
 
 		/* KeyChecker Interface */
-		virtual const bool check(void) const override;
+		virtual const bool check(void) const override final;
 	private:
 		granules_t _granules;
 		bool _logout_after_check = false;

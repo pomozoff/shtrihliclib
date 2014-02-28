@@ -9,8 +9,8 @@ class PlatformWindows : public Platform
 		PlatformWindows(void);
 		~PlatformWindows(void);
 
-		virtual const std::string computer_name(void) const override;
-		virtual const std::string user_name(void) const override;
 		/* Accessors */
+		virtual const std::string computer_name(void) const override final;
+		virtual const std::string user_name(void) const override final;
 	protected:
 };
