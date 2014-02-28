@@ -31,9 +31,6 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		void set_max_check_number(const check_number_t check_number) const;
 
 		/* IKeyChecker Interface */
-		virtual const bool is_base_key_available(const check_method_base_t check_method) const override = 0;
 		virtual const bool is_able_to_login(const check_method_login_t check_method) const override;
-		virtual const bool is_same_memory(const check_method_memory_t check_method) const override = 0;
-		virtual const bool logout_key(const check_method_login_t check_method) const override = 0;
 	private:
 };
