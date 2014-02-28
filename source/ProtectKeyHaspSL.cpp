@@ -119,7 +119,7 @@ const hasp_status_t ProtectKeyHaspSL::write_rw_memory(const check_method_login_t
 const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) const {
 	return false;
 }
-const size_t ProtectKeyHaspSL::licenses_amount1(const check_method_login_t check_method) const {
+const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_method) const {
 	value_t buffer(2);
 	auto logged_in_method = std::static_pointer_cast<const CheckMethod>(check_method);
 	auto check_method_memory = create_check_method_memory(offset_licenses_amount, buffer, logged_in_method);

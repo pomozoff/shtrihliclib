@@ -42,7 +42,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		const hasp_status_t write_rw_memory(const check_method_login_t check_method, const hasp_size_t offset, const hasp_size_t length, const value_t& buffer) const;
 
 		const bool login(const check_method_login_t check_method) const;
-		const size_t licenses_amount1(const check_method_login_t check_method) const;
+		const size_t licenses_amount(const check_method_login_t check_method) const;
 		const bool get_license(const check_method_login_t check_method) const;
 
 		void free_licnese(void) const;
