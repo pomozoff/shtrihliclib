@@ -32,6 +32,7 @@ static const offset_t offset_licenses_amount = 8;
 ProtectKeyHaspSL::ProtectKeyHaspSL(void) {
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
+	free_licnese();
 }
 #pragma endregion Constructor Destructor
 
