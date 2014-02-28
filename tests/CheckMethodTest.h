@@ -9,8 +9,9 @@
 
 class CheckMethodTest : public ::testing::Test {
 	public:
-		CheckMethodTest(void);
 		virtual ~CheckMethodTest(void);
 	protected:
+		CheckMethodTest(void);
+
 		protect_key_t _protect_key_hasp_sl;
 };

@@ -3,6 +3,7 @@
 
 class ICheckMethodsViewer {
 	public:
-		ICheckMethodsViewer(void);
 		virtual ~ICheckMethodsViewer(void);
+	protected:
+		ICheckMethodsViewer(void);
 };

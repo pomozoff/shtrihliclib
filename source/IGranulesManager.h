@@ -3,6 +3,7 @@
 
 class IGranulesManager {
 	public:
-		IGranulesManager(void);
 		virtual ~IGranulesManager(void);
+	protected:
+		IGranulesManager(void);
 };

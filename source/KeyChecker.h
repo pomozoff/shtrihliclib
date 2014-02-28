@@ -14,7 +14,6 @@ using check_methods_t = std::vector<const check_method_t>;
 
 class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public ICheckMethodsViewer {
 	public:
-		KeyChecker(void);
 		~KeyChecker(void);
 
 		const check_method_base_t create_check_method_base(void) const;
@@ -23,6 +22,8 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 
 		virtual void logout(const bool forced_logout) const;
 	protected:
+		KeyChecker(void);
+
 		mutable check_methods_t _check_methods;
 		mutable handles_t _handles;
 
