@@ -52,6 +52,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		KeyType _key_type;
 		time_t _timeout_check;
 		std::string _key_number;
+		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
 		ProtectKey(void);
 
@@ -69,7 +70,6 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		mutable time_t _nfr_end_date = time(NULL);
 		mutable bool _is_key_nfr = false;
-		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;
