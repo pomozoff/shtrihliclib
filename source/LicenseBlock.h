@@ -21,6 +21,8 @@ class LicenseBlock final {
 		void make_expired(void) const;
 
 		/* Accessors */
+		const offset_t offset_in_manager(void) const;
+		const value_t& block(void) const;
 	protected:
 	private:
 		mutable value_t _block;

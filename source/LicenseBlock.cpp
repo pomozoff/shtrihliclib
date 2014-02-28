@@ -53,6 +53,15 @@ void LicenseBlock::make_expired(void) const {
 }
 #pragma endregion Public
 
+#pragma region Accessors
+const offset_t LicenseBlock::offset_in_manager(void) const {
+	return _offset_in_manager;
+}
+const value_t& LicenseBlock::block(void) const {
+	return _block;
+}
+#pragma endregion Accessors
+
 #pragma region Private
 template <typename T>
 const bool LicenseBlock::place_data_to_buffer_at_offset(value_t& buffer, const offset_t offset, const T data) {
