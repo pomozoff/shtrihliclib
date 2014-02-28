@@ -47,6 +47,9 @@ void KeyChecker::logout(const bool forced_logout) const {
 		}
 	}
 }
+void KeyChecker::add_handle(const check_method_login_t check_method, const handle_t handle) const {
+	_handles.insert(handles_pair_t(check_method, handle));
+}
 #pragma endregion Protected
 
 #pragma region IKeyChecker Interface
