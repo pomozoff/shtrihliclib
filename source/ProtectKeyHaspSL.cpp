@@ -65,11 +65,11 @@ const hasp_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t chec
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? HASP_INVALID_HANDLE_VALUE : iterator->second;
 }
-const hasp_status_t ProtectKeyHaspSL::_hasp_login(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const {
 	return hasp_login_scope(feature_id, scope, vendor_code, &handle);
 #pragma endregion KeyChecker Interface
 
 #pragma region Private
+const hasp_status_t ProtectKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const {
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
 	uint8_t *data = new uint8_t[length];
