@@ -10,7 +10,7 @@
 #include "CheckMethod.h"
 
 using handles_t = std::map<const check_method_login_t, const handle_t>;
-using check_methods_t = std::vector<check_method_t>;
+using check_methods_t = std::vector<const check_method_t>;
 
 class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public ICheckMethodsViewer {
 	public:
