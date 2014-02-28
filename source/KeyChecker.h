@@ -28,7 +28,7 @@ class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public IChec
 		mutable handles_t _handles;
 
 		virtual const bool check(void) const = 0;
-		virtual void set_max_check_number(const check_number_t check_number) const final;
+		void set_max_check_number(const check_number_t check_number) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t check_method) const override = 0;
