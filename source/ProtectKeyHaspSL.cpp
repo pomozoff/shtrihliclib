@@ -65,15 +65,18 @@ const hasp_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t chec
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? HASP_INVALID_HANDLE_VALUE : iterator->second;
 }
-	return hasp_login_scope(feature_id, scope, vendor_code, &handle);
 #pragma endregion KeyChecker Interface
 
 #pragma region Private
 const hasp_status_t ProtectKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const {
+	auto status = hasp_login_scope(feature_id, scope, vendor_code, &handle);
+	_last_status = status;
+	return status;
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
 	uint8_t *data = new uint8_t[length];
-	hasp_status_t status = hasp_read(handle, file_id, offset, length, data);
+	auto status = hasp_read(handle, file_id, offset, length, data);
+	_last_status = status;
 
 	if (HASP_STATUS_OK == status) {
 		buffer.assign(data[0], data[length - 1]);
@@ -83,10 +86,14 @@ const hasp_status_t ProtectKeyHaspSL::_hasp_read(const hasp_handle_t handle, con
 	return status;
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_write(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const {
-	return hasp_write(handle, file_id, offset, length, &buffer[0]);
+	auto status = hasp_write(handle, file_id, offset, length, &buffer[0]);
+	_last_status = status;
+	return status;
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_logout(const hasp_handle_t handle) const {
-	return hasp_logout(handle);
+	auto status = hasp_logout(handle);
+	_last_status = status;
+	return status;
 }
 
 const std::string ProtectKeyHaspSL::key_id(const hasp_handle_t handle) const {

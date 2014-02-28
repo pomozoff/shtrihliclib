@@ -29,6 +29,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		check_method_login_t _last_loggedin_method;
 
 		const hasp_handle_t get_handle(const check_method_login_t check_method) const;
+		mutable hasp_status_t _last_status;
 
 		const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const;
 		const hasp_status_t _hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const;
