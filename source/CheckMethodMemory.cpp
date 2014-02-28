@@ -18,6 +18,8 @@ const bool CheckMethodMemory::check(const ikey_checker_t key_checker) const {
 	bool logged_in = key_checker->is_same_memory(sp_this);
 	return false;
 };
+
+/* Properties */
 const check_method_login_t CheckMethodMemory::logged_in_method(void) const {
 	return _logged_in_method;
 }

@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "ProtectKey.h"
 #include "hasp/hasp_api.h"
 
+#include "ProtectKey.h"
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
 		ProtectKeyHaspSL(void);
