@@ -137,18 +137,118 @@ const hasp_status_t ProtectKeyHaspSL::write_rw_memory(const check_method_login_t
 }
 
 const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) const {
-	return false;
+	if (!check_method) {
+		return false;
+	}
+	hasp_handle_t handle = HASP_INV_HND;
+	const auto status = _hasp_login_scope(check_method->feature(), vendor_code, handle);
+	const bool success = HASP_STATUS_OK == status;
+
+	process_result(status);
+	if (HASP_STATUS_OK == _last_status) {
+		_key_number = key_id(handle);
+		hasp_legacy_set_idletime(handle, 1);
+
+		add_handle(check_method, handle);
+		add_feature(check_method->feature());
+	}
+	return success;
 }
 const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_method) const {
-	value_t buffer(2);
+	const size_t sizeof_buffer = 2;
+	const size_t one_byte = 256;
+
+	value_t buffer(sizeof_buffer);
 	auto check_method_memory = create_check_method_memory(offset_licenses_amount, buffer, check_method);
+	auto data = read_memory(check_method_memory);
+
+	size_t read_licenses_amount = 0;
+	if (sizeof_buffer == data.size()) {
+		read_licenses_amount = buffer[0] * one_byte + buffer[1];
+	}
 	return 0;
 }
+const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method) const {
+	value_t buffer;
+	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
+		return nullptr;
+	}
+	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, license_timeout, licenses_amount(check_method));
+	if (!license_block_manager) {
+		return nullptr;
+	}
+	return license_block_manager;
+}
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {
-	return false;
+	auto license_block_manager = make_license_block_manager(check_method);
+	if (!license_block_manager) {
+		return false;
+	}
+	auto license_block = license_block_manager->take_license();
+	bool success = nullptr != license_block;
+	if (success) {
+		success = HASP_STATUS_OK == write_rw_memory(check_method, license_block->offset_in_manager(), license_block->sizeof_block, license_block->block());
+	}
+	return success;
 }
 
 void ProtectKeyHaspSL::free_licnese(void) const {
+	if (!login(_last_loggedin_method)) {
+		return;
+	}
+	auto license_block_manager = make_license_block_manager(_last_loggedin_method);
+	if (!license_block_manager) {
+		return;
+	}
+	auto license_block = license_block_manager->find_my_block();
+	if (!license_block) {
+		return;
+	}
+	license_block->make_expired();
+	write_rw_memory(_last_loggedin_method, license_block->offset_in_manager(), license_block->sizeof_block, license_block->block());
 
+	logout_key(_last_loggedin_method);
+}
+void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
+	_error_code = status;
+	switch (status)
+	{
+		case HASP_STATUS_OK:
+			_error_string = R"()";
+			break;
+		case HASP_NO_DRIVER:
+			_error_string = R"(Не обнаружен драйвер HASP)";
+			break;
+		case HASP_CONTAINER_NOT_FOUND:
+			_error_string = R"(Не найден ключ HASP)";
+			break;
+		case HASP_FEATURE_NOT_FOUND:
+			_error_string = R"(Программа не найдена)";
+			break;
+		case HASP_TS_DETECTED:
+			_error_string = R"(Запрещена работа в терминальной сессии)";
+			break;
+		case HASP_TMOF:
+			_error_string = R"(Слишком много открытых программ)";
+			break;
+		case HASP_ACCESS_DENIED:
+			_error_string = R"(Доступ к программе запрещён)";
+			break;
+		case HASP_OLD_DRIVER:
+			_error_string = R"(Используется устаревший драйвер)";
+			break;
+		case HASP_SYS_ERR:
+			_error_string = R"(Ошибка вызова системной функции)";
+			break;
+		case HASP_INSUF_MEM:
+			_error_string = R"(Недостаточно памяти)";
+			break;
+		case HASP_INV_HND:
+			_error_string = R"(Ошибочный дескриптор)";
+			break;
+		default:
+			_error_string = R"(Ошибка)";
+			break;
+	}
 }
 #pragma endregion Private

@@ -4,6 +4,9 @@
 #include "hasp/hasp_api.h"
 
 #include "ProtectKey.h"
+#include "LicenseBlock.h"
+#include "LicenseBlockManager.h"
+
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
 		ProtectKeyHaspSL(void);
@@ -48,5 +51,8 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		const size_t licenses_amount(const check_method_login_t check_method) const;
 		const bool get_license(const check_method_login_t check_method) const;
 
+		const license_block_manager_t make_license_block_manager(const check_method_login_t check_method) const;
 		void free_licnese(void) const;
+
+		void process_result(const hasp_status_t status) const;
 };
