@@ -33,8 +33,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		static const size_t read_only_memory_size = 64;
 		static const time_t license_timeout = 60; // Одна минута
 
-		check_method_login_t _last_loggedin_method;
-
+		mutable check_method_login_t _last_loggedin_method;
 		mutable hasp_status_t _last_status;
 
 		const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const;
