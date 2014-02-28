@@ -51,13 +51,41 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 
 #pragma region IKeyChecker Interface
 const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_method) const {
-	return false;
+	bool success = false;
+	if (login(check_method)) {
+		_last_loggedin_method = check_method;
+		success = get_license(check_method);
+	}
+	if (_key_delegate) {
+		_key_delegate->did_check_protect_key(success);
+	}
+	return success;
 }
 const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_method) const {
-	return false;
+	bool success = false;
+	auto buffer = read_memory(check_method);
+	process_result(_last_status);
+	if (HASP_STATUS_OK == _last_status) {
+		_error_string = R"()";
+		if (check_method->value().size() == buffer.size()) {
+			success = std::equal(buffer.begin(), buffer.end(), check_method->value().begin());
+		}
+	}
+	return success;
 }
 const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method) const {
-	return false;
+	bool success = false;
+	const auto handle = get_handle(check_method);
+	if (HASP_INV_HND == handle) {
+		_error_string = R"(Ошибка)";
+		_error_code = HASP_INV_HND;
+	} else {
+		const auto status = _hasp_logout(handle);
+		success = HASP_STATUS_OK == status;
+		remove_handle(check_method);
+		process_result(status);
+	}
+	return success;
 }
 #pragma endregion IKeyChecker Interface
 
