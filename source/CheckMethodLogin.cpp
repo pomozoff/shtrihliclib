@@ -17,3 +17,11 @@ const bool CheckMethodLogin::check(const ikey_checker_t key_checker) const {
 	bool logged_in = key_checker->is_able_to_login(sp_this);
 	return false;
 };
+
+/* Properties */
+const feature_t CheckMethodLogin::feature(void) const {
+	return _feature;
+}
+const bool CheckMethodLogin::allow_to_login_on_previous_key(void) const {
+	return _allow_to_login_on_previous_key;
+}
