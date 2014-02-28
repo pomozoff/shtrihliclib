@@ -58,7 +58,7 @@ const bool LicenseBlock::place_data_to_buffer_at_offset(value_t& buffer, const o
 	}
 
 	auto begin = static_cast<const byte_t*>(static_cast<const void*>(&data));
-	auto end   = static_cast<const byte_t*>(static_cast<const void*>(&data)) + sizeof data;
+	auto end = static_cast<const byte_t*>(static_cast<const void*>(&data)) + sizeof data;
 
 	std::copy(begin, end, buffer.begin() + offset);
 
