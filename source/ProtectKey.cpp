@@ -217,3 +217,7 @@ const bool ProtectKey::recheck_key(void) const {
 
 	return result;
 }
+void ProtectKey::add_feature(const feature_t feature) const {
+	_features.push_back(feature);
+}
+#pragma endregion Private
