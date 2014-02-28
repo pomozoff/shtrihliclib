@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include "CheckMethodBaseTest.h"
+#include "CheckMethodBase.h"
 
 CheckMethodBaseTest::CheckMethodBaseTest(void) {
 	_check_method = _protect_key_hasp_sl->create_check_method_base();

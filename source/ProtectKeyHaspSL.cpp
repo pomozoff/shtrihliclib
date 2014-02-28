@@ -121,8 +121,7 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) cons
 }
 const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_method) const {
 	value_t buffer(2);
-	auto logged_in_method = std::static_pointer_cast<const CheckMethod>(check_method);
-	auto check_method_memory = create_check_method_memory(offset_licenses_amount, buffer, logged_in_method);
+	auto check_method_memory = create_check_method_memory(offset_licenses_amount, buffer, check_method);
 	return 0;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {

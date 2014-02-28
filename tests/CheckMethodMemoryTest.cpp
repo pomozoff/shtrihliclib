@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include "CheckMethodMemoryTest.h"
+#include "CheckMethodMemory.h"
 
 CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
 	byte_t tmp[] = { 0x10, 0xfe, 0x4a, 0x83 };
