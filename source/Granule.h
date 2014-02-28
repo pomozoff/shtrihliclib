@@ -12,7 +12,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
 
-		/* Properties */
+		/* Accessors */
 		void set_granule_nfr_date(const bool is_granule_nfr_date);
 		const bool is_granule_nfr_date(void) const;
 	protected:

@@ -7,6 +7,7 @@
 #include "LicenseBlock.h"
 #include "ProtectKey.h"
 
+#pragma region Constructor Destructor
 LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout) :
 _block(block),
 _offset_in_manager(offset),
@@ -15,14 +16,41 @@ _timeout(timeout)
 }
 LicenseBlock::~LicenseBlock(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Public
 const value_t LicenseBlock::block_from_string(const std::string session_id, const time_t time_logged_in) {
 	std::hash<std::string> hasher;
 	size_t hash = hasher(session_id);
 	return block_from_hash(hash, time_logged_in);
 }
+const bool LicenseBlock::is_expired() const {
+	return (!is_valid()) || (difftime(time(NULL), logged_in_time()) > _timeout);
+}
+const time_t LicenseBlock::logged_in_time() const {
+	time_t logged_in = 0;
+	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
+		return 0;
+	}
+	return logged_in;
+}
+const bool LicenseBlock::is_it_my_block(void) const {
+	if (!is_valid()) {
+		return false;
+	}
 
-/* Private */
+	size_t block_id_hash = 0;
+	if (!get_data_from_buffer_at_offset(_block, 0, block_id_hash)) {
+		return false;
+	}
+	return block_id_hash == ProtectKey::session_id_hash();
+}
+void LicenseBlock::update_block(const time_t time) const {
+	_block = block_from_hash(ProtectKey::session_id_hash(), time);
+}
+#pragma endregion Public
+
+#pragma region Private
 template <typename T>
 const bool LicenseBlock::place_data_to_buffer_at_offset(value_t& buffer, const offset_t offset, const T data) {
 	if ((offset + sizeof data) > buffer.size()) {
@@ -85,27 +113,4 @@ const bool LicenseBlock::is_valid() const {
 
 	return computed_hash == block_hash;
 }
-const bool LicenseBlock::is_expired() const {
-	return (!is_valid()) || (difftime(time(NULL), logged_in_time()) > _timeout);
-}
-const time_t LicenseBlock::logged_in_time() const {
-	time_t logged_in = 0;
-	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
-		return 0;
-	}
-	return logged_in;
-}
-const bool LicenseBlock::is_it_my_block(void) const {
-	if (!is_valid()) {
-		return false;
-	}
-
-	size_t block_id_hash = 0;
-	if (!get_data_from_buffer_at_offset(_block, 0, block_id_hash)) {
-		return false;
-	}
-	return block_id_hash == ProtectKey::session_id_hash();
-}
-void LicenseBlock::update_block(const time_t time) const {
-	_block = block_from_hash(ProtectKey::session_id_hash(), time);
-}
+#pragma endregion Private

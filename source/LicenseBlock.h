@@ -18,6 +18,8 @@ class LicenseBlock final {
 		const bool is_it_my_block(void) const;
 
 		void update_block(const time_t time) const;
+
+		/* Accessors */
 	protected:
 	private:
 		mutable value_t _block;

@@ -6,13 +6,16 @@
 #include "CheckMethodLogin.h"
 #include "CheckMethodMemory.h"
 
+#pragma region Constructor Destructor
 KeyChecker::KeyChecker(void) {
 }
 KeyChecker::~KeyChecker(void) {
 	_check_methods.clear();
 	_handles.clear();
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Public
 const check_method_base_t KeyChecker::create_check_method_base(void) const {
 	auto check_method = std::make_shared<CheckMethodBase>();
 	_check_methods.push_back(check_method);
@@ -28,7 +31,9 @@ const check_method_memory_t KeyChecker::create_check_method_memory(const offset_
 	_check_methods.push_back(check_method);
 	return check_method;
 }
+#pragma endregion Public
 
+#pragma region Protected
 void KeyChecker::set_max_check_number(check_number_t check_number) const {
 	for (const auto& element : _check_methods) {
 		element->set_max_check_number(check_number);
@@ -42,8 +47,10 @@ void KeyChecker::logout(const bool forced_logout) const {
 		}
 	}
 }
+#pragma endregion Protected
 
-/* IKeyChecker Interface */
+#pragma region IKeyChecker Interface
 const bool KeyChecker::is_able_to_login(const check_method_login_t check_method) const {
 	return logout_key(check_method);
 }
+#pragma endregion IKeyChecker Interface

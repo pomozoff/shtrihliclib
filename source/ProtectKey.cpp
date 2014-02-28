@@ -8,17 +8,22 @@
 #include "ProtectKeyHaspSL.h"
 #include "Platform.h"
 
+#pragma region Constants
 static const platform_t _platform = Platform::platform();
 static std::string _session_id = R"()";
 static size_t _session_id_hash = 0;
+#pragma endregion Constants
 
+#pragma region Constructor Destructor
 ProtectKey::ProtectKey(void) {
 }
 ProtectKey::~ProtectKey(void) {
 	logout(true);
 	_granules.clear();
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Public
 const std::string ProtectKey::session_id(void) {
 	if (_session_id.empty()) {
 		_session_id = _platform->computer_name() + _platform->user_name();
@@ -99,19 +104,24 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 	
 	return true;
 }
+#pragma endregion Public
 
-void ProtectKey::check_granules(void) const {
-	for (const auto& element : _granules) {
-		element->check();
-	}
+#pragma region Accessors
+const bool ProtectKey::logout_after_check(void) const {
+	return _logout_after_check;
 }
-void ProtectKey::try_to_logout(void) const {
-	if (_logout_after_check) {
-		logout(false);
-	}
+void ProtectKey::set_logout_after_check(const bool logout_after_check) {
+	_logout_after_check = logout_after_check;
 }
+const time_t ProtectKey::nfr_end_date(void) const {
+	return _nfr_end_date;
+}
+void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
+	_nfr_end_date = nfr_end_date;
+}
+#pragma endregion Accessors
 
-/* IProtectKey Interface */
+#pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
 	if (_is_key_nfr) {
 		return false;
@@ -126,22 +136,9 @@ const bool ProtectKey::is_key_nfr(void) const {
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
 }
+#pragma endregion IProtectKey Interface
 
-/* Properties */
-const bool ProtectKey::logout_after_check(void) const {
-	return _logout_after_check;
-}
-void ProtectKey::set_logout_after_check(const bool logout_after_check) {
-	_logout_after_check = logout_after_check;
-}
-const time_t ProtectKey::nfr_end_date(void) const {
-	return _nfr_end_date;
-}
-void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
-	_nfr_end_date = nfr_end_date;
-}
-
-/* KeyChecker Interface */
+#pragma region KeyChecker Interface
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	protect_key_t sp_this = shared_from_this();
@@ -161,8 +158,9 @@ const bool ProtectKey::check(void) const {
 
 	return result;
 }
+#pragma endregion KeyChecker Interface
 
-/* IKeyChecker Interface */
+#pragma region IKeyChecker Interface
 const bool ProtectKey::is_base_key_available(const check_method_base_t check_method) const {
 	return false;
 }
@@ -175,8 +173,22 @@ const bool ProtectKey::is_same_memory(const check_method_memory_t check_method) 
 const bool ProtectKey::logout_key(const check_method_login_t check_method) const {
 	return false;
 }
+#pragma endregion IKeyChecker Interface
 
-/* Private */
+#pragma region Protected
+void ProtectKey::check_granules(void) const {
+	for (const auto& element : _granules) {
+		element->check();
+	}
+}
+void ProtectKey::try_to_logout(void) const {
+	if (_logout_after_check) {
+		logout(false);
+	}
+}
+#pragma endregion Protected
+
+#pragma region Private
 const bool ProtectKey::check_license_with_methods(void) const {
 	bool result = false;
 	protect_key_t sp_this = shared_from_this();

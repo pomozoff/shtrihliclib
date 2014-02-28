@@ -8,6 +8,7 @@
 #include "LicenseBlockManager.h"
 #include "LicenseBlock.h"
 
+#pragma region Constructor Destructor
 LicenseBlockManager::LicenseBlockManager(const value_t buffer, const time_t timeout, const size_t licenses_amount) :
 _licenses_amount(licenses_amount),
 _license_blocks(license_blocks_from_buffer(buffer, timeout))
@@ -15,7 +16,25 @@ _license_blocks(license_blocks_from_buffer(buffer, timeout))
 }
 LicenseBlockManager::~LicenseBlockManager(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Public
+const license_block_t LicenseBlockManager::take_license(void) const {
+	license_block_t block = find_my_block();
+	if (!block) {
+		block = find_first_free_block();
+	}
+	if (block) {
+		block->update_block(time(NULL));
+	}
+	return block;
+}
+const license_block_t LicenseBlockManager::find_my_block(void) const {
+	return find_block(&LicenseBlock::is_it_my_block);
+}
+#pragma endregion Public
+
+#pragma region Private
 const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const value_t& buffer, const time_t timeout) const {
 	auto block_size = LicenseBlock::sizeof_block;
 	license_blocks_t license_blocks;
@@ -54,19 +73,7 @@ const license_block_t LicenseBlockManager::find_block(p_block_func_t function_ch
 
 	return found_block;
 }
-const license_block_t LicenseBlockManager::find_my_block(void) const {
-	return find_block(&LicenseBlock::is_it_my_block);
-}
 const license_block_t LicenseBlockManager::find_first_free_block(void) const {
 	return find_block(&LicenseBlock::is_expired);
 }
-const license_block_t LicenseBlockManager::take_license(void) const {
-	license_block_t block = find_my_block();
-	if (!block) {
-		block = find_first_free_block();
-	}
-	if (block) {
-		block->update_block(time(NULL));
-	}
-	return block;
-}
+#pragma endregion Private

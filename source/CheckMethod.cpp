@@ -3,16 +3,18 @@
 
 #include "CheckMethod.h"
 
+#pragma region Constructor Destructor
 CheckMethod::CheckMethod(void) {
 }
 CheckMethod::~CheckMethod(void) {
 }
+#pragma endregion Constructor Destructor
 
 const CheckMethodType CheckMethod::check_method_type(void) const {
 	return _check_method;
 }
 
-/* Properties */
+#pragma region Accessors
 const bool CheckMethod::logout_after_check(void) const {
 	return _logout_after_check;
 }
@@ -25,7 +27,9 @@ const bool CheckMethod::is_check_method_for_license(void) const {
 void CheckMethod::set_max_check_number(check_number_t check_number) const {
 	_max_check_number = check_number;
 }
+#pragma endregion Accessors
 
+#pragma region Protected
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
 	if (last_check_is_success) {
 		_current_check_number = 0;
@@ -39,3 +43,4 @@ const bool CheckMethod::process_check_result(const bool last_check_is_success) c
 
 	return give_a_try_one_more_time;
 }
+#pragma endregion Protected

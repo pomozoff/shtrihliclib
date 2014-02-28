@@ -3,11 +3,14 @@
 
 #include "PlatformLinux.h"
 
+#pragma region Constructor Destructor
 PlatformLinux::PlatformLinux(void) {
 }
 PlatformLinux::~PlatformLinux(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Accessors
 const std::string PlatformLinux::computer_name(void) const {
 	if (!_computer_name.empty()) {
 		return _computer_name;
@@ -20,3 +23,4 @@ const std::string PlatformLinux::user_name(void) const {
 	}
 	return R"()";
 }
+#pragma endregion Accessors

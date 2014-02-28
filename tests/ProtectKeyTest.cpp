@@ -5,12 +5,15 @@
 #include "ProtectKeyHaspSL.h"
 #include "LicenseBlock.h"
 
+#pragma region Constructor Destructor
 ProtectKeyTest::ProtectKeyTest(void) {
 	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL);
 }
 ProtectKeyTest::~ProtectKeyTest(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Tests
 TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	byte_t first_byte = 124;
 	byte_t last_byte = 235;
@@ -26,3 +29,4 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	ASSERT_EQ(buffer[block_offset], first_byte);
 	ASSERT_EQ(buffer[block_offset + LicenseBlock::sizeof_block - 1], last_byte);
 }
+#pragma endregion Tests

@@ -8,9 +8,10 @@ class CheckMethodLogin final : public CheckMethod, public std::enable_shared_fro
 		CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key);
 		~CheckMethodLogin(void);
 
+		/* CheckMethod Interface */
 		virtual const bool check(const ikey_checker_t key_checker) const override final;
 
-		/* Properties */
+		/* Accessors */
 		const feature_t feature(void) const;
 		const bool allow_to_login_on_previous_key(void) const;
 	protected:

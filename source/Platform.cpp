@@ -5,11 +5,14 @@
 #include "PlatformLinux.h"
 #include "PlatformWindows.h"
 
+#pragma region Constructor Destructor
 Platform::Platform(void) {
 }
 Platform::~Platform(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Public
 const platform_t Platform::platform(void) {
 #ifdef __linux__
 	return std::make_shared<PlatformLinux>();
@@ -17,3 +20,4 @@ const platform_t Platform::platform(void) {
 	return std::make_shared<PlatformWindows>();
 #endif // __linux__
 }
+#pragma endregion Public

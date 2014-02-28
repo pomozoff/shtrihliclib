@@ -7,6 +7,7 @@
 
 #include "DataTypes.h"
 
+#pragma region Constants
 static const unsigned char vendor_code[] =
 	"Ir8uIUvOt9rvL4GXELPf2KOnWon4Nt3J9XTOrpuM+4Kkhr5ClEoAoha6s2sCYx1UPtu0TfXK7pvO3rHN"
 	"31lDHZlyMzZKj4O27bb5CkatSYi/L/g1x/yFDEAWN4tJYC1kY4OyItmJbCQ/4gzNXE/EgOA2WRhG677R"
@@ -25,15 +26,18 @@ static const char* scope =
 	"<haspscope/>";
 
 static const offset_t offset_licenses_amount = 8;
+#pragma endregion Constants
 
 ProtectKeyHaspSL::ProtectKeyHaspSL(void) :
 _key_number(R"()")
 {
+#pragma region Constructor Destructor
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 }
+#pragma endregion Constructor Destructor
 
-/* ProtectKey Interface */
+#pragma region ProtectKey Interface
 const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_method) const {
 	value_t value;
 	const hasp_handle_t handle = get_handle(check_method->logged_in_method());
@@ -44,8 +48,9 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 	}
 	return value;
 }
+#pragma endregion ProtectKey Interface
 
-/* IKeyChecker Interface */
+#pragma region IKeyChecker Interface
 const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_method) const {
 	return false;
 }
@@ -55,14 +60,18 @@ const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_me
 const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method) const {
 	return false;
 }
+#pragma endregion IKeyChecker Interface
 
-/* Private */
 const hasp_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check_method) const {
+#pragma region KeyChecker Interface
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? HASP_INVALID_HANDLE_VALUE : iterator->second;
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_login(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const {
 	return hasp_login_scope(feature_id, scope, vendor_code, &handle);
+#pragma endregion KeyChecker Interface
+
+#pragma region Private
 }
 const hasp_status_t ProtectKeyHaspSL::_hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
 	uint8_t *data = new uint8_t[length];
@@ -131,3 +140,4 @@ const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method
 void ProtectKeyHaspSL::free_licnese(void) const {
 
 }
+#pragma endregion Private

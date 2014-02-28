@@ -12,7 +12,7 @@ class CheckMethod {
 		virtual const bool check(const ikey_checker_t key_checker) const = 0;
 		const CheckMethodType check_method_type(void) const;
 
-		/* Properties */
+		/* Accessors */
 		const bool logout_after_check(void) const;
 		const bool is_check_method_for_nfr(void) const;
 		const bool is_check_method_for_license(void) const;

@@ -4,6 +4,7 @@
 #include "CheckMethodMemoryTest.h"
 #include "CheckMethodMemory.h"
 
+#pragma region Constructor Destructor
 CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
 	byte_t tmp[] = { 0x10, 0xfe, 0x4a, 0x83 };
 	value_t value_for_constructor_test { *tmp };
@@ -13,7 +14,9 @@ CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Tests
 TEST_F(CheckMethodMemoryTest, check) {
 	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
@@ -22,3 +25,4 @@ TEST_F(CheckMethodMemoryTest, check_method_type) {
 	CheckMethodType check_method_type = _check_method->check_method_type();
 	ASSERT_TRUE(check_method_type == CheckMethodType::Memory);
 }
+#pragma endregion Tests

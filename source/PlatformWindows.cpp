@@ -3,11 +3,14 @@
 
 #include "PlatformWindows.h"
 
+#pragma region Constructor Destructor
 PlatformWindows::PlatformWindows(void) {
 }
 PlatformWindows::~PlatformWindows(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Accessors
 const std::string PlatformWindows::computer_name(void) const {
 	if (!_computer_name.empty()) {
 		return _computer_name;
@@ -20,3 +23,4 @@ const std::string PlatformWindows::user_name(void) const {
 	}
 	return R"()";
 }
+#pragma endregion Accessors

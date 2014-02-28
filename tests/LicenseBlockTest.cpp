@@ -4,12 +4,15 @@
 #include "LicenseBlockTest.h"
 #include "ProtectKeyHaspSL.h"
 
+#pragma region Constructor Destructor
 LicenseBlockTest::LicenseBlockTest(void) {
 	_key_memory.resize(ProtectKeyHaspSL::read_write_memory_size);
 }
 LicenseBlockTest::~LicenseBlockTest(void) {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Tests
 TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	time_t some_time = 1392280873;
 
@@ -83,3 +86,4 @@ TEST_F(LicenseBlockTest, is_it_my_block_false) {
 	auto is_it_my_block = license_block->is_it_my_block();
 	ASSERT_TRUE(!is_it_my_block);
 }
+#pragma endregion Tests

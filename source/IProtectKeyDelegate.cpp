@@ -3,7 +3,9 @@
 
 #include "IProtectKeyDelegate.h"
 
+#pragma region Constructor Destructor
 IProtectKeyDelegate::IProtectKeyDelegate() {
 }
 IProtectKeyDelegate::~IProtectKeyDelegate() {
 }
+#pragma endregion Constructor Destructor

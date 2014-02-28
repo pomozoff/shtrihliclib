@@ -4,11 +4,14 @@
 #include "LicenseBlockManagerTest.h"
 #include "LicenseBlock.h"
 
+#pragma region Constructor Destructor
 LicenseBlockManagerTest::LicenseBlockManagerTest() {
 }
 LicenseBlockManagerTest::~LicenseBlockManagerTest() {
 }
+#pragma endregion Constructor Destructor
 
+#pragma region Tests
 TEST_F(LicenseBlockManagerTest, take_license) {
 	const size_t sizeof_buffer = 4096;
 	const time_t timeout = 30;
@@ -24,3 +27,4 @@ TEST_F(LicenseBlockManagerTest, take_license) {
 	ASSERT_TRUE(!license_block->is_expired());
 	ASSERT_TRUE(license_block->is_it_my_block());
 }
+#pragma endregion Tests

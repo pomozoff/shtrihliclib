@@ -11,5 +11,6 @@ class PlatformWindows : public Platform
 
 		virtual const std::string computer_name(void) const override;
 		virtual const std::string user_name(void) const override;
+		/* Accessors */
 	protected:
 };
