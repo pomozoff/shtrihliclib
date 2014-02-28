@@ -52,6 +52,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		KeyType _key_type;
 		time_t _timeout_check;
 		std::string _key_number;
+		mutable std::string _error_string;
+		mutable size_t _error_code;
+		mutable features_t _features;
 		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
 		ProtectKey(void);
