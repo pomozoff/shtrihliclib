@@ -8,7 +8,8 @@
 using byte_t = uint8_t;
 using offset_t = uint32_t;
 using feature_t = uint32_t;
-using handle_t = uint32_t;
+using handle_t = int32_t;
+
 using features_t = std::vector<const feature_t>;
 
 using check_number_t = unsigned int;
