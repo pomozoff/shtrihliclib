@@ -3,7 +3,8 @@
 
 #include <memory>
 
-#include "gtest\gtest.h"
+#include "gtest/gtest.h"
+
 #include "CheckMethod.h"
 #include "ProtectKey.h"
 

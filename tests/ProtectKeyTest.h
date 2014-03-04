@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "gtest\gtest.h"
+#include "gtest/gtest.h"
+
 #include "ProtectKey.h"
 
 class ProtectKeyTest : public ::testing::Test {

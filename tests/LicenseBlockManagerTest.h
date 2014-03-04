@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "gtest\gtest.h"
+#include "gtest/gtest.h"
+
 #include "LicenseBlockManager.h"
 
 class LicenseBlockManagerTest : public ::testing::Test {
