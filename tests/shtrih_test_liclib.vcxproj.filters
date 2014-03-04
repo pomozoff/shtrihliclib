@@ -45,6 +45,9 @@
     <ClInclude Include="LicenseBlockManagerTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProtectKeyHaspSLTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LicenseBlockManagerTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtectKeyHaspSLTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
