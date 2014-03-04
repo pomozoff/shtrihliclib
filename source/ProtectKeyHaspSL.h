@@ -7,7 +7,7 @@
 #include "LicenseBlock.h"
 #include "LicenseBlockManager.h"
 
-class ProtectKeyHaspSL final : public ProtectKey {
+class ProtectKeyHaspSL : public ProtectKey {
 	public:
 		ProtectKeyHaspSL(void);
 		~ProtectKeyHaspSL(void);
