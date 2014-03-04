@@ -8,6 +8,6 @@ class ProtectKeyTest : public ::testing::Test {
 	public:
 		ProtectKeyTest(void);
 		~ProtectKeyTest(void);
-	protected:
+	private:
 		protect_key_t _protect_key_hasp_sl;
 };
