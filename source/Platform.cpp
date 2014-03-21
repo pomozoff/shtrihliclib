@@ -18,9 +18,9 @@ Platform::~Platform(void) {
 #pragma region Public
 const platform_t Platform::platform(void) {
 #ifdef __linux__
-	return std::make_shared<PlatformLinux>();
+	return std::make_shared<const PlatformLinux>();
 #else
-	return std::make_shared<PlatformWindows>();
+	return std::make_shared<const PlatformWindows>();
 #endif // __linux__
 }
 #pragma endregion Public
