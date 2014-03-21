@@ -3,7 +3,7 @@
 
 #include "Platform.h"
 
-class PlatformLinux : public Platform
+class PlatformLinux final : public Platform
 {
 	public:
 		PlatformLinux(void);
