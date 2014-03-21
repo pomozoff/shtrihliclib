@@ -4,23 +4,21 @@
 #include "PlatformLinux.h"
 
 #pragma region Constructor Destructor
-PlatformLinux::PlatformLinux(void) {
+PlatformLinux::PlatformLinux(void) :
+Platform(get_computer_name(), get_user_name())
+{
 }
 PlatformLinux::~PlatformLinux(void) {
 }
 #pragma endregion Constructor Destructor
 
-#pragma region Accessors
-const std::string PlatformLinux::computer_name(void) const {
-	if (!_computer_name.empty()) {
-		return _computer_name;
-	}
-	return R"()";
+#pragma region Private
+const std::string PlatformLinux::get_computer_name(void) const {
+	// TODO: Добавить реализацию получения имени компьютера
+	return R"(linux-computer)";
 }
-const std::string PlatformLinux::user_name(void) const {
-	if (!_user_name.empty()) {
-		return _user_name;
-	}
-	return R"()";
+const std::string PlatformLinux::get_user_name(void) const {
+	// TODO: Добавить реализацию получения имени пользователя
+	return R"(linux-user)";
 }
-#pragma endregion Accessors
+#pragma endregion Private

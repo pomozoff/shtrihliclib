@@ -4,23 +4,21 @@
 #include "PlatformWindows.h"
 
 #pragma region Constructor Destructor
-PlatformWindows::PlatformWindows(void) {
+PlatformWindows::PlatformWindows(void) :
+Platform(get_computer_name(), get_user_name())
+{
 }
 PlatformWindows::~PlatformWindows(void) {
 }
 #pragma endregion Constructor Destructor
 
-#pragma region Accessors
-const std::string PlatformWindows::computer_name(void) const {
-	if (!_computer_name.empty()) {
-		return _computer_name;
-	}
-	return R"()";
+#pragma region Private
+const std::string PlatformWindows::get_computer_name(void) const {
+	// TODO: Добавить реализацию получения имени компьютера
+	return R"(windows-computer)";
 }
-const std::string PlatformWindows::user_name(void) const {
-	if (!_user_name.empty()) {
-		return _user_name;
-	}
-	return R"()";
+const std::string PlatformWindows::get_user_name(void) const {
+	// TODO: Добавить реализацию получения имени пользователя
+	return R"(windows-user)";
 }
-#pragma endregion Accessors
+#pragma endregion Private

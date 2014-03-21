@@ -10,10 +10,10 @@ class Platform {
 		static const platform_t platform(void);
 
 		/* Accessors */
-		virtual const std::string computer_name(void) const = 0;
-		virtual const std::string user_name(void) const = 0;
+		const std::string computer_name(void) const;
+		const std::string user_name(void) const;
 	protected:
-		Platform(void);
+		Platform(const std::string computer_name, const std::string user_name);
 
 		std::string _computer_name;
 		std::string _user_name;
