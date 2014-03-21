@@ -65,9 +65,9 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type) {
 		default:
 			break;
 	}
-
 	return protect_key;
 }
+
 const iprotect_key_t ProtectKey::find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate) {
 	iprotect_key_t protect_key = nullptr;
 	for (const auto& element : keys_list) {
