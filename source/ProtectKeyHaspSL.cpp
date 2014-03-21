@@ -1,11 +1,12 @@
 
 #include "stdafx.h"
 
+#include "DataTypes.h"
+
 #include "ProtectKeyHaspSL.h"
 #include "CheckMethodMemory.h"
 #include "CheckMethodLogin.h"
-
-#include "DataTypes.h"
+#include "IRealKeyHasp.h"
 
 #pragma region Constants
 static const unsigned char vendor_code[] =
@@ -29,7 +30,9 @@ static const offset_t offset_licenses_amount = 8;
 #pragma endregion Constants
 
 #pragma region Constructor Destructor
-ProtectKeyHaspSL::ProtectKeyHaspSL(void) {
+ProtectKeyHaspSL::ProtectKeyHaspSL(const i_real_key_hasp_t key) :
+_real_key(key)
+{
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 	free_licnese();
@@ -43,7 +46,8 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 	if (HASP_INVALID_HANDLE_VALUE != handle) {
 		auto offset = check_method->offset();
 		auto length = check_method->value().size();
-		hasp_status_t status = _hasp_read(handle, HASP_FILEID_RO, offset, length, buffer);
+		auto memory_type = hasp_memory_type(check_method->memory_type());
+		hasp_status_t status = _real_key->_hasp_read(handle, memory_type, offset, length, buffer);
 	}
 	return buffer;
 }
@@ -64,8 +68,8 @@ const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_m
 const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_method) const {
 	bool success = false;
 	auto buffer = read_memory(check_method);
-	process_result(_last_status);
-	if (HASP_STATUS_OK == _last_status) {
+	process_result(_real_key->last_status());
+	if (HASP_STATUS_OK == _real_key->last_status()) {
 		_error_string = R"()";
 		if (check_method->value().size() == buffer.size()) {
 			success = std::equal(buffer.begin(), buffer.end(), check_method->value().begin());
@@ -80,7 +84,7 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 		_error_string = R"(Ошибка)";
 		_error_code = HASP_INV_HND;
 	} else {
-		const auto status = _hasp_logout(handle);
+		const auto status = _real_key->_hasp_logout(handle);
 		success = HASP_STATUS_OK == status;
 		remove_handle(check_method);
 		process_result(status);
@@ -103,34 +107,6 @@ void ProtectKeyHaspSL::remove_handle(const check_method_login_t check_method) co
 #pragma endregion KeyChecker Interface
 
 #pragma region Private
-const hasp_status_t ProtectKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const {
-	auto status = hasp_login_scope(feature_id, scope, vendor_code, &handle);
-	_last_status = status;
-	return status;
-}
-const hasp_status_t ProtectKeyHaspSL::_hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
-	uint8_t *data = new uint8_t[length];
-	auto status = hasp_read(handle, file_id, offset, length, data);
-	_last_status = status;
-
-	if (HASP_STATUS_OK == status) {
-		buffer.assign(data[0], data[length - 1]);
-	}
-	delete[] data;
-
-	return status;
-}
-const hasp_status_t ProtectKeyHaspSL::_hasp_write(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const {
-	auto status = hasp_write(handle, file_id, offset, length, &buffer[0]);
-	_last_status = status;
-	return status;
-}
-const hasp_status_t ProtectKeyHaspSL::_hasp_logout(const hasp_handle_t handle) const {
-	auto status = hasp_logout(handle);
-	_last_status = status;
-	return status;
-}
-
 const std::string ProtectKeyHaspSL::key_id(const hasp_handle_t handle) const {
 	char *info = 0;
 	std::string key_id = R"()", xml_begin_id = "<haspid>", xml_end_id = "</haspid>";
@@ -152,7 +128,7 @@ const hasp_status_t ProtectKeyHaspSL::read_rw_memory(const check_method_login_t 
 	hasp_status_t status = HASP_INV_HND;
 	const hasp_handle_t handle = get_handle(check_method);
 	if (HASP_INVALID_HANDLE_VALUE != handle) {
-		status = _hasp_read(handle, HASP_FILEID_RW, offset, length, buffer);
+		status = _real_key->_hasp_read(handle, HASP_FILEID_RW, offset, length, buffer);
 	}
 	return status;
 }
@@ -160,7 +136,7 @@ const hasp_status_t ProtectKeyHaspSL::write_rw_memory(const check_method_login_t
 	hasp_status_t status = HASP_INV_HND;
 	const hasp_handle_t handle = get_handle(check_method);
 	if (HASP_INVALID_HANDLE_VALUE != handle) {
-		status = _hasp_write(handle, HASP_FILEID_RW, offset, length, buffer);
+		status = _real_key->_hasp_write(handle, HASP_FILEID_RW, offset, length, buffer);
 	}
 	return status;
 }
@@ -170,11 +146,11 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) cons
 		return false;
 	}
 	hasp_handle_t handle = HASP_INV_HND;
-	const auto status = _hasp_login_scope(check_method->feature(), vendor_code, handle);
+	const auto status = _real_key->_hasp_login_scope(check_method->feature(), scope, vendor_code, handle);
 	const bool success = HASP_STATUS_OK == status;
 
 	process_result(status);
-	if (HASP_STATUS_OK == _last_status) {
+	if (HASP_STATUS_OK == _real_key->last_status()) {
 		_key_number = key_id(handle);
 		hasp_legacy_set_idletime(handle, 1);
 
@@ -279,5 +255,8 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 			_error_string = R"(Ошибка)";
 			break;
 	}
+}
+const hasp_fileid_t ProtectKeyHaspSL::hasp_memory_type(const KeyMemoryType memory_type) const {
+	return memory_type == KeyMemoryType::ReadOnly ? HASP_FILEID_RO : HASP_FILEID_RW;
 }
 #pragma endregion Private

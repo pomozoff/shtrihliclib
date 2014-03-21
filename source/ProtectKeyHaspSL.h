@@ -7,9 +7,9 @@
 #include "LicenseBlock.h"
 #include "LicenseBlockManager.h"
 
-class ProtectKeyHaspSL : public ProtectKey {
+class ProtectKeyHaspSL final : public ProtectKey {
 	public:
-		ProtectKeyHaspSL(void);
+		ProtectKeyHaspSL(const i_real_key_hasp_t key);
 		~ProtectKeyHaspSL(void);
 
 		static const size_t read_write_memory_size = 4032;
@@ -33,13 +33,8 @@ class ProtectKeyHaspSL : public ProtectKey {
 		static const size_t read_only_memory_size = 64;
 		static const time_t license_timeout = 60; // Одна минута
 
+		const i_real_key_hasp_t _real_key;
 		mutable check_method_login_t _last_loggedin_method;
-		mutable hasp_status_t _last_status;
-
-		const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const hasp_vendor_code_t vendor_code, hasp_handle_t handle) const;
-		const hasp_status_t _hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const;
-		const hasp_status_t _hasp_write(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const;
-		const hasp_status_t _hasp_logout(const hasp_handle_t handle) const;
 
 		const std::string key_id(const hasp_handle_t handle) const;
 
@@ -54,4 +49,6 @@ class ProtectKeyHaspSL : public ProtectKey {
 		void free_licnese(void) const;
 
 		void process_result(const hasp_status_t status) const;
+
+		const hasp_fileid_t hasp_memory_type(const KeyMemoryType memory_type) const;
 };
