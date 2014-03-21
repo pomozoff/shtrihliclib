@@ -7,6 +7,7 @@
 #include "Granule.h"
 #include "ProtectKeyHaspSL.h"
 #include "Platform.h"
+#include "RealKeyHaspSL.h"
 
 #pragma region Constants
 static const platform_t _platform = Platform::platform();
@@ -44,8 +45,10 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type) {
 		case KeyType::Base:
 			protect_key = nullptr;
 			break;
-		case KeyType::HaspSL:
-			protect_key = std::make_shared<const ProtectKeyHaspSL>();
+		case KeyType::HaspSL: {
+				auto key = std::make_shared<const RealKeyHaspSL>();
+				protect_key = std::make_shared<const ProtectKeyHaspSL>(key);
+			}
 			break;
 		case KeyType::HaspHLLocal:
 			protect_key = nullptr;
