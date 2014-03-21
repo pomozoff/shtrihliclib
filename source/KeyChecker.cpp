@@ -17,17 +17,17 @@ KeyChecker::~KeyChecker(void) {
 
 #pragma region Public
 const check_method_base_t KeyChecker::create_check_method_base(void) const {
-	auto check_method = std::make_shared<CheckMethodBase>();
+	auto check_method = std::make_shared<const CheckMethodBase>();
 	_check_methods.push_back(check_method);
 	return check_method;
 }
 const check_method_login_t KeyChecker::create_check_method_login(const feature_t feature, const bool allow_to_login_on_previous_key) const {
-	auto check_method = std::make_shared<CheckMethodLogin>(feature, allow_to_login_on_previous_key);
+	auto check_method = std::make_shared<const CheckMethodLogin>(feature, allow_to_login_on_previous_key);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
 const check_method_memory_t KeyChecker::create_check_method_memory(const offset_t offset, value_t& value, const check_method_login_t logged_in_method) const {
-	auto check_method = std::make_shared<CheckMethodMemory>(offset, value, logged_in_method);
+	auto check_method = std::make_shared<const CheckMethodMemory>(offset, value, logged_in_method);
 	_check_methods.push_back(check_method);
 	return check_method;
 }
