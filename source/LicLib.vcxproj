@@ -96,9 +96,12 @@
     <ClCompile Include="ICheckMethodsViewer.cpp" />
     <ClCompile Include="IGranulesManager.cpp" />
     <ClCompile Include="IKeyChecker.cpp" />
+    <ClCompile Include="IRealKeyHasp.cpp" />
     <ClCompile Include="IProtectKey.cpp" />
     <ClCompile Include="IProtectKeyDelegate.cpp" />
     <ClCompile Include="KeyChecker.cpp" />
+    <ClCompile Include="RealKeyHaspHL.cpp" />
+    <ClCompile Include="RealKeyHaspSL.cpp" />
     <ClCompile Include="LicenseBlock.cpp" />
     <ClCompile Include="LicenseBlockManager.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -122,9 +125,12 @@
     <ClInclude Include="ICheckMethodsViewer.h" />
     <ClInclude Include="IGranulesManager.h" />
     <ClInclude Include="IKeyChecker.h" />
+    <ClInclude Include="IRealKeyHasp.h" />
     <ClInclude Include="IProtectKey.h" />
     <ClInclude Include="IProtectKeyDelegate.h" />
     <ClInclude Include="KeyChecker.h" />
+    <ClInclude Include="RealKeyHaspHL.h" />
+    <ClInclude Include="RealKeyHaspSL.h" />
     <ClInclude Include="LicenseBlock.h" />
     <ClInclude Include="LicenseBlockManager.h" />
     <ClInclude Include="Platform.h" />

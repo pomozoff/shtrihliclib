@@ -75,6 +75,15 @@
     <ClCompile Include="PlatformLinux.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IRealKeyHasp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RealKeyHaspSL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RealKeyHaspHL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheckMethod.h">
@@ -141,6 +150,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlatformLinux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRealKeyHasp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RealKeyHaspSL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RealKeyHaspHL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
