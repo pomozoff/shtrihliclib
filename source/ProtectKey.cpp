@@ -33,7 +33,7 @@ const std::string ProtectKey::session_id(void) {
 const size_t ProtectKey::session_id_hash(void) {
 	if (_session_id_hash == 0) {
 		std::hash<std::string> hasher;
-		_session_id_hash = hasher(_session_id);
+		_session_id_hash = hasher(session_id());
 	}
 	return _session_id_hash;
 }
