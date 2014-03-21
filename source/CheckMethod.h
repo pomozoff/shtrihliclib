@@ -20,7 +20,7 @@ class CheckMethod {
 	protected:
 		CheckMethodType _check_method;
 
-		CheckMethod(void);
+		CheckMethod(const CheckMethodType check_method);
 
 		const bool process_check_result(const bool last_check_is_success) const;
 	private:

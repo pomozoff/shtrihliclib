@@ -5,7 +5,9 @@
 #include "KeyChecker.h"
 
 #pragma region Constructor Destructor
-CheckMethodBase::CheckMethodBase(void) {
+CheckMethodBase::CheckMethodBase(void) :
+CheckMethod(CheckMethodType::Base)
+{
 }
 CheckMethodBase::~CheckMethodBase(void) {
 }

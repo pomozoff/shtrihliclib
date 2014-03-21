@@ -4,7 +4,9 @@
 #include "CheckMethod.h"
 
 #pragma region Constructor Destructor
-CheckMethod::CheckMethod(void) {
+CheckMethod::CheckMethod(const CheckMethodType check_method) :
+_check_method(check_method)
+{
 }
 CheckMethod::~CheckMethod(void) {
 }
