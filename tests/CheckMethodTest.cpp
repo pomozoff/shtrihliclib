@@ -2,10 +2,13 @@
 #include "stdafx.h"
 
 #include "CheckMethodTest.h"
+#include "RealKeyHaspSL.h"
+#include "ProtectKeyHaspSL.h"
 
 #pragma region Constructor Destructor
 CheckMethodTest::CheckMethodTest(void) {
-	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL);
+	auto key = std::make_shared<const RealKeyHaspSL>();
+	_protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(key);
 }
 CheckMethodTest::~CheckMethodTest(void) {
 }
