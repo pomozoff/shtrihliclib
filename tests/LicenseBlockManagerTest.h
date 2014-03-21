@@ -7,6 +7,6 @@
 
 class LicenseBlockManagerTest : public ::testing::Test {
 	public:
-		LicenseBlockManagerTest();
-		~LicenseBlockManagerTest();
+		LicenseBlockManagerTest(void);
+		~LicenseBlockManagerTest(void);
 };
