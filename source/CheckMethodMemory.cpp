@@ -39,4 +39,7 @@ const offset_t CheckMethodMemory::offset(void) const {
 const value_t& CheckMethodMemory::value(void) const {
 	return _value;
 }
+const KeyMemoryType CheckMethodMemory::memory_type(void) const {
+	return _memory_type;
+}
 #pragma endregion Accessors
