@@ -15,7 +15,7 @@ CheckMethodBaseTest::~CheckMethodBaseTest(void) {
 #pragma region Tests
 TEST_F(CheckMethodBaseTest, check) {
 	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
-	ASSERT_TRUE(successful_checked);
+	ASSERT_TRUE(!successful_checked);
 }
 TEST_F(CheckMethodBaseTest, check_method_type) {
 	CheckMethodType check_method_type = _check_method->check_method_type();
