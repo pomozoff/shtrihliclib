@@ -171,7 +171,7 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 	if (sizeof_buffer == data.size()) {
 		read_licenses_amount = data[0] * one_byte + data[1];
 	}
-	return 0;
+	return read_licenses_amount;
 }
 const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method) const {
 	value_t buffer;
