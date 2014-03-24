@@ -14,5 +14,6 @@ class CheckMethodTest : public ::testing::Test {
 	protected:
 		CheckMethodTest(void);
 
+		const feature_t feature = 3;
 		protect_key_t _protect_key_hasp_sl;
 };
