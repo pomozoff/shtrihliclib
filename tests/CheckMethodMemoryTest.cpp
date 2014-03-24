@@ -6,11 +6,8 @@
 
 #pragma region Constructor Destructor
 CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
-	byte_t tmp[] = { 0x10, 0xfe, 0x4a, 0x83 };
-	value_t value_for_constructor_test { *tmp };
-	
-	_check_method = _protect_key_hasp_sl->create_check_method_memory(_offset_for_constructor_test, value_for_constructor_test, check_method_login);
 	auto check_method_login = _protect_key_hasp_sl->create_check_method_login(feature, true);
+	_check_method = _protect_key_hasp_sl->create_check_method_memory(_offset_for_constructor_test, _value_for_constructor_test, check_method_login);
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest(void) {
 }
