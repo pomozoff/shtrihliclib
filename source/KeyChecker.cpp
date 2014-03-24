@@ -26,7 +26,7 @@ const check_method_login_t KeyChecker::create_check_method_login(const feature_t
 	_check_methods.push_back(check_method);
 	return check_method;
 }
-const check_method_memory_t KeyChecker::create_check_method_memory(const offset_t offset, value_t& value, const check_method_login_t logged_in_method) const {
+const check_method_memory_t KeyChecker::create_check_method_memory(const offset_t offset, const value_t& value, const check_method_login_t logged_in_method) const {
 	auto check_method = std::make_shared<const CheckMethodMemory>(offset, value, logged_in_method);
 	_check_methods.push_back(check_method);
 	return check_method;
