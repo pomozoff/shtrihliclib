@@ -169,7 +169,7 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 
 	size_t read_licenses_amount = 0;
 	if (sizeof_buffer == data.size()) {
-		read_licenses_amount = buffer[0] * one_byte + buffer[1];
+		read_licenses_amount = data[0] * one_byte + data[1];
 	}
 	return 0;
 }
