@@ -13,6 +13,7 @@ class IRealKeyHasp {
 		virtual const hasp_status_t _hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const = 0;
 		virtual const hasp_status_t _hasp_write(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const = 0;
 		virtual const hasp_status_t _hasp_logout(const hasp_handle_t handle) const = 0;
+		virtual const hasp_status_t _hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const = 0;
 
 		/* Accessors */
 		const hasp_status_t last_status(void) const;

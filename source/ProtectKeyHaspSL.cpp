@@ -152,7 +152,7 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) cons
 	process_result(status);
 	if (HASP_STATUS_OK == _real_key->last_status()) {
 		_key_number = key_id(handle);
-		hasp_legacy_set_idletime(handle, 1);
+		_real_key->_hasp_legacy_set_idletime(handle, 1);
 
 		add_handle(check_method, handle);
 		add_feature(check_method->feature());
