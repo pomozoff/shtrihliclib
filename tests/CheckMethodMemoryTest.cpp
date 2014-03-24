@@ -3,6 +3,7 @@
 
 #include "CheckMethodMemoryTest.h"
 #include "CheckMethodMemory.h"
+#include "CheckMethodLogin.h"
 
 #pragma region Constructor Destructor
 CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
@@ -15,6 +16,9 @@ CheckMethodMemoryTest::~CheckMethodMemoryTest(void) {
 
 #pragma region Tests
 TEST_F(CheckMethodMemoryTest, check) {
+	auto check_method_login = _check_method->logged_in_method();
+	check_method_login->set_logout_after_check(false);
+	check_method_login->check(_protect_key_hasp_sl);
 	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
 }
