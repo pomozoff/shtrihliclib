@@ -179,9 +179,6 @@ const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const
 		return nullptr;
 	}
 	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, license_timeout, licenses_amount(check_method));
-	if (!license_block_manager) {
-		return nullptr;
-	}
 	return license_block_manager;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {

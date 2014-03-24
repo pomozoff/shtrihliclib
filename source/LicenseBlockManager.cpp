@@ -52,13 +52,11 @@ const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const val
 
 		buffer_iterator_begin_block = buffer_iterator_end_block;
 	};
-
 	return license_blocks;
 }
 const license_block_t LicenseBlockManager::find_block(p_block_func_t function_checker) const {
 	license_block_t found_block = nullptr;
-
-	auto lambda = [&found_block, function_checker](const license_block_t block) mutable ->bool {
+	auto lambda = [&found_block, function_checker](const license_block_t& block) mutable -> bool {
 		auto function_check = std::bind(function_checker, block);
 		if (function_check()) {
 			found_block = block;
