@@ -6,7 +6,7 @@
 
 #pragma region Constructor Destructor
 CheckMethodLoginTest::CheckMethodLoginTest(void) {
-	_check_method = _protect_key_hasp_sl->create_check_method_login(0, false);
+	_check_method = _protect_key_hasp_sl->create_check_method_login(feature, false);
 }
 CheckMethodLoginTest::~CheckMethodLoginTest(void) {
 }
