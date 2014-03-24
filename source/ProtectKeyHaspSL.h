@@ -12,7 +12,9 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		ProtectKeyHaspSL(const i_real_key_hasp_t key);
 		~ProtectKeyHaspSL(void);
 
+		static const size_t read_only_memory_size = 64;
 		static const size_t read_write_memory_size = 4032;
+		static const offset_t offset_licenses_amount = 8;
 
 		/* ProtectKey Interface */
 		virtual const value_t read_memory(const check_method_memory_t check_method) const override final;
@@ -30,7 +32,6 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		virtual const handle_t get_handle(const check_method_login_t check_method) const override final;
 		virtual void remove_handle(const check_method_login_t check_method) const override final;
 	private:
-		static const size_t read_only_memory_size = 64;
 		static const time_t license_timeout = 60; // Одна минута
 
 		const i_real_key_hasp_t _real_key;

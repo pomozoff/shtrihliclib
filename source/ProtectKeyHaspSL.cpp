@@ -26,7 +26,6 @@ static const char* scope =
 	"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 	"<haspscope/>";
 
-static const offset_t offset_licenses_amount = 8;
 #pragma endregion Constants
 
 #pragma region Constructor Destructor
