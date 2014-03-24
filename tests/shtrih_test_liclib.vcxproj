@@ -101,6 +101,7 @@
     <ClInclude Include="CheckMethodTest.h" />
     <ClInclude Include="LicenseBlockManagerTest.h" />
     <ClInclude Include="LicenseBlockTest.h" />
+    <ClInclude Include="MockRealKeyHaspSL.h" />
     <ClInclude Include="ProtectKeyHaspSLTest.h" />
     <ClInclude Include="ProtectKeyTest.h" />
     <ClInclude Include="stdafx.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="CheckMethodTest.cpp" />
     <ClCompile Include="LicenseBlockManagerTest.cpp" />
     <ClCompile Include="LicenseBlockTest.cpp" />
+    <ClCompile Include="MockRealKeyHaspSL.cpp" />
     <ClCompile Include="ProtectKeyHaspSLTest.cpp" />
     <ClCompile Include="ProtectKeyTest.cpp" />
     <ClCompile Include="tests.cpp" />
