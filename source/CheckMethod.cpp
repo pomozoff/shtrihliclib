@@ -29,6 +29,9 @@ const bool CheckMethod::is_check_method_for_license(void) const {
 void CheckMethod::set_max_check_number(check_number_t check_number) const {
 	_max_check_number = check_number;
 }
+void CheckMethod::set_logout_after_check(const bool logout_after_check) const {
+	_logout_after_check = logout_after_check;
+}
 #pragma endregion Accessors
 
 #pragma region Protected
