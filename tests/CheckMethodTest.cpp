@@ -21,6 +21,7 @@ CheckMethodTest::CheckMethodTest(void) {
 	auto key = std::make_shared<const MockRealKeyHaspSL>(feature, check_methods_memory);
 	key->set_licenses_amount(licenses_amount);
 	_protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(key);
+	_protect_key_hasp_sl->set_logout_after_check(true);
 }
 CheckMethodTest::~CheckMethodTest(void) {
 }
