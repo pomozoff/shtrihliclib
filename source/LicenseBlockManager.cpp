@@ -25,7 +25,12 @@ const license_block_t LicenseBlockManager::take_license(void) const {
 		block = find_first_free_block();
 	}
 	if (block) {
-		block->update_block(time(NULL));
+		if (block->offset_in_manager() < _licenses_amount) {
+			block->update_block(time(NULL));
+		}
+		else {
+			block = nullptr;
+		}
 	}
 	return block;
 }
