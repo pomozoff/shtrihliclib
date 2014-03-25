@@ -10,6 +10,7 @@ class MockRealKeyHaspSL : public RealKeyHaspSL {
 		MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory);
 		virtual ~MockRealKeyHaspSL();
 
+		void set_licenses_amount(const uint16_t amount) const;
 
 		/* IRealKeyHasp */
 		virtual const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const override;

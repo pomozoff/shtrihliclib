@@ -8,7 +8,6 @@
 #include "CheckMethodMemory.h"
 
 static const hasp_handle_t HASP_HANDLE_VALUE = 10;
-static const size_t LICENSES_AMOUNT = 2;
 
 #pragma region Constructor Destructor
 MockRealKeyHaspSL::MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory) :
@@ -19,6 +18,14 @@ _feature_id(feature_id)
 MockRealKeyHaspSL::~MockRealKeyHaspSL() {
 }
 #pragma endregion Constructor Destructor
+
+#pragma region Public
+void MockRealKeyHaspSL::set_licenses_amount(const uint16_t amount) const {
+	const size_t one_byte = 0xff;
+	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 0] = amount / one_byte;
+	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 1] = amount % one_byte;
+}
+#pragma endregion Public
 
 #pragma region IRealKeyHasp
 const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const {
