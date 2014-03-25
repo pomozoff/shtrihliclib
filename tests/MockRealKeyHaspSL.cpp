@@ -33,7 +33,7 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t fe
 	_last_status = status;
 	return status;
 }
-const hasp_status_t MockRealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
+const hasp_status_t MockRealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
 	value_t* local_buffer = nullptr;
 	auto status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
 	if (HASP_STATUS_OK != status) {
@@ -45,7 +45,7 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_read(const hasp_handle_t handle, co
 	_last_status = status;
 	return status;
 }
-const hasp_status_t MockRealKeyHaspSL::_hasp_write(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const {
+const hasp_status_t MockRealKeyHaspSL::_hasp_write(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const {
 	value_t* local_buffer = nullptr;
 	auto status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
 	if (HASP_STATUS_OK != status) {
@@ -67,7 +67,7 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_hand
 }
 #pragma endregion IRealKeyHasp
 
-const hasp_status_t MockRealKeyHaspSL::check_memory(const hasp_handle_t handle, const size_t file_id, const hasp_size_t offset, const int length, const value_t& buffer, value_t** local_buffer) const {
+const hasp_status_t MockRealKeyHaspSL::check_memory(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer, value_t** local_buffer) const {
 	if (HASP_HANDLE_VALUE != handle) {
 		return HASP_INV_HND;
 	}
