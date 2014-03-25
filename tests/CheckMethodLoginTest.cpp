@@ -21,5 +21,13 @@ TEST_F(CheckMethodLoginTest, check) {
 	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
 }
+TEST_F(CheckMethodLoginTest, check_licenses_counter_my_block) {
+	bool successful_checked = false;
+	successful_checked = _check_method->check(_protect_key_hasp_sl);
+	ASSERT_TRUE(successful_checked);
+	successful_checked = _check_method->check(_protect_key_hasp_sl);
+	ASSERT_TRUE(successful_checked);
+	successful_checked = _check_method->check(_protect_key_hasp_sl);
+	ASSERT_TRUE(successful_checked);
 }
 #pragma endregion Tests
