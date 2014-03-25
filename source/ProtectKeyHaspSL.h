@@ -50,6 +50,4 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		void free_licnese(void) const;
 
 		void process_result(const hasp_status_t status) const;
-
-		const hasp_fileid_t hasp_memory_type(const KeyMemoryType memory_type) const;
 };

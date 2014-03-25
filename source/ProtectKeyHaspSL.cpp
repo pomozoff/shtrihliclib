@@ -45,7 +45,7 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 	if (HASP_INVALID_HANDLE_VALUE != handle) {
 		auto offset = check_method->offset();
 		auto length = check_method->value().size();
-		auto memory_type = hasp_memory_type(check_method->memory_type());
+		auto memory_type = _real_key->hasp_memory_type(check_method->memory_type());
 		hasp_status_t status = _real_key->_hasp_read(handle, memory_type, offset, length, buffer);
 	}
 	return buffer;
@@ -251,8 +251,5 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 			_error_string = R"(Ошибка)";
 			break;
 	}
-}
-const hasp_fileid_t ProtectKeyHaspSL::hasp_memory_type(const KeyMemoryType memory_type) const {
-	return memory_type == KeyMemoryType::ReadOnly ? HASP_FILEID_RO : HASP_FILEID_RW;
 }
 #pragma endregion Private
