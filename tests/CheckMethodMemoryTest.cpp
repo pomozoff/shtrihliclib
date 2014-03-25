@@ -15,15 +15,15 @@ CheckMethodMemoryTest::~CheckMethodMemoryTest(void) {
 #pragma endregion Constructor Destructor
 
 #pragma region Tests
+TEST_F(CheckMethodMemoryTest, check_method_type) {
+	CheckMethodType check_method_type = _check_method->check_method_type();
+	ASSERT_TRUE(check_method_type == CheckMethodType::Memory);
+}
 TEST_F(CheckMethodMemoryTest, check) {
 	auto check_method_login = _check_method->logged_in_method();
 	check_method_login->set_logout_after_check(false);
 	check_method_login->check(_protect_key_hasp_sl);
 	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
-}
-TEST_F(CheckMethodMemoryTest, check_method_type) {
-	CheckMethodType check_method_type = _check_method->check_method_type();
-	ASSERT_TRUE(check_method_type == CheckMethodType::Memory);
 }
 #pragma endregion Tests
