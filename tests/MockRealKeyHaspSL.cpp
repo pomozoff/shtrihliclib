@@ -5,16 +5,16 @@
 
 #include "MockRealKeyHaspSL.h"
 #include "ProtectKeyHaspSL.h"
+#include "CheckMethodMemory.h"
 
 static const hasp_handle_t HASP_HANDLE_VALUE = 10;
 static const size_t LICENSES_AMOUNT = 2;
 
 #pragma region Constructor Destructor
-MockRealKeyHaspSL::MockRealKeyHaspSL(const hasp_feature_t feature_id) :
+MockRealKeyHaspSL::MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory) :
 _feature_id(feature_id)
 {
-	initialize_ro_memory(_ro_buffer);
-	initialize_rw_memory(_rw_buffer);
+	initialize_memory(check_methods_memory);
 }
 MockRealKeyHaspSL::~MockRealKeyHaspSL() {
 }
@@ -67,43 +67,47 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_hand
 }
 #pragma endregion IRealKeyHasp
 
+#pragma region Private
+void MockRealKeyHaspSL::initialize_memory(const check_methods_memory_t& check_methods_memory) const {
+	_ro_buffer.assign(ProtectKeyHaspSL::read_only_memory_size,  0);
+	_rw_buffer.assign(ProtectKeyHaspSL::read_write_memory_size, 0);
+
+	for (const auto& check_method_memory : check_methods_memory) {
+		auto key_memory_type = check_method_memory->memory_type();
+		auto buffer = get_buffer_by_memory_type(hasp_memory_type(key_memory_type));
+		if (nullptr == buffer) {
+			continue;
+		}
+		auto& value = check_method_memory->value();
+		auto offset = check_method_memory->offset();
+		std::copy(value.begin(), value.end(), buffer->begin() + offset);
+	}
+}
 const hasp_status_t MockRealKeyHaspSL::check_memory(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer, value_t** local_buffer) const {
 	if (HASP_HANDLE_VALUE != handle) {
 		return HASP_INV_HND;
 	}
-	switch (file_id) {
-	case HASP_FILEID_RO:
-		*local_buffer = &_ro_buffer;
-		break;
-	case HASP_FILEID_RW:
-		*local_buffer = &_rw_buffer;
-		break;
-	default:
+	*local_buffer = get_buffer_by_memory_type(file_id);
+	if (nullptr == *local_buffer) {
 		return HASP_INV_FILEID;
-		break;
 	}
 	if ((*local_buffer)->size() < (offset + length)) {
 		return HASP_MEM_RANGE;
 	}
 	return HASP_STATUS_OK;
 }
-void MockRealKeyHaspSL::initialize_ro_memory(value_t& buffer) const {
-	const size_t one_byte = 256;
-	if (LICENSES_AMOUNT > (one_byte^2)) {
-		value_t init_value;
-		buffer = init_value;
-		return;
+value_t* const MockRealKeyHaspSL::get_buffer_by_memory_type(const hasp_fileid_t file_id) const {
+	value_t* result = nullptr;
+	switch (file_id) {
+	case HASP_FILEID_RO:
+		result = &_ro_buffer;
+		break;
+	case HASP_FILEID_RW:
+		result = &_rw_buffer;
+		break;
+	default:
+		break;
 	}
-	value_t init_value(ProtectKeyHaspSL::read_only_memory_size, 0);
-
-	init_value[ProtectKeyHaspSL::offset_licenses_amount + 0] = LICENSES_AMOUNT / one_byte;
-	init_value[ProtectKeyHaspSL::offset_licenses_amount + 1] = LICENSES_AMOUNT % one_byte;
-
-	std::copy(_ro_memory_value.begin(), _ro_memory_value.end(), init_value.begin() + _ro_memory_offset);
-
-	buffer = init_value;
+	return result;
 }
-void MockRealKeyHaspSL::initialize_rw_memory(value_t& buffer) const {
-	value_t init_value(ProtectKeyHaspSL::read_write_memory_size, 0);
-	buffer = init_value;
-}
+#pragma endregion Private

@@ -3,12 +3,15 @@
 
 #include "RealKeyHaspSL.h"
 
+using check_methods_memory_t = std::vector<const check_method_memory_t>;
+
 class MockRealKeyHaspSL : public RealKeyHaspSL {
 	public:
-		MockRealKeyHaspSL(const hasp_feature_t feature_id);
+		MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory);
 		virtual ~MockRealKeyHaspSL();
 
-		/* IProtectKey IRealKeyHasp */
+
+		/* IRealKeyHasp */
 		virtual const hasp_status_t _hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const override;
 		virtual const hasp_status_t _hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const override;
 		virtual const hasp_status_t _hasp_write(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const override;
@@ -18,11 +21,8 @@ class MockRealKeyHaspSL : public RealKeyHaspSL {
 		const hasp_feature_t _feature_id;
 		mutable value_t _ro_buffer;
 		mutable value_t _rw_buffer;
-
-		void initialize_ro_memory(value_t& buffer) const;
-		void initialize_rw_memory(value_t& buffer) const;
 	private:
-		const offset_t _ro_memory_offset = 3;
-		const value_t _ro_memory_value = value_t{ 0x10, 0x00, 0x4a, 0x83 };
+		void initialize_memory(const check_methods_memory_t& check_methods_memory) const;
 		const hasp_status_t check_memory(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer, value_t** local_buffer) const;
+		value_t* const get_buffer_by_memory_type(const hasp_fileid_t file_id) const;
 };
