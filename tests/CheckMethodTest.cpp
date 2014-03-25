@@ -8,6 +8,7 @@
 
 #pragma region Constructor Destructor
 CheckMethodTest::CheckMethodTest(void) {
+	const size_t licenses_amount = 2;
 	const offset_t ro_memory_offset = 3;
 	const value_t ro_memory_value = value_t{ 0x10, 0x00, 0x4a, 0x83 };
 
@@ -18,6 +19,7 @@ CheckMethodTest::CheckMethodTest(void) {
 	check_methods_memory.push_back(check_method_memory);
 
 	auto key = std::make_shared<const MockRealKeyHaspSL>(feature, check_methods_memory);
+	key->set_licenses_amount(licenses_amount);
 	_protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(key);
 }
 CheckMethodTest::~CheckMethodTest(void) {
