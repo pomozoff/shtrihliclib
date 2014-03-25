@@ -46,7 +46,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		/* Accessors */
 		const bool logout_after_check(void) const;
-		void set_logout_after_check(const bool logout_after_check);
+		void set_logout_after_check(const bool logout_after_check) const;
 		const time_t nfr_end_date(void) const;
 		void set_nfr_end_date(const time_t nfr_end_date) const;
 	protected:
@@ -70,7 +70,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool check(void) const override final;
 	private:
 		granules_t _granules;
-		bool _logout_after_check = false;
+		mutable bool _logout_after_check = false;
 		bool _is_key_base = false;
 
 		mutable time_t _nfr_end_date = time(NULL);

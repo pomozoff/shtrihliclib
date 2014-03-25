@@ -113,7 +113,7 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 const bool ProtectKey::logout_after_check(void) const {
 	return _logout_after_check;
 }
-void ProtectKey::set_logout_after_check(const bool logout_after_check) {
+void ProtectKey::set_logout_after_check(const bool logout_after_check) const {
 	_logout_after_check = logout_after_check;
 }
 const time_t ProtectKey::nfr_end_date(void) const {
