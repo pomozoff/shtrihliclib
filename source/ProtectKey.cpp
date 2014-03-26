@@ -37,6 +37,9 @@ const size_t ProtectKey::session_id_hash(void) {
 		_session_id_hash = hasher(session_id());
 	}
 	return _session_id_hash;
+const size_t ProtectKey::hash_from_session_id(const std::string session_id) {
+	std::hash<std::string> hasher;
+	return hasher(session_id);
 }
 
 const protect_key_t ProtectKey::create_key(const KeyType key_type) {
