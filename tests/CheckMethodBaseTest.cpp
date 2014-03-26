@@ -18,7 +18,7 @@ TEST_F(CheckMethodBaseTest, check_method_type) {
 	ASSERT_TRUE(check_method_type == CheckMethodType::Base);
 }
 TEST_F(CheckMethodBaseTest, check) {
-	bool successful_checked = _check_method->check(_protect_key_hasp_sl);
+	auto successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(!successful_checked);
 }
 #pragma endregion Tests
