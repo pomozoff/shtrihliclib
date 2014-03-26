@@ -22,5 +22,48 @@ TEST_F(CheckMethodLoginTest, check) {
 	auto successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
 }
+TEST_F(CheckMethodLoginTest, check_licenses_counter_amount_is_null) {
+	auto protect_key_hasp_sl1 = create_hasp_sl_key(_feature, R"(computer-username1)", _licenses_amount_null);
+	auto successful_checked = _check_method->check(protect_key_hasp_sl1);
+	ASSERT_TRUE(!successful_checked);
+}
+TEST_F(CheckMethodLoginTest, check_licenses_counter) {
+	const value_t buffer(ProtectKeyHaspSL::read_write_memory_size, 0);
+	const time_t timeout = 30;
+	const size_t licenses_amount = 2;
+
+	auto session_id = R"(computer-username)";
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
+
+	//-------------------------------------------------------------------------------------------------------------------
+	auto session_id1 = R"(computer-username1)";
+	auto session_id1_hash = ProtectKey::hash_from_session_id(session_id1);
+
+	auto block1 = LicenseBlock::block_from_string(session_id1, time(NULL));
+	const offset_t offset1 = 0 * block1.size();
+	check_method_memory_t check_method_memory1 = std::make_shared<const CheckMethodMemory>(offset1, block1, nullptr, KeyMemoryType::ReadWrite);
+	//-------------------------------------------------------------------------------------------------------------------
+	auto my_protect_key_hasp_sl1 = create_hasp_sl_key(_feature, _session_id, _licenses_amount_two, { check_method_memory1 });
+	auto successful_checked1 = _check_method->check(my_protect_key_hasp_sl1);
+	ASSERT_TRUE(successful_checked1);
+
+	auto my_protect_key_hasp_sl2 = create_hasp_sl_key(_feature, _session_id, _licenses_amount_one, { check_method_memory1 });
+	auto successful_checked2 = _check_method->check(my_protect_key_hasp_sl2);
+	ASSERT_TRUE(!successful_checked2);
+	//-------------------------------------------------------------------------------------------------------------------
+	auto session_id2 = R"(computer-username2)";
+	auto session_id2_hash = ProtectKey::hash_from_session_id(session_id2);
+
+	auto block2 = LicenseBlock::block_from_string(session_id2, time(NULL));
+	const offset_t offset2 = 1 * block2.size();
+	check_method_memory_t check_method_memory2 = std::make_shared<const CheckMethodMemory>(offset2, block2, nullptr, KeyMemoryType::ReadWrite);
+	//-------------------------------------------------------------------------------------------------------------------
+	auto my_protect_key_hasp_sl3 = create_hasp_sl_key(_feature, _session_id, _licenses_amount_two, { check_method_memory1, check_method_memory2 });
+	auto successful_checked3 = _check_method->check(my_protect_key_hasp_sl3);
+	ASSERT_TRUE(!successful_checked3);
+
+	auto my_protect_key_hasp_sl4 = create_hasp_sl_key(_feature, _session_id, _licenses_amount_three, { check_method_memory1, check_method_memory2 });
+	auto successful_checked4 = _check_method->check(my_protect_key_hasp_sl4);
+	ASSERT_TRUE(successful_checked4);
 }
 #pragma endregion Tests
