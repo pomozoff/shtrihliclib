@@ -5,15 +5,13 @@
 #include <map>
 
 #include "IKeyChecker.h"
-#include "ICheckMethodsManager.h"
-#include "ICheckMethodsViewer.h"
 #include "CheckMethod.h"
 
 using handles_t = std::map<const check_method_login_t, const handle_t>;
 using handles_pair_t = std::pair<const check_method_login_t, const handle_t>;
 using check_methods_t = std::vector<const check_method_t>;
 
-class KeyChecker : public IKeyChecker, public ICheckMethodsManager, public ICheckMethodsViewer {
+class KeyChecker : public IKeyChecker {
 	public:
 		virtual ~KeyChecker(void);
 

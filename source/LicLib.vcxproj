@@ -92,9 +92,6 @@
     <ClCompile Include="CheckMethodLogin.cpp" />
     <ClCompile Include="CheckMethodMemory.cpp" />
     <ClCompile Include="Granule.cpp" />
-    <ClCompile Include="ICheckMethodsManager.cpp" />
-    <ClCompile Include="ICheckMethodsViewer.cpp" />
-    <ClCompile Include="IGranulesManager.cpp" />
     <ClCompile Include="IKeyChecker.cpp" />
     <ClCompile Include="IRealKeyHasp.cpp" />
     <ClCompile Include="IProtectKey.cpp" />
@@ -121,9 +118,6 @@
     <ClInclude Include="CheckMethodMemory.h" />
     <ClInclude Include="DataTypes.h" />
     <ClInclude Include="Granule.h" />
-    <ClInclude Include="ICheckMethodsManager.h" />
-    <ClInclude Include="ICheckMethodsViewer.h" />
-    <ClInclude Include="IGranulesManager.h" />
     <ClInclude Include="IKeyChecker.h" />
     <ClInclude Include="IRealKeyHasp.h" />
     <ClInclude Include="IProtectKey.h" />

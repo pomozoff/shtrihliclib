@@ -1,9 +1,7 @@
 
 #pragma once
 
-#include "IGranulesManager.h"
-
-class IProtectKey : public IGranulesManager {
+class IProtectKey {
 	public:
 		virtual ~IProtectKey(void);
 

@@ -30,15 +30,6 @@
     <ClCompile Include="Granule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ICheckMethodsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ICheckMethodsViewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IGranulesManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="IKeyChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,15 +90,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Granule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICheckMethodsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICheckMethodsViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IGranulesManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IKeyChecker.h">
