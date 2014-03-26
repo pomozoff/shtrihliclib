@@ -18,10 +18,10 @@ TEST_F(LicenseBlockManagerTest, take_license) {
 	const time_t timeout = 30;
 	const size_t licenses_amount = 2;
 
-	value_t buffer(sizeof_buffer);
-	std::fill(buffer.begin(), buffer.end(), 0);
+	auto session_id = R"(computer-username)";
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
 
-	auto manager = std::make_shared<const LicenseBlockManager>(buffer, timeout, licenses_amount);
+	auto manager = std::make_shared<const LicenseBlockManager>(buffer, timeout, licenses_amount, session_id_hash);
 	auto license_block = manager->take_license();
 
 	ASSERT_TRUE(nullptr != license_block);

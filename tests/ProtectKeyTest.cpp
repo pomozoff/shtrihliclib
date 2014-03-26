@@ -5,9 +5,11 @@
 #include "ProtectKeyHaspSL.h"
 #include "LicenseBlock.h"
 
+static std::string id = R"(computer-user)";
+
 #pragma region Constructor Destructor
 ProtectKeyTest::ProtectKeyTest(void) {
-	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL);
+	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL, id);
 }
 ProtectKeyTest::~ProtectKeyTest(void) {
 }
@@ -15,10 +17,10 @@ ProtectKeyTest::~ProtectKeyTest(void) {
 
 #pragma region Tests
 TEST_F(ProtectKeyTest, copy_block_to_buffer) {
-	std::string id = R"(computer-user)";
 	byte_t first_byte = 124;
 	byte_t last_byte = 235;
 	time_t some_time = 1392379203;
+	
 	const value_t block = LicenseBlock::block_from_string(id, some_time);
 
 	ASSERT_EQ(block[0], first_byte);

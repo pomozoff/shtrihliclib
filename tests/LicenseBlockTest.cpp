@@ -3,6 +3,7 @@
 
 #include "LicenseBlockTest.h"
 #include "ProtectKeyHaspSL.h"
+#include "Platform.h"
 
 #pragma region Constructor Destructor
 LicenseBlockTest::LicenseBlockTest(void) {
@@ -40,11 +41,12 @@ TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 TEST_F(LicenseBlockTest, is_expired_true) {
 	time_t some_time = 1392280873;
 
-	auto session_id = ProtectKey::session_id();
+	auto session_id = ProtectKey::session_id(Platform::platform());
 	auto block = LicenseBlock::block_from_string(session_id, some_time);
 	auto offset = LicenseBlock::sizeof_block * 6;
 	auto timeout_seconds = 30;
-	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds);
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
+	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds, session_id_hash);
 
 	auto is_expired = license_block->is_expired();
 	ASSERT_TRUE(is_expired);
@@ -53,11 +55,12 @@ TEST_F(LicenseBlockTest, is_expired_false) {
 	time_t some_time;
 	time(&some_time);
 
-	auto session_id = ProtectKey::session_id();
+	auto session_id = ProtectKey::session_id(Platform::platform());
 	auto block = LicenseBlock::block_from_string(session_id, some_time);
 	auto offset = LicenseBlock::sizeof_block * 4;
 	auto timeout_seconds = 30;
-	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds);
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
+	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds, session_id_hash);
 
 	auto is_expired = license_block->is_expired();
 	ASSERT_TRUE(!is_expired);
@@ -65,11 +68,13 @@ TEST_F(LicenseBlockTest, is_expired_false) {
 TEST_F(LicenseBlockTest, is_it_my_block_true) {
 	time_t some_time = 1392280873;
 
-	auto session_id = ProtectKey::session_id();
+	auto session_id = ProtectKey::session_id(Platform::platform());
+
 	auto block = LicenseBlock::block_from_string(session_id, some_time);
 	auto offset = LicenseBlock::sizeof_block * 7;
 	auto timeout_seconds = 30;
-	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds);
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
+	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds, session_id_hash);
 
 	auto is_it_my_block = license_block->is_it_my_block();
 	ASSERT_TRUE(is_it_my_block);
@@ -77,11 +82,14 @@ TEST_F(LicenseBlockTest, is_it_my_block_true) {
 TEST_F(LicenseBlockTest, is_it_my_block_false) {
 	time_t some_time = 1392280873;
 
-	auto session_id = R"(computer-username)";
-	auto block = LicenseBlock::block_from_string(session_id, some_time);
+	auto session1_id = R"(computer-alex)";
+	auto session2_id = R"(computer-test)";
+
+	auto block = LicenseBlock::block_from_string(session1_id, some_time);
 	auto offset = LicenseBlock::sizeof_block * 7;
 	auto timeout_seconds = 30;
-	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds);
+	auto session_id_hash = ProtectKey::hash_from_session_id(session2_id);
+	auto license_block = std::make_shared<const LicenseBlock>(block, offset, timeout_seconds, session_id_hash);
 
 	auto is_it_my_block = license_block->is_it_my_block();
 	ASSERT_TRUE(!is_it_my_block);
