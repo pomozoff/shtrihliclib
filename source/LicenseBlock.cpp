@@ -24,8 +24,6 @@ const value_t LicenseBlock::block_from_string(const std::string session_id, cons
 	size_t hash = hasher(session_id);
 	return block_from_hash(hash, time_logged_in);
 }
-const bool LicenseBlock::is_expired() const {
-	return (!is_valid()) || (difftime(time(NULL), logged_in_time()) > _timeout);
 }
 const time_t LicenseBlock::logged_in_time() const {
 	time_t logged_in = 0;
@@ -33,6 +31,12 @@ const time_t LicenseBlock::logged_in_time() const {
 		return 0;
 	}
 	return logged_in;
+const bool LicenseBlock::is_expired(void) const {
+	auto block_is_valid = is_valid();
+	auto time_is_out = (difftime(time(NULL), logged_in_time()) > _timeout);
+	auto result = (!block_is_valid) || time_is_out;
+
+	return result;
 }
 const bool LicenseBlock::is_it_my_block(void) const {
 	if (!is_valid()) {
