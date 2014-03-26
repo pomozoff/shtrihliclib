@@ -25,11 +25,9 @@ ProtectKey::~ProtectKey(void) {
 #pragma endregion Constructor Destructor
 
 #pragma region Public
-const std::string ProtectKey::session_id(void) {
-	if (_session_id.empty()) {
-		_session_id = _platform->computer_name() + _platform->user_name();
-	}
-	return _session_id;
+const std::string ProtectKey::session_id(platform_t platform) {
+	auto session_id = platform->computer_name() + platform->user_name();
+	return session_id;
 }
 const size_t ProtectKey::session_id_hash(void) {
 	if (_session_id_hash == 0) {
