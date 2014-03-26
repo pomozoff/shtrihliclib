@@ -28,12 +28,6 @@ const value_t LicenseBlock::block_from_string(const std::string session_id, cons
 const size_t LicenseBlock::position_in_manager(void) const {
 	return _offset_in_manager / sizeof_block;
 }
-const time_t LicenseBlock::logged_in_time() const {
-	time_t logged_in = 0;
-	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
-		return 0;
-	}
-	return logged_in;
 const bool LicenseBlock::is_expired(void) const {
 	auto block_is_valid = is_valid();
 	auto time_is_out = (difftime(time(NULL), logged_in_time()) > _timeout);
@@ -129,7 +123,13 @@ const bool LicenseBlock::is_valid() const {
 	if (!computed_hash) {
 		return false;
 	}
-
 	return computed_hash == block_hash;
+}
+const time_t LicenseBlock::logged_in_time(void) const {
+	time_t logged_in = 0;
+	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
+		return 0;
+	}
+	return logged_in;
 }
 #pragma endregion Private
