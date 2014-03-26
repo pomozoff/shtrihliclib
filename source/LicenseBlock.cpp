@@ -24,6 +24,9 @@ const value_t LicenseBlock::block_from_string(const std::string session_id, cons
 	size_t hash = hasher(session_id);
 	return block_from_hash(hash, time_logged_in);
 }
+
+const size_t LicenseBlock::position_in_manager(void) const {
+	return _offset_in_manager / sizeof_block;
 }
 const time_t LicenseBlock::logged_in_time() const {
 	time_t logged_in = 0;

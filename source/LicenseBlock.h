@@ -14,6 +14,7 @@ class LicenseBlock final {
 		static const size_t sizeof_block = sizeof_data + sizeof_hash;
 		static const value_t block_from_string(const std::string session_id, const time_t time_logged_in);
 
+		const size_t position_in_manager(void) const;
 		const bool is_expired(void) const;
 		const bool is_it_my_block(void) const;
 
