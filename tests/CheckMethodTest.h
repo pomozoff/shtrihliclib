@@ -5,8 +5,9 @@
 
 #include "gtest/gtest.h"
 
-#include "CheckMethod.h"
 #include "ProtectKey.h"
+#include "MockRealKeyHaspSL.h"
+#include "CheckMethodMemory.h"
 
 class CheckMethodTest : public ::testing::Test {
 	public:
@@ -14,6 +15,15 @@ class CheckMethodTest : public ::testing::Test {
 	protected:
 		CheckMethodTest(void);
 
-		const feature_t feature = 3;
-		protect_key_t _protect_key_hasp_sl;
+		static const protect_key_t create_hasp_sl_key(const feature_t feature, const std::string session_id, const size_t licenses_amount);
+		static const protect_key_t create_hasp_sl_key(const feature_t feature, const std::string session_id, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory);
+
+		const size_t _licenses_amount_null  = 0;
+		const size_t _licenses_amount_one   = 1;
+		const size_t _licenses_amount_two   = 2;
+		const size_t _licenses_amount_three = 3;
+		const feature_t _feature = 3;
+		const std::string _session_id = R"(computer-username)";
+
+		const protect_key_t _protect_key_hasp_sl;
 };
