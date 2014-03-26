@@ -3,6 +3,7 @@
 
 #include "LicenseBlockManagerTest.h"
 #include "LicenseBlock.h"
+#include "ProtectKeyHaspSL.h"
 
 #pragma region Constructor Destructor
 LicenseBlockManagerTest::LicenseBlockManagerTest() {
@@ -13,7 +14,7 @@ LicenseBlockManagerTest::~LicenseBlockManagerTest() {
 
 #pragma region Tests
 TEST_F(LicenseBlockManagerTest, take_license) {
-	const size_t sizeof_buffer = 4096;
+	const value_t buffer(ProtectKeyHaspSL::read_write_memory_size, 0);
 	const time_t timeout = 30;
 	const size_t licenses_amount = 2;
 
