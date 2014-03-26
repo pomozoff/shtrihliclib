@@ -9,7 +9,7 @@
 
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
-		ProtectKeyHaspSL(const i_real_key_hasp_t key);
+		ProtectKeyHaspSL(const i_real_key_hasp_t key, const size_t session_id_hash);
 		~ProtectKeyHaspSL(void);
 
 		static const size_t read_only_memory_size = 64;

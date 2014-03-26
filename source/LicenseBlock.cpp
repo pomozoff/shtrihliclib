@@ -8,10 +8,11 @@
 #include "ProtectKey.h"
 
 #pragma region Constructor Destructor
-LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout) :
+LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout, const size_t session_id_hash) :
 _block(block),
 _offset_in_manager(offset),
-_timeout(timeout)
+_timeout(timeout),
+_current_session_id_hash(session_id_hash)
 {
 }
 LicenseBlock::~LicenseBlock(void) {
@@ -43,10 +44,10 @@ const bool LicenseBlock::is_it_my_block(void) const {
 	if (!get_data_from_buffer_at_offset(_block, 0, block_id_hash)) {
 		return false;
 	}
-	return block_id_hash == ProtectKey::session_id_hash();
+	return block_id_hash == _current_session_id_hash;
 }
 void LicenseBlock::update_block(const time_t time) const {
-	_block = block_from_hash(ProtectKey::session_id_hash(), time);
+	_block = block_from_hash(_current_session_id_hash, time);
 }
 void LicenseBlock::make_expired(void) const {
 	update_block(0);

@@ -29,7 +29,8 @@ static const char* scope =
 #pragma endregion Constants
 
 #pragma region Constructor Destructor
-ProtectKeyHaspSL::ProtectKeyHaspSL(const i_real_key_hasp_t key) :
+ProtectKeyHaspSL::ProtectKeyHaspSL(const i_real_key_hasp_t key, const size_t session_id_hash) :
+ProtectKey(session_id_hash),
 _real_key(key)
 {
 }
@@ -177,7 +178,7 @@ const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const
 	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
 		return nullptr;
 	}
-	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, license_timeout, licenses_amount(check_method));
+	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, license_timeout, licenses_amount(check_method), _session_id_hash);
 	return license_block_manager;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {

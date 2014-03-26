@@ -22,13 +22,10 @@ enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNe
 class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_shared_from_this<const ProtectKey> {
 	public:
 		~ProtectKey(void);
-
-		static const std::string session_id(void);
-		static const size_t session_id_hash(void);
-
-		static const protect_key_t create_key(const KeyType key_type);
+		
 		static const std::string session_id(platform_t platform);
 		static const size_t hash_from_session_id(const std::string session_id);
+		static const protect_key_t create_key(const KeyType key_type, const std::string session_id);
 
 		static const iprotect_key_t find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate);
 		static const bool copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset);
@@ -52,6 +49,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		const time_t nfr_end_date(void) const;
 		void set_nfr_end_date(const time_t nfr_end_date) const;
 	protected:
+		const size_t _session_id_hash;
+
 		KeyType _key_type;
 		time_t _timeout_check;
 		
@@ -61,7 +60,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable features_t _features;
 		mutable iprotect_key_delegate_t _key_delegate = nullptr;
 
-		ProtectKey(void);
+		ProtectKey(const size_t session_id_hash);
 
 		void check_granules(void) const;
 		void try_to_logout(void) const;

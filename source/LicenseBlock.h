@@ -8,7 +8,7 @@ class LicenseBlock final {
 		static const size_t sizeof_hash = sizeof(size_t);
 		static const size_t sizeof_data = sizeof_hash + sizeof(time_t);
 	public:
-		LicenseBlock(const value_t block, const offset_t offset, const time_t timeout);
+		LicenseBlock(const value_t block, const offset_t offset, const time_t timeout, const size_t session_id_hash);
 		~LicenseBlock(void);
 
 		static const size_t sizeof_block = sizeof_data + sizeof_hash;
@@ -29,7 +29,8 @@ class LicenseBlock final {
 		mutable value_t _block;
 		const offset_t _offset_in_manager;
 		const time_t _timeout;
-		
+		const size_t _current_session_id_hash;
+
 		template <typename T>
 		static const bool place_data_to_buffer_at_offset(value_t& buffer, const offset_t offset, const T data);
 		template <typename T>

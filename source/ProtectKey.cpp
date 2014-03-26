@@ -9,14 +9,10 @@
 #include "Platform.h"
 #include "RealKeyHaspSL.h"
 
-#pragma region Constants
-static const platform_t _platform = Platform::platform();
-static std::string _session_id = R"()";
-static size_t _session_id_hash = 0;
-#pragma endregion Constants
-
 #pragma region Constructor Destructor
-ProtectKey::ProtectKey(void) {
+ProtectKey::ProtectKey(const size_t session_id_hash) :
+_session_id_hash(session_id_hash)
+{
 }
 ProtectKey::~ProtectKey(void) {
 	logout(true);
@@ -29,18 +25,11 @@ const std::string ProtectKey::session_id(platform_t platform) {
 	auto session_id = platform->computer_name() + platform->user_name();
 	return session_id;
 }
-const size_t ProtectKey::session_id_hash(void) {
-	if (_session_id_hash == 0) {
-		std::hash<std::string> hasher;
-		_session_id_hash = hasher(session_id());
-	}
-	return _session_id_hash;
 const size_t ProtectKey::hash_from_session_id(const std::string session_id) {
 	std::hash<std::string> hasher;
 	return hasher(session_id);
 }
-
-const protect_key_t ProtectKey::create_key(const KeyType key_type) {
+const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::string session_id) {
 	protect_key_t protect_key = nullptr;
 	switch (key_type) {
 		case KeyType::Base:
@@ -48,7 +37,7 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type) {
 			break;
 		case KeyType::HaspSL: {
 				auto key = std::make_shared<const RealKeyHaspSL>();
-				protect_key = std::make_shared<const ProtectKeyHaspSL>(key);
+				protect_key = std::make_shared<const ProtectKeyHaspSL>(key, hash_from_session_id(session_id));
 			}
 			break;
 		case KeyType::HaspHLLocal:

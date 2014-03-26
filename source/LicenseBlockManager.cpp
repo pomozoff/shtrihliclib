@@ -9,9 +9,9 @@
 #include "LicenseBlock.h"
 
 #pragma region Constructor Destructor
-LicenseBlockManager::LicenseBlockManager(const value_t buffer, const time_t timeout, const size_t licenses_amount) :
+LicenseBlockManager::LicenseBlockManager(const value_t buffer, const time_t timeout, const size_t licenses_amount, const size_t session_id_hash) :
 _licenses_amount(licenses_amount),
-_license_blocks(license_blocks_from_buffer(buffer, timeout))
+_license_blocks(license_blocks_from_buffer(buffer, timeout, session_id_hash))
 {
 }
 LicenseBlockManager::~LicenseBlockManager(void) {
@@ -41,7 +41,7 @@ const license_block_t LicenseBlockManager::find_my_block(void) const {
 #pragma endregion Public
 
 #pragma region Private
-const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const value_t& buffer, const time_t timeout) const {
+const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const value_t& buffer, const time_t timeout, const size_t session_id_hash) const {
 	int32_t block_size = LicenseBlock::sizeof_block;
 	license_blocks_t license_blocks;
 	license_blocks.reserve(buffer.size() / block_size);
@@ -53,7 +53,7 @@ const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const val
 		std::copy(buffer_iterator_begin_block, buffer_iterator_end_block, block.begin());
 
 		auto position = buffer_iterator_begin_block - buffer.begin();
-		license_block_t license_block = std::make_shared<const LicenseBlock>(block, position, timeout);
+		license_block_t license_block = std::make_shared<const LicenseBlock>(block, position, timeout, session_id_hash);
 		license_blocks.push_back(license_block);
 
 		buffer_iterator_begin_block = buffer_iterator_end_block;
