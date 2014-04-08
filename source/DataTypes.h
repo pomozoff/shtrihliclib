@@ -10,7 +10,7 @@ enum class KeyMemoryType { ReadOnly, ReadWrite };
 using byte_t = uint8_t;
 using offset_t = uint32_t;
 using feature_t = uint32_t;
-using handle_t = int32_t;
+using key_handle_t = int32_t;
 
 using features_t = std::vector<const feature_t>;
 

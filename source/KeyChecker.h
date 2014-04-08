@@ -7,8 +7,8 @@
 #include "IKeyChecker.h"
 #include "CheckMethod.h"
 
-using handles_t = std::map<const check_method_login_t, const handle_t>;
-using handles_pair_t = std::pair<const check_method_login_t, const handle_t>;
+using handles_t = std::map<const check_method_login_t, const key_handle_t>;
+using handles_pair_t = std::pair<const check_method_login_t, const key_handle_t>;
 using check_methods_t = std::vector<const check_method_t>;
 
 class KeyChecker : public IKeyChecker {
@@ -29,8 +29,8 @@ class KeyChecker : public IKeyChecker {
 		virtual const bool check(void) const = 0;
 		void set_max_check_number(const check_number_t check_number) const;
 
-		void add_handle(const check_method_login_t check_method, const handle_t handle) const;
-		virtual const handle_t get_handle(const check_method_login_t check_method) const = 0;
+		void add_handle(const check_method_login_t check_method, const key_handle_t handle) const;
+		virtual const key_handle_t get_handle(const check_method_login_t check_method) const = 0;
 		virtual void remove_handle(const check_method_login_t check_method) const = 0;
 
 		/* IKeyChecker Interface */

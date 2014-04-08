@@ -29,7 +29,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		const time_t _timeout_check = 10; // Проверять лицензию каждые 10 секунд
 
 		/* KeyChecker Interface */
-		virtual const handle_t get_handle(const check_method_login_t check_method) const override final;
+		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 		virtual void remove_handle(const check_method_login_t check_method) const override final;
 	private:
 		static const time_t license_timeout = 60; // Одна минута
