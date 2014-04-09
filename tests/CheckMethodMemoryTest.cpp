@@ -12,7 +12,7 @@ CheckMethodMemoryTest::CheckMethodMemoryTest(void) {
 }
 CheckMethodMemoryTest::~CheckMethodMemoryTest(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Tests
 TEST_F(CheckMethodMemoryTest, check_method_type) {
@@ -26,4 +26,4 @@ TEST_F(CheckMethodMemoryTest, check) {
 	auto successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(successful_checked);
 }
-#pragma endregion Tests
+#pragma endregion

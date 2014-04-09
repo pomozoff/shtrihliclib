@@ -16,7 +16,7 @@ _license_blocks(license_blocks_from_buffer(buffer, timeout, session_id_hash))
 }
 LicenseBlockManager::~LicenseBlockManager(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 const license_block_t LicenseBlockManager::take_license(void) const {
@@ -38,7 +38,7 @@ const license_block_t LicenseBlockManager::take_license(void) const {
 const license_block_t LicenseBlockManager::find_my_block(void) const {
 	return find_block(&LicenseBlock::is_it_my_block);
 }
-#pragma endregion Public
+#pragma endregion
 
 #pragma region Private
 const license_blocks_t LicenseBlockManager::license_blocks_from_buffer(const value_t& buffer, const time_t timeout, const size_t session_id_hash) const {
@@ -77,4 +77,4 @@ const license_block_t LicenseBlockManager::find_block(p_block_func_t function_ch
 const license_block_t LicenseBlockManager::find_first_free_block(void) const {
 	return find_block(&LicenseBlock::is_expired);
 }
-#pragma endregion Private
+#pragma endregion

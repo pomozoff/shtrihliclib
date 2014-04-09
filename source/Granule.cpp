@@ -12,7 +12,7 @@ _protect_key(protect_key)
 }
 Granule::~Granule(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Accessors
 void Granule::set_granule_nfr_date(bool is_granule_nfr_date) {
@@ -21,7 +21,7 @@ void Granule::set_granule_nfr_date(bool is_granule_nfr_date) {
 const bool Granule::is_granule_nfr_date(void) const {
 	return _is_granule_nfr_date;
 }
-#pragma endregion Accessors
+#pragma endregion
 
 #pragma region KeyChecker Interface
 const bool Granule::check(void) const {
@@ -40,7 +40,7 @@ const bool Granule::check(void) const {
 void Granule::logout(const bool forced_logout) const {
 	return nullptr == _protect_key ? true : _protect_key->logout(forced_logout);
 }
-#pragma endregion KeyChecker Interface
+#pragma endregion
 
 #pragma region IKeyChecker Interface
 const bool Granule::is_base_key_available(const check_method_base_t check_method) const {
@@ -76,7 +76,7 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 const bool Granule::logout_key(const check_method_login_t check_method) const {
 	return nullptr == _protect_key ? true : _protect_key->logout_key(check_method);
 }
-#pragma endregion IKeyChecker Interface
+#pragma endregion
 
 #pragma region Private
 const time_t Granule::make_unix_time_from_old_format(const value_t value) const {
@@ -85,4 +85,4 @@ const time_t Granule::make_unix_time_from_old_format(const value_t value) const 
 	}
 	return value[0] * 256 + value[1];
 }
-#pragma endregion Private
+#pragma endregion

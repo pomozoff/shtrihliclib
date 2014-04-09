@@ -26,7 +26,7 @@ static const char* scope =
 	"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 	"<haspscope/>";
 
-#pragma endregion Constants
+#pragma endregion
 
 #pragma region Constructor Destructor
 ProtectKeyHaspSL::ProtectKeyHaspSL(const i_real_key_hasp_t key, const size_t session_id_hash) :
@@ -37,7 +37,7 @@ _real_key(key)
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 	free_licnese();
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region ProtectKey Interface
 const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_method) const {
@@ -51,7 +51,7 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 	}
 	return buffer;
 }
-#pragma endregion ProtectKey Interface
+#pragma endregion
 
 #pragma region IKeyChecker Interface
 const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_method) const {
@@ -91,7 +91,7 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 	}
 	return success;
 }
-#pragma endregion IKeyChecker Interface
+#pragma endregion
 
 #pragma region KeyChecker Interface
 const key_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check_method) const {
@@ -104,7 +104,7 @@ void ProtectKeyHaspSL::remove_handle(const check_method_login_t check_method) co
 		_handles.erase(iterator);
 	}
 }
-#pragma endregion KeyChecker Interface
+#pragma endregion
 
 #pragma region Private
 const std::string ProtectKeyHaspSL::key_id(const hasp_handle_t handle) const {
@@ -253,4 +253,4 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 			break;
 	}
 }
-#pragma endregion Private
+#pragma endregion

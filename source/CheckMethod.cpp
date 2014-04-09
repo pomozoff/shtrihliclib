@@ -10,7 +10,7 @@ _check_method(check_method)
 }
 CheckMethod::~CheckMethod(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 const CheckMethodType CheckMethod::check_method_type(void) const {
 	return _check_method;
@@ -32,7 +32,7 @@ void CheckMethod::set_max_check_number(check_number_t check_number) const {
 void CheckMethod::set_logout_after_check(const bool logout_after_check) const {
 	_logout_after_check = logout_after_check;
 }
-#pragma endregion Accessors
+#pragma endregion
 
 #pragma region Protected
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
@@ -48,4 +48,4 @@ const bool CheckMethod::process_check_result(const bool last_check_is_success) c
 
 	return give_a_try_one_more_time;
 }
-#pragma endregion Protected
+#pragma endregion

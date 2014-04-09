@@ -10,7 +10,7 @@ LicenseBlockManagerTest::LicenseBlockManagerTest() {
 }
 LicenseBlockManagerTest::~LicenseBlockManagerTest() {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Tests
 TEST_F(LicenseBlockManagerTest, take_license) {
@@ -28,4 +28,4 @@ TEST_F(LicenseBlockManagerTest, take_license) {
 	ASSERT_TRUE(!license_block->is_expired());
 	ASSERT_TRUE(license_block->is_it_my_block());
 }
-#pragma endregion Tests
+#pragma endregion

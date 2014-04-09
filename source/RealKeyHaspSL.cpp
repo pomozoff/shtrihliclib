@@ -8,7 +8,7 @@ RealKeyHaspSL::RealKeyHaspSL(void) {
 }
 RealKeyHaspSL::~RealKeyHaspSL(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region IRealKeyHasp
 const hasp_status_t RealKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const {
@@ -41,4 +41,4 @@ const hasp_status_t RealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) cons
 const hasp_status_t RealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const {
 	return hasp_legacy_set_idletime(handle, idle_time);
 }
-#pragma endregion IRealKeyHasp
+#pragma endregion

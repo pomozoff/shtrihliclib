@@ -8,4 +8,4 @@ RealKeyHaspHL::RealKeyHaspHL(void) {
 }
 RealKeyHaspHL::~RealKeyHaspHL(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion

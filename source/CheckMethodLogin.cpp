@@ -13,14 +13,14 @@ _allow_to_login_on_previous_key(allow_to_login_on_previous_key)
 }
 CheckMethodLogin::~CheckMethodLogin(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region CheckMethod Interface
 const bool CheckMethodLogin::check(const ikey_checker_t key_checker) const {
 	check_method_login_t sp_this = shared_from_this();
 	return key_checker->is_able_to_login(sp_this);
 };
-#pragma endregion CheckMethod Interface
+#pragma endregion
 
 #pragma region Accessors
 const feature_t CheckMethodLogin::feature(void) const {
@@ -29,4 +29,4 @@ const feature_t CheckMethodLogin::feature(void) const {
 const bool CheckMethodLogin::allow_to_login_on_previous_key(void) const {
 	return _allow_to_login_on_previous_key;
 }
-#pragma endregion Accessors
+#pragma endregion

@@ -8,4 +8,4 @@ IKeyChecker::IKeyChecker(void) {
 }
 IKeyChecker::~IKeyChecker(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion

@@ -17,7 +17,7 @@ _current_session_id_hash(session_id_hash)
 }
 LicenseBlock::~LicenseBlock(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 const value_t LicenseBlock::block_from_string(const std::string session_id, const time_t time_logged_in) {
@@ -52,7 +52,7 @@ void LicenseBlock::update_block(const time_t time) const {
 void LicenseBlock::make_expired(void) const {
 	update_block(0);
 }
-#pragma endregion Public
+#pragma endregion
 
 #pragma region Accessors
 const offset_t LicenseBlock::offset_in_manager(void) const {
@@ -61,7 +61,7 @@ const offset_t LicenseBlock::offset_in_manager(void) const {
 const value_t& LicenseBlock::block(void) const {
 	return _block;
 }
-#pragma endregion Accessors
+#pragma endregion
 
 #pragma region Private
 template <typename T>
@@ -132,4 +132,4 @@ const time_t LicenseBlock::logged_in_time(void) const {
 	}
 	return logged_in;
 }
-#pragma endregion Private
+#pragma endregion

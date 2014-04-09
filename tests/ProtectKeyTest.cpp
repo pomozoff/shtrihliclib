@@ -13,7 +13,7 @@ ProtectKeyTest::ProtectKeyTest(void) {
 }
 ProtectKeyTest::~ProtectKeyTest(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Tests
 TEST_F(ProtectKeyTest, copy_block_to_buffer) {
@@ -34,4 +34,4 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	ASSERT_EQ(buffer[block_offset], first_byte);
 	ASSERT_EQ(buffer[block_offset + LicenseBlock::sizeof_block - 1], last_byte);
 }
-#pragma endregion Tests
+#pragma endregion

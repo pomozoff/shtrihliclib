@@ -11,7 +11,7 @@ CheckMethodLoginTest::CheckMethodLoginTest(void) {
 }
 CheckMethodLoginTest::~CheckMethodLoginTest(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Tests
 TEST_F(CheckMethodLoginTest, check_method_type) {
@@ -66,4 +66,4 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 	auto successful_checked4 = _check_method->check(my_protect_key_hasp_sl4);
 	ASSERT_TRUE(successful_checked4);
 }
-#pragma endregion Tests
+#pragma endregion

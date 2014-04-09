@@ -11,4 +11,4 @@ _protect_key_hasp_sl(ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, _session
 }
 CheckMethodTest::~CheckMethodTest(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion

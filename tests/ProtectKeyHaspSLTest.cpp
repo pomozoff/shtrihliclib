@@ -9,7 +9,7 @@ ProtectKeyHaspSLTest::ProtectKeyHaspSLTest() {
 }
 ProtectKeyHaspSLTest::~ProtectKeyHaspSLTest() {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::string session_id, const size_t licenses_amount) {
@@ -31,4 +31,4 @@ const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t fea
 
 	return protect_key_hasp_sl;
 }
-#pragma endregion Public
+#pragma endregion

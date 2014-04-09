@@ -10,7 +10,7 @@ CheckMethodBaseTest::CheckMethodBaseTest(void) {
 }
 CheckMethodBaseTest::~CheckMethodBaseTest(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Tests
 TEST_F(CheckMethodBaseTest, check_method_type) {
@@ -21,4 +21,4 @@ TEST_F(CheckMethodBaseTest, check) {
 	auto successful_checked = _check_method->check(_protect_key_hasp_sl);
 	ASSERT_TRUE(!successful_checked);
 }
-#pragma endregion Tests
+#pragma endregion

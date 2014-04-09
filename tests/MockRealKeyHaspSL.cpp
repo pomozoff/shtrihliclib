@@ -17,7 +17,7 @@ _feature_id(feature_id)
 }
 MockRealKeyHaspSL::~MockRealKeyHaspSL() {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 void MockRealKeyHaspSL::set_licenses_amount(const uint16_t amount) const {
@@ -25,7 +25,7 @@ void MockRealKeyHaspSL::set_licenses_amount(const uint16_t amount) const {
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 0] = amount / one_byte;
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 1] = amount % one_byte;
 }
-#pragma endregion Public
+#pragma endregion
 
 #pragma region IRealKeyHasp
 const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const {
@@ -72,7 +72,7 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) 
 const hasp_status_t MockRealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const {
 	return HASP_STATUS_OK;
 }
-#pragma endregion IRealKeyHasp
+#pragma endregion
 
 #pragma region Private
 void MockRealKeyHaspSL::initialize_memory(const check_methods_memory_t& check_methods_memory) const {
@@ -117,4 +117,4 @@ value_t* const MockRealKeyHaspSL::get_buffer_by_memory_type(const hasp_fileid_t 
 	}
 	return result;
 }
-#pragma endregion Private
+#pragma endregion

@@ -8,4 +8,4 @@ IProtectKey::IProtectKey(void) {
 }
 IProtectKey::~IProtectKey(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion

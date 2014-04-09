@@ -18,7 +18,7 @@ ProtectKey::~ProtectKey(void) {
 	logout(true);
 	_granules.clear();
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 const std::string ProtectKey::session_id(platform_t platform) {
@@ -97,7 +97,7 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 	
 	return true;
 }
-#pragma endregion Public
+#pragma endregion
 
 #pragma region Accessors
 const bool ProtectKey::logout_after_check(void) const {
@@ -112,7 +112,7 @@ const time_t ProtectKey::nfr_end_date(void) const {
 void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 	_nfr_end_date = nfr_end_date;
 }
-#pragma endregion Accessors
+#pragma endregion
 
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
@@ -129,7 +129,7 @@ const bool ProtectKey::is_key_nfr(void) const {
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
 }
-#pragma endregion IProtectKey Interface
+#pragma endregion
 
 #pragma region KeyChecker Interface
 const bool ProtectKey::check(void) const {
@@ -151,7 +151,7 @@ const bool ProtectKey::check(void) const {
 
 	return result;
 }
-#pragma endregion KeyChecker Interface
+#pragma endregion
 
 #pragma region IKeyChecker Interface
 const bool ProtectKey::is_base_key_available(const check_method_base_t check_method) const {
@@ -166,7 +166,7 @@ const bool ProtectKey::is_same_memory(const check_method_memory_t check_method) 
 const bool ProtectKey::logout_key(const check_method_login_t check_method) const {
 	return false;
 }
-#pragma endregion IKeyChecker Interface
+#pragma endregion
 
 #pragma region Protected
 void ProtectKey::check_granules(void) const {
@@ -179,7 +179,7 @@ void ProtectKey::try_to_logout(void) const {
 		logout(false);
 	}
 }
-#pragma endregion Protected
+#pragma endregion
 
 #pragma region Private
 const bool ProtectKey::check_license_with_methods(void) const {
@@ -213,4 +213,4 @@ const bool ProtectKey::recheck_key(void) const {
 void ProtectKey::add_feature(const feature_t feature) const {
 	_features.push_back(feature);
 }
-#pragma endregion Private
+#pragma endregion

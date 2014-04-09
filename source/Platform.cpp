@@ -13,7 +13,7 @@ _user_name(user_name)
 }
 Platform::~Platform(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region Public
 const platform_t Platform::platform(void) {
@@ -23,7 +23,7 @@ const platform_t Platform::platform(void) {
 	return std::make_shared<const PlatformWindows>();
 #endif // __linux__
 }
-#pragma endregion Public
+#pragma endregion
 
 #pragma region Accessors
 const std::string Platform::computer_name(void) const {
@@ -32,4 +32,4 @@ const std::string Platform::computer_name(void) const {
 const std::string Platform::user_name(void) const {
 	return _user_name;
 }
-#pragma endregion Accessors
+#pragma endregion

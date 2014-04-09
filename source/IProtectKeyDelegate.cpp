@@ -8,4 +8,4 @@ IProtectKeyDelegate::IProtectKeyDelegate() {
 }
 IProtectKeyDelegate::~IProtectKeyDelegate() {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion

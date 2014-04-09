@@ -19,14 +19,14 @@ CheckMethodMemory(offset, value, logged_in_method, KeyMemoryType::ReadOnly)
 }
 CheckMethodMemory::~CheckMethodMemory(void) {
 }
-#pragma endregion Constructor Destructor
+#pragma endregion
 
 #pragma region CheckMethod Interface
 const bool CheckMethodMemory::check(const ikey_checker_t key_checker) const {
 	check_method_memory_t sp_this = shared_from_this();
 	return key_checker->is_same_memory(sp_this);
 };
-#pragma endregion CheckMethod Interface
+#pragma endregion
 
 #pragma region Accessors
 const check_method_login_t CheckMethodMemory::logged_in_method(void) const {
@@ -41,4 +41,4 @@ const value_t& CheckMethodMemory::value(void) const {
 const KeyMemoryType CheckMethodMemory::memory_type(void) const {
 	return _memory_type;
 }
-#pragma endregion Accessors
+#pragma endregion
