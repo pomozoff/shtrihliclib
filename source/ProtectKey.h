@@ -30,6 +30,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const iprotect_key_t find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate);
 		static const bool copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset);
 
+		const granule_t create_granule(const std::wstring id) const;
+		void removeGranules(void) const;
+
 		virtual const value_t read_memory(const check_method_memory_t check_method) const = 0;
 
 		/* IProtectKey Interface */
@@ -70,7 +73,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
 	private:
-		granules_t _granules;
+		mutable granules_t _granules;
 		mutable bool _logout_after_check = false;
 		bool _is_key_base = false;
 

@@ -97,6 +97,14 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 	
 	return true;
 }
+const granule_t ProtectKey::create_granule(const std::wstring id) const {
+	auto granule = std::make_shared<const Granule>(id, shared_from_this());
+	_granules.push_back(granule);
+	return granule;
+}
+void ProtectKey::removeGranules(void) const {
+	_granules.clear();
+}
 #pragma endregion
 
 #pragma region Accessors
