@@ -1,6 +1,8 @@
 
 #include "stdafx.h"
 
+#include <algorithm>
+
 #include "KeyChecker.h"
 #include "CheckMethodBase.h"
 #include "CheckMethodLogin.h"
@@ -40,11 +42,15 @@ void KeyChecker::set_max_check_number(check_number_t check_number) const {
 	}
 }
 void KeyChecker::logout(const bool forced_logout) const {
-	for (const auto& element : _handles) {
-		auto& check_method_login = element.first;
+	for (auto iterator = _handles.begin(); iterator != _handles.end(); ) {
+		auto& check_method_login = iterator->first;
 		if (forced_logout || check_method_login->logout_after_check()) {
-			logout_key(check_method_login);
+			if (logout_key(check_method_login)) {
+				_handles.erase(iterator++);
+				continue;
+			}
 		}
+		++iterator;
 	}
 }
 void KeyChecker::add_handle(const check_method_login_t check_method, const key_handle_t handle) const {
