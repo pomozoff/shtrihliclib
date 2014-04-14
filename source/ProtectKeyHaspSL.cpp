@@ -86,7 +86,6 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 	} else {
 		const auto status = _real_key->_hasp_logout(handle);
 		success = HASP_STATUS_OK == status;
-		remove_handle(check_method);
 		process_result(status);
 	}
 	return success;
@@ -97,12 +96,6 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 const key_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check_method) const {
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? HASP_INVALID_HANDLE_VALUE : iterator->second;
-}
-void ProtectKeyHaspSL::remove_handle(const check_method_login_t check_method) const {
-	const auto iterator = _handles.find(check_method);
-	if (_handles.end() != iterator) {
-		_handles.erase(iterator);
-	}
 }
 #pragma endregion
 
