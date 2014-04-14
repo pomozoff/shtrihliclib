@@ -17,14 +17,14 @@ LicenseBlockTest::~LicenseBlockTest(void) {
 TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	time_t some_time = 1392280873;
 
-	auto session_id = R"(computer-username)";
+	auto session_id = L"(computer-username)";
 	auto block = LicenseBlock::block_from_string(session_id, some_time);
 	ASSERT_EQ(block.size(), 16);
 
-	ASSERT_EQ(block[0],  119);
-	ASSERT_EQ(block[1],  212);
-	ASSERT_EQ(block[2],   48);
-	ASSERT_EQ(block[3],   74);
+	ASSERT_EQ(block[0],  232);
+	ASSERT_EQ(block[1],  121);
+	ASSERT_EQ(block[2],   37);
+	ASSERT_EQ(block[3],   55);
 	ASSERT_EQ(block[4],   41);
 	ASSERT_EQ(block[5],  133);
 	ASSERT_EQ(block[6],  252);
@@ -33,10 +33,10 @@ TEST_F(LicenseBlockTest, create_block_as_buffer_from_string) {
 	ASSERT_EQ(block[9],    0);
 	ASSERT_EQ(block[10],   0);
 	ASSERT_EQ(block[11],   0);
-	ASSERT_EQ(block[12], 168);
-	ASSERT_EQ(block[13], 116);
-	ASSERT_EQ(block[14], 191);
-	ASSERT_EQ(block[15],  89);
+	ASSERT_EQ(block[12],  34);
+	ASSERT_EQ(block[13], 246);
+	ASSERT_EQ(block[14], 193);
+	ASSERT_EQ(block[15], 217);
 }
 TEST_F(LicenseBlockTest, is_expired_true) {
 	time_t some_time = 1392280873;
@@ -82,8 +82,8 @@ TEST_F(LicenseBlockTest, is_it_my_block_true) {
 TEST_F(LicenseBlockTest, is_it_my_block_false) {
 	time_t some_time = 1392280873;
 
-	auto session1_id = R"(computer-alex)";
-	auto session2_id = R"(computer-test)";
+	auto session1_id = L"(computer-alex)";
+	auto session2_id = L"(computer-test)";
 
 	auto block = LicenseBlock::block_from_string(session1_id, some_time);
 	auto offset = LicenseBlock::sizeof_block * 7;

@@ -14,7 +14,7 @@ ProtectKeyHaspSLTest::~ProtectKeyHaspSLTest() {
 #pragma endregion
 
 #pragma region Public
-const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::string session_id, const size_t licenses_amount) {
+const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::wstring session_id, const size_t licenses_amount) {
 	const offset_t ro_memory_offset = 3;
 	const value_t ro_memory_value = value_t{ 0x10, 0x00, 0x4a, 0x83 };
 
@@ -23,7 +23,7 @@ const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t fea
 
 	return create_hasp_sl_key(feature, session_id, licenses_amount, check_methods_memory);
 }
-const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::string session_id, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory) {
+const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::wstring session_id, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory) {
 	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
 	auto key = std::make_shared<const MockRealKeyHaspSL>(feature, check_methods_memory);
 	key->set_licenses_amount(licenses_amount);

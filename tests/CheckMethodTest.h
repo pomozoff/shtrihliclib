@@ -20,7 +20,7 @@ class CheckMethodTest : public ::testing::Test {
 		const size_t _licenses_amount_two   = 2;
 		const size_t _licenses_amount_three = 3;
 		const feature_t _feature = 3;
-		const std::string _session_id = R"(computer-username)";
+		const std::wstring _session_id = L"(computer-username)";
 
 		const protect_key_t _protect_key_hasp_sl;
 };

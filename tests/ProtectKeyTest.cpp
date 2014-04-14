@@ -16,10 +16,11 @@ ProtectKeyTest::~ProtectKeyTest(void) {
 
 #pragma region Tests
 TEST_F(ProtectKeyTest, copy_block_to_buffer) {
-	byte_t first_byte = 124;
-	byte_t last_byte = 235;
+	byte_t first_byte = 135;
+	byte_t last_byte = 215;
 	time_t some_time = 1392379203;
 	
+	auto id = L"(computer-user)";
 	const value_t block = LicenseBlock::block_from_string(id, some_time);
 
 	ASSERT_EQ(block[0], first_byte);

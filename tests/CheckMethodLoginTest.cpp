@@ -23,7 +23,7 @@ TEST_F(CheckMethodLoginTest, check) {
 	ASSERT_TRUE(successful_checked);
 }
 TEST_F(CheckMethodLoginTest, check_licenses_counter_amount_is_null) {
-	auto protect_key_hasp_sl1 = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, R"(computer-username1)", _licenses_amount_null);
+	auto protect_key_hasp_sl1 = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, L"(computer-username1)", _licenses_amount_null);
 	auto successful_checked = _check_method->check(protect_key_hasp_sl1);
 	ASSERT_TRUE(!successful_checked);
 }
@@ -32,11 +32,11 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 	const time_t timeout = 30;
 	const size_t licenses_amount = 2;
 
-	auto session_id = R"(computer-username)";
+	auto session_id = L"(computer-username)";
 	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
 
 	//-------------------------------------------------------------------------------------------------------------------
-	auto session_id1 = R"(computer-username1)";
+	auto session_id1 = L"(computer-username1)";
 	auto session_id1_hash = ProtectKey::hash_from_session_id(session_id1);
 
 	auto block1 = LicenseBlock::block_from_string(session_id1, time(NULL));
@@ -51,7 +51,7 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 	auto successful_checked2 = _check_method->check(my_protect_key_hasp_sl2);
 	ASSERT_TRUE(!successful_checked2);
 	//-------------------------------------------------------------------------------------------------------------------
-	auto session_id2 = R"(computer-username2)";
+	auto session_id2 = L"(computer-username2)";
 	auto session_id2_hash = ProtectKey::hash_from_session_id(session_id2);
 
 	auto block2 = LicenseBlock::block_from_string(session_id2, time(NULL));
