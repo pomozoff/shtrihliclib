@@ -7,6 +7,7 @@
 RealKeyHaspSL::RealKeyHaspSL(void) {
 }
 RealKeyHaspSL::~RealKeyHaspSL(void) {
+	hasp_cleanup();
 }
 #pragma endregion
 
