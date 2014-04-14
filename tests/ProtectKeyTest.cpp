@@ -4,12 +4,11 @@
 #include "ProtectKeyTest.h"
 #include "ProtectKeyHaspSL.h"
 #include "LicenseBlock.h"
-
-static std::string id = R"(computer-user)";
+#include "Platform.h"
 
 #pragma region Constructor Destructor
 ProtectKeyTest::ProtectKeyTest(void) {
-	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL, id);
+	_protect_key_hasp_sl = ProtectKey::create_key(KeyType::HaspSL, Platform::platform());
 }
 ProtectKeyTest::~ProtectKeyTest(void) {
 }
