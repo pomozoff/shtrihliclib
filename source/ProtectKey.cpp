@@ -180,13 +180,11 @@ void ProtectKey::try_to_logout(void) const {
 #pragma region Private
 const bool ProtectKey::check_license_with_methods(void) const {
 	bool result = false;
-	protect_key_t sp_this = shared_from_this();
-
 	for (const auto& element : _check_methods) {
 		if (!element->is_check_method_for_license()) {
 			continue;
 		}
-		result = element->check(sp_this);
+		result = element->check(shared_from_this());
 		if (!result) {
 			break;
 		}
