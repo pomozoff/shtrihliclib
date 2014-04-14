@@ -20,7 +20,7 @@ LicenseBlock::~LicenseBlock(void) {
 #pragma endregion
 
 #pragma region Public
-const value_t LicenseBlock::block_from_string(const std::string session_id, const time_t time_logged_in) {
+const value_t LicenseBlock::block_from_string(const std::wstring session_id, const time_t time_logged_in) {
 	auto hash = ProtectKey::hash_from_session_id(session_id);
 	return block_from_hash(hash, time_logged_in);
 }

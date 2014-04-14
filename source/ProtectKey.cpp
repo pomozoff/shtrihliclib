@@ -21,44 +21,16 @@ ProtectKey::~ProtectKey(void) {
 #pragma endregion
 
 #pragma region Public
-const std::string ProtectKey::session_id(platform_t platform) {
-	auto session_id = platform->computer_name() + platform->user_name();
+const std::wstring ProtectKey::session_id(platform_t platform) {
+	auto session_id = platform->session_id();
 	return session_id;
 }
-const size_t ProtectKey::hash_from_session_id(const std::string session_id) {
-	std::hash<std::string> hasher;
+const size_t ProtectKey::hash_from_session_id(const std::wstring session_id) {
+	std::hash<std::wstring> hasher;
 	return hasher(session_id);
 }
-const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::string session_id) {
-	protect_key_t protect_key = nullptr;
-	switch (key_type) {
-		case KeyType::Base:
-			protect_key = nullptr;
-			break;
-		case KeyType::HaspSL: {
-				auto key = std::make_shared<const RealKeyHaspSL>();
-				protect_key = std::make_shared<const ProtectKeyHaspSL>(key, hash_from_session_id(session_id));
-			}
-			break;
-		case KeyType::HaspHLLocal:
-			protect_key = nullptr;
-			break;
-		case KeyType::HaspHLNet:
-			protect_key = nullptr;
-			break;
-		case KeyType::RockeyLocal:
-			protect_key = nullptr;
-			break;
-		case KeyType::RockeyNet:
-			protect_key = nullptr;
-			break;
-		case KeyType::FileMapped:
-			protect_key = nullptr;
-			break;
-		default:
-			break;
-	}
-	return protect_key;
+const protect_key_t ProtectKey::create_key(const KeyType key_type, const platform_t platform) {
+	return create_key(key_type, platform->session_id());
 }
 
 const iprotect_key_t ProtectKey::find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate) {
@@ -182,6 +154,37 @@ void ProtectKey::try_to_logout(void) const {
 	if (_logout_after_check) {
 		logout(false);
 	}
+}
+const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::wstring session_id) {
+	protect_key_t protect_key = nullptr;
+	switch (key_type) {
+	case KeyType::Base:
+		protect_key = nullptr;
+		break;
+	case KeyType::HaspSL: {
+		auto key = std::make_shared<const RealKeyHaspSL>();
+		protect_key = std::make_shared<const ProtectKeyHaspSL>(key, hash_from_session_id(session_id));
+	}
+		break;
+	case KeyType::HaspHLLocal:
+		protect_key = nullptr;
+		break;
+	case KeyType::HaspHLNet:
+		protect_key = nullptr;
+		break;
+	case KeyType::RockeyLocal:
+		protect_key = nullptr;
+		break;
+	case KeyType::RockeyNet:
+		protect_key = nullptr;
+		break;
+	case KeyType::FileMapped:
+		protect_key = nullptr;
+		break;
+	default:
+		break;
+	}
+	return protect_key;
 }
 #pragma endregion
 

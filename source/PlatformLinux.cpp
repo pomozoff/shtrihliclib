@@ -13,12 +13,12 @@ PlatformLinux::~PlatformLinux(void) {
 #pragma endregion
 
 #pragma region Private
-const std::string PlatformLinux::get_computer_name(void) const {
+const std::wstring PlatformLinux::get_computer_name(void) const {
 	// TODO: Добавить реализацию получения имени компьютера
-	return R"(linux-computer)";
+	return L"(linux-computer)";
 }
-const std::string PlatformLinux::get_user_name(void) const {
+const std::wstring PlatformLinux::get_user_name(void) const {
 	// TODO: Добавить реализацию получения имени пользователя
-	return R"(linux-user)";
+	return L"(linux-user)";
 }
 #pragma endregion

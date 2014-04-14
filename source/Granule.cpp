@@ -5,7 +5,7 @@
 #include "ProtectKey.h"
 
 #pragma region Constructor Destructor
-Granule::Granule(const std::string id, const protect_key_t protect_key) :
+Granule::Granule(const std::wstring id, const protect_key_t protect_key) :
 _id(id),
 _protect_key(protect_key)
 {

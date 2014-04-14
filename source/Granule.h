@@ -6,7 +6,7 @@
 
 class Granule final : public KeyChecker, public std::enable_shared_from_this<const Granule> {
 	public:
-		Granule(const std::string id, const protect_key_t protect_key);
+		Granule(const std::wstring id, const protect_key_t protect_key);
 		~Granule(void);
 
 		/* KeyChecker Interface */
@@ -28,7 +28,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		virtual const bool is_same_memory(const check_method_memory_t check_method) const override final;
 		virtual const bool logout_key(const check_method_login_t check_method) const override final;
 	private:
-		const std::string _id;
+		const std::wstring _id;
 		const protect_key_t _protect_key;
 
 		bool _is_present = false;

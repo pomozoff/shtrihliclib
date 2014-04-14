@@ -13,12 +13,8 @@ PlatformWindows::~PlatformWindows(void) {
 #pragma endregion
 
 #pragma region Private
-const std::string PlatformWindows::get_computer_name(void) const {
-	// TODO: Добавить реализацию получения имени компьютера
-	return R"(windows-computer)";
+const std::wstring PlatformWindows::get_computer_name(void) const {
 }
-const std::string PlatformWindows::get_user_name(void) const {
-	// TODO: Добавить реализацию получения имени пользователя
-	return R"(windows-user)";
+const std::wstring PlatformWindows::get_user_name(void) const {
 }
 #pragma endregion

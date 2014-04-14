@@ -6,7 +6,7 @@
 #include "PlatformWindows.h"
 
 #pragma region Constructor Destructor
-Platform::Platform(const std::string computer_name, const std::string user_name) :
+Platform::Platform(const std::wstring computer_name, const std::wstring user_name) :
 _computer_name(computer_name),
 _user_name(user_name)
 {
@@ -23,13 +23,8 @@ const platform_t Platform::platform(void) {
 	return std::make_shared<const PlatformWindows>();
 #endif // __linux__
 }
-#pragma endregion
+const std::wstring Platform::session_id(void) const {
 
-#pragma region Accessors
-const std::string Platform::computer_name(void) const {
-	return _computer_name;
-}
-const std::string Platform::user_name(void) const {
-	return _user_name;
+	return _computer_name + L"-" + _user_name;
 }
 #pragma endregion

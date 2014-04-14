@@ -8,13 +8,10 @@ class Platform {
 		virtual ~Platform(void);
 
 		static const platform_t platform(void);
-
-		/* Accessors */
-		const std::string computer_name(void) const;
-		const std::string user_name(void) const;
+		const std::wstring session_id(void) const;
 	protected:
-		Platform(const std::string computer_name, const std::string user_name);
+		Platform(const std::wstring computer_name, const std::wstring user_name);
 
-		std::string _computer_name;
-		std::string _user_name;
+		std::wstring _computer_name;
+		std::wstring _user_name;
 };
