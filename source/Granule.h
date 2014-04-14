@@ -6,7 +6,7 @@
 
 class Granule final : public KeyChecker, public std::enable_shared_from_this<const Granule> {
 	public:
-		Granule(const std::wstring id, const protect_key_t protect_key);
+		Granule(const std::wstring id, const protect_key_weak_t protect_key);
 		~Granule(void);
 
 		/* KeyChecker Interface */
@@ -29,7 +29,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		virtual const bool logout_key(const check_method_login_t check_method) const override final;
 	private:
 		const std::wstring _id;
-		const protect_key_t _protect_key;
+		const protect_key_weak_t _protect_weak_key;
 
 		bool _is_present = false;
 		mutable bool _is_granule_nfr_date = false;

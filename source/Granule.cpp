@@ -5,9 +5,9 @@
 #include "ProtectKey.h"
 
 #pragma region Constructor Destructor
-Granule::Granule(const std::wstring id, const protect_key_t protect_key) :
+Granule::Granule(const std::wstring id, const protect_key_weak_t protect_key) :
 _id(id),
-_protect_key(protect_key)
+_protect_weak_key(protect_key)
 {
 }
 Granule::~Granule(void) {
@@ -34,6 +34,7 @@ const bool Granule::check(void) const {
 	bool result = false;
 	for (const auto& element : _check_methods) {
 		result = result && element->check(shared_from_this());
+		auto _protect_key = _protect_weak_key.lock();
 		if (_protect_key->is_key_nfr() && is_granule_nfr_date()) {
 			result = true;
 		}
@@ -41,23 +42,28 @@ const bool Granule::check(void) const {
 	return result;
 }
 void Granule::logout(const bool forced_logout) const {
+	auto _protect_key = _protect_weak_key.lock();
 	return nullptr == _protect_key ? true : _protect_key->logout(forced_logout);
 }
 const key_handle_t Granule::get_handle(const check_method_login_t check_method) const {
+	auto _protect_key = _protect_weak_key.lock();
 	return _protect_key->get_handle(check_method);
 }
 #pragma endregion
 
 #pragma region IKeyChecker Interface
 const bool Granule::is_base_key_available(const check_method_base_t check_method) const {
+	auto _protect_key = _protect_weak_key.lock();
 	return nullptr == _protect_key ? false : _protect_key->is_base_key_available(check_method);
 }
 const bool Granule::is_able_to_login(const check_method_login_t check_method) const {
+	auto _protect_key = _protect_weak_key.lock();
 	return nullptr == _protect_key ? false : _protect_key->is_able_to_login(check_method);
 }
 const bool Granule::is_same_memory(const check_method_memory_t check_method) const {
 	bool result = false;
 
+	auto _protect_key = _protect_weak_key.lock();
 	if (nullptr == _protect_key) {
 		return false;
 	} else if (_read_memory_to_value) {
@@ -80,6 +86,7 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 	return false;
 }
 const bool Granule::logout_key(const check_method_login_t check_method) const {
+	auto _protect_key = _protect_weak_key.lock();
 	return nullptr == _protect_key ? true : _protect_key->logout_key(check_method);
 }
 #pragma endregion
