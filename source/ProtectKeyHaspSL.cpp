@@ -157,7 +157,7 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 	const size_t one_byte = 256;
 
 	value_t buffer(sizeof_buffer);
-	auto check_method_memory = create_check_method_memory(offset_licenses_amount, buffer, check_method);
+	auto check_method_memory = std::make_shared<const CheckMethodMemory>(offset_licenses_amount, buffer, check_method);
 	auto data = read_memory(check_method_memory);
 
 	size_t read_licenses_amount = 0;
