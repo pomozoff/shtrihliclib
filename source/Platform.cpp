@@ -1,6 +1,8 @@
 
 #include "stdafx.h"
 
+#include <assert.h>
+
 #include "Platform.h"
 #include "PlatformLinux.h"
 #include "PlatformWindows.h"
@@ -24,7 +26,8 @@ const platform_t Platform::platform(void) {
 #endif // __linux__
 }
 const std::wstring Platform::session_id(void) const {
-
+	assert(_computer_name != L"");
+	assert(_user_name != L"");
 	return _computer_name + L"-" + _user_name;
 }
 #pragma endregion
