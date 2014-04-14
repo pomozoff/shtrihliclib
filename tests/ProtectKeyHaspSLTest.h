@@ -18,7 +18,7 @@ class ProtectKeyHaspSLTest : public ::testing::Test {
 
 		const feature_t _feature = 3;
 		const std::string _session_id = R"(computer-username)";
-		const size_t _licenses_amount_two   = 2;
+		const size_t _licenses_amount_two = 2;
 
 		const protect_keys_t createKeys(void) const;
 };
