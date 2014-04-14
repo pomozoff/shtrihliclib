@@ -15,7 +15,7 @@ Granule::~Granule(void) {
 #pragma endregion
 
 #pragma region Accessors
-void Granule::set_granule_nfr_date(bool is_granule_nfr_date) {
+void Granule::set_granule_nfr_date(bool is_granule_nfr_date) const {
 	_is_granule_nfr_date = is_granule_nfr_date;
 }
 const bool Granule::is_granule_nfr_date(void) const {
