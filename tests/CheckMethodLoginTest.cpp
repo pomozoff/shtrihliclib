@@ -15,7 +15,7 @@ CheckMethodLoginTest::~CheckMethodLoginTest(void) {
 
 #pragma region Tests
 TEST_F(CheckMethodLoginTest, check_method_type) {
-	CheckMethodType check_method_type = _check_method->check_method_type();
+	auto check_method_type = _check_method->check_method_type();
 	ASSERT_TRUE(check_method_type == CheckMethodType::Login);
 }
 TEST_F(CheckMethodLoginTest, check) {
@@ -41,7 +41,7 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 
 	auto block1 = LicenseBlock::block_from_string(session_id1, time(NULL));
 	const offset_t offset1 = 0 * block1.size();
-	check_method_memory_t check_method_memory1 = std::make_shared<const CheckMethodMemory>(offset1, block1, nullptr, KeyMemoryType::ReadWrite);
+	auto check_method_memory1 = std::make_shared<const CheckMethodMemory>(offset1, block1, nullptr, KeyMemoryType::ReadWrite);
 	//-------------------------------------------------------------------------------------------------------------------
 	auto my_protect_key_hasp_sl1 = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, _session_id, _licenses_amount_two, { check_method_memory1 });
 	auto successful_checked1 = _check_method->check(my_protect_key_hasp_sl1);
@@ -56,7 +56,7 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 
 	auto block2 = LicenseBlock::block_from_string(session_id2, time(NULL));
 	const offset_t offset2 = 1 * block2.size();
-	check_method_memory_t check_method_memory2 = std::make_shared<const CheckMethodMemory>(offset2, block2, nullptr, KeyMemoryType::ReadWrite);
+	auto check_method_memory2 = std::make_shared<const CheckMethodMemory>(offset2, block2, nullptr, KeyMemoryType::ReadWrite);
 	//-------------------------------------------------------------------------------------------------------------------
 	auto my_protect_key_hasp_sl3 = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, _session_id, _licenses_amount_two, { check_method_memory1, check_method_memory2 });
 	auto successful_checked3 = _check_method->check(my_protect_key_hasp_sl3);
