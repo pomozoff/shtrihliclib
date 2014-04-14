@@ -15,6 +15,8 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		/* Accessors */
 		void set_granule_nfr_date(const bool is_granule_nfr_date) const;
 		const bool is_granule_nfr_date(void) const;
+		void set_read_memory_to_value(const bool read_memory_to_value) const;
+		const bool read_memory_to_value(void) const;
 	protected:
 		/* KeyChecker Interface */
 		virtual void logout(const bool forced_logout) const override final;
@@ -29,8 +31,8 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		const protect_key_t _protect_key;
 
 		bool _is_present = false;
-		bool _read_memory_to_value = false;
 		mutable bool _is_granule_nfr_date = false;
+		mutable bool _read_memory_to_value = false;
 
 		mutable value_t _value;
 

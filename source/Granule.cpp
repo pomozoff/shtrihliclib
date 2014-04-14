@@ -21,6 +21,12 @@ void Granule::set_granule_nfr_date(bool is_granule_nfr_date) const {
 const bool Granule::is_granule_nfr_date(void) const {
 	return _is_granule_nfr_date;
 }
+void Granule::set_read_memory_to_value(const bool read_memory_to_value) const {
+	_read_memory_to_value = read_memory_to_value;
+}
+const bool Granule::read_memory_to_value(void) const {
+	return _read_memory_to_value;
+}
 #pragma endregion
 
 #pragma region KeyChecker Interface
