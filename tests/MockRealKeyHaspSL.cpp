@@ -79,7 +79,7 @@ void MockRealKeyHaspSL::initialize_memory(const check_methods_memory_t& check_me
 	_ro_buffer.assign(ProtectKeyHaspSL::read_only_memory_size,  0);
 	_rw_buffer.assign(ProtectKeyHaspSL::read_write_memory_size, 0);
 
-	for (const auto& check_method_memory : check_methods_memory) {
+	for (const auto check_method_memory : check_methods_memory) {
 		auto key_memory_type = check_method_memory->memory_type();
 		auto buffer = get_buffer_by_memory_type(hasp_memory_type(key_memory_type));
 		if (nullptr == buffer) {
