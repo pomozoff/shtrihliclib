@@ -38,7 +38,6 @@ const bool Granule::check(void) const {
 			result = true;
 		}
 	}
-
 	return result;
 }
 void Granule::logout(const bool forced_logout) const {

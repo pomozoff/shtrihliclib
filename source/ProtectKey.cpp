@@ -145,7 +145,6 @@ const bool ProtectKey::check(void) const {
 			break;
 		}
 	}
-
 	return result;
 }
 #pragma endregion
