@@ -2,7 +2,9 @@
 #include "stdafx.h"
 
 #include "ProtectKeyHaspSLTest.h"
+#include "CheckMethodLogin.h"
 #include "CheckMethodMemory.h"
+#include "Platform.h"
 
 #pragma region Constructor Destructor
 ProtectKeyHaspSLTest::ProtectKeyHaspSLTest() {
@@ -30,5 +32,19 @@ const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t fea
 	protect_key_hasp_sl->set_logout_after_check(true);
 
 	return protect_key_hasp_sl;
+}
+#pragma endregion
+
+#pragma region Protecetd
+const protect_keys_t ProtectKeyHaspSLTest::createKeys(void) const {
+	auto protectKey = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, Platform::platform()->session_id(), _licenses_amount_two);
+	const auto checkMethod = protectKey->create_check_method_login(_feature, false);
+	checkMethod->set_check_method_for_license(true);
+	checkMethod->set_logout_after_check(true);
+
+	protect_keys_t protect_keys;
+	protect_keys.push_back(protectKey);
+
+	return protect_keys;
 }
 #pragma endregion
