@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "stdafx.h"
+
 class IProtectKeyDelegate {
 	public:
 		IProtectKeyDelegate(void);
