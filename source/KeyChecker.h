@@ -20,6 +20,8 @@ class KeyChecker : public IKeyChecker {
 		const check_method_memory_t create_check_method_memory(const offset_t offset, const value_t& value, const check_method_login_t logged_in_method) const;
 
 		virtual void logout(const bool forced_logout) const;
+
+		virtual const key_handle_t get_handle(const check_method_login_t check_method) const = 0;
 	protected:
 		KeyChecker(void);
 
@@ -30,7 +32,6 @@ class KeyChecker : public IKeyChecker {
 		void set_max_check_number(const check_number_t check_number) const;
 
 		void add_handle(const check_method_login_t check_method, const key_handle_t handle) const;
-		virtual const key_handle_t get_handle(const check_method_login_t check_method) const = 0;
 		virtual void remove_handle(const check_method_login_t check_method) const = 0;
 
 		/* IKeyChecker Interface */

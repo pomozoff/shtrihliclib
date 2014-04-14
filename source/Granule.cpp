@@ -44,6 +44,9 @@ const bool Granule::check(void) const {
 void Granule::logout(const bool forced_logout) const {
 	return nullptr == _protect_key ? true : _protect_key->logout(forced_logout);
 }
+const key_handle_t Granule::get_handle(const check_method_login_t check_method) const {
+	return _protect_key->get_handle(check_method);
+}
 #pragma endregion
 
 #pragma region IKeyChecker Interface

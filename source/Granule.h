@@ -20,6 +20,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 	protected:
 		/* KeyChecker Interface */
 		virtual void logout(const bool forced_logout) const override final;
+		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t check_method) const override final;
