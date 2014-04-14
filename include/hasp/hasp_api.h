@@ -2,9 +2,9 @@
  * \mainpage Sentinel Licensing API
  * \file hasp_api.h Sentinel Licensing API declarations
  *
- * Copyright (C) 2011, SafeNet, Inc. All rights reserved.
+ * Copyright (C) 2013, SafeNet, Inc. All rights reserved.
  *
- * $Id: hasp_api.h,v 1.102 2012-12-12 16:55:01 axel Exp $
+ * $Id: hasp_api.h,v 1.107 2013-07-18 09:24:25 andi Exp $
  */
 
 
@@ -179,8 +179,6 @@ extern "C" {
 /**
  * @}
  */
-
-
 
 /**
  * @defgroup hasp_error_codes Run-time API Status Codes
@@ -444,6 +442,16 @@ enum hasp_error_codes
      *  contains VM disabled feature and host machine is a virtual machine */
     HASP_REHOST_DISABLED = 75,
 
+    /** Format SL-AdminMode or migrate SL-Legacy to SL-AdminMode not allowed
+     *  as container has detached license */
+    HASP_DETACHED_LICENSE_FOUND = 76,
+	
+	 /** Recipient of the requested operation is older than expected */
+    HASP_RECIPIENT_OLD_LM = 77,
+
+	 /** Secure storage ID mismatch */
+    HASP_SECURE_STORE_ID_MISMATCH = 78,
+	
     /** API dispatcher: API for this Vendor Code was not found */
     HASP_NO_API_DYLIB = 400,
 
@@ -1762,6 +1770,8 @@ hasp_status_t HASP_CALLCONV hasp_hasptime_to_datetime(hasp_time_t time,
 /**
  * @}
  */
+
+hasp_status_t HASP_CALLCONV hasp_cleanup(void);
 
 #ifdef __cplusplus
 } // extern "C"
