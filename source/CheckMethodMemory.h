@@ -3,7 +3,7 @@
 
 #include "CheckMethod.h"
 
-class CheckMethodMemory final : public CheckMethod, public std::enable_shared_from_this<CheckMethodMemory> {
+class CheckMethodMemory final : public CheckMethod, public std::enable_shared_from_this<const CheckMethodMemory> {
 	public:
 		CheckMethodMemory(const feature_t offset, const value_t& value, const check_method_login_t logged_in_method);
 		CheckMethodMemory(const feature_t offset, const value_t& value, const check_method_login_t logged_in_method, const KeyMemoryType memory_type);

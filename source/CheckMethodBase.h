@@ -3,7 +3,7 @@
 
 #include "CheckMethod.h"
 
-class CheckMethodBase final : public CheckMethod, public std::enable_shared_from_this<CheckMethodBase> {
+class CheckMethodBase final : public CheckMethod, public std::enable_shared_from_this<const CheckMethodBase> {
 	public:
 		CheckMethodBase(void);
 		~CheckMethodBase(void);

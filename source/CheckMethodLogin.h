@@ -3,7 +3,7 @@
 
 #include "CheckMethod.h"
 
-class CheckMethodLogin final : public CheckMethod, public std::enable_shared_from_this<CheckMethodLogin> {
+class CheckMethodLogin final : public CheckMethod, public std::enable_shared_from_this<const CheckMethodLogin> {
 	public:
 		CheckMethodLogin(const feature_t feature, const bool allow_to_login_on_previous_key);
 		~CheckMethodLogin(void);
