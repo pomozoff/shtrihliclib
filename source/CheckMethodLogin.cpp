@@ -17,8 +17,7 @@ CheckMethodLogin::~CheckMethodLogin(void) {
 
 #pragma region CheckMethod Interface
 const bool CheckMethodLogin::check(const ikey_checker_t key_checker) const {
-	check_method_login_t sp_this = shared_from_this();
-	return key_checker->is_able_to_login(sp_this);
+	return key_checker->is_able_to_login(shared_from_this());
 };
 #pragma endregion
 

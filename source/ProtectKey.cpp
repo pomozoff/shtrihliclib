@@ -134,14 +134,11 @@ const bool ProtectKey::is_key_base(void) const {
 #pragma region KeyChecker Interface
 const bool ProtectKey::check(void) const {
 	bool result = false;
-	protect_key_t sp_this = shared_from_this();
-
 	for (const auto& element : _check_methods) {
 		if (_is_key_nfr && element->is_check_method_for_nfr()) {
 			return true;
 		}
-
-		result = element->check(sp_this);
+		result = element->check(shared_from_this());
 		_is_key_nfr = result && element->is_check_method_for_nfr();
 
 		if (!result && !element->is_check_method_for_nfr()) {

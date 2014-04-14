@@ -26,10 +26,8 @@ const bool Granule::is_granule_nfr_date(void) const {
 #pragma region KeyChecker Interface
 const bool Granule::check(void) const {
 	bool result = false;
-	granule_t sp_this = shared_from_this();
-
 	for (const auto& element : _check_methods) {
-		result = result && element->check(sp_this);
+		result = result && element->check(shared_from_this());
 		if (_protect_key->is_key_nfr() && is_granule_nfr_date()) {
 			result = true;
 		}
