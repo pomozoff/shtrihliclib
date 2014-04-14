@@ -15,7 +15,6 @@ _session_id_hash(session_id_hash)
 {
 }
 ProtectKey::~ProtectKey(void) {
-	logout(true);
 	_granules.clear();
 }
 #pragma endregion

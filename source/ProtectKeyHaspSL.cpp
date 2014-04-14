@@ -36,6 +36,7 @@ _real_key(key)
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 	free_licnese();
+	logout(true);
 }
 #pragma endregion
 
