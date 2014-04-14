@@ -35,6 +35,13 @@ const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t fea
 }
 #pragma endregion
 
+#pragma region Tests
+TEST_F(ProtectKeyHaspSLTest, find_key) {
+	protect_keys_t protect_keys = createKeys();
+	auto iprotectKey = ProtectKey::find_key(protect_keys, nullptr);
+}
+#pragma endregion
+
 #pragma region Protecetd
 const protect_keys_t ProtectKeyHaspSLTest::createKeys(void) const {
 	auto protectKey = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature, Platform::platform()->session_id(), _licenses_amount_two);
