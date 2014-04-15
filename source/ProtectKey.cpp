@@ -46,11 +46,11 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 
 		element->try_to_logout();
 		if (is_key_found) {
-			protect_key = element;
+			iprotect_key = element;
 			break;
 		}
 	}
-	return protect_key;
+	return iprotect_key;
 }
 const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset) {
 	if (source_offset >= source.size()
