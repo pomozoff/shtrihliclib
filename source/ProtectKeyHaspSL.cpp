@@ -102,8 +102,10 @@ const key_handle_t ProtectKeyHaspSL::get_handle(const check_method_login_t check
 
 #pragma region Private
 const std::string ProtectKeyHaspSL::key_id(const hasp_handle_t handle) const {
-	char *info = 0;
-	std::string key_id = R"()", xml_begin_id = "<haspid>", xml_end_id = "</haspid>";
+	char *info = NULL;
+	std::string key_id = R"()";
+	const std::string xml_begin_id = "<haspid>";
+	const std::string xml_end_id = "</haspid>";
 	const hasp_status_t status = hasp_get_sessioninfo(handle, HASP_KEYINFO, &info);
 	if (HASP_STATUS_OK == status) {
 		const std::string info_string = info;
