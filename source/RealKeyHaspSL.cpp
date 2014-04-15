@@ -42,4 +42,10 @@ const hasp_status_t RealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) cons
 const hasp_status_t RealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const {
 	return hasp_legacy_set_idletime(handle, idle_time);
 }
+const hasp_status_t RealKeyHaspSL::_hasp_decrypt(const hasp_handle_t handle, uint8_t* buffer, const hasp_size_t length) const {
+	auto status = hasp_decrypt(handle, (void*)buffer, length);
+	_last_status = status;
+
+	return status;
+}
 #pragma endregion
