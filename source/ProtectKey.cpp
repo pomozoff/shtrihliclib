@@ -114,13 +114,14 @@ const bool ProtectKey::is_key_base(void) const {
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	for (const auto& element : _check_methods) {
-		if (_is_key_nfr && element->is_check_method_for_nfr()) {
+		bool is_check_nfr_true = element->is_check_method_for_nfr();
+		if (_is_key_nfr && is_check_nfr_true) {
 			return true;
 		}
 		result = element->check(shared_from_this());
-		_is_key_nfr = result && element->is_check_method_for_nfr();
+		_is_key_nfr = result && is_check_nfr_true;
 
-		if (!result && !element->is_check_method_for_nfr()) {
+		if (!result && !is_check_nfr_true) {
 			break;
 		}
 	}
