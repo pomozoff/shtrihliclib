@@ -109,8 +109,8 @@ const std::string ProtectKeyHaspSL::key_id(const hasp_handle_t handle) const {
 	const hasp_status_t status = hasp_get_sessioninfo(handle, HASP_KEYINFO, &info);
 	if (HASP_STATUS_OK == status) {
 		const std::string info_string = info;
-		const size_t haspid_begin = info_string.find_first_of(xml_begin_id);
-		const size_t haspid_end = info_string.find_first_of(xml_end_id);
+		const size_t haspid_begin = info_string.find(xml_begin_id);
+		const size_t haspid_end = info_string.find(xml_end_id);
 		if (std::string::npos != haspid_begin && std::string::npos != haspid_end) {
 			size_t first_symbol_position = haspid_begin + xml_begin_id.size();
 			size_t length = haspid_end - first_symbol_position;
