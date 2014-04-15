@@ -17,7 +17,7 @@ const hasp_status_t RealKeyHaspSL::_hasp_login_scope(const hasp_feature_t featur
 	_last_status = status;
 	return status;
 }
-const hasp_status_t RealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, value_t& buffer) const {
+const hasp_status_t RealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, value_t& buffer) const {
 	uint8_t *data = new uint8_t[length];
 	auto status = hasp_read(handle, file_id, offset, length, data);
 	_last_status = status;
@@ -29,7 +29,7 @@ const hasp_status_t RealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const 
 
 	return status;
 }
-const hasp_status_t RealKeyHaspSL::_hasp_write(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer) const {
+const hasp_status_t RealKeyHaspSL::_hasp_write(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, const value_t& buffer) const {
 	auto status = hasp_write(handle, file_id, offset, length, &buffer[0]);
 	_last_status = status;
 	return status;
