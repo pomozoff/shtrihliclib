@@ -23,7 +23,7 @@ const hasp_status_t RealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const 
 	_last_status = status;
 
 	if (HASP_STATUS_OK == status) {
-		buffer.assign(data[0], data[length - 1]);
+		buffer.assign(&data[0], &data[length]);
 	}
 	delete[] data;
 
