@@ -32,8 +32,8 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const platfor
 	return create_key(key_type, platform->session_id());
 }
 
-const iprotect_key_t ProtectKey::find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate) {
-	iprotect_key_t protect_key = nullptr;
+const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate) {
+	iprotect_key_weak_t iprotect_key;
 	for (const auto& element : keys_list) {
 		element->set_max_check_number(1);
 		element->_key_delegate = nullptr;
