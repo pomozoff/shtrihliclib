@@ -62,7 +62,6 @@ const bool Granule::is_able_to_login(const check_method_login_t check_method) co
 }
 const bool Granule::is_same_memory(const check_method_memory_t check_method) const {
 	bool result = false;
-
 	auto _protect_key = _protect_weak_key.lock();
 	if (nullptr == _protect_key) {
 		return false;
@@ -72,7 +71,6 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 	} else {
 		_protect_key->is_same_memory(check_method);
 	}
-
 	if (_is_granule_nfr_date) {
 		time_t nfr_end_date;
 		if (2 == _value.size()) {
