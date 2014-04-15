@@ -80,8 +80,7 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 		}
 		_protect_key->set_nfr_end_date(nfr_end_date);
 	}
-
-	return false;
+	return result;
 }
 const bool Granule::logout_key(const check_method_login_t check_method) const {
 	auto _protect_key = _protect_weak_key.lock();
