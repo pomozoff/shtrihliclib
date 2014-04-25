@@ -15,75 +15,75 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\..\tests\CheckMethodBaseTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="..\..\tests\CheckMethodLoginTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CheckMethodBaseTest.h">
+    <ClInclude Include="..\..\tests\CheckMethodMemoryTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CheckMethodLoginTest.h">
+    <ClInclude Include="..\..\tests\CheckMethodTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CheckMethodMemoryTest.h">
+    <ClInclude Include="..\..\tests\LicenseBlockManagerTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CheckMethodTest.h">
+    <ClInclude Include="..\..\tests\LicenseBlockTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LicenseBlockTest.h">
+    <ClInclude Include="..\..\tests\MockRealKeyHaspSL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProtectKeyTest.h">
+    <ClInclude Include="..\..\tests\ProtectKeyHaspSLTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LicenseBlockManagerTest.h">
+    <ClInclude Include="..\..\tests\ProtectKeyTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProtectKeyHaspSLTest.h">
+    <ClInclude Include="..\..\tests\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MockRealKeyHaspSL.h">
+    <ClInclude Include="..\..\tests\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <Text Include="..\..\tests\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\tests\CheckMethodBaseTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests.cpp">
+    <ClCompile Include="..\..\tests\CheckMethodLoginTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CheckMethodBaseTest.cpp">
+    <ClCompile Include="..\..\tests\CheckMethodMemoryTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CheckMethodLoginTest.cpp">
+    <ClCompile Include="..\..\tests\CheckMethodTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CheckMethodMemoryTest.cpp">
+    <ClCompile Include="..\..\tests\LicenseBlockManagerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CheckMethodTest.cpp">
+    <ClCompile Include="..\..\tests\LicenseBlockTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LicenseBlockTest.cpp">
+    <ClCompile Include="..\..\tests\MockRealKeyHaspSL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProtectKeyTest.cpp">
+    <ClCompile Include="..\..\tests\ProtectKeyHaspSLTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LicenseBlockManagerTest.cpp">
+    <ClCompile Include="..\..\tests\ProtectKeyTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProtectKeyHaspSLTest.cpp">
+    <ClCompile Include="..\..\tests\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MockRealKeyHaspSL.cpp">
+    <ClCompile Include="..\..\tests\tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

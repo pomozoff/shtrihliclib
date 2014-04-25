@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shtrih_liclib", "source\LicLib.vcxproj", "{773D9B09-8495-423E-9C31-45DDE36DE910}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shtrih_liclib", "LicLib\LicLib.vcxproj", "{773D9B09-8495-423E-9C31-45DDE36DE910}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shtrih_liclib_test", "tests\shtrih_test_liclib.vcxproj", "{7473E5A9-A716-496C-B5D9-923BD938FCB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shtrih_liclib_test", "Tests\shtrih_test_liclib.vcxproj", "{7473E5A9-A716-496C-B5D9-923BD938FCB4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{773D9B09-8495-423E-9C31-45DDE36DE910} = {773D9B09-8495-423E-9C31-45DDE36DE910}
 	EndProjectSection

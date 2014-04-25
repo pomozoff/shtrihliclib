@@ -44,11 +44,15 @@
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -57,17 +61,17 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\include;..\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\source</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib;..\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shtrih_liclib.lib;Secur32.lib;gmockd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib;..\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shtrih_liclibd.lib;Secur32.lib;gmockd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\lib\hasp_windows_70838.dll $(SolutionDir)$(Configuration)\</Command>
+      <Command>copy /y $(SolutionDir)\..\lib\hasp_windows_70838.dll $(OutDir)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,7 +83,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\include;..\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\source</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,43 +91,45 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\lib;..\Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib;..\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>shtrih_liclib.lib;Secur32.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\lib\hasp_windows_70838.dll $(SolutionDir)$(Configuration)\</Command>
+      <Command>copy /y $(SolutionDir)\..\lib\hasp_windows_70838.dll $(OutDir)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <ClInclude Include="..\..\tests\CheckMethodBaseTest.h" />
+    <ClInclude Include="..\..\tests\CheckMethodLoginTest.h" />
+    <ClInclude Include="..\..\tests\CheckMethodMemoryTest.h" />
+    <ClInclude Include="..\..\tests\CheckMethodTest.h" />
+    <ClInclude Include="..\..\tests\LicenseBlockManagerTest.h" />
+    <ClInclude Include="..\..\tests\LicenseBlockTest.h" />
+    <ClInclude Include="..\..\tests\MockRealKeyHaspSL.h" />
+    <ClInclude Include="..\..\tests\ProtectKeyHaspSLTest.h" />
+    <ClInclude Include="..\..\tests\ProtectKeyTest.h" />
+    <ClInclude Include="..\..\tests\stdafx.h" />
+    <ClInclude Include="..\..\tests\targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CheckMethodBaseTest.h" />
-    <ClInclude Include="CheckMethodLoginTest.h" />
-    <ClInclude Include="CheckMethodMemoryTest.h" />
-    <ClInclude Include="CheckMethodTest.h" />
-    <ClInclude Include="LicenseBlockManagerTest.h" />
-    <ClInclude Include="LicenseBlockTest.h" />
-    <ClInclude Include="MockRealKeyHaspSL.h" />
-    <ClInclude Include="ProtectKeyHaspSLTest.h" />
-    <ClInclude Include="ProtectKeyTest.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <Text Include="..\..\tests\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CheckMethodBaseTest.cpp" />
-    <ClCompile Include="CheckMethodLoginTest.cpp" />
-    <ClCompile Include="CheckMethodMemoryTest.cpp" />
-    <ClCompile Include="CheckMethodTest.cpp" />
-    <ClCompile Include="LicenseBlockManagerTest.cpp" />
-    <ClCompile Include="LicenseBlockTest.cpp" />
-    <ClCompile Include="MockRealKeyHaspSL.cpp" />
-    <ClCompile Include="ProtectKeyHaspSLTest.cpp" />
-    <ClCompile Include="ProtectKeyTest.cpp" />
-    <ClCompile Include="tests.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="..\..\tests\CheckMethodBaseTest.cpp" />
+    <ClCompile Include="..\..\tests\CheckMethodLoginTest.cpp" />
+    <ClCompile Include="..\..\tests\CheckMethodMemoryTest.cpp" />
+    <ClCompile Include="..\..\tests\CheckMethodTest.cpp" />
+    <ClCompile Include="..\..\tests\LicenseBlockManagerTest.cpp" />
+    <ClCompile Include="..\..\tests\LicenseBlockTest.cpp" />
+    <ClCompile Include="..\..\tests\MockRealKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\tests\ProtectKeyHaspSLTest.cpp" />
+    <ClCompile Include="..\..\tests\ProtectKeyTest.cpp" />
+    <ClCompile Include="..\..\tests\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\tests.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -42,13 +42,14 @@
     <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -62,7 +63,7 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>..\include;..\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\source</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>false</FunctionLevelLinking>
@@ -70,7 +71,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>hasp_windows_70838.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -84,64 +85,64 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\include;..\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\source</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
       <AdditionalDependencies>hasp_windows_70838.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CheckMethod.cpp" />
-    <ClCompile Include="CheckMethodBase.cpp" />
-    <ClCompile Include="CheckMethodLogin.cpp" />
-    <ClCompile Include="CheckMethodMemory.cpp" />
-    <ClCompile Include="Granule.cpp" />
-    <ClCompile Include="IKeyChecker.cpp" />
-    <ClCompile Include="IRealKeyHasp.cpp" />
-    <ClCompile Include="IProtectKey.cpp" />
-    <ClCompile Include="IProtectKeyDelegate.cpp" />
-    <ClCompile Include="KeyChecker.cpp" />
-    <ClCompile Include="RealKeyHaspHL.cpp" />
-    <ClCompile Include="RealKeyHaspSL.cpp" />
-    <ClCompile Include="LicenseBlock.cpp" />
-    <ClCompile Include="LicenseBlockManager.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="PlatformLinux.cpp" />
-    <ClCompile Include="PlatformWindows.cpp" />
-    <ClCompile Include="ProtectKey.cpp" />
-    <ClCompile Include="ProtectKeyHaspSL.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClInclude Include="..\..\source\CheckMethod.h" />
+    <ClInclude Include="..\..\source\CheckMethodBase.h" />
+    <ClInclude Include="..\..\source\CheckMethodLogin.h" />
+    <ClInclude Include="..\..\source\CheckMethodMemory.h" />
+    <ClInclude Include="..\..\source\DataTypes.h" />
+    <ClInclude Include="..\..\source\Granule.h" />
+    <ClInclude Include="..\..\source\IKeyChecker.h" />
+    <ClInclude Include="..\..\source\IProtectKey.h" />
+    <ClInclude Include="..\..\source\IProtectKeyDelegate.h" />
+    <ClInclude Include="..\..\source\IRealKeyHasp.h" />
+    <ClInclude Include="..\..\source\KeyChecker.h" />
+    <ClInclude Include="..\..\source\LicenseBlock.h" />
+    <ClInclude Include="..\..\source\LicenseBlockManager.h" />
+    <ClInclude Include="..\..\source\Platform.h" />
+    <ClInclude Include="..\..\source\PlatformLinux.h" />
+    <ClInclude Include="..\..\source\PlatformWindows.h" />
+    <ClInclude Include="..\..\source\ProtectKey.h" />
+    <ClInclude Include="..\..\source\ProtectKeyHaspSL.h" />
+    <ClInclude Include="..\..\source\RealKeyHaspHL.h" />
+    <ClInclude Include="..\..\source\RealKeyHaspSL.h" />
+    <ClInclude Include="..\..\source\stdafx.h" />
+    <ClInclude Include="..\..\source\targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\CheckMethod.cpp" />
+    <ClCompile Include="..\..\source\CheckMethodBase.cpp" />
+    <ClCompile Include="..\..\source\CheckMethodLogin.cpp" />
+    <ClCompile Include="..\..\source\CheckMethodMemory.cpp" />
+    <ClCompile Include="..\..\source\Granule.cpp" />
+    <ClCompile Include="..\..\source\IKeyChecker.cpp" />
+    <ClCompile Include="..\..\source\IProtectKey.cpp" />
+    <ClCompile Include="..\..\source\IProtectKeyDelegate.cpp" />
+    <ClCompile Include="..\..\source\IRealKeyHasp.cpp" />
+    <ClCompile Include="..\..\source\KeyChecker.cpp" />
+    <ClCompile Include="..\..\source\LicenseBlock.cpp" />
+    <ClCompile Include="..\..\source\LicenseBlockManager.cpp" />
+    <ClCompile Include="..\..\source\Platform.cpp" />
+    <ClCompile Include="..\..\source\PlatformLinux.cpp" />
+    <ClCompile Include="..\..\source\PlatformWindows.cpp" />
+    <ClCompile Include="..\..\source\ProtectKey.cpp" />
+    <ClCompile Include="..\..\source\ProtectKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\source\RealKeyHaspHL.cpp" />
+    <ClCompile Include="..\..\source\RealKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CheckMethod.h" />
-    <ClInclude Include="CheckMethodBase.h" />
-    <ClInclude Include="CheckMethodLogin.h" />
-    <ClInclude Include="CheckMethodMemory.h" />
-    <ClInclude Include="DataTypes.h" />
-    <ClInclude Include="Granule.h" />
-    <ClInclude Include="IKeyChecker.h" />
-    <ClInclude Include="IRealKeyHasp.h" />
-    <ClInclude Include="IProtectKey.h" />
-    <ClInclude Include="IProtectKeyDelegate.h" />
-    <ClInclude Include="KeyChecker.h" />
-    <ClInclude Include="RealKeyHaspHL.h" />
-    <ClInclude Include="RealKeyHaspSL.h" />
-    <ClInclude Include="LicenseBlock.h" />
-    <ClInclude Include="LicenseBlockManager.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="PlatformLinux.h" />
-    <ClInclude Include="PlatformWindows.h" />
-    <ClInclude Include="ProtectKey.h" />
-    <ClInclude Include="ProtectKeyHaspSL.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Text Include="..\..\source\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
