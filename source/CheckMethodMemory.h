@@ -19,6 +19,8 @@ class CheckMethodMemory final : public CheckMethod, public std::enable_shared_fr
 		const KeyMemoryType memory_type(void) const;
 	protected:
 	private:
+		CheckMethodMemory& operator=(const CheckMethodMemory &tmp);
+
 		const offset_t _offset;
 		const value_t _value;
 		const check_method_login_t _logged_in_method;

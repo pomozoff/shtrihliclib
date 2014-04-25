@@ -26,6 +26,8 @@ class LicenseBlock final {
 		const value_t& block(void) const;
 	protected:
 	private:
+		LicenseBlock& operator=(const LicenseBlock &tmp);
+
 		mutable value_t _block;
 		const offset_t _offset_in_manager;
 		const time_t _timeout;

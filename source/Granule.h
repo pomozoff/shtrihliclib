@@ -28,6 +28,8 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 		virtual const bool is_same_memory(const check_method_memory_t check_method) const override final;
 		virtual const bool logout_key(const check_method_login_t check_method) const override final;
 	private:
+		Granule& operator=(const Granule &tmp);
+		
 		const std::wstring _id;
 		const protect_key_weak_t _protect_weak_key;
 

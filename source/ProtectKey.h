@@ -73,6 +73,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
 	private:
+		ProtectKey& operator=(const ProtectKey &tmp);
+
 		mutable granules_t _granules;
 		mutable bool _logout_after_check = false;
 		bool _is_key_base = false;
