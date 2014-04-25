@@ -22,6 +22,7 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	
 	auto id = L"(computer-user)";
 	const value_t block = LicenseBlock::block_from_string(id, some_time);
+	ASSERT_EQ(block.size(), LicenseBlock::sizeof_block);
 
 	ASSERT_EQ(block[0], first_byte);
 	ASSERT_EQ(block[LicenseBlock::sizeof_block - 1], last_byte);
@@ -29,8 +30,11 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	offset_t block_offset = LicenseBlock::sizeof_block * 4;
 	value_t buffer(ProtectKeyHaspSL::read_write_memory_size);
 	bool successs_copy = ProtectKey::copy_block_to_buffer(block, buffer, sizeof block, 0, block_offset);
+	ASSERT_EQ(buffer.size(), ProtectKeyHaspSL::read_write_memory_size);
 
 	ASSERT_TRUE(successs_copy);
+	ASSERT_EQ(block.size(), LicenseBlock::sizeof_block);
+	ASSERT_EQ(buffer.size(), ProtectKeyHaspSL::read_write_memory_size);
 	ASSERT_EQ(buffer[block_offset], first_byte);
 	ASSERT_EQ(buffer[block_offset + LicenseBlock::sizeof_block - 1], last_byte);
 
