@@ -48,7 +48,7 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 		auto offset = check_method->offset();
 		auto length = check_method->value().size();
 		auto memory_type = _real_key->hasp_memory_type(check_method->memory_type());
-		hasp_status_t status = _real_key->_hasp_read(handle, memory_type, offset, length, buffer);
+		_real_key->_hasp_read(handle, memory_type, offset, length, buffer);
 	}
 	return buffer;
 }
