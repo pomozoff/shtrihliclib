@@ -33,5 +33,13 @@ TEST_F(ProtectKeyTest, copy_block_to_buffer) {
 	ASSERT_TRUE(successs_copy);
 	ASSERT_EQ(buffer[block_offset], first_byte);
 	ASSERT_EQ(buffer[block_offset + LicenseBlock::sizeof_block - 1], last_byte);
+
+#pragma region Private
+void ProtectKeyTest::printBuffer(const std::string prefix, const value_t& buffer, const offset_t offset, const size_t size) const {
+	std::cout << "Start of block offset is: " << offset << std::endl;
+	std::cout << "End   of block offset is: " << offset + size - 1 << std::endl;
+	for (size_t i = 0; i < size; i++) {
+		std::cout << prefix << "buffer[" << offset + i << "] = " << (int)buffer[offset + i] << std::endl;
+	}
 }
 #pragma endregion
