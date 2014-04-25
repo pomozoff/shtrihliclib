@@ -90,6 +90,9 @@
       <AdditionalLibraryDirectories>..\lib;..\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>shtrih_liclib.lib;Secur32.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(SolutionDir)\lib\hasp_windows_70838.dll $(SolutionDir)$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
