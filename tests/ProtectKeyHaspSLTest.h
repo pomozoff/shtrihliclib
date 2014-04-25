@@ -6,8 +6,9 @@
 #include "ProtectKey.h"
 #include "ProtectKeyHaspSL.h"
 #include "MockRealKeyHaspSL.h"
+#include "IProtectKeyDelegate.h"
 
-class ProtectKeyHaspSLTest : public ::testing::Test {
+class ProtectKeyHaspSLTest : public ::testing::Test, public IProtectKeyDelegate {
 	public:
 		~ProtectKeyHaspSLTest(void);
 
@@ -21,4 +22,6 @@ class ProtectKeyHaspSLTest : public ::testing::Test {
 		const size_t _licenses_amount_two = 2;
 
 		const protect_keys_t createKeys(void) const;
+
+		virtual void did_check_protect_key(const bool success) override final;
 };
