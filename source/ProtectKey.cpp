@@ -64,7 +64,7 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 	auto source_iterator_end = source.begin() + source_offset + length;
 	auto destination_iterator = destination.begin() + destination_offset;
 
-	std::copy(source_iterator_begin, source_iterator_end, std::inserter(destination, destination_iterator));
+	std::move(source_iterator_begin, source_iterator_end, destination_iterator);
 	
 	return true;
 }
