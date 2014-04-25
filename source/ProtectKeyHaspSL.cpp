@@ -57,7 +57,9 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 #pragma region IKeyChecker Interface
 const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_method) const {
 	bool isSuccess = false;
-	if (login(check_method)) {
+	hasp_handle_t handle = HASP_INVALID_HANDLE_VALUE;
+	if (login(check_method, handle)) {
+		_key_number = key_id(handle);
 		_last_loggedin_method = check_method;
 		isSuccess = get_license(check_method);
 	}
@@ -81,9 +83,9 @@ const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_me
 const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method) const {
 	bool success = false;
 	const auto handle = get_handle(check_method);
-	if (HASP_INV_HND == handle) {
+	if (HASP_INVALID_HANDLE_VALUE == handle) {
 		_error_string = R"(Ошибка)";
-		_error_code = HASP_INV_HND;
+		_error_code = HASP_INVALID_HANDLE_VALUE;
 	} else {
 		const auto status = _real_key->_hasp_logout(handle);
 		success = HASP_STATUS_OK == status;
@@ -95,7 +97,12 @@ const bool ProtectKeyHaspSL::decrypt(uint8_t* buffer, const size_t length) const
 	if (!_decrypt_method) {
 		return false;
 	}
-	const auto handle = get_handle(_decrypt_method);
+	hasp_handle_t handle = get_handle(_decrypt_method);
+	if (HASP_INVALID_HANDLE_VALUE == handle) {
+		if (!login(_decrypt_method, handle)) {
+			return false;
+		}
+	}
 	auto status = _real_key->_hasp_decrypt(handle, buffer, length);
 	return HASP_STATUS_OK == status;
 }
@@ -145,21 +152,17 @@ const hasp_status_t ProtectKeyHaspSL::write_rw_memory(const check_method_login_t
 	return status;
 }
 
-const bool ProtectKeyHaspSL::login(const check_method_login_t check_method) const {
+const bool ProtectKeyHaspSL::login(const check_method_login_t check_method, hasp_handle_t& handle) const {
 	if (!check_method) {
 		return false;
 	}
-	hasp_handle_t handle = HASP_INV_HND;
 	const auto status = _real_key->_hasp_login_scope(check_method->feature(), scope, vendor_code, handle);
 	const bool success = HASP_STATUS_OK == status;
 
 	process_result(status);
 	if (HASP_STATUS_OK == _real_key->last_status()) {
-		_key_number = key_id(handle);
 		_real_key->_hasp_legacy_set_idletime(handle, 1);
-
 		add_handle(check_method, handle);
-		add_feature(check_method->feature());
 	}
 	return success;
 }
@@ -199,7 +202,8 @@ const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method
 }
 
 void ProtectKeyHaspSL::free_licnese(void) const {
-	if (!login(_last_loggedin_method)) {
+	hasp_handle_t handle = HASP_INVALID_HANDLE_VALUE;
+	if (!login(_last_loggedin_method, handle)) {
 		return;
 	}
 	auto license_block_manager = make_license_block_manager(_last_loggedin_method);
