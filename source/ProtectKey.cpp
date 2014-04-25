@@ -11,7 +11,8 @@
 
 #pragma region Constructor Destructor
 ProtectKey::ProtectKey(const size_t session_id_hash) :
-_session_id_hash(session_id_hash)
+_session_id_hash(session_id_hash),
+_key_delegate(NULL)
 {
 }
 ProtectKey::~ProtectKey(void) {
@@ -32,16 +33,16 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const platfor
 	return create_key(key_type, platform->session_id());
 }
 
-const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate) {
+const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate) {
 	iprotect_key_weak_t iprotect_key;
 	for (const auto& element : keys_list) {
 		element->set_max_check_number(1);
-		element->_key_delegate = nullptr;
+		element->_key_delegate = NULL;
 
 		bool is_key_found = element->check();
 		if (is_key_found) {
 			element->check_granules();
-			element->_key_delegate = key_delegate;
+			element->_key_delegate = &key_delegate;
 		}
 
 		element->try_to_logout();
@@ -203,8 +204,8 @@ const bool ProtectKey::check_license_with_methods(void) const {
 	return result;
 }
 const bool ProtectKey::recheck_key(void) const {
-	iprotect_key_delegate_t temp_delegate = _key_delegate;
-	_key_delegate = nullptr;
+	auto& temp_delegate = _key_delegate;
+	_key_delegate = NULL;
 
 	bool result = check();
 	if (result) {

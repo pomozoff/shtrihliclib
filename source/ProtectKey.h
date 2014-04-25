@@ -15,7 +15,6 @@ using protect_key_weak_t = std::weak_ptr<const ProtectKey>;
 using protect_keys_t = std::vector<const protect_key_t>;
 using granule_t = std::shared_ptr<const Granule>;
 using granules_t = std::vector<const granule_t>;
-using iprotect_key_delegate_t = std::shared_ptr<const IProtectKeyDelegate>;
 using iprotect_key_weak_t = std::weak_ptr<const IProtectKey>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
@@ -28,7 +27,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const size_t hash_from_session_id(const std::wstring session_id);
 		static const protect_key_t create_key(const KeyType key_type, const platform_t platform);
 
-		static const iprotect_key_weak_t find_key(const protect_keys_t& keys_list, const iprotect_key_delegate_t key_delegate);
+		static const iprotect_key_weak_t find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate);
 		static const bool copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset);
 
 		const granule_t create_granule(const std::wstring id) const;
@@ -62,7 +61,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable std::string _error_string;
 		mutable size_t _error_code;
 		mutable features_t _features;
-		mutable iprotect_key_delegate_t _key_delegate = nullptr;
+		mutable IProtectKeyDelegate* _key_delegate;
 
 		ProtectKey(const size_t session_id_hash);
 
