@@ -33,7 +33,7 @@ const std::wstring PlatformWindows::get_computer_name(void) const {
 }
 const std::wstring PlatformWindows::get_user_name(void) const {
 	DWORD size = 0;
-	GetUserNameExW(NameDisplay, NULL, &size);
+	GetUserNameExW(NameSamCompatible, NULL, &size);
 
 	PTCHAR buffer = new TCHAR[size];
 	std::wstring userName = L"";
