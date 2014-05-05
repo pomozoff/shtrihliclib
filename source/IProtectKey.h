@@ -12,7 +12,8 @@ class IProtectKey {
 		virtual const bool check_license(void) const = 0;
 		virtual const bool is_key_nfr(void) const = 0;
 		virtual const bool is_key_base(void) const = 0;
-		virtual const bool decrypt(uint8_t* buffer, const size_t length) const = 0;
+		//virtual const bool decrypt(byte_t* buffer, const size_t length) const = 0;
+		virtual void decrypt(const byte_t* encoded_buffer, byte_t* iv_dec, byte_t* decoded_buffer, const size_t decoded_length) const = 0;
 
 		void set_decrypt_method(const check_method_login_t decrypt_method) const;
 	protected:

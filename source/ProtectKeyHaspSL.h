@@ -25,7 +25,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		virtual const bool logout_key(const check_method_login_t check_method) const override final;
 
 		/* IProtectKey Interface */
-		virtual const bool decrypt(uint8_t* buffer, const size_t length) const override final;
+		//virtual const bool decrypt(byte_t* buffer, const size_t length) const override final;
 	protected:
 		// Наследование из базового класса ProtectKey
 		const KeyType _key_type = KeyType::HaspSL;

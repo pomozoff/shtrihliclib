@@ -3,11 +3,16 @@
 
 #include <iterator>
 
+#include <openssl/aes.h>
+#include <openssl/rand.h>
+
 #include "ProtectKey.h"
 #include "Granule.h"
 #include "ProtectKeyHaspSL.h"
 #include "Platform.h"
 #include "RealKeyHaspSL.h"
+
+static const uint16_t AES_key_length = 256;
 
 #pragma region Constructor Destructor
 ProtectKey::ProtectKey(const size_t session_id_hash) :
@@ -108,6 +113,20 @@ const bool ProtectKey::is_key_nfr(void) const {
 }
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
+}
+void ProtectKey::decrypt(const byte_t* encoded_buffer, byte_t* iv_dec, byte_t* decoded_buffer, const size_t decoded_length) const {
+	std::string aes_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
+
+	// buffers for encryption and decryption
+	const size_t encslength = ((decoded_length + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
+	byte_t* internal_decoded_buffer = new byte_t[encslength];
+
+	AES_KEY dec_key;
+	AES_set_decrypt_key(reinterpret_cast<const byte_t*>(aes_key_str.data()), AES_key_length, &dec_key);
+	AES_cbc_encrypt(encoded_buffer, internal_decoded_buffer, encslength, &dec_key, iv_dec, AES_DECRYPT);
+
+	std::memcpy(decoded_buffer, internal_decoded_buffer, decoded_length);
+	delete[] internal_decoded_buffer;
 }
 #pragma endregion
 

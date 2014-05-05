@@ -67,8 +67,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\lib;..\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shtrih_liclibd.lib;Secur32.lib;gmockd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shtrih_liclibd.lib;Secur32.lib;gmockd.lib;libeay32MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\..\lib\hasp_windows_70838.dll $(OutDir)\</Command>
@@ -91,7 +91,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\lib;..\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>shtrih_liclib.lib;Secur32.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

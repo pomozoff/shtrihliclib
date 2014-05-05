@@ -18,7 +18,7 @@ const hasp_status_t RealKeyHaspSL::_hasp_login_scope(const hasp_feature_t featur
 	return status;
 }
 const hasp_status_t RealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, value_t& buffer) const {
-	uint8_t *data = new uint8_t[length];
+	byte_t *data = new byte_t[length];
 	auto status = hasp_read(handle, file_id, offset, length, data);
 	_last_status = status;
 
@@ -42,7 +42,7 @@ const hasp_status_t RealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) cons
 const hasp_status_t RealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const {
 	return hasp_legacy_set_idletime(handle, idle_time);
 }
-const hasp_status_t RealKeyHaspSL::_hasp_decrypt(const hasp_handle_t handle, uint8_t* buffer, const hasp_size_t length) const {
+const hasp_status_t RealKeyHaspSL::_hasp_decrypt(const hasp_handle_t handle, byte_t* buffer, const hasp_size_t length) const {
 	auto status = hasp_decrypt(handle, (void*)buffer, length);
 	_last_status = status;
 

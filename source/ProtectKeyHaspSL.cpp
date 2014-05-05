@@ -93,7 +93,8 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 	}
 	return success;
 }
-const bool ProtectKeyHaspSL::decrypt(uint8_t* buffer, const size_t length) const {
+/*
+const bool ProtectKeyHaspSL::decrypt(byte_t* buffer, const size_t length) const {
 	if (!_decrypt_method) {
 		return false;
 	}
@@ -106,6 +107,7 @@ const bool ProtectKeyHaspSL::decrypt(uint8_t* buffer, const size_t length) const
 	auto status = _real_key->_hasp_decrypt(handle, buffer, length);
 	return HASP_STATUS_OK == status;
 }
+*/
 #pragma endregion
 
 #pragma region KeyChecker Interface

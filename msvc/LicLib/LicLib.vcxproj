@@ -71,8 +71,8 @@
       </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>hasp_windows_70838.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MTd.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -91,8 +91,8 @@
       </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>hasp_windows_70838.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MT.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

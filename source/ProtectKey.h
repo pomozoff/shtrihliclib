@@ -39,6 +39,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool check_license(void) const override final;
 		virtual const bool is_key_nfr(void) const override final;
 		virtual const bool is_key_base(void) const override final;
+		virtual void decrypt(const byte_t* encoded_buffer, byte_t* iv_dec, byte_t* decoded_buffer, const size_t decoded_length) const override final;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t check_method) const override;
