@@ -59,44 +59,28 @@ void ProtectKeyTest::printBuffer(const std::string prefix, const value_t& buffer
 		std::cout << prefix << "buffer[" << offset + i << "] = " << (int)buffer[offset + i] << std::endl;
 	}
 }
-TEST_F(ProtectKeyTest, decode) {
-	std::string aes_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
-
+TEST_F(ProtectKeyTest, decrypt) {
 	// Generate input with a given length
-	const size_t inputslength = 50000;
-	byte_t* aes_input = new byte_t[inputslength];
-	memset(aes_input, 'X', inputslength);
+	const size_t input_length = 50000;
+	byte_t* aes_input = new byte_t[input_length];
+	std::memset(aes_input, 'X', input_length);
 
-	// Init vector
-	byte_t *iv_enc = new byte_t[AES_BLOCK_SIZE];
-	byte_t *iv_dec = new byte_t[AES_BLOCK_SIZE];
-	RAND_bytes(iv_enc, AES_BLOCK_SIZE);
-	memcpy(iv_dec, iv_enc, AES_BLOCK_SIZE);
+	byte_t* iv_enc = NULL;
+	size_t iv_length = 0;
 
-	// Buffers for encryption and decryption
-	const size_t encslength = ((inputslength + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
-	byte_t *enc_out = new byte_t[encslength];
-	byte_t *dec_out = new byte_t[inputslength];
-	memset(enc_out, 0, encslength);
-	memset(dec_out, 0, inputslength);
+	byte_t* enc_out = NULL;
+	size_t encrypted_length = 0;
+	_protect_key_hasp_sl->encrypt(aes_input, input_length, &iv_enc, iv_length, &enc_out, encrypted_length);
 
-	// Key to encode
-	AES_KEY enc_key;
-	AES_set_encrypt_key(reinterpret_cast<const byte_t*>(aes_key_str.data()), AES_key_length, &enc_key);
-	AES_cbc_encrypt(aes_input, enc_out, encslength, &enc_key, iv_enc, AES_ENCRYPT);
+	byte_t* dec_out = NULL;
+	_protect_key_hasp_sl->decrypt(enc_out, encrypted_length, iv_enc, &dec_out);
 
-	// Trying to decode
-	byte_t* decoded_buffer = new byte_t[inputslength];
-	_protect_key_hasp_sl->decrypt(enc_out, iv_dec, decoded_buffer, inputslength);
-
-	int result = std::memcmp(aes_input, decoded_buffer, inputslength);
-	ASSERT_TRUE(result == 0);
+	int result = std::memcmp(aes_input, dec_out, input_length);
+	ASSERT_TRUE((dec_out) && (result == 0));
 
 	delete[] aes_input;
 	delete[] iv_enc;
-	delete[] iv_dec;
 	delete[] enc_out;
 	delete[] dec_out;
-	delete[] decoded_buffer;
 }
 #pragma endregion

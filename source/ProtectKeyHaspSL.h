@@ -2,14 +2,14 @@
 #pragma once
 
 #include "hasp/hasp_api.h"
-
 #include "ProtectKey.h"
-#include "LicenseBlock.h"
-#include "LicenseBlockManager.h"
+
+class LicenseBlock;
+class LicenseBlockManager;
 
 class ProtectKeyHaspSL final : public ProtectKey {
 	public:
-		ProtectKeyHaspSL(const i_real_key_hasp_t key, const size_t session_id_hash);
+		ProtectKeyHaspSL(const real_key_hasp_t key, const size_t session_id_hash);
 		~ProtectKeyHaspSL(void);
 
 		static const size_t read_only_memory_size = 64;
@@ -27,16 +27,10 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		/* IProtectKey Interface */
 		//virtual const bool decrypt(byte_t* buffer, const size_t length) const override final;
 	protected:
-		// Наследование из базового класса ProtectKey
-		const KeyType _key_type = KeyType::HaspSL;
-		const time_t _timeout_check = 10; // Проверять лицензию каждые 10 секунд
-
 		/* KeyChecker Interface */
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 	private:
-		static const time_t license_timeout = 60; // Одна минута
-
-		const i_real_key_hasp_t _real_key;
+		const real_key_hasp_t _real_key;
 		mutable check_method_login_t _last_loggedin_method;
 
 		const std::string key_id(const hasp_handle_t handle) const;

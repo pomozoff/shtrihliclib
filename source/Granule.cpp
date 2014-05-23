@@ -32,7 +32,7 @@ const bool Granule::read_memory_to_value(void) const {
 #pragma region KeyChecker Interface
 const bool Granule::check(void) const {
 	bool result = _check_methods.size() > 0;
-	for (const auto& element : _check_methods) {
+	for (auto&& element : _check_methods) {
 		result = result && element->check(shared_from_this());
 		auto _protect_key = _protect_weak_key.lock();
 		if (_protect_key->is_key_nfr() && is_granule_nfr_date()) {

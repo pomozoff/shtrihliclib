@@ -6,7 +6,9 @@
 #include "ProtectKeyHaspSL.h"
 #include "CheckMethodMemory.h"
 #include "CheckMethodLogin.h"
-#include "IRealKeyHasp.h"
+#include "RealKeyHasp.h"
+#include "LicenseBlock.h"
+#include "LicenseBlockManager.h"
 
 #pragma region Constants
 static const unsigned char vendor_code[] =
@@ -29,10 +31,11 @@ static const char* scope =
 #pragma endregion
 
 #pragma region Constructor Destructor
-ProtectKeyHaspSL::ProtectKeyHaspSL(const i_real_key_hasp_t key, const size_t session_id_hash) :
-ProtectKey(session_id_hash),
-_real_key(key)
+ProtectKeyHaspSL::ProtectKeyHaspSL(const real_key_hasp_t key, const size_t session_id_hash)
+	: ProtectKey(session_id_hash, KeyType::HaspSL)
+	, _real_key(key)
 {
+	_license_timeout = 10; // поиск ключа каждые 10 секунд
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 	free_licnese();
@@ -73,7 +76,7 @@ const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_me
 	auto buffer = read_memory(check_method);
 	process_result(_real_key->last_status());
 	if (HASP_STATUS_OK == _real_key->last_status()) {
-		_error_string = R"()";
+		_error_string = L"";
 		if (check_method->value().size() == buffer.size()) {
 			success = std::equal(buffer.begin(), buffer.end(), check_method->value().begin());
 		}
@@ -84,7 +87,7 @@ const bool ProtectKeyHaspSL::logout_key(const check_method_login_t check_method)
 	bool success = false;
 	const auto handle = get_handle(check_method);
 	if (HASP_INVALID_HANDLE_VALUE == handle) {
-		_error_string = R"(Ошибка)";
+		_error_string = L"Ошибка";
 		_error_code = HASP_INVALID_HANDLE_VALUE;
 	} else {
 		const auto status = _real_key->_hasp_logout(handle);
@@ -187,7 +190,7 @@ const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const
 	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
 		return nullptr;
 	}
-	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, license_timeout, licenses_amount(check_method), _session_id_hash);
+	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, _license_timeout, licenses_amount(check_method), _session_id_hash);
 	return license_block_manager;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {
@@ -226,40 +229,40 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 	switch (status)
 	{
 		case HASP_STATUS_OK:
-			_error_string = R"()";
+			_error_string = L"";
 			break;
 		case HASP_NO_DRIVER:
-			_error_string = R"(Не обнаружен драйвер HASP)";
+			_error_string = L"Не обнаружен драйвер HASP";
 			break;
 		case HASP_CONTAINER_NOT_FOUND:
-			_error_string = R"(Не найден ключ HASP)";
+			_error_string = L"Не найден ключ HASP";
 			break;
 		case HASP_FEATURE_NOT_FOUND:
-			_error_string = R"(Программа не найдена)";
+			_error_string = L"Программа не найдена";
 			break;
 		case HASP_TS_DETECTED:
-			_error_string = R"(Запрещена работа в терминальной сессии)";
+			_error_string = L"Запрещена работа в терминальной сессии";
 			break;
 		case HASP_TMOF:
-			_error_string = R"(Слишком много открытых программ)";
+			_error_string = L"Слишком много открытых программ";
 			break;
 		case HASP_ACCESS_DENIED:
-			_error_string = R"(Доступ к программе запрещён)";
+			_error_string = L"Доступ к программе запрещён";
 			break;
 		case HASP_OLD_DRIVER:
-			_error_string = R"(Используется устаревший драйвер)";
+			_error_string = L"Используется устаревший драйвер";
 			break;
 		case HASP_SYS_ERR:
-			_error_string = R"(Ошибка вызова системной функции)";
+			_error_string = L"Ошибка вызова системной функции";
 			break;
 		case HASP_INSUF_MEM:
-			_error_string = R"(Недостаточно памяти)";
+			_error_string = L"Недостаточно памяти";
 			break;
 		case HASP_INV_HND:
-			_error_string = R"(Ошибочный дескриптор)";
+			_error_string = L"Ошибочный дескриптор";
 			break;
 		default:
-			_error_string = R"(Ошибка)";
+			_error_string = L"Ошибка";
 			break;
 	}
 }

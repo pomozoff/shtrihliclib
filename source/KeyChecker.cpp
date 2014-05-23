@@ -37,7 +37,7 @@ const check_method_memory_t KeyChecker::create_check_method_memory(const offset_
 
 #pragma region Protected
 void KeyChecker::set_max_check_number(check_number_t check_number) const {
-	for (const auto& element : _check_methods) {
+	for (auto&& element : _check_methods) {
 		element->set_max_check_number(check_number);
 	}
 }

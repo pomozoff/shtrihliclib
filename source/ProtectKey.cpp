@@ -13,11 +13,14 @@
 #include "RealKeyHaspSL.h"
 
 static const uint16_t AES_key_length = 256;
+static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
 
 #pragma region Constructor Destructor
-ProtectKey::ProtectKey(const size_t session_id_hash) :
-_session_id_hash(session_id_hash),
-_key_delegate(NULL)
+ProtectKey::ProtectKey(const size_t session_id_hash, const KeyType keytype)
+	: _session_id_hash(session_id_hash)
+	, _key_delegate(NULL)
+	, _license_timeout(60 * 30)  // поиск ключа каждые полчаса
+	, _keytype(keytype)
 {
 }
 ProtectKey::~ProtectKey(void) {
@@ -40,7 +43,7 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const platfor
 
 const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate) {
 	iprotect_key_weak_t iprotect_key;
-	for (const auto& element : keys_list) {
+	for (auto&& element : keys_list) {
 		element->set_max_check_number(1);
 		element->_key_delegate = NULL;
 
@@ -102,7 +105,7 @@ void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
 	if (_is_key_nfr) {
-		return false;
+		return true;
 	}
 	bool result = check_license_with_methods() || recheck_key();
 
@@ -114,26 +117,40 @@ const bool ProtectKey::is_key_nfr(void) const {
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
 }
-void ProtectKey::decrypt(const byte_t* encoded_buffer, byte_t* iv_dec, byte_t* decoded_buffer, const size_t decoded_length) const {
-	std::string aes_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
-
+const time_t ProtectKey::check_license_timeout(void) const {
+	return _license_timeout;
+}
+void ProtectKey::encrypt(const byte_t* input_buffer, const size_t input_length, byte_t** iv_enc, size_t& iv_length, byte_t** encrypted_buffer, size_t& encrypted_length) const {
 	// buffers for encryption and decryption
-	const size_t encslength = ((decoded_length + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
-	byte_t* internal_decoded_buffer = new byte_t[encslength];
+	encrypted_length = ((input_length + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
+	*encrypted_buffer = new byte_t[encrypted_length];
 
+	byte_t* internal_iv_enc = new byte_t[AES_BLOCK_SIZE];
+	RAND_bytes(internal_iv_enc, AES_BLOCK_SIZE);
+
+	*iv_enc = new byte_t[AES_BLOCK_SIZE];
+	std::memcpy(*iv_enc, internal_iv_enc, AES_BLOCK_SIZE);
+
+	iv_length = AES_BLOCK_SIZE;
+
+	AES_KEY enc_key;
+	AES_set_encrypt_key(reinterpret_cast<const byte_t*>(AES_key_str.data()), AES_key_length, &enc_key);
+	AES_cbc_encrypt(input_buffer, *encrypted_buffer, encrypted_length, &enc_key, internal_iv_enc, AES_ENCRYPT);
+
+	delete[] internal_iv_enc;
+}
+void ProtectKey::decrypt(const byte_t* encrypted_buffer, const size_t encrypted_length, byte_t* iv_dec, byte_t** decrypted_buffer) const {
+	*decrypted_buffer = new byte_t[encrypted_length];
 	AES_KEY dec_key;
-	AES_set_decrypt_key(reinterpret_cast<const byte_t*>(aes_key_str.data()), AES_key_length, &dec_key);
-	AES_cbc_encrypt(encoded_buffer, internal_decoded_buffer, encslength, &dec_key, iv_dec, AES_DECRYPT);
-
-	std::memcpy(decoded_buffer, internal_decoded_buffer, decoded_length);
-	delete[] internal_decoded_buffer;
+	AES_set_decrypt_key(reinterpret_cast<const byte_t*>(AES_key_str.data()), AES_key_length, &dec_key);
+	AES_cbc_encrypt(encrypted_buffer, *decrypted_buffer, encrypted_length, &dec_key, iv_dec, AES_DECRYPT);
 }
 #pragma endregion
 
 #pragma region KeyChecker Interface
 const bool ProtectKey::check(void) const {
 	bool result = false;
-	for (const auto& element : _check_methods) {
+	for (auto&& element : _check_methods) {
 		bool is_check_nfr_true = element->is_check_method_for_nfr();
 		if (_is_key_nfr && is_check_nfr_true) {
 			return true;
@@ -166,7 +183,7 @@ const bool ProtectKey::logout_key(const check_method_login_t check_method) const
 
 #pragma region Protected
 void ProtectKey::check_granules(void) const {
-	for (const auto& element : _granules) {
+	for (auto&& element : _granules) {
 		element->check();
 	}
 }
@@ -211,7 +228,7 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 #pragma region Private
 const bool ProtectKey::check_license_with_methods(void) const {
 	bool result = false;
-	for (const auto& element : _check_methods) {
+	for (auto&& element : _check_methods) {
 		if (!element->is_check_method_for_license()) {
 			continue;
 		}

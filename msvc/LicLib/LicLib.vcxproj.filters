@@ -42,9 +42,6 @@
     <ClInclude Include="..\..\source\IProtectKeyDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\IRealKeyHasp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\KeyChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -81,6 +78,15 @@
     <ClInclude Include="..\..\source\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\RealKeyHasp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ProtectKeyRockey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\RealKeyRockey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\CheckMethod.cpp">
@@ -105,9 +111,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\IProtectKeyDelegate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\IRealKeyHasp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\KeyChecker.cpp">
@@ -141,6 +144,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\RealKeyHasp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ProtectKeyRockey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\RealKeyRockey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

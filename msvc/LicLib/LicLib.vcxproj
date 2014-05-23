@@ -105,7 +105,6 @@
     <ClInclude Include="..\..\source\IKeyChecker.h" />
     <ClInclude Include="..\..\source\IProtectKey.h" />
     <ClInclude Include="..\..\source\IProtectKeyDelegate.h" />
-    <ClInclude Include="..\..\source\IRealKeyHasp.h" />
     <ClInclude Include="..\..\source\KeyChecker.h" />
     <ClInclude Include="..\..\source\LicenseBlock.h" />
     <ClInclude Include="..\..\source\LicenseBlockManager.h" />
@@ -114,8 +113,11 @@
     <ClInclude Include="..\..\source\PlatformWindows.h" />
     <ClInclude Include="..\..\source\ProtectKey.h" />
     <ClInclude Include="..\..\source\ProtectKeyHaspSL.h" />
+    <ClInclude Include="..\..\source\ProtectKeyRockey.h" />
+    <ClInclude Include="..\..\source\RealKeyHasp.h" />
     <ClInclude Include="..\..\source\RealKeyHaspHL.h" />
     <ClInclude Include="..\..\source\RealKeyHaspSL.h" />
+    <ClInclude Include="..\..\source\RealKeyRockey.h" />
     <ClInclude Include="..\..\source\stdafx.h" />
     <ClInclude Include="..\..\source\targetver.h" />
   </ItemGroup>
@@ -128,7 +130,6 @@
     <ClCompile Include="..\..\source\IKeyChecker.cpp" />
     <ClCompile Include="..\..\source\IProtectKey.cpp" />
     <ClCompile Include="..\..\source\IProtectKeyDelegate.cpp" />
-    <ClCompile Include="..\..\source\IRealKeyHasp.cpp" />
     <ClCompile Include="..\..\source\KeyChecker.cpp" />
     <ClCompile Include="..\..\source\LicenseBlock.cpp" />
     <ClCompile Include="..\..\source\LicenseBlockManager.cpp" />
@@ -137,8 +138,11 @@
     <ClCompile Include="..\..\source\PlatformWindows.cpp" />
     <ClCompile Include="..\..\source\ProtectKey.cpp" />
     <ClCompile Include="..\..\source\ProtectKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\source\ProtectKeyRockey.cpp" />
+    <ClCompile Include="..\..\source\RealKeyHasp.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspHL.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\source\RealKeyRockey.cpp" />
     <ClCompile Include="..\..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

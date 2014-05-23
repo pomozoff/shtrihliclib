@@ -4,8 +4,8 @@
 #include <ctime>
 
 #include "IProtectKey.h"
-#include "IProtectKeyDelegate.h"
 #include "KeyChecker.h"
+#include "IProtectKeyDelegate.h"
 
 class ProtectKey;
 class Granule;
@@ -39,7 +39,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool check_license(void) const override final;
 		virtual const bool is_key_nfr(void) const override final;
 		virtual const bool is_key_base(void) const override final;
-		virtual void decrypt(const byte_t* encoded_buffer, byte_t* iv_dec, byte_t* decoded_buffer, const size_t decoded_length) const override final;
+		virtual const time_t check_license_timeout(void) const override final;
+		virtual void encrypt(const byte_t* input_buffer, const size_t input_length, byte_t** iv_enc, size_t& iv_length, byte_t** encrypted_buffer, size_t& encrypted_length) const override final;
+		virtual void decrypt(const byte_t* encrypted_buffer, const size_t encrypted_length, byte_t* iv_dec, byte_t** decrypted_buffer) const override final;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_base_key_available(const check_method_base_t check_method) const override;
@@ -55,16 +57,16 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	protected:
 		const size_t _session_id_hash;
 
-		KeyType _key_type;
-		time_t _timeout_check;
+		const KeyType _keytype;
+		time_t _license_timeout = 60; // Одна минута
 		
 		mutable std::string _key_number;
-		mutable std::string _error_string;
+		mutable std::wstring _error_string;
 		mutable size_t _error_code;
 		mutable features_t _features;
 		mutable IProtectKeyDelegate* _key_delegate;
 
-		ProtectKey(const size_t session_id_hash);
+		ProtectKey(const size_t session_id_hash, const KeyType keytype);
 
 		static const protect_key_t create_key(const KeyType key_type, const std::wstring session_id);
 
