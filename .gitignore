@@ -1,7 +1,6 @@
 *.user
 *.ncb
 *.suo
-*.lib
 *.so
 *.obj
 msvc/*/Debug/
