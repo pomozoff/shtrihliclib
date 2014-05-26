@@ -3,6 +3,21 @@
 
 #include <stdint.h>
 
+using rockey_handle_t = int16_t;
+using rockey_status_t = uint16_t;
+using rockey_feature_t = uint16_t;
+using rockey_size_t = uint16_t;
+using rockey_pass_t = uint16_t;
+
+struct rockey_passwords_t {
+	rockey_pass_t pass1 = 0;
+	rockey_pass_t pass2 = 0;
+	rockey_pass_t pass3 = 0;
+	rockey_pass_t pass4 = 0;
+};
+
+const rockey_handle_t ROCKEY_INVALID_HANDLE_VALUE = -1;
+
 // Function Code
 #define  RY_FIND                        1		// Find Dongle
 #define  RY_FIND_NEXT			2		// Find Next Dongle
@@ -57,6 +72,8 @@
 
 #define  ERR_INVALID_HANDLE		500		// Invalid handle passed to function
 #define  ERR_TS_DETECTED		501		// Terminsal session detected
+#define  ERR_INVALID_FEATURE	502		// Invalid feature
+#define  ERR_INVALID_MEM_RANGE	503		// Invalid range with memory operations
 
 
 /* Interface:
@@ -94,7 +111,7 @@
     *handle = Opened dongle handle
     return 0 = Success, else is error code
 
-(4) Cloase Dongle
+(4) Close Dongle
     Input:
     function = 3
     *handle = dongle handle

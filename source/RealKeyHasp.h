@@ -2,10 +2,9 @@
 #pragma once
 
 #include "hasp/hasp_api.h"
+#include "RealKey.h"
 
-#include "DataTypes.h"
-
-class RealKeyHasp {
+class RealKeyHasp : public RealKey<hasp_status_t> {
 	public:
 		RealKeyHasp(void);
 		virtual ~RealKeyHasp(void);
@@ -20,9 +19,4 @@ class RealKeyHasp {
 		virtual const hasp_status_t _hasp_logout(const hasp_handle_t handle) const;
 		virtual const hasp_status_t _hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const;
 		virtual const hasp_status_t _hasp_decrypt(const hasp_handle_t handle, byte_t* buffer, const hasp_size_t length) const;
-
-		/* Accessors */
-		const hasp_status_t last_status(void) const;
-	protected:
-		mutable hasp_status_t _last_status;
 };

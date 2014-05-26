@@ -44,9 +44,3 @@ const hasp_status_t RealKeyHasp::_hasp_decrypt(const hasp_handle_t handle, byte_
 	return status;
 }
 #pragma endregion
-
-#pragma region Accessors
-const hasp_status_t RealKeyHasp::last_status(void) const {
-	return _last_status;
-}
-#pragma endregion

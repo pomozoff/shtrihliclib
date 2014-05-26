@@ -106,6 +106,7 @@
     <ClInclude Include="..\..\tests\LicenseBlockManagerTest.h" />
     <ClInclude Include="..\..\tests\LicenseBlockTest.h" />
     <ClInclude Include="..\..\tests\MockRealKeyHaspSL.h" />
+    <ClInclude Include="..\..\tests\MockRealKeyRockeyLocal.h" />
     <ClInclude Include="..\..\tests\ProtectKeyHaspSLTest.h" />
     <ClInclude Include="..\..\tests\ProtectKeyTest.h" />
     <ClInclude Include="..\..\tests\stdafx.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="..\..\tests\LicenseBlockManagerTest.cpp" />
     <ClCompile Include="..\..\tests\LicenseBlockTest.cpp" />
     <ClCompile Include="..\..\tests\MockRealKeyHaspSL.cpp" />
+    <ClCompile Include="..\..\tests\MockRealKeyRockeyLocal.cpp" />
     <ClCompile Include="..\..\tests\ProtectKeyHaspSLTest.cpp" />
     <ClCompile Include="..\..\tests\ProtectKeyTest.cpp" />
     <ClCompile Include="..\..\tests\stdafx.cpp">

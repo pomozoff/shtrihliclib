@@ -40,7 +40,11 @@ const size_t ProtectKey::hash_from_session_id(const std::wstring session_id) {
 const protect_key_t ProtectKey::create_key(const KeyType key_type, const platform_t platform) {
 	return create_key(key_type, platform->session_id());
 }
-
+void ProtectKey::call_delegate(bool isSuccess) const {
+	if (_key_delegate) {
+		_key_delegate->did_check_protect_key(isSuccess);
+	}
+}
 const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate) {
 	iprotect_key_weak_t iprotect_key;
 	for (auto&& element : keys_list) {

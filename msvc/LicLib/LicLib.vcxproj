@@ -114,6 +114,9 @@
     <ClInclude Include="..\..\source\ProtectKey.h" />
     <ClInclude Include="..\..\source\ProtectKeyHaspSL.h" />
     <ClInclude Include="..\..\source\ProtectKeyRockey.h" />
+    <ClInclude Include="..\..\source\ProtectKeyRockeyLocal.h" />
+    <ClInclude Include="..\..\source\ProtectKeyRockeyNet.h" />
+    <ClInclude Include="..\..\source\RealKey.h" />
     <ClInclude Include="..\..\source\RealKeyHasp.h" />
     <ClInclude Include="..\..\source\RealKeyHaspHL.h" />
     <ClInclude Include="..\..\source\RealKeyHaspSL.h" />
@@ -139,6 +142,9 @@
     <ClCompile Include="..\..\source\ProtectKey.cpp" />
     <ClCompile Include="..\..\source\ProtectKeyHaspSL.cpp" />
     <ClCompile Include="..\..\source\ProtectKeyRockey.cpp" />
+    <ClCompile Include="..\..\source\ProtectKeyRockeyLocal.cpp" />
+    <ClCompile Include="..\..\source\ProtectKeyRockeyNet.cpp" />
+    <ClCompile Include="..\..\source\RealKey.cpp" />
     <ClCompile Include="..\..\source\RealKeyHasp.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspHL.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspSL.cpp" />

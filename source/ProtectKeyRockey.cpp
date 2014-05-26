@@ -9,9 +9,6 @@
 #include "LicenseBlock.h"
 #include "LicenseBlockManager.h"
 
-#pragma region Constants
-#pragma endregion
-
 #pragma region Constructor Destructor
 ProtectKeyRockey::ProtectKeyRockey(const real_key_rockey_t key, const size_t session_id_hash, const KeyType keytype)
 	: ProtectKey(session_id_hash, keytype)
@@ -35,16 +32,15 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 
 #pragma region IKeyChecker Interface
 const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_method) const {
-	bool isSuccess = false;
 	rockey_handle_t handle = ROCKEY_INVALID_HANDLE_VALUE;
 	if (login(check_method, handle)) {
 		_key_number = key_id(handle);
 		_last_loggedin_method = check_method;
-		isSuccess = get_license(check_method);
 	}
-	if (_key_delegate) {
-		_key_delegate->did_check_protect_key(isSuccess);
-	}
+
+	bool isSuccess = ROCKEY_INVALID_HANDLE_VALUE == handle;
+	call_delegate(isSuccess);
+
 	return isSuccess;
 }
 const bool ProtectKeyRockey::is_same_memory(const check_method_memory_t check_method) const {
@@ -71,11 +67,11 @@ const std::string ProtectKeyRockey::key_id(const rockey_handle_t handle) const {
 	return key_id;
 }
 
-const rockey_status_t ProtectKeyRockey::read_rw_memory(const check_method_login_t check_method, const offset_t offset, const size_t length, value_t& buffer) const {
+const rockey_status_t ProtectKeyRockey::read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const {
 	rockey_status_t status = ERR_INVALID_HANDLE;
 	return status;
 }
-const rockey_status_t ProtectKeyRockey::write_rw_memory(const check_method_login_t check_method, const offset_t offset, const size_t length, const value_t& buffer) const {
+const rockey_status_t ProtectKeyRockey::write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
 	rockey_status_t status = ERR_INVALID_HANDLE;
 	return status;
 }
@@ -84,7 +80,8 @@ const bool ProtectKeyRockey::login(const check_method_login_t check_method, rock
 	if (!check_method) {
 		return false;
 	}
-	const bool success = ERR_SUCCESS;
+	rockey_status_t status = ERR_INVALID_HANDLE;
+	const bool success = ERR_SUCCESS == status;
 	return success;
 }
 void ProtectKeyRockey::process_result(const rockey_status_t status) const {

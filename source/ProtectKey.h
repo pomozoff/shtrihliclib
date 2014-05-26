@@ -64,11 +64,12 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable std::wstring _error_string;
 		mutable size_t _error_code;
 		mutable features_t _features;
-		mutable IProtectKeyDelegate* _key_delegate;
 
 		ProtectKey(const size_t session_id_hash, const KeyType keytype);
 
 		static const protect_key_t create_key(const KeyType key_type, const std::wstring session_id);
+
+		void call_delegate(bool isSuccess) const;
 
 		void check_granules(void) const;
 		void try_to_logout(void) const;
@@ -78,6 +79,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	private:
 		ProtectKey& operator=(const ProtectKey &tmp);
 
+		mutable IProtectKeyDelegate* _key_delegate;
 		mutable granules_t _granules;
 		mutable bool _logout_after_check = false;
 		bool _is_key_base = false;
