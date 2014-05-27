@@ -3,20 +3,15 @@
 
 #include <stdint.h>
 
-using rockey_handle_t = int16_t;
+using rockey_handle_t = uint16_t;
 using rockey_status_t = uint16_t;
 using rockey_feature_t = uint16_t;
+using rockey_long_t = uint32_t;
 using rockey_size_t = uint16_t;
 using rockey_pass_t = uint16_t;
+using rockey_function_t = uint16_t;
 
-struct rockey_passwords_t {
-	rockey_pass_t pass1 = 0;
-	rockey_pass_t pass2 = 0;
-	rockey_pass_t pass3 = 0;
-	rockey_pass_t pass4 = 0;
-};
-
-const rockey_handle_t ROCKEY_INVALID_HANDLE_VALUE = -1;
+const rockey_handle_t ROCKEY_INVALID_HANDLE_VALUE = UINT16_MAX;
 
 // Function Code
 #define  RY_FIND                        1		// Find Dongle

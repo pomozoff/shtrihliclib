@@ -4,14 +4,15 @@
 #include "DataTypes.h"
 
 #include "ProtectKeyRockey.h"
+#include "RealKeyRockey.h"
 #include "CheckMethodMemory.h"
 #include "CheckMethodLogin.h"
 #include "LicenseBlock.h"
 #include "LicenseBlockManager.h"
 
 #pragma region Constructor Destructor
-ProtectKeyRockey::ProtectKeyRockey(const real_key_rockey_t key, const size_t session_id_hash, const KeyType keytype)
-	: ProtectKey(session_id_hash, keytype)
+ProtectKeyRockey::ProtectKeyRockey(const real_key_rockey_t key, const KeyType keytype)
+	: ProtectKey(keytype)
 	, _real_key(key)
 {
 }
@@ -23,7 +24,7 @@ ProtectKeyRockey::~ProtectKeyRockey(void) {
 #pragma region ProtectKey Interface
 const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_method) const {
 	value_t buffer;
-	const rockey_handle_t handle = get_handle(check_method->logged_in_method());
+	const rockey_handle_t handle = (rockey_handle_t)get_handle(check_method->logged_in_method());
 	if (ROCKEY_INVALID_HANDLE_VALUE != handle) {
 	}
 	return buffer;
@@ -34,22 +35,18 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_method) const {
 	rockey_handle_t handle = ROCKEY_INVALID_HANDLE_VALUE;
 	if (login(check_method, handle)) {
-		_key_number = key_id(handle);
 		_last_loggedin_method = check_method;
 	}
-
-	bool isSuccess = ROCKEY_INVALID_HANDLE_VALUE == handle;
+	bool isSuccess = ROCKEY_INVALID_HANDLE_VALUE != handle;
 	call_delegate(isSuccess);
 
 	return isSuccess;
 }
 const bool ProtectKeyRockey::is_same_memory(const check_method_memory_t check_method) const {
-	bool success = false;
-	return success;
+	return false;
 }
 const bool ProtectKeyRockey::logout_key(const check_method_login_t check_method) const {
-	bool success = false;
-	return success;
+	return false;
 }
 #pragma endregion
 
@@ -61,27 +58,24 @@ const key_handle_t ProtectKeyRockey::get_handle(const check_method_login_t check
 #pragma endregion
 
 #pragma region Private
-const std::string ProtectKeyRockey::key_id(const rockey_handle_t handle) const {
-	char *info = NULL;
-	std::string key_id = R"()";
-	return key_id;
-}
-
 const rockey_status_t ProtectKeyRockey::read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const {
-	rockey_status_t status = ERR_INVALID_HANDLE;
-	return status;
+	return ERR_INVALID_HANDLE;
 }
 const rockey_status_t ProtectKeyRockey::write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
-	rockey_status_t status = ERR_INVALID_HANDLE;
-	return status;
+	return ERR_INVALID_HANDLE;
 }
 
 const bool ProtectKeyRockey::login(const check_method_login_t check_method, rockey_handle_t& handle) const {
 	if (!check_method) {
 		return false;
 	}
-	rockey_status_t status = ERR_INVALID_HANDLE;
+	const auto status = _real_key->_rockey_login(check_method->feature(), _key_number, handle);
 	const bool success = ERR_SUCCESS == status;
+
+	process_result(status);
+	if (success) {
+		add_handle(check_method, handle);
+	}
 	return success;
 }
 void ProtectKeyRockey::process_result(const rockey_status_t status) const {

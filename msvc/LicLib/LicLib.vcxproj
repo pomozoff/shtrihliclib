@@ -71,7 +71,7 @@
       </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MTd.lib</AdditionalDependencies>
+      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MTd.lib;ryvc32.obj</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
@@ -91,7 +91,7 @@
       </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MT.lib</AdditionalDependencies>
+      <AdditionalDependencies>hasp_windows_70838.lib;ssleay32MT.lib;ryvc32.obj</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -121,6 +121,8 @@
     <ClInclude Include="..\..\source\RealKeyHaspHL.h" />
     <ClInclude Include="..\..\source\RealKeyHaspSL.h" />
     <ClInclude Include="..\..\source\RealKeyRockey.h" />
+    <ClInclude Include="..\..\source\RealKeyRockeyLocal.h" />
+    <ClInclude Include="..\..\source\RealKeyRockeyNet.h" />
     <ClInclude Include="..\..\source\stdafx.h" />
     <ClInclude Include="..\..\source\targetver.h" />
   </ItemGroup>
@@ -144,11 +146,12 @@
     <ClCompile Include="..\..\source\ProtectKeyRockey.cpp" />
     <ClCompile Include="..\..\source\ProtectKeyRockeyLocal.cpp" />
     <ClCompile Include="..\..\source\ProtectKeyRockeyNet.cpp" />
-    <ClCompile Include="..\..\source\RealKey.cpp" />
     <ClCompile Include="..\..\source\RealKeyHasp.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspHL.cpp" />
     <ClCompile Include="..\..\source\RealKeyHaspSL.cpp" />
     <ClCompile Include="..\..\source\RealKeyRockey.cpp" />
+    <ClCompile Include="..\..\source\RealKeyRockeyLocal.cpp" />
+    <ClCompile Include="..\..\source\RealKeyRockeyNet.cpp" />
     <ClCompile Include="..\..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

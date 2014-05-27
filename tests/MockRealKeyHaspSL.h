@@ -3,8 +3,6 @@
 
 #include "RealKeyHaspSL.h"
 
-using check_methods_memory_t = std::vector<const check_method_memory_t>;
-
 class MockRealKeyHaspSL : public RealKeyHaspSL {
 	public:
 		MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory);

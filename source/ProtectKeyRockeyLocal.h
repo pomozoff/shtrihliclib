@@ -5,6 +5,6 @@
 
 class ProtectKeyRockeyLocal : public ProtectKeyRockey {
 	public:
-		using ProtectKeyRockey::ProtectKeyRockey;
+		ProtectKeyRockeyLocal(const real_key_rockey_t key);
 		~ProtectKeyRockeyLocal(void);
 };

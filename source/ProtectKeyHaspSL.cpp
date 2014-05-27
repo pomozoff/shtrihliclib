@@ -32,7 +32,8 @@ static const char* scope =
 
 #pragma region Constructor Destructor
 ProtectKeyHaspSL::ProtectKeyHaspSL(const real_key_hasp_t key, const size_t session_id_hash)
-	: ProtectKey(session_id_hash, KeyType::HaspSL)
+	: ProtectKey(KeyType::HaspSL)
+	, _session_id_hash(session_id_hash)
 	, _real_key(key)
 {
 	_license_timeout = 10; // поиск ключа каждые 10 секунд
@@ -163,7 +164,7 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method, hasp
 	const bool success = HASP_STATUS_OK == status;
 
 	process_result(status);
-	if (HASP_STATUS_OK == _real_key->last_status()) {
+	if (success) {
 		_real_key->_hasp_legacy_set_idletime(handle, 1);
 		add_handle(check_method, handle);
 	}

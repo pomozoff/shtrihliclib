@@ -96,6 +96,12 @@
     <ClInclude Include="..\..\source\RealKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\RealKeyRockeyLocal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\RealKeyRockeyNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\CheckMethod.cpp">
@@ -170,7 +176,10 @@
     <ClCompile Include="..\..\source\ProtectKeyRockeyNet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\RealKey.cpp">
+    <ClCompile Include="..\..\source\RealKeyRockeyLocal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\RealKeyRockeyNet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

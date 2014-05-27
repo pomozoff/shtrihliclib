@@ -35,6 +35,7 @@ using check_method_t = std::shared_ptr<const CheckMethod>;
 using check_method_base_t = std::shared_ptr<const CheckMethodBase>;
 using check_method_login_t = std::shared_ptr<const CheckMethodLogin>;
 using check_method_memory_t = std::shared_ptr<const CheckMethodMemory>;
+using check_methods_memory_t = std::vector<const check_method_memory_t>;
 using platform_t = std::shared_ptr<const Platform>;
 using license_block_t = std::shared_ptr<const LicenseBlock>;
 using license_blocks_t = std::vector<const license_block_t>;

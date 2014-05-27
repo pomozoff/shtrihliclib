@@ -27,6 +27,8 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		/* IProtectKey Interface */
 		//virtual const bool decrypt(byte_t* buffer, const size_t length) const override final;
 	protected:
+		const size_t _session_id_hash;
+
 		/* KeyChecker Interface */
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 	private:

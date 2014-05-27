@@ -9,14 +9,8 @@ class LicenseBlockManager;
 
 class ProtectKeyRockey : public ProtectKey {
 	public:
-		ProtectKeyRockey(const real_key_rockey_t key, const size_t session_id_hash, const KeyType keytype);
+		ProtectKeyRockey(const real_key_rockey_t key, const KeyType keytype);
 		~ProtectKeyRockey(void);
-
-		static const size_t key_type_rockey4_local = 3;
-		static const size_t key_type_rockey4_net = 6;
-
-		static const size_t memory_size_rockey4_local = 24;
-		static const size_t memory_size_rockey4_net = 120;
 
 		/* ProtectKey Interface */
 		virtual const value_t read_memory(const check_method_memory_t check_method) const override final;
@@ -31,8 +25,6 @@ class ProtectKeyRockey : public ProtectKey {
 	private:
 		const real_key_rockey_t _real_key;
 		mutable check_method_login_t _last_loggedin_method;
-
-		const std::string key_id(const rockey_handle_t handle) const;
 
 		const rockey_status_t read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const;
 		const rockey_status_t write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const;

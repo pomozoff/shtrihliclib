@@ -55,8 +55,6 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		const time_t nfr_end_date(void) const;
 		void set_nfr_end_date(const time_t nfr_end_date) const;
 	protected:
-		const size_t _session_id_hash;
-
 		const KeyType _keytype;
 		time_t _license_timeout = 60; // Одна минута
 		
@@ -65,7 +63,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable size_t _error_code;
 		mutable features_t _features;
 
-		ProtectKey(const size_t session_id_hash, const KeyType keytype);
+		ProtectKey(const KeyType keytype);
 
 		static const protect_key_t create_key(const KeyType key_type, const std::wstring session_id);
 

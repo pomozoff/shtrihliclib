@@ -8,23 +8,25 @@
 
 #include "ProtectKey.h"
 #include "Granule.h"
-#include "ProtectKeyHaspSL.h"
 #include "Platform.h"
+#include "ProtectKeyHaspSL.h"
 #include "RealKeyHaspSL.h"
+#include "ProtectKeyRockeyLocal.h"
+#include "RealKeyRockeyLocal.h"
 
 static const uint16_t AES_key_length = 256;
 static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
 
 #pragma region Constructor Destructor
-ProtectKey::ProtectKey(const size_t session_id_hash, const KeyType keytype)
-	: _session_id_hash(session_id_hash)
-	, _key_delegate(NULL)
+ProtectKey::ProtectKey(const KeyType keytype)
+	: _key_delegate(NULL)
 	, _license_timeout(60 * 30)  // поиск ключа каждые полчаса
 	, _keytype(keytype)
 {
 }
 ProtectKey::~ProtectKey(void) {
 	_granules.clear();
+	logout(true);
 }
 #pragma endregion
 
@@ -203,9 +205,9 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 		protect_key = nullptr;
 		break;
 	case KeyType::HaspSL: {
-		auto key = std::make_shared<const RealKeyHaspSL>();
-		protect_key = std::make_shared<const ProtectKeyHaspSL>(key, hash_from_session_id(session_id));
-	}
+			auto real_key = std::make_shared<const RealKeyHaspSL>();
+			protect_key = std::make_shared<const ProtectKeyHaspSL>(real_key, hash_from_session_id(session_id));
+		}
 		break;
 	case KeyType::HaspHLLocal:
 		protect_key = nullptr;
@@ -213,8 +215,10 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 	case KeyType::HaspHLNet:
 		protect_key = nullptr;
 		break;
-	case KeyType::RockeyLocal:
-		protect_key = nullptr;
+	case KeyType::RockeyLocal: {
+			auto real_key = std::make_shared<const RealKeyRockeyLocal>();
+			protect_key = std::make_shared<const ProtectKeyRockeyLocal>(real_key);
+		}
 		break;
 	case KeyType::RockeyNet:
 		protect_key = nullptr;
