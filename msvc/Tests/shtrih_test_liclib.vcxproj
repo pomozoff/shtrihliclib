@@ -93,6 +93,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)\LicLib\bin\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>shtrih_liclib.lib;Secur32.lib;gmock.lib;libeay32MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\..\lib\hasp_windows_70838.dll $(OutDir)\</Command>
