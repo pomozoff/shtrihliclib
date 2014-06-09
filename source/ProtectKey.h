@@ -15,6 +15,7 @@ using protect_key_weak_t = std::weak_ptr<const ProtectKey>;
 using protect_keys_t = std::vector<const protect_key_t>;
 using granule_t = std::shared_ptr<const Granule>;
 using granules_t = std::vector<const granule_t>;
+using iprotect_key_t = std::shared_ptr<const IProtectKey>;
 using iprotect_key_weak_t = std::weak_ptr<const IProtectKey>;
 
 enum class KeyType { Base, HaspSL, HaspHLLocal, HaspHLNet, RockeyLocal, RockeyNet, FileMapped };
