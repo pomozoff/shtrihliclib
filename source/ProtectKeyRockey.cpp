@@ -50,7 +50,16 @@ const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_m
 	return isSuccess;
 }
 const bool ProtectKeyRockey::is_same_memory(const check_method_memory_t check_method) const {
-	return false;
+	bool success = false;
+	auto buffer = read_memory(check_method);
+	process_result(_real_key->last_status());
+	if (ERR_SUCCESS == _real_key->last_status()) {
+		_error_string = L"";
+		if (check_method->value().size() == buffer.size()) {
+			success = std::equal(buffer.begin(), buffer.end(), check_method->value().begin());
+		}
+	}
+	return success;
 }
 const bool ProtectKeyRockey::logout_key(const check_method_login_t check_method) const {
 	return false;
