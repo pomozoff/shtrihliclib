@@ -13,11 +13,7 @@ class RealKeyRockey : public RealKey<rockey_status_t> {
 		RealKeyRockey(void);
 		virtual ~RealKeyRockey(void);
 
-		static const size_t key_type_rockey4_local = 3;
-		static const size_t key_type_rockey4_net = 6;
-
-		static const size_t memory_size_rockey4_local = 24;
-		static const size_t memory_size_rockey4_net = 120;
+		virtual const size_t max_memory_size(void) const = 0;
 
 		virtual const rockey_status_t _rockey_login(const rockey_feature_t feature_id, std::string& key_number, rockey_handle_t& handle) const;
 		virtual const rockey_status_t _rockey_read(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const;

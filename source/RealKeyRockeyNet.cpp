@@ -13,6 +13,9 @@ RealKeyRockeyNet::~RealKeyRockeyNet(void) {
 #pragma endregion
 
 #pragma region Protected
+const size_t RealKeyRockeyNet::max_memory_size(void) const {
+	return _memory_size;
+}
 const rockey_long_t RealKeyRockeyNet::prepared_feature_id(const rockey_feature_t feature_id) const {
 	return feature_id + _is_terminal_mode ? 0 : 0x10000;
 }

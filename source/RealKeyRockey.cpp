@@ -1,6 +1,8 @@
 
 #include "stdafx.h"
 
+#include <string>
+
 #include "RealKeyRockey.h"
 
 static const rockey_pass_t pass1 = 0x12;
@@ -21,38 +23,51 @@ const rockey_status_t RealKeyRockey::_rockey_login(const rockey_feature_t featur
 	rockey_status_t status = find_keys(keys);
 	if (ERR_SUCCESS == status) {
 		rockey_function_t function = RY_OPEN;
-		rockey_handle_t handle = 0;
 		rockey_long_t lp1 = 0;
 		rockey_long_t lp2 = 0;
 		rockey_pass_t p1 = pass1;
 		rockey_pass_t p2 = pass2;
 		rockey_pass_t p3 = 0;
 		rockey_pass_t p4 = 0;
-		uint8_t buffer[memory_size_rockey4_net];
+		uint8_t *buffer = new uint8_t[max_memory_size()];
 
 		for (auto&& key_id : keys) {
 			function = RY_OPEN;
 			lp1 = key_id;
 			lp2 = prepared_feature_id(feature_id);
-			std::memset(&buffer[0], 0, memory_size_rockey4_net);
+			std::memset(buffer, 0, max_memory_size());
 			p2 = pass2;
-			status = Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0]);
+			status = Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
 			if (ERR_SUCCESS == status) {
+				key_number = std::to_string(lp1);
 				_key_type = lp2;
 				function = RY_CHECK_MOUDLE;
 				p1 = feature_id;
-				status = ((ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0])) && (1 == p2)) ? ERR_SUCCESS : ERR_NO_ROCKEY;
+				status = ((ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) && (1 == p2)) ? ERR_SUCCESS : ERR_NO_ROCKEY;
 				if (ERR_SUCCESS == status) {
 					break;
 				}
 			}
 			_rockey_logout(handle);
 		}
+		delete[] buffer;
 	}
 	return status;
 }
 const rockey_status_t RealKeyRockey::_rockey_read(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const {
-	return ERR_INVALID_HANDLE;
+	rockey_function_t function = RY_READ;
+	rockey_handle_t local_handle = handle;
+	rockey_long_t lp1 = 0;
+	rockey_long_t lp2 = 0;
+	rockey_pass_t p1 = offset;
+	rockey_pass_t p2 = length;
+	rockey_pass_t p3 = 0;
+	rockey_pass_t p4 = 0;
+
+	rockey_status_t status = Rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0]);
+	_last_status = status;
+
+	return status;
 }
 const rockey_status_t RealKeyRockey::_rockey_write(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
 	return ERR_INVALID_HANDLE;
@@ -66,9 +81,11 @@ const rockey_status_t RealKeyRockey::_rockey_logout(const rockey_handle_t handle
 	rockey_pass_t p2 = pass2;
 	rockey_pass_t p3 = 0;
 	rockey_pass_t p4 = 0;
-	uint8_t buffer[memory_size_rockey4_net];
+	uint8_t *buffer = new uint8_t[max_memory_size()];
 
-	rockey_status_t status = Rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0]);
+	rockey_status_t status = Rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
+	delete[] buffer;
+
 	return status;
 }
 #pragma endregion
@@ -86,15 +103,17 @@ const rockey_status_t RealKeyRockey::find_keys(rockey_keys_t& keys) const {
 	rockey_pass_t p2 = pass2;
 	rockey_pass_t p3 = 0;
 	rockey_pass_t p4 = 0;
-	uint8_t buffer[memory_size_rockey4_net];
+	uint8_t *buffer = new uint8_t[max_memory_size()];
 
-	while (ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0])) {
+	while (ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) {
 		status = ERR_SUCCESS;
 		function = RY_FIND_NEXT;
 		p1 = pass1;
 		p2 = pass2;
 		keys.push_back(lp1);
 	}
+	delete[] buffer;
+
 	return status;
 }
 #pragma endregion
