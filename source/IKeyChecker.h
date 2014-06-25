@@ -2,7 +2,7 @@
 #ifndef __IKEYCHECKER_H__
 #define __IKEYCHECKER_H__
 
-#include "CheckMethod.h"
+#include "DataTypes.h"
 
 class IKeyChecker {
 	public:
