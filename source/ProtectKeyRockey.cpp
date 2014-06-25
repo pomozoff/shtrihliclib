@@ -28,6 +28,8 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 	if (ROCKEY_INVALID_HANDLE_VALUE != handle) {
 		const auto offset = (rockey_size_t)check_method->offset(); // It's OK
 		const auto length = (rockey_size_t)check_method->value().size(); // It's OK
+
+		buffer.resize(length);
 	}
 	return buffer;
 }
