@@ -1,6 +1,4 @@
 
-
-#include <stdint.h>
 #ifndef __IPROTECTKEY_H__
 #define __IPROTECTKEY_H__
 
