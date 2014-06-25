@@ -30,6 +30,9 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 		const auto length = (rockey_size_t)check_method->value().size(); // It's OK
 
 		buffer.resize(length);
+		if (ERR_SUCCESS != _real_key->_rockey_read(handle, offset, length, buffer)) {
+			buffer.clear();
+		}
 	}
 	return buffer;
 }
