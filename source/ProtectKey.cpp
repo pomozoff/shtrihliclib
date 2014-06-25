@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 #include <iterator>
+#include <algorithm>
 
 #include <openssl/aes.h>
 #include <openssl/rand.h>
@@ -90,6 +91,12 @@ const granule_t ProtectKey::create_granule(const std::wstring id) const {
 }
 void ProtectKey::removeGranules(void) const {
 	_granules.clear();
+}
+const granule_t ProtectKey::granule_with_name(const std::wstring& granule_name) const {
+	auto iterator = std::find_if(_granules.begin(), _granules.end(), [&granule_name] (const granule_t& granule) {
+		return granule->name() == granule_name;
+	});
+	return iterator != _granules.end() ? *iterator : nullptr;
 }
 #pragma endregion
 
