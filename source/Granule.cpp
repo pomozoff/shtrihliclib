@@ -6,7 +6,7 @@
 
 #pragma region Constructor Destructor
 Granule::Granule(const std::wstring id, const protect_key_weak_t protect_key) :
-_id(id),
+_name(id),
 _protect_weak_key(protect_key)
 {
 }
@@ -15,6 +15,9 @@ Granule::~Granule(void) {
 #pragma endregion
 
 #pragma region Accessors
+const std::wstring Granule::name(void) const {
+	return _name;
+}
 void Granule::set_granule_nfr_date(bool is_granule_nfr_date) const {
 	_is_granule_nfr_date = is_granule_nfr_date;
 }

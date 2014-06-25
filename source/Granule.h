@@ -7,13 +7,14 @@
 
 class Granule final : public KeyChecker, public std::enable_shared_from_this<const Granule> {
 	public:
-		Granule(const std::wstring id, const protect_key_weak_t protect_key);
+		Granule(const std::wstring name, const protect_key_weak_t protect_key);
 		~Granule(void);
 
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
 
 		/* Accessors */
+		const std::wstring name(void) const;
 		void set_granule_nfr_date(const bool is_granule_nfr_date) const;
 		const bool is_granule_nfr_date(void) const;
 		void set_read_memory_to_value(const bool read_memory_to_value) const;
@@ -31,7 +32,7 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 	private:
 		Granule& operator=(const Granule &tmp);
 		
-		const std::wstring _id;
+		const std::wstring _name;
 		const protect_key_weak_t _protect_weak_key;
 
 		bool _is_present = false;
