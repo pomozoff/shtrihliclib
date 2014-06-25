@@ -26,6 +26,8 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 	value_t buffer;
 	const rockey_handle_t handle = (rockey_handle_t)get_handle(check_method->logged_in_method());
 	if (ROCKEY_INVALID_HANDLE_VALUE != handle) {
+		const auto offset = (rockey_size_t)check_method->offset(); // It's OK
+		const auto length = (rockey_size_t)check_method->value().size(); // It's OK
 	}
 	return buffer;
 }
@@ -69,7 +71,8 @@ const bool ProtectKeyRockey::login(const check_method_login_t check_method, rock
 	if (!check_method) {
 		return false;
 	}
-	const auto status = _real_key->_rockey_login(check_method->feature(), _key_number, handle);
+	const auto rockey_feature = (rockey_feature_t)check_method->feature(); // It's OK
+	const auto status = _real_key->_rockey_login(rockey_feature, _key_number, handle);
 	const bool success = ERR_SUCCESS == status;
 
 	process_result(status);
