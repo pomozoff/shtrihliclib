@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __REALKEYROCKEYNET_H__
+#define __REALKEYROCKEYNET_H__
 
 #include "RealKeyRockey.h"
 
@@ -13,3 +14,5 @@ class RealKeyRockeyNet : public RealKeyRockey {
 		const bool _is_terminal_mode;
 		const bool is_terminal_mode_detected(void) const;
 };
+
+#endif // __REALKEYROCKEYNET_H__

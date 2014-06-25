@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __IKEYCHECKER_H__
+#define __IKEYCHECKER_H__
 
 #include "CheckMethod.h"
 
@@ -15,3 +16,5 @@ class IKeyChecker {
 		IKeyChecker(void);
 	private:
 };
+
+#endif // __IKEYCHECKER_H__

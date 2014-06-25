@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __MOCKREALCKEYHASPSL_H__
+#define __MOCKREALCKEYHASPSL_H__
 
 #include "RealKeyHaspSL.h"
 
@@ -25,3 +26,5 @@ class MockRealKeyHaspSL : public RealKeyHaspSL {
 		const hasp_status_t check_memory(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const int length, const value_t& buffer, value_t** local_buffer) const;
 		value_t* const get_buffer_by_memory_type(const hasp_fileid_t file_id) const;
 };
+
+#endif // __MOCKREALCKEYHASPSL_H__

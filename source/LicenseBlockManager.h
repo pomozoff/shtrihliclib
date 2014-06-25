@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __LICENSEBLOCKMANAGER_H__
+#define __LICENSEBLOCKMANAGER_H__
 
 #include <functional>
 
@@ -25,3 +26,5 @@ class LicenseBlockManager final {
 		const license_block_t find_block(p_block_func_t function_checker) const;
 		const license_block_t find_first_free_block(void) const;
 };
+
+#endif // __LICENSEBLOCKMANAGER_H__

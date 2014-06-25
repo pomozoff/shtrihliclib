@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __PROTECTKEYHASPSLTEST_H__
+#define __PROTECTKEYHASPSLTEST_H__
 
 #include "gtest/gtest.h"
 
@@ -25,3 +26,5 @@ class ProtectKeyHaspSLTest : public ::testing::Test, public IProtectKeyDelegate 
 
 		virtual void did_check_protect_key(const bool success) override final;
 };
+
+#endif // __PROTECTKEYHASPSLTEST_H__

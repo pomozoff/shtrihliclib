@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __DATATYPES_H__
+#define __DATATYPES_H__
 
 #include <stdint.h>
 #include <vector>
@@ -43,3 +44,5 @@ using license_block_manager_t = std::shared_ptr<const LicenseBlockManager>;
 using real_key_hasp_t = std::shared_ptr<const RealKeyHasp>;
 using real_key_hasp_sl_t = std::shared_ptr<const RealKeyHaspSL>;
 using real_key_rockey_t = std::shared_ptr<const RealKeyRockey>;
+
+#endif // __DATATYPES_H__

@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __PROTECTKEY_H__
+#define __PROTECTKEY_H__
 
 #include <ctime>
 
@@ -89,3 +90,5 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;
 };
+
+#endif // __PROTECTKEY_H__

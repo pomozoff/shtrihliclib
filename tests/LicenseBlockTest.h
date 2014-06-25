@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __LICENSEBLOCKTEST_H__
+#define __LICENSEBLOCKTEST_H__
 
 #include "gtest/gtest.h"
 
@@ -12,3 +13,5 @@ class LicenseBlockTest : public ::testing::Test {
 	private:
 		value_t _key_memory;
 };
+
+#endif // __LICENSEBLOCKTEST_H__

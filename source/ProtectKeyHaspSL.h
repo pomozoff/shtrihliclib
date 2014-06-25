@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __PROTECTKEYHASPSL_H__
+#define __PROTECTKEYHASPSL_H__
 
 #include "hasp/hasp_api.h"
 #include "ProtectKey.h"
@@ -49,3 +50,5 @@ class ProtectKeyHaspSL final : public ProtectKey {
 
 		void process_result(const hasp_status_t status) const;
 };
+
+#endif // __PROTECTKEYHASPSL_H__

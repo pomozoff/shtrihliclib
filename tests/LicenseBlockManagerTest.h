@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __LICENSEBLOCKMANAGERTEST_H__
+#define __LICENSEBLOCKMANAGERTEST_H__
 
 #include "gtest/gtest.h"
 
@@ -10,3 +11,5 @@ class LicenseBlockManagerTest : public ::testing::Test {
 		LicenseBlockManagerTest(void);
 		~LicenseBlockManagerTest(void);
 };
+
+#endif // __LICENSEBLOCKMANAGERTEST_H__

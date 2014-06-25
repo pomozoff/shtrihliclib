@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __REALKEYHASP_H__
+#define __REALKEYHASP_H__
 
 #include "hasp/hasp_api.h"
 #include "RealKey.h"
@@ -20,3 +21,5 @@ class RealKeyHasp : public RealKey<hasp_status_t> {
 		virtual const hasp_status_t _hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const;
 		virtual const hasp_status_t _hasp_decrypt(const hasp_handle_t handle, byte_t* buffer, const hasp_size_t length) const;
 };
+
+#endif // __REALKEYHASP_H__

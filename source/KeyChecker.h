@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __KEYCHECKER_H__
+#define __KEYCHECKER_H__
 
 #include <vector>
 #include <map>
@@ -36,3 +37,5 @@ class KeyChecker : public IKeyChecker {
 		virtual const bool is_able_to_login(const check_method_login_t check_method) const override;
 	private:
 };
+
+#endif // __KEYCHECKER_H__

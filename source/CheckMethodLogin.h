@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHODLOGIN_H__
+#define __CHECKMETHODLOGIN_H__
 
 #include "CheckMethod.h"
 
@@ -21,3 +22,5 @@ class CheckMethodLogin final : public CheckMethod, public std::enable_shared_fro
 		const feature_t _feature;
 		const bool _allow_to_login_on_previous_key;
 };
+
+#endif // __CHECKMETHODLOGIN_H__

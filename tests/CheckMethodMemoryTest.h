@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHODMEMORYTEST_H__
+#define __CHECKMETHODMEMORYTEST_H__
 
 #include "CheckMethodTest.h"
 
@@ -13,3 +14,5 @@ class CheckMethodMemoryTest : public CheckMethodTest {
 	protected:
 		check_method_memory_t _check_method;
 };
+
+#endif // __CHECKMETHODMEMORYTEST_H__

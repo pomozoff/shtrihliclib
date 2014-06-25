@@ -1,7 +1,6 @@
 
-#pragma once
-
-#include "stdafx.h"
+#ifndef __IPROTECTKEYDELEGATE_H__
+#define __IPROTECTKEYDELEGATE_H__
 
 class IProtectKeyDelegate {
 	public:
@@ -11,3 +10,6 @@ class IProtectKeyDelegate {
 	protected:
 		virtual ~IProtectKeyDelegate(void);
 };
+
+#endif // #define __IPROTECTKEYDELEGATE_H__
+

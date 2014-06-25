@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __MOCKREALCKEYROCKEY_H__
+#define __MOCKREALCKEYROCKEY_H__
 
 #include "RealKeyRockey.h"
 
@@ -20,3 +21,5 @@ class MockRealKeyRockey : public RealKeyRockey {
 		void initialize_memory(const check_methods_memory_t& check_methods_memory) const;
 		const rockey_status_t check_memory(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer, value_t** local_buffer) const;
 };
+
+#endif // __MOCKREALCKEYROCKEY_H__

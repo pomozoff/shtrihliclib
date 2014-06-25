@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __PROTECTKEYROCKELOCALTEST_H__
+#define __PROTECTKEYROCKELOCALTEST_H__
 
 #include "gtest/gtest.h"
 
@@ -22,3 +23,5 @@ class ProtectKeyRockeyLocalTest : public ::testing::Test, public IProtectKeyDele
 
 		virtual void did_check_protect_key(const bool success) override final;
 };
+
+#endif // __PROTECTKEYROCKELOCALTEST_H__

@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHODMEMORY_H__
+#define __CHECKMETHODMEMORY_H__
 
 #include "CheckMethod.h"
 
@@ -26,3 +27,5 @@ class CheckMethodMemory final : public CheckMethod, public std::enable_shared_fr
 		const check_method_login_t _logged_in_method;
 		const KeyMemoryType _memory_type;
 };
+
+#endif // __CHECKMETHODMEMORY_H__

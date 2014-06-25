@@ -1,7 +1,8 @@
 
-#pragma once
 
 #include <stdint.h>
+#ifndef __IPROTECTKEY_H__
+#define __IPROTECTKEY_H__
 
 #include "DataTypes.h"
 
@@ -25,3 +26,5 @@ class IProtectKey {
 
 		mutable check_method_login_t _decrypt_method = nullptr;
 };
+
+#endif // __IPROTECTKEY_H__

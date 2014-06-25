@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHODLOGINTEST_H__
+#define __CHECKMETHODLOGINTEST_H__
 
 #include "CheckMethodTest.h"
 
@@ -10,3 +11,5 @@ class CheckMethodLoginTest : public CheckMethodTest {
 	protected:
 		check_method_login_t _check_method;
 };
+
+#endif // __CHECKMETHODLOGINTEST_H__

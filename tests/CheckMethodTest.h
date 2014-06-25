@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHODTEST_H__
+#define __CHECKMETHODTEST_H__
 
 #include <memory>
 
@@ -24,3 +25,5 @@ class CheckMethodTest : public ::testing::Test {
 
 		const protect_key_t _protect_key_hasp_sl;
 };
+
+#endif // __CHECKMETHODTEST_H__

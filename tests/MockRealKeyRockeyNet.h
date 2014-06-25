@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __MOCKREALCKEYROCKEYNET_H__
+#define __MOCKREALCKEYROCKEYNET_H__
 
 #include "MockRealKeyRockey.h"
 
@@ -10,3 +11,5 @@ class MockRealKeyRockeyNet : public MockRealKeyRockey {
 	protected:
 		virtual const rockey_long_t prepared_feature_id(const rockey_feature_t feature_id) const override;
 };
+
+#endif // __MOCKREALCKEYROCKEYNET_H__

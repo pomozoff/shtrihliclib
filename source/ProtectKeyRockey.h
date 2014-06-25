@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __PROTECTKEYROCKEY_H__
+#define __PROTECTKEYROCKEY_H__
 
 #include "rockey/ryvc32.h"
 #include "ProtectKey.h"
@@ -34,3 +35,5 @@ class ProtectKeyRockey : public ProtectKey {
 
 		void process_result(const rockey_status_t status) const;
 };
+
+#endif // __PROTECTKEYROCKEY_H__

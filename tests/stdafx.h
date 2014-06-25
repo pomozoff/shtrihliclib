@@ -4,7 +4,8 @@
 // are changed infrequently
 //
 
-#pragma once
+#ifndef __STDAFX_H__
+#define __STDAFX_H__
 
 #include "targetver.h"
 
@@ -12,3 +13,5 @@
 #include <tchar.h>
 
 // TODO: reference additional headers your program requires here
+
+#endif // __STDAFX_H__

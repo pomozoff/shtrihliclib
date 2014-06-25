@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __REALKEY_H__
+#define __REALKEY_H__
 
 #include "DataTypes.h"
 
@@ -16,3 +17,5 @@ class RealKey {
 		RealKey(void) {};
 		mutable T _last_status;
 };
+
+#endif // __REALKEY_H__

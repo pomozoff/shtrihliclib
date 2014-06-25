@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __LICENSEBLOCK_H__
+#define __LICENSEBLOCK_H__
 
 #include "DataTypes.h"
 
@@ -44,3 +45,5 @@ class LicenseBlock final {
 		const bool is_valid(void) const;
 		const time_t logged_in_time(void) const;
 };
+
+#endif // __LICENSEBLOCK_H__

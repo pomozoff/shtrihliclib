@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __REALKEYROCKEY_H__
+#define __REALKEYROCKEY_H__
 
 #include "rockey/ryvc32.h"
 #include "RealKey.h"
@@ -29,3 +30,5 @@ class RealKeyRockey : public RealKey<rockey_status_t> {
 
 		mutable rockey_long_t _key_type = 0;
 };
+
+#endif // __REALKEYROCKEY_H__

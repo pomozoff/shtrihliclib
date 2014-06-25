@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __CHECKMETHOD_H__
+#define __CHECKMETHOD_H__
 
 #include "DataTypes.h"
 
@@ -34,3 +35,5 @@ class CheckMethod {
 		mutable check_number_t _max_check_number = 1;
 		mutable check_number_t _current_check_number = 0;
 };
+
+#endif // __CHECKMETHOD_H__

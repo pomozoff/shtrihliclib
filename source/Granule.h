@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __GRANULE_H__
+#define __GRANULE_H__
 
 #include "KeyChecker.h"
 #include "ProtectKey.h"
@@ -41,3 +42,5 @@ class Granule final : public KeyChecker, public std::enable_shared_from_this<con
 
 		const time_t make_unix_time_from_old_format(const value_t value) const;
 };
+
+#endif // __GRANULE_H__
