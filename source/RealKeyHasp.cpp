@@ -13,14 +13,8 @@ RealKeyHasp::~RealKeyHasp(void) {
 
 #pragma region Public
 const hasp_status_t RealKeyHasp::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, value_t& buffer) const {
-	byte_t *data = new byte_t[length];
-	auto status = hasp_read(handle, file_id, offset, length, data);
+	auto status = hasp_read(handle, file_id, offset, length, &buffer[0]);
 	_last_status = status;
-
-	if (HASP_STATUS_OK == status) {
-		buffer.assign(&data[0], &data[length]);
-	}
-	delete[] data;
 
 	return status;
 }
