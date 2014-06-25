@@ -30,6 +30,9 @@ void Granule::set_read_memory_to_value(const bool read_memory_to_value) const {
 const bool Granule::read_memory_to_value(void) const {
 	return _read_memory_to_value;
 }
+const value_t Granule::value(void) const {
+	return _value;
+}
 #pragma endregion
 
 #pragma region KeyChecker Interface
