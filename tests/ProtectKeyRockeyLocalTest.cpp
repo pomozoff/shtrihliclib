@@ -26,6 +26,7 @@ const protect_key_t ProtectKeyRockeyLocalTest::create_rockey_local_key(const fea
 }
 const protect_key_t ProtectKeyRockeyLocalTest::create_rockey_local_key(const feature_t feature, const check_methods_memory_t& check_methods_memory) {
 	auto key = std::make_shared<const MockRealKeyRockeyLocal>(feature, check_methods_memory);
+	key->initialize_memory(check_methods_memory);
 
 	auto protect_key_rockey_local = std::make_shared<const ProtectKeyRockeyLocal>(key);
 	protect_key_rockey_local->set_logout_after_check(true);

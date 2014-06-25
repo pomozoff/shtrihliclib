@@ -15,3 +15,6 @@ MockRealKeyRockeyLocal::~MockRealKeyRockeyLocal() {
 const rockey_long_t MockRealKeyRockeyLocal::prepared_feature_id(const rockey_feature_t feature_id) const {
 	return feature_id + 0x10000;
 }
+const size_t MockRealKeyRockeyLocal::max_memory_size(void) const {
+	return _memory_size;
+}

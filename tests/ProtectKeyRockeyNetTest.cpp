@@ -26,6 +26,7 @@ const protect_key_t ProtectKeyRockeyNetTest::create_rockey_net_key(const feature
 }
 const protect_key_t ProtectKeyRockeyNetTest::create_rockey_net_key(const feature_t feature, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory) {
 	auto key = std::make_shared<const MockRealKeyRockeyNet>(feature, check_methods_memory);
+	key->initialize_memory(check_methods_memory);
 
 	auto protect_key_rockey_net = std::make_shared<const ProtectKeyRockeyNet>(key);
 	protect_key_rockey_net->set_logout_after_check(true);

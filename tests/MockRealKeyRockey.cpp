@@ -14,7 +14,6 @@ static const std::string rockey_key_number = R"(555111777)";
 MockRealKeyRockey::MockRealKeyRockey(const rockey_feature_t feature_id, const check_methods_memory_t check_methods_memory)
 	: _feature_id(feature_id)
 {
-	initialize_memory(check_methods_memory);
 }
 MockRealKeyRockey::~MockRealKeyRockey() {
 }
@@ -74,7 +73,7 @@ const rockey_status_t MockRealKeyRockey::_rockey_logout(const rockey_handle_t ha
 
 #pragma region Private
 void MockRealKeyRockey::initialize_memory(const check_methods_memory_t& check_methods_memory) const {
-	_buffer.assign(RealKeyRockey::memory_size_rockey4_local, 0);
+	_buffer.assign(max_memory_size(), 0);
 
 	for (auto&& check_method_memory : check_methods_memory) {
 		auto key_memory_type = check_method_memory->memory_type();

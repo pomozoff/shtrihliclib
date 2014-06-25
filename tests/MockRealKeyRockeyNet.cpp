@@ -15,3 +15,6 @@ MockRealKeyRockeyNet::~MockRealKeyRockeyNet() {
 const rockey_long_t MockRealKeyRockeyNet::prepared_feature_id(const rockey_feature_t feature_id) const {
 	return feature_id + 0x10000;
 }
+const size_t MockRealKeyRockeyNet::max_memory_size(void) const {
+	return _memory_size;
+}
