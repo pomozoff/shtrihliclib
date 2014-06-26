@@ -75,9 +75,15 @@ const key_handle_t ProtectKeyRockey::get_handle(const check_method_login_t check
 
 #pragma region Private
 const rockey_status_t ProtectKeyRockey::read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const {
+	(void)offset;
+	(void)length;
+	(void)buffer;
 	return ERR_INVALID_HANDLE;
 }
 const rockey_status_t ProtectKeyRockey::write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
+	(void)offset;
+	(void)length;
+	(void)buffer;
 	return ERR_INVALID_HANDLE;
 }
 

@@ -70,6 +70,10 @@ const rockey_status_t RealKeyRockey::_rockey_read(const rockey_handle_t handle, 
 	return status;
 }
 const rockey_status_t RealKeyRockey::_rockey_write(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
+	(void)handle;
+	(void)offset;
+	(void)length;
+	(void)buffer;
 	return ERR_INVALID_HANDLE;
 }
 const rockey_status_t RealKeyRockey::_rockey_logout(const rockey_handle_t handle) const {
