@@ -21,7 +21,7 @@ RealKeyRockey::~RealKeyRockey(void) {
 const rockey_status_t RealKeyRockey::_rockey_login(const rockey_feature_t feature_id, std::string& key_number, rockey_handle_t& handle) const {
 	rockey_keys_t keys;
 	rockey_status_t status = find_keys(keys);
-	if (ERR_SUCCESS == status) {
+	if ( (ERR_SUCCESS == status) && (keys.size() > 0) ) {
 		rockey_function_t function = RY_OPEN;
 		rockey_long_t lp1 = 0;
 		rockey_long_t lp2 = 0;
