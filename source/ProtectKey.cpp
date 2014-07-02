@@ -7,13 +7,18 @@
 #include <openssl/aes.h>
 #include <openssl/rand.h>
 
+#include "Platform.h"
 #include "ProtectKey.h"
 #include "Granule.h"
-#include "Platform.h"
+
 #include "ProtectKeyHaspSL.h"
 #include "RealKeyHaspSL.h"
+
 #include "ProtectKeyRockeyLocal.h"
+#include "ProtectKeyRockeyNet.h"
+
 #include "RealKeyRockeyLocal.h"
+#include "RealKeyRockeyNet.h"
 
 static const uint16_t AES_key_length = 256;
 static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
@@ -227,8 +232,10 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 			protect_key = std::make_shared<const ProtectKeyRockeyLocal>(real_key);
 		}
 		break;
-	case KeyType::RockeyNet:
-		protect_key = nullptr;
+	case KeyType::RockeyNet: {
+			auto real_key = std::make_shared<const RealKeyRockeyNet>((char*)NULL);
+			protect_key = std::make_shared<const ProtectKeyRockeyNet>(real_key);
+		}
 		break;
 	case KeyType::FileMapped:
 		protect_key = nullptr;
