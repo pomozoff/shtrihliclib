@@ -47,14 +47,9 @@ void CheckMethod::set_check_method_for_license(const bool check_method_for_licen
 const bool CheckMethod::process_check_result(const bool last_check_is_success) const {
 	if (last_check_is_success) {
 		_current_check_number = 0;
-		return true;
-	}
-
-	bool give_a_try_one_more_time = _current_check_number <= _max_check_number;
-	if (give_a_try_one_more_time) {
+	} else {
 		_current_check_number++;
 	}
-
-	return give_a_try_one_more_time;
+	return _current_check_number < _max_check_number;
 }
 #pragma endregion
