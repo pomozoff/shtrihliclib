@@ -41,11 +41,11 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 #pragma region IKeyChecker Interface
 const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_method) const {
 	rockey_handle_t handle = ROCKEY_INVALID_HANDLE_VALUE;
-	if (login(check_method, handle)) {
 	ProtectKey::is_able_to_login(check_method);
+	bool isSuccess = login(check_method, handle) && ROCKEY_INVALID_HANDLE_VALUE != handle;
+	if (isSuccess) {
 		_last_loggedin_method = check_method;
 	}
-	bool isSuccess = ROCKEY_INVALID_HANDLE_VALUE != handle;
 	call_delegate(isSuccess);
 
 	return isSuccess;
@@ -63,7 +63,8 @@ const bool ProtectKeyRockey::is_same_memory(const check_method_memory_t check_me
 	return success;
 }
 const bool ProtectKeyRockey::logout_key(const check_method_login_t check_method) const {
-	return false;
+	const rockey_handle_t handle = (rockey_handle_t)get_handle(check_method);
+	return _real_key->_rockey_logout(handle) == ERR_SUCCESS;
 }
 #pragma endregion
 
