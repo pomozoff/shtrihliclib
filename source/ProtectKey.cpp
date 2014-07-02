@@ -168,11 +168,12 @@ void ProtectKey::decrypt(const byte_t* encrypted_buffer, const size_t encrypted_
 #pragma region KeyChecker Interface
 const bool ProtectKey::check(void) const {
 	bool result = false;
+	bool is_check_nfr_true = false;
 	for (auto&& element : _check_methods) {
-		bool is_check_nfr_true = element->is_check_method_for_nfr();
 		if (_is_key_nfr && is_check_nfr_true) {
 			return true;
 		}
+		is_check_nfr_true = element->is_check_method_for_nfr();
 		result = element->check(shared_from_this());
 		_is_key_nfr = result && is_check_nfr_true;
 
