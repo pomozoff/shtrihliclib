@@ -21,6 +21,7 @@ class RealKeyRockey : public RealKey<rockey_status_t> {
 		virtual const rockey_status_t _rockey_logout(const rockey_handle_t handle) const;
 	protected:
 		virtual const rockey_long_t prepared_feature_id(const rockey_feature_t feature_id) const = 0;
+		virtual const uint16_t call_rockey(uint16_t function, uint16_t* handle, uint32_t* lp1, uint32_t* lp2, uint16_t* p1, uint16_t* p2, uint16_t* p3, uint16_t* p4, uint8_t* buffer) const = 0;
 	private:
 		const rockey_status_t find_keys(rockey_keys_t& keys) const;
 

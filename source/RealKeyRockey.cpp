@@ -37,13 +37,13 @@ const rockey_status_t RealKeyRockey::_rockey_login(const rockey_feature_t featur
 			lp2 = prepared_feature_id(feature_id);
 			std::memset(buffer, 0, max_memory_size());
 			p2 = pass2;
-			status = Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
+			status = call_rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
 			if (ERR_SUCCESS == status) {
 				key_number = std::to_string(lp1);
 				_key_type = lp2;
 				function = RY_CHECK_MOUDLE;
 				p1 = feature_id;
-				status = ((ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) && (1 == p2)) ? ERR_SUCCESS : ERR_NO_ROCKEY;
+				status = ((ERR_SUCCESS == call_rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) && (1 == p2)) ? ERR_SUCCESS : ERR_NO_ROCKEY;
 				if (ERR_SUCCESS == status) {
 					break;
 				}
@@ -64,7 +64,7 @@ const rockey_status_t RealKeyRockey::_rockey_read(const rockey_handle_t handle, 
 	rockey_pass_t p3 = 0;
 	rockey_pass_t p4 = 0;
 
-	rockey_status_t status = Rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0]);
+	rockey_status_t status = call_rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, &buffer[0]);
 	_last_status = status;
 
 	return status;
@@ -87,7 +87,7 @@ const rockey_status_t RealKeyRockey::_rockey_logout(const rockey_handle_t handle
 	rockey_pass_t p4 = 0;
 	uint8_t *buffer = new uint8_t[max_memory_size()];
 
-	rockey_status_t status = Rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
+	rockey_status_t status = call_rockey(function, &local_handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer);
 	delete[] buffer;
 
 	return status;
@@ -109,7 +109,7 @@ const rockey_status_t RealKeyRockey::find_keys(rockey_keys_t& keys) const {
 	rockey_pass_t p4 = 0;
 	uint8_t *buffer = new uint8_t[max_memory_size()];
 
-	while (ERR_SUCCESS == Rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) {
+	while (ERR_SUCCESS == call_rockey(function, &handle, &lp1, &lp2, &p1, &p2, &p3, &p4, buffer)) {
 		status = ERR_SUCCESS;
 		function = RY_FIND_NEXT;
 		p1 = pass1;
