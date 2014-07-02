@@ -99,6 +99,13 @@ const time_t Granule::make_unix_time_from_old_format(const value_t value) const 
 	if (2 != value.size()) {
 		return 0;
 	}
-	return value[0] * 256 + value[1];
+
+	int days = value[0] * 256 + value[1];
+	int delphi_delta_days = 25569;
+	time_t seconds_in_day = 60 * 60 * 24;
+
+	time_t timestamp = static_cast<time_t>(days - delphi_delta_days) * seconds_in_day;
+
+	return timestamp;
 }
 #pragma endregion
