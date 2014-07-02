@@ -32,6 +32,9 @@ const check_number_t CheckMethod::max_check_number(void) const {
 void CheckMethod::set_max_check_number(check_number_t check_number) const {
 	_max_check_number = check_number;
 }
+void CheckMethod::set_current_check_number(const check_number_t check_number) const {
+	_current_check_number = check_number;
+}
 void CheckMethod::set_logout_after_check(const bool logout_after_check) const {
 	_logout_after_check = logout_after_check;
 }
