@@ -71,6 +71,14 @@ const bool KeyChecker::del_handle(const check_method_login_t check_method) const
 
 #pragma region IKeyChecker Interface
 const bool KeyChecker::is_able_to_login(const check_method_login_t check_method) const {
-	return logout_key(check_method);
+	bool need_to_logout = !check_method->allow_to_login_on_previous_key();
+	bool result = true;
+	if (need_to_logout) {
+		result = logout_key(check_method);
+		if (result) {
+			del_handle(check_method);
+		}
+	}
+	return result;
 }
 #pragma endregion

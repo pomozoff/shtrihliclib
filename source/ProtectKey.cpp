@@ -189,7 +189,7 @@ const bool ProtectKey::is_base_key_available(const check_method_base_t check_met
 	return false;
 }
 const bool ProtectKey::is_able_to_login(const check_method_login_t check_method) const {
-	return logout_key(check_method);
+	return KeyChecker::is_able_to_login(check_method);
 }
 const bool ProtectKey::is_same_memory(const check_method_memory_t check_method) const {
 	return false;

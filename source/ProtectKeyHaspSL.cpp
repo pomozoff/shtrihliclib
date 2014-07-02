@@ -60,6 +60,7 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 
 #pragma region IKeyChecker Interface
 const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_method) const {
+	ProtectKey::is_able_to_login(check_method);
 	bool isSuccess = false;
 	hasp_handle_t handle = HASP_INVALID_HANDLE_VALUE;
 	if (login(check_method, handle)) {

@@ -42,6 +42,7 @@ const value_t ProtectKeyRockey::read_memory(const check_method_memory_t check_me
 const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_method) const {
 	rockey_handle_t handle = ROCKEY_INVALID_HANDLE_VALUE;
 	if (login(check_method, handle)) {
+	ProtectKey::is_able_to_login(check_method);
 		_last_loggedin_method = check_method;
 	}
 	bool isSuccess = ROCKEY_INVALID_HANDLE_VALUE != handle;
