@@ -122,11 +122,7 @@ void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
-	if (_is_key_nfr) {
-		return true;
-	}
 	bool result = check_license_with_methods() || recheck_key();
-
 	return result;
 }
 const bool ProtectKey::is_key_nfr(void) const {
@@ -255,7 +251,8 @@ const time_t ProtectKey::get_nfr_end_date(void) const {
 const bool ProtectKey::check_license_with_methods(void) const {
 	bool result = false;
 	for (auto&& element : _check_methods) {
-		if (!element->is_check_method_for_license()) {
+		if (   (_is_key_nfr  && !element->is_check_method_for_nfr())
+			|| (!_is_key_nfr && !element->is_check_method_for_license()) ) {
 			continue;
 		}
 		result = element->check(shared_from_this());
