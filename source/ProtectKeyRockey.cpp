@@ -73,6 +73,9 @@ const key_handle_t ProtectKeyRockey::get_handle(const check_method_login_t check
 	auto iterator = _handles.find(check_method);
 	return iterator == _handles.end() ? ROCKEY_INVALID_HANDLE_VALUE : iterator->second;
 }
+const check_number_t ProtectKeyRockey::max_check_number(void) const {
+	return _max_check_number;
+}
 #pragma endregion
 
 #pragma region Private

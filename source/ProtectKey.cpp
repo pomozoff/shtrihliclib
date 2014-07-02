@@ -70,6 +70,8 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 		}
 
 		element->try_to_logout();
+		element->set_max_check_number(element->max_check_number());
+
 		if (is_key_found) {
 			iprotect_key = element;
 			break;

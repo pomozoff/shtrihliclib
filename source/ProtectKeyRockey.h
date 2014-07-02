@@ -23,8 +23,10 @@ class ProtectKeyRockey : public ProtectKey {
 	protected:
 		/* KeyChecker Interface */
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
+		virtual const check_number_t max_check_number(void) const override;
 	private:
 		const real_key_rockey_t _real_key;
+		const check_number_t _max_check_number = 3;
 
 		const rockey_status_t read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const;
 		const rockey_status_t write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const;

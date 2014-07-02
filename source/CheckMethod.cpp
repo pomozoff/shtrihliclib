@@ -26,6 +26,9 @@ const bool CheckMethod::is_check_method_for_nfr(void) const {
 const bool CheckMethod::is_check_method_for_license(void) const {
 	return _is_check_method_for_license;
 }
+const check_number_t CheckMethod::max_check_number(void) const {
+	return _max_check_number;
+}
 void CheckMethod::set_max_check_number(check_number_t check_number) const {
 	_max_check_number = check_number;
 }
