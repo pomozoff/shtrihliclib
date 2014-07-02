@@ -3,6 +3,7 @@
 
 #include <iterator>
 #include <algorithm>
+#include <functional>
 
 #include <openssl/aes.h>
 #include <openssl/rand.h>
@@ -59,21 +60,50 @@ void ProtectKey::call_delegate(bool isSuccess) const {
 }
 const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate) {
 	iprotect_key_weak_t iprotect_key;
-	for (auto&& element : keys_list) {
-		element->set_max_check_number(1);
-		element->_key_delegate = NULL;
 
-		bool is_key_found = element->check();
+	auto for_every_object_in_container = [](const std::vector<const check_method_t>& container,
+		const check_number_t&& value,
+		member_function_t<CheckMethod, void, const check_number_t> function)
+	{
+		for (auto&& object : container) {
+			std::bind(function, object, value)();
+		}
+	};
+
+	for (auto&& protect_key : keys_list) {
+		// Установить максимальное неудачных попыток в минимальное значение
+		// т.к. поиск ключа должен происходить всего один раз
+		for_every_object_in_container(protect_key->_check_methods,
+			1,
+			&CheckMethod::set_max_check_number);
+
+		// Сбрасываем текущее значение попыток поиска лицензий
+		// т.к. ищем новый ключ, старое значение уже не нужно
+		for_every_object_in_container(protect_key->_check_methods,
+			0,
+			&CheckMethod::set_current_check_number);
+
+		// При поиске ключа не надо оповещать делегата
+		protect_key->_key_delegate = NULL;
+
+		// Ищем ключ
+		bool is_key_found = protect_key->check();
 		if (is_key_found) {
-			element->check_granules();
-			element->_key_delegate = &key_delegate;
+			protect_key->check_granules();
+			protect_key->_key_delegate = &key_delegate;
 		}
 
-		element->try_to_logout();
-		element->set_max_check_number(element->max_check_number());
+		// Отлогиниваемся если необходимо
+		protect_key->try_to_logout();
+
+		// Установить дефолтное максимальное значение неудачных попыток взад
+		// чтобы поиск лицензии имел возможность несколько раз неудачно завершиться
+		for_every_object_in_container(protect_key->_check_methods,
+			protect_key->max_check_number(),
+			&CheckMethod::set_max_check_number);
 
 		if (is_key_found) {
-			iprotect_key = element;
+			iprotect_key = protect_key;
 			break;
 		}
 	}
