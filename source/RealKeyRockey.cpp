@@ -19,6 +19,7 @@ RealKeyRockey::~RealKeyRockey(void) {
 
 #pragma region Public
 const rockey_status_t RealKeyRockey::_rockey_login(const rockey_feature_t feature_id, std::string& key_number, rockey_handle_t& handle) const {
+	handle = ROCKEY_INVALID_HANDLE_VALUE;
 	rockey_keys_t keys;
 	rockey_status_t status = find_keys(keys);
 	if ( (ERR_SUCCESS == status) && (keys.size() > 0) ) {
@@ -49,6 +50,7 @@ const rockey_status_t RealKeyRockey::_rockey_login(const rockey_feature_t featur
 				}
 			}
 			_rockey_logout(handle);
+			handle = ROCKEY_INVALID_HANDLE_VALUE;
 		}
 		delete[] buffer;
 	}
