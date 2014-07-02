@@ -34,7 +34,6 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 	private:
 		const real_key_hasp_t _real_key;
-		mutable check_method_login_t _last_loggedin_method;
 
 		const std::string key_id(const hasp_handle_t handle) const;
 

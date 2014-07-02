@@ -28,6 +28,7 @@ class KeyChecker : public IKeyChecker {
 
 		mutable check_methods_t _check_methods;
 		mutable handles_t _handles;
+		mutable check_method_login_t _last_loggedin_method;
 
 		virtual const bool check(void) const = 0;
 		void set_max_check_number(const check_number_t check_number) const;

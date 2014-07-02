@@ -25,7 +25,6 @@ class ProtectKeyRockey : public ProtectKey {
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 	private:
 		const real_key_rockey_t _real_key;
-		mutable check_method_login_t _last_loggedin_method;
 
 		const rockey_status_t read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const;
 		const rockey_status_t write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const;
