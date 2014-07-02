@@ -77,6 +77,9 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
+	
+		/* IProtectKey Interface */
+		virtual const time_t get_nfr_end_date(void) const override final;
 	private:
 		ProtectKey& operator=(const ProtectKey &tmp);
 

@@ -238,6 +238,9 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 	}
 	return protect_key;
 }
+const time_t ProtectKey::get_nfr_end_date(void) const {
+	return _nfr_end_date;
+}
 #pragma endregion
 
 #pragma region Private
