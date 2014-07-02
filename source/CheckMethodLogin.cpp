@@ -17,7 +17,13 @@ CheckMethodLogin::~CheckMethodLogin(void) {
 
 #pragma region CheckMethod Interface
 const bool CheckMethodLogin::check(const ikey_checker_t key_checker) const {
-	return key_checker->is_able_to_login(shared_from_this());
+	auto is_logged_in = key_checker->is_able_to_login(shared_from_this());
+	auto result = process_check_result(is_logged_in);
+
+	if (is_logged_in && logout_after_check()) {
+		key_checker->logout_key(shared_from_this());
+	}
+	return result;
 };
 #pragma endregion
 

@@ -23,7 +23,12 @@ CheckMethodMemory::~CheckMethodMemory(void) {
 
 #pragma region CheckMethod Interface
 const bool CheckMethodMemory::check(const ikey_checker_t key_checker) const {
-	return key_checker->is_same_memory(shared_from_this());
+	auto is_memory_same = key_checker->is_same_memory(shared_from_this());
+	if (logout_after_check()) {
+		key_checker->logout_key(_logged_in_method);
+	}
+	auto result = process_check_result(is_memory_same);
+	return result;
 };
 #pragma endregion
 
