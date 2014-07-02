@@ -44,7 +44,7 @@ const uint16_t RealKeyRockeyNet::call_rockey(uint16_t function, uint16_t* handle
 
 #pragma region Private
 const bool RealKeyRockeyNet::is_terminal_mode_detected(void) const {
-	return false;
+	return GetSystemMetrics(SM_REMOTESESSION) > 0;
 }
 const HINSTANCE RealKeyRockeyNet::load_library(const LPCWCH library_name) const {
 	HINSTANCE library_handle = GetModuleHandle(library_name);
