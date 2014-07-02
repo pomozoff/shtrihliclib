@@ -32,6 +32,7 @@ class KeyChecker : public IKeyChecker {
 		virtual const bool check(void) const = 0;
 		void set_max_check_number(const check_number_t check_number) const;
 		void add_handle(const check_method_login_t check_method, const key_handle_t handle) const;
+		const bool del_handle(const check_method_login_t check_method) const;
 
 		/* IKeyChecker Interface */
 		virtual const bool is_able_to_login(const check_method_login_t check_method) const override;

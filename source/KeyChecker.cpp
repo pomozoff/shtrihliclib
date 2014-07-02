@@ -46,7 +46,7 @@ void KeyChecker::logout(const bool forced_logout) const {
 		auto& check_method_login = iterator->first;
 		if (forced_logout || check_method_login->logout_after_check()) {
 			if (logout_key(check_method_login)) {
-				_handles.erase(iterator++);
+				del_handle(iterator++->first);
 				continue;
 			}
 		}
@@ -55,6 +55,17 @@ void KeyChecker::logout(const bool forced_logout) const {
 }
 void KeyChecker::add_handle(const check_method_login_t check_method, const key_handle_t handle) const {
 	_handles.insert(handles_pair_t(check_method, handle));
+}
+const bool KeyChecker::del_handle(const check_method_login_t check_method) const {
+	if (check_method == _last_loggedin_method) {
+		_last_loggedin_method = nullptr;
+	}
+	auto iterator = _handles.find(check_method);
+	bool handle_found = iterator != _handles.end();
+	if (handle_found) {
+		_handles.erase(iterator);
+	}
+	return handle_found;
 }
 #pragma endregion
 
