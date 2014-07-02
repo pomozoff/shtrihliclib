@@ -26,7 +26,11 @@ static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
 #pragma region Constructor Destructor
 ProtectKey::ProtectKey(const KeyType keytype)
 	: _key_delegate(NULL)
+#ifdef _DEBUG
+	, _license_timeout(10)  // поиск ключа каждые 10 секунд
+#else
 	, _license_timeout(60 * 30)  // поиск ключа каждые полчаса
+#endif
 	, _keytype(keytype)
 {
 }

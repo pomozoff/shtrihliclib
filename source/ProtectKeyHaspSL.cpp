@@ -36,7 +36,11 @@ ProtectKeyHaspSL::ProtectKeyHaspSL(const real_key_hasp_t key, const size_t sessi
 	, _session_id_hash(session_id_hash)
 	, _real_key(key)
 {
+#ifdef _DEBUG
 	_license_timeout = 10; // поиск ключа каждые 10 секунд
+#else
+	_license_timeout = 30; // поиск ключа каждые 30 секунд
+#endif
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 	free_licnese();
