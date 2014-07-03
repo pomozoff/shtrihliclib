@@ -5,8 +5,6 @@
 #include "gtest/gtest.h"
 
 #include "ProtectKey.h"
-#include "ProtectKeyHaspSL.h"
-#include "MockRealKeyHaspSL.h"
 #include "IProtectKeyDelegate.h"
 
 class ProtectKeyHaspSLTest : public ::testing::Test, public IProtectKeyDelegate {

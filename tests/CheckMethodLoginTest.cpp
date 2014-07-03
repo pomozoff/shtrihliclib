@@ -5,6 +5,7 @@
 #include "CheckMethodLogin.h"
 #include "ProtectKeyHaspSLTest.h"
 #include "LicenseBlock.h"
+#include "ProtectKeyHaspSL.h"
 
 #pragma region Constructor Destructor
 CheckMethodLoginTest::CheckMethodLoginTest(void) {

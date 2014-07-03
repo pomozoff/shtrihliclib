@@ -5,6 +5,8 @@
 #include "CheckMethodLogin.h"
 #include "CheckMethodMemory.h"
 #include "Platform.h"
+#include "ProtectKeyHaspSL.h"
+#include "MockRealKeyHaspSL.h"
 
 #pragma region Constructor Destructor
 ProtectKeyHaspSLTest::ProtectKeyHaspSLTest() {
