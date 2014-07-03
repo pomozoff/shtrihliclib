@@ -2,8 +2,6 @@
 #ifndef __IKEYCHECKER_H__
 #define __IKEYCHECKER_H__
 
-#include "DataTypes.h"
-
 class IKeyChecker {
 	public:
 		virtual ~IKeyChecker(void);

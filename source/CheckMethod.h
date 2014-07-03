@@ -2,8 +2,6 @@
 #ifndef __CHECKMETHOD_H__
 #define __CHECKMETHOD_H__
 
-#include "DataTypes.h"
-
 enum class CheckMethodType { Base, Login, Memory };
 
 class CheckMethod {

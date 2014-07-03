@@ -1,8 +1,6 @@
 
 #include "stdafx.h"
 
-#include "DataTypes.h"
-
 #include "ProtectKeyRockey.h"
 #include "RealKeyRockey.h"
 #include "CheckMethodMemory.h"

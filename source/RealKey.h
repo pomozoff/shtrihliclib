@@ -2,8 +2,6 @@
 #ifndef __REALKEY_H__
 #define __REALKEY_H__
 
-#include "DataTypes.h"
-
 template <typename T>
 class RealKey {
 	public:

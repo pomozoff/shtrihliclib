@@ -4,8 +4,6 @@
 
 #include <functional>
 
-#include "DataTypes.h"
-
 class LicenseBlockManager final {
 	public:
 		LicenseBlockManager(const value_t buffer, const time_t timeout, const size_t licenses_amount, const size_t session_id_hash);

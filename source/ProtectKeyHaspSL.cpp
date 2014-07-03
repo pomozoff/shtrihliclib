@@ -1,8 +1,6 @@
 
 #include "stdafx.h"
 
-#include "DataTypes.h"
-
 #include "ProtectKeyHaspSL.h"
 #include "CheckMethodMemory.h"
 #include "CheckMethodLogin.h"

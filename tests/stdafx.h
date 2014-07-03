@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include "DataTypes.h"
 
 // TODO: reference additional headers your program requires here
 

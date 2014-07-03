@@ -2,8 +2,6 @@
 #ifndef __IPROTECTKEY_H__
 #define __IPROTECTKEY_H__
 
-#include "DataTypes.h"
-
 class Granule;
 using granule_t = std::shared_ptr<const Granule>;
 

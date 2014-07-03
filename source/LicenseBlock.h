@@ -2,8 +2,6 @@
 #ifndef __LICENSEBLOCK_H__
 #define __LICENSEBLOCK_H__
 
-#include "DataTypes.h"
-
 class LicenseBlock final {
 	private:
 		static const size_t sizeof_hash = sizeof(size_t);
