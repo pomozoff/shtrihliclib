@@ -17,7 +17,9 @@ ProtectKeyTest::~ProtectKeyTest(void) {
 
 #pragma region Tests
 TEST_F(ProtectKeyTest, hasp_sl_key) {
-	auto protect_keys = createKeysOneHaspSL();
+	protect_keys_t protect_keys;
+	protect_keys.push_back(create_key_hasp_sl());
+
 	auto iprotect_key_weak = ProtectKey::find_key(protect_keys, *this);
 	auto iprotect_key = iprotect_key_weak.lock();
 	ASSERT_TRUE(nullptr != iprotect_key);
@@ -29,17 +31,15 @@ TEST_F(ProtectKeyTest, hasp_sl_key) {
 #pragma endregion
 
 #pragma region Protecetd
-const protect_keys_t ProtectKeyTest::createKeysOneHaspSL(void) const {
+const protect_key_t ProtectKeyTest::create_key_hasp_sl(void) const {
 	auto key = std::make_shared<const MockRealKeyHaspSL>(_feature_hasp_sl, check_methods_memory_t());
 	key->set_licenses_amount(_licenses_amount_two);
 
-	auto protectKey = ProtectKeyHaspSLTest::create_hasp_sl_key(_feature_hasp_sl, Platform::platform()->session_id(), _licenses_amount_two);
-	const auto checkMethod = protectKey->create_check_method_login(_feature_hasp_sl, false);
+	auto protect_key = ProtectKeyHaspSLTest::create_key(_feature_hasp_sl, Platform::platform()->session_id(), _licenses_amount_two);
+	const auto checkMethod = protect_key->create_check_method_login(_feature_hasp_sl, false);
 	checkMethod->set_check_method_for_license(true);
 	checkMethod->set_logout_after_check(true);
 
-	protect_keys_t protect_keys;
-	protect_keys.push_back(protectKey);
 
 	return protect_keys;
 }

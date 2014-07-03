@@ -14,7 +14,7 @@ class ProtectKeyTest : public ::testing::Test, public IProtectKeyDelegate {
 	protected:
 		bool _check_license_expected_result = false;
 
-		const protect_keys_t createKeysOneHaspSL(void) const;
+		const protect_key_t create_key_hasp_sl(void) const;
 	private:
 		const feature_t _feature_hasp_sl = 3;
 		const std::wstring _session_id = L"(computer-username)";
