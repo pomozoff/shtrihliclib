@@ -12,6 +12,8 @@ class ProtectKeyTest : public ::testing::Test, public IProtectKeyDelegate {
 		ProtectKeyTest(void);
 		~ProtectKeyTest(void);
 	protected:
+		bool _check_license_expected_result = false;
+
 		const protect_keys_t createKeysOneHaspSL(void) const;
 	private:
 		const feature_t _feature_hasp_sl = 3;
