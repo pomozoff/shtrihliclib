@@ -43,7 +43,7 @@ TEST_F(ProtectKeyRockeyNetTest, find_key) {
 }
 #pragma endregion
 
-#pragma region Protecetd
+#pragma region Protected
 const protect_keys_t ProtectKeyRockeyNetTest::createKeys(void) const {
 	auto protectKey = ProtectKeyRockeyNetTest::create_rockey_net_key(_feature, _licenses_amount_two);
 	const auto checkMethod = protectKey->create_check_method_login(_feature, false);

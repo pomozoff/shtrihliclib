@@ -30,7 +30,7 @@ TEST_F(ProtectKeyTest, hasp_sl_key) {
 }
 #pragma endregion
 
-#pragma region Protecetd
+#pragma region Protected
 const protect_key_t ProtectKeyTest::create_key_hasp_sl(void) const {
 	auto key = std::make_shared<const MockRealKeyHaspSL>(_feature_hasp_sl, check_methods_memory_t());
 	key->set_licenses_amount(_licenses_amount_two);

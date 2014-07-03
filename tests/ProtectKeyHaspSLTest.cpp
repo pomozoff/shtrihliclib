@@ -48,7 +48,7 @@ TEST_F(ProtectKeyHaspSLTest, find_key) {
 }
 #pragma endregion
 
-#pragma region Protecetd
+#pragma region Protected
 const protect_keys_t ProtectKeyHaspSLTest::createKeys(void) const {
 	auto protectKey = ProtectKeyHaspSLTest::create_key(_feature, Platform::platform()->session_id(), _licenses_amount_two);
 	const auto checkMethod = protectKey->create_check_method_login(_feature, false);
