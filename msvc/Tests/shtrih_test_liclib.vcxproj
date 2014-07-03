@@ -104,6 +104,7 @@
     <ClInclude Include="..\..\tests\CheckMethodLoginTest.h" />
     <ClInclude Include="..\..\tests\CheckMethodMemoryTest.h" />
     <ClInclude Include="..\..\tests\CheckMethodTest.h" />
+    <ClInclude Include="..\..\tests\DecryptTest.h" />
     <ClInclude Include="..\..\tests\GranuleTest.h" />
     <ClInclude Include="..\..\tests\LicenseBlockManagerTest.h" />
     <ClInclude Include="..\..\tests\LicenseBlockTest.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="..\..\tests\CheckMethodLoginTest.cpp" />
     <ClCompile Include="..\..\tests\CheckMethodMemoryTest.cpp" />
     <ClCompile Include="..\..\tests\CheckMethodTest.cpp" />
+    <ClCompile Include="..\..\tests\DecryptTest.cpp" />
     <ClCompile Include="..\..\tests\GranuleTest.cpp" />
     <ClCompile Include="..\..\tests\LicenseBlockManagerTest.cpp" />
     <ClCompile Include="..\..\tests\LicenseBlockTest.cpp" />

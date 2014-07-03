@@ -66,6 +66,9 @@
     <ClInclude Include="..\..\tests\GranuleTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tests\DecryptTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\tests\ReadMe.txt" />
@@ -120,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tests\GranuleTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\DecryptTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
