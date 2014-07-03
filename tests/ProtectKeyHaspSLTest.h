@@ -7,12 +7,17 @@
 #include "ProtectKey.h"
 #include "IProtectKeyDelegate.h"
 
+class MockRealKeyHaspSL;
+
+using mock_real_key_hasp_sl_t = std::shared_ptr<const MockRealKeyHaspSL>;
+
 class ProtectKeyHaspSLTest : public ::testing::Test, public IProtectKeyDelegate {
 	public:
 		~ProtectKeyHaspSLTest(void);
 
 		static const protect_key_t create_hasp_sl_key(const feature_t feature, const std::wstring session_id, const size_t licenses_amount);
 		static const protect_key_t create_hasp_sl_key(const feature_t feature, const std::wstring session_id, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory);
+		static const protect_key_t create_hasp_sl_key(mock_real_key_hasp_sl_t real_key, const std::wstring session_id);
 	protected:
 		ProtectKeyHaspSLTest(void);
 

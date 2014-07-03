@@ -26,11 +26,14 @@ const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t fea
 	return create_hasp_sl_key(feature, session_id, licenses_amount, check_methods_memory);
 }
 const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(const feature_t feature, const std::wstring session_id, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory) {
-	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
 	auto key = std::make_shared<const MockRealKeyHaspSL>(feature, check_methods_memory);
 	key->set_licenses_amount(licenses_amount);
 
-	auto protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(key, session_id_hash);
+	return create_hasp_sl_key(key, session_id);
+}
+const protect_key_t ProtectKeyHaspSLTest::create_hasp_sl_key(mock_real_key_hasp_sl_t real_key, const std::wstring session_id) {
+	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
+	auto protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(real_key, session_id_hash);
 	protect_key_hasp_sl->set_logout_after_check(true);
 
 	return protect_key_hasp_sl;
