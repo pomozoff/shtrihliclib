@@ -2,12 +2,13 @@
 #ifndef __MOCKREALCKEYROCKEY_H__
 #define __MOCKREALCKEYROCKEY_H__
 
+#include "MockRealKey.h"
 #include "RealKeyRockey.h"
 
-class MockRealKeyRockey : public RealKeyRockey {
+class MockRealKeyRockey : public MockRealKey, public RealKeyRockey {
 	public:
 		MockRealKeyRockey(const rockey_feature_t feature_id, const check_methods_memory_t check_methods_memory);
-		virtual ~MockRealKeyRockey();
+		virtual ~MockRealKeyRockey(void);
 
 		virtual const size_t max_memory_size(void) const = 0;
 		void initialize_memory(const check_methods_memory_t& check_methods_memory) const;

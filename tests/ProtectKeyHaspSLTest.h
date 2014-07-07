@@ -8,7 +8,6 @@
 #include "IProtectKeyDelegate.h"
 
 class MockRealKeyHaspSL;
-
 using mock_real_key_hasp_sl_t = std::shared_ptr<const MockRealKeyHaspSL>;
 
 class ProtectKeyHaspSLTest : public ::testing::Test, public IProtectKeyDelegate {

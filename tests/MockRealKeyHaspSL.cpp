@@ -30,6 +30,9 @@ void MockRealKeyHaspSL::set_licenses_amount(const uint16_t amount) const {
 #pragma region RealKeyHasp
 const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t feature_id, const char* scope, const hasp_vendor_code_t vendor_code, hasp_handle_t& handle) const {
 	auto status = HASP_HASP_NOT_FOUND;
+	if (!is_enabled()) {
+		return status;
+	}
 	if (feature_id == _feature_id) {
 		status = HASP_STATUS_OK;
 		handle = HASP_HANDLE_VALUE;
@@ -41,8 +44,12 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t fe
 	return status;
 }
 const hasp_status_t MockRealKeyHaspSL::_hasp_read(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, value_t& buffer) const {
+	auto status = HASP_HASP_NOT_FOUND;
+	if (!is_enabled()) {
+		return status;
+	}
 	value_t* local_buffer = nullptr;
-	auto status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
+	status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
 	if (HASP_STATUS_OK != status) {
 		return status;
 	}
@@ -53,8 +60,12 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_read(const hasp_handle_t handle, co
 	return status;
 }
 const hasp_status_t MockRealKeyHaspSL::_hasp_write(const hasp_handle_t handle, const hasp_fileid_t file_id, const hasp_size_t offset, const hasp_size_t length, const value_t& buffer) const {
+	auto status = HASP_HASP_NOT_FOUND;
+	if (!is_enabled()) {
+		return status;
+	}
 	value_t* local_buffer = nullptr;
-	auto status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
+	status = check_memory(handle, file_id, offset, length, buffer, &local_buffer);
 	if (HASP_STATUS_OK != status) {
 		return status;
 	}
@@ -65,11 +76,19 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_write(const hasp_handle_t handle, c
 	return status;
 }
 const hasp_status_t MockRealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) const {
-	auto status = HASP_STATUS_OK;
+	auto status = HASP_HASP_NOT_FOUND;
+	if (!is_enabled()) {
+		return status;
+	}
+	status = HASP_STATUS_OK;
 	_last_status = status;
 	return status;
 }
 const hasp_status_t MockRealKeyHaspSL::_hasp_legacy_set_idletime(const hasp_handle_t handle, const hasp_u16_t idle_time) const {
+	auto status = HASP_HASP_NOT_FOUND;
+	if (!is_enabled()) {
+		return status;
+	}
 	return HASP_STATUS_OK;
 }
 #pragma endregion

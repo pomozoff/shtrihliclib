@@ -7,12 +7,16 @@
 #include "ProtectKey.h"
 #include "IProtectKeyDelegate.h"
 
+class MockRealKeyRockeyLocal;
+using mock_real_key_rockey_local_t = std::shared_ptr<const MockRealKeyRockeyLocal>;
+
 class ProtectKeyRockeyLocalTest : public ::testing::Test, public IProtectKeyDelegate {
 	public:
 		~ProtectKeyRockeyLocalTest(void);
 
-		static const protect_key_t create_rockey_local_key(const feature_t feature);
-		static const protect_key_t create_rockey_local_key(const feature_t feature, const check_methods_memory_t& check_methods_memory);
+		static const protect_key_t create_key(const feature_t feature);
+		static const protect_key_t create_key(const feature_t feature, const check_methods_memory_t& check_methods_memory);
+		static const protect_key_t create_key(mock_real_key_rockey_local_t real_key);
 	protected:
 		ProtectKeyRockeyLocalTest(void);
 

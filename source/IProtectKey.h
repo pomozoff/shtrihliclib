@@ -21,6 +21,8 @@ class IProtectKey {
 		virtual void encrypt(const byte_t* input_buffer, const size_t input_length, byte_t** iv_enc, size_t& iv_length, byte_t** encrypted_buffer, size_t& encrypted_length) const = 0;
 		virtual void decrypt(const byte_t* encrypted_buffer, const size_t encrypted_length, byte_t* iv_dec, byte_t** decrypted_buffer) const = 0;
 
+		virtual const check_number_t max_check_number(void) const = 0;
+
 		void set_decrypt_method(const check_method_login_t decrypt_method) const;
 	protected:
 		IProtectKey(void);

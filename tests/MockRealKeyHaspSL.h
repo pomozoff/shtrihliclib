@@ -2,12 +2,13 @@
 #ifndef __MOCKREALCKEYHASPSL_H__
 #define __MOCKREALCKEYHASPSL_H__
 
+#include "MockRealKey.h"
 #include "RealKeyHaspSL.h"
 
-class MockRealKeyHaspSL : public RealKeyHaspSL {
+class MockRealKeyHaspSL : public MockRealKey, public RealKeyHaspSL {
 	public:
 		MockRealKeyHaspSL(const hasp_feature_t feature_id, const check_methods_memory_t check_methods_memory);
-		virtual ~MockRealKeyHaspSL();
+		virtual ~MockRealKeyHaspSL(void);
 
 		void set_licenses_amount(const uint16_t amount) const;
 

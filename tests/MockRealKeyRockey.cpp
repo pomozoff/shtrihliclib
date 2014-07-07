@@ -21,7 +21,10 @@ MockRealKeyRockey::~MockRealKeyRockey() {
 
 #pragma region RealKeyHasp
 const rockey_status_t MockRealKeyRockey::_rockey_login(const rockey_feature_t feature_id, std::string& key_number, rockey_handle_t& handle) const {
-	rockey_status_t status;
+	auto status = ERR_NO_ROCKEY;
+	if (!is_enabled()) {
+		return status;
+	}
 	if (feature_id == _feature_id) {
 		status = ERR_SUCCESS;
 		key_number = rockey_key_number;
@@ -35,8 +38,12 @@ const rockey_status_t MockRealKeyRockey::_rockey_login(const rockey_feature_t fe
 	return status;
 }
 const rockey_status_t MockRealKeyRockey::_rockey_read(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const {
+	auto status = ERR_NO_ROCKEY;
+	if (!is_enabled()) {
+		return status;
+	}
 	value_t* local_buffer = nullptr;
-	auto status = check_memory(handle, offset, length, buffer, &local_buffer);
+	status = check_memory(handle, offset, length, buffer, &local_buffer);
 	if (ERR_SUCCESS != status) {
 		return status;
 	}
@@ -47,8 +54,12 @@ const rockey_status_t MockRealKeyRockey::_rockey_read(const rockey_handle_t hand
 	return status;
 }
 const rockey_status_t MockRealKeyRockey::_rockey_write(const rockey_handle_t handle, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const {
+	auto status = ERR_NO_ROCKEY;
+	if (!is_enabled()) {
+		return status;
+	}
 	value_t* local_buffer = nullptr;
-	auto status = check_memory(handle, offset, length, buffer, &local_buffer);
+	status = check_memory(handle, offset, length, buffer, &local_buffer);
 	if (ERR_SUCCESS != status) {
 		return status;
 	}
@@ -59,7 +70,10 @@ const rockey_status_t MockRealKeyRockey::_rockey_write(const rockey_handle_t han
 	return status;
 }
 const rockey_status_t MockRealKeyRockey::_rockey_logout(const rockey_handle_t handle) const {
-	rockey_status_t status;
+	auto status = ERR_NO_ROCKEY;
+	if (!is_enabled()) {
+		return status;
+	}
 	if (ROCKEY_HANDLE_VALUE != handle) {
 		status = ERR_INVALID_HANDLE;
 	}

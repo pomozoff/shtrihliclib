@@ -27,8 +27,7 @@ const bool CheckMethodMemory::check(const ikey_checker_t key_checker) const {
 	if (logout_after_check()) {
 		key_checker->logout_key(_logged_in_method);
 	}
-	auto result = process_check_result(is_memory_same);
-	return result;
+	return is_memory_same;
 };
 #pragma endregion
 

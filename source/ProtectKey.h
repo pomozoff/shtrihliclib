@@ -75,8 +75,6 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		void check_granules(void) const;
 		void try_to_logout(void) const;
 
-		virtual const check_number_t max_check_number(void) const = 0;
-
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;
 	
@@ -93,8 +91,12 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable time_t _nfr_end_date = time(NULL);
 		mutable bool _is_key_nfr = false;
 
+		mutable check_number_t _current_check_number = 0;
+
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;
+
+		const bool process_check_result(const bool last_check_is_success) const;
 
 		template <class C, typename R, typename T>
 		using member_function_t = R(C::*)(T value) const;

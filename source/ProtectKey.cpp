@@ -71,36 +71,21 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 	};
 
 	for (auto&& protect_key : keys_list) {
-		// Установить максимальное неудачных попыток в минимальное значение
-		// т.к. поиск ключа должен происходить всего один раз
-		for_every_object_in_container(protect_key->_check_methods,
-			1,
-			&CheckMethod::set_max_check_number);
+		// Устанавливаем текущее значение попыток поиска лицензий
+		// в максимальное допустимое значение, т.к. ключ должен
+		// быть найден с первого раза
+		protect_key->_current_check_number = protect_key->max_check_number();
 
-		// Сбрасываем текущее значение попыток поиска лицензий
-		// т.к. ищем новый ключ, старое значение уже не нужно
-		for_every_object_in_container(protect_key->_check_methods,
-			0,
-			&CheckMethod::set_current_check_number);
-
-		// При поиске ключа не надо оповещать делегата
 		protect_key->_key_delegate = NULL;
 
-		// Ищем ключ
 		bool is_key_found = protect_key->check();
 		if (is_key_found) {
 			protect_key->check_granules();
 			protect_key->_key_delegate = &key_delegate;
 		}
 
-		// Отлогиниваемся если необходимо
 		protect_key->try_to_logout();
-
-		// Установить дефолтное максимальное значение неудачных попыток взад
-		// чтобы поиск лицензии имел возможность несколько раз неудачно завершиться
-		for_every_object_in_container(protect_key->_check_methods,
-			protect_key->max_check_number(),
-			&CheckMethod::set_max_check_number);
+		protect_key->_current_check_number = 0;
 
 		if (is_key_found) {
 			iprotect_key = protect_key;
@@ -159,7 +144,7 @@ void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
 	bool result = check_license_with_methods() || recheck_key();
-	return result;
+	return process_check_result(result);
 }
 const bool ProtectKey::is_key_nfr(void) const {
 	return _is_key_nfr;
@@ -280,6 +265,14 @@ const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::ws
 }
 const time_t ProtectKey::get_nfr_end_date(void) const {
 	return _nfr_end_date;
+}
+const bool ProtectKey::process_check_result(const bool last_check_is_success) const {
+	if (last_check_is_success) {
+		_current_check_number = 0;
+	} else {
+		_current_check_number++;
+	}
+	return _current_check_number < max_check_number();
 }
 #pragma endregion
 
