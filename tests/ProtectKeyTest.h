@@ -27,19 +27,24 @@ class ProtectKeyTest : public ::testing::Test, public IProtectKeyDelegate {
 	protected:
 		bool _check_license_expected_result = false;
 
-		const feature_t _feature_hasp_sl = 3;
+		const feature_t _feature_hasp_sl = 4;
 		const feature_t _feature_rockey_local = 1;
-		const feature_t _feature_rockey_net = 11;
+		const feature_t _feature_rockey_net = 1;
+		const feature_t _feature_rockey_net_nfr = 11;
 
 		const std::wstring _session_id = L"(computer-username)";
 		const size_t _licenses_amount_two = 2;
+		const size_t _licenses_amount_ten = 10;
+		const size_t _logins_amount_one = 1;
 
 		const mock_real_key_hasp_sl_t      _mock_real_key_hasp_sl;
 		const mock_real_key_rockey_local_t _mock_real_key_rockey_local;
+		const mock_real_key_rockey_net_t   _mock_real_key_rockey_net_nfr;
 		const mock_real_key_rockey_net_t   _mock_real_key_rockey_net;
 
 		const protect_key_t _protect_key_hasp_sl;
 		const protect_key_t _protect_key_rockey_local;
+		const protect_key_t _protect_key_rockey_net_nfr;
 		const protect_key_t _protect_key_rockey_net;
 
 		const protect_key_t create_key_hasp_sl(const mock_real_key_hasp_sl_t mock_real_key) const;
@@ -47,7 +52,9 @@ class ProtectKeyTest : public ::testing::Test, public IProtectKeyDelegate {
 		const protect_key_t create_key_rockey_net(const mock_real_key_rockey_net_t mock_real_key) const;
 
 		void add_granules_for_key_rockey(const protect_key_t protect_key, const check_method_login_t check_method) const;
-		void find_next_key(const protect_keys_t protect_keys, const mock_real_key_t mock_real_key);
+		
+		const iprotect_key_t find_next_key(const protect_keys_t protect_keys);
+		void check_key_license(const iprotect_key_t iprotect_key, const mock_real_key_t mock_real_key);
 	private:
 		virtual void did_check_protect_key(const bool success) override final;
 };

@@ -25,14 +25,18 @@ const rockey_status_t MockRealKeyRockey::_rockey_login(const rockey_feature_t fe
 	if (!is_enabled()) {
 		return status;
 	}
-	if (feature_id == _feature_id) {
-		status = ERR_SUCCESS;
-		key_number = rockey_key_number;
-		handle = ROCKEY_HANDLE_VALUE;
+	handle = ROCKEY_INVALID_HANDLE_VALUE;
+	if (_feature_id == feature_id) {
+		if (add_logged_in_user()) {
+			status = ERR_SUCCESS;
+			key_number = rockey_key_number;
+			handle = ROCKEY_HANDLE_VALUE;
+		} else {
+			status = ERR_NOMORE;
+		}
 	} else {
 		status = ERR_INVALID_FEATURE;
 		key_number = R"()";
-		handle = ROCKEY_INVALID_HANDLE_VALUE;
 	}
 	_last_status = status;
 	return status;
@@ -74,11 +78,11 @@ const rockey_status_t MockRealKeyRockey::_rockey_logout(const rockey_handle_t ha
 	if (!is_enabled()) {
 		return status;
 	}
-	if (ROCKEY_HANDLE_VALUE != handle) {
-		status = ERR_INVALID_HANDLE;
-	}
-	else {
+	if (ROCKEY_HANDLE_VALUE == handle) {
 		status = ERR_SUCCESS;
+		del_logged_in_user();
+	} else {
+		status = ERR_INVALID_HANDLE;
 	}
 	_last_status = status;
 	return status;

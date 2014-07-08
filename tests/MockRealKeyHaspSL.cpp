@@ -20,7 +20,7 @@ MockRealKeyHaspSL::~MockRealKeyHaspSL() {
 #pragma endregion
 
 #pragma region Public
-void MockRealKeyHaspSL::set_licenses_amount(const uint16_t amount) const {
+void MockRealKeyHaspSL::set_licenses_amount(const size_t amount) const {
 	const size_t one_byte = 0xff;
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 0] = amount / one_byte;
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 1] = amount % one_byte;
@@ -33,12 +33,16 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_login_scope(const hasp_feature_t fe
 	if (!is_enabled()) {
 		return status;
 	}
-	if (feature_id == _feature_id) {
-		status = HASP_STATUS_OK;
-		handle = HASP_HANDLE_VALUE;
+	handle = HASP_INVALID_HANDLE_VALUE;
+	if (_feature_id == feature_id) {
+		if (add_logged_in_user()) {
+			status = HASP_STATUS_OK;
+			handle = HASP_HANDLE_VALUE;
+		} else {
+			status = HASP_TOO_MANY_USERS;
+		}
 	} else {
 		status = HASP_FEATURE_NOT_FOUND;
-		handle = HASP_INVALID_HANDLE_VALUE;
 	}
 	_last_status = status;
 	return status;
@@ -80,7 +84,12 @@ const hasp_status_t MockRealKeyHaspSL::_hasp_logout(const hasp_handle_t handle) 
 	if (!is_enabled()) {
 		return status;
 	}
-	status = HASP_STATUS_OK;
+	if (HASP_HANDLE_VALUE == handle) {
+		status = HASP_STATUS_OK;
+		del_logged_in_user();
+	} else {
+		status = HASP_INV_HND;
+	}
 	_last_status = status;
 	return status;
 }

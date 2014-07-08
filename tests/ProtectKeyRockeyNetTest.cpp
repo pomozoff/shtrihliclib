@@ -25,14 +25,13 @@ const protect_key_t ProtectKeyRockeyNetTest::create_key(const feature_t feature,
 	return create_key(feature, licenses_amount, check_methods_memory);
 }
 const protect_key_t ProtectKeyRockeyNetTest::create_key(const feature_t feature, const size_t licenses_amount, const check_methods_memory_t& check_methods_memory) {
-	auto real_key = std::make_shared<const MockRealKeyRockeyNet>(feature, check_methods_memory);
+	auto real_key = std::make_shared<const MockRealKeyRockeyNet>(feature, check_methods_memory, false);
 	real_key->initialize_memory(check_methods_memory);
 
 	return create_key(real_key);
 }
 const protect_key_t ProtectKeyRockeyNetTest::create_key(mock_real_key_rockey_net_t real_key) {
 	auto protect_key_rockey_net = std::make_shared<const ProtectKeyRockeyNet>(real_key);
-	protect_key_rockey_net->set_logout_after_check(true);
 
 	return protect_key_rockey_net;
 }
@@ -48,13 +47,14 @@ TEST_F(ProtectKeyRockeyNetTest, find_key) {
 
 #pragma region Protected
 const protect_keys_t ProtectKeyRockeyNetTest::createKeys(void) const {
-	auto protectKey = ProtectKeyRockeyNetTest::create_key(_feature, _licenses_amount_two);
-	const auto checkMethod = protectKey->create_check_method_login(_feature, false);
+	auto protect_key = ProtectKeyRockeyNetTest::create_key(_feature, _licenses_amount_two);
+	protect_key->set_logout_after_check(true);
+	const auto checkMethod = protect_key->create_check_method_login(_feature, false);
 	checkMethod->set_check_method_for_license(true);
 	checkMethod->set_logout_after_check(true);
 
 	protect_keys_t protect_keys;
-	protect_keys.push_back(protectKey);
+	protect_keys.push_back(protect_key);
 
 	return protect_keys;
 }

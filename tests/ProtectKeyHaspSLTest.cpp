@@ -34,7 +34,6 @@ const protect_key_t ProtectKeyHaspSLTest::create_key(const feature_t feature, co
 const protect_key_t ProtectKeyHaspSLTest::create_key(mock_real_key_hasp_sl_t real_key, const std::wstring session_id) {
 	auto session_id_hash = ProtectKey::hash_from_session_id(session_id);
 	auto protect_key_hasp_sl = std::make_shared<const ProtectKeyHaspSL>(real_key, session_id_hash);
-	protect_key_hasp_sl->set_logout_after_check(true);
 
 	return protect_key_hasp_sl;
 }
@@ -50,13 +49,14 @@ TEST_F(ProtectKeyHaspSLTest, find_key) {
 
 #pragma region Protected
 const protect_keys_t ProtectKeyHaspSLTest::createKeys(void) const {
-	auto protectKey = ProtectKeyHaspSLTest::create_key(_feature, Platform::platform()->session_id(), _licenses_amount_two);
-	const auto checkMethod = protectKey->create_check_method_login(_feature, false);
+	auto protect_key = ProtectKeyHaspSLTest::create_key(_feature, Platform::platform()->session_id(), _licenses_amount_two);
+	protect_key->set_logout_after_check(true);
+	const auto checkMethod = protect_key->create_check_method_login(_feature, false);
 	checkMethod->set_check_method_for_license(true);
 	checkMethod->set_logout_after_check(true);
 
 	protect_keys_t protect_keys;
-	protect_keys.push_back(protectKey);
+	protect_keys.push_back(protect_key);
 
 	return protect_keys;
 }

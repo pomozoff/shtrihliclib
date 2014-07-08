@@ -32,7 +32,6 @@ const protect_key_t ProtectKeyRockeyLocalTest::create_key(const feature_t featur
 }
 const protect_key_t ProtectKeyRockeyLocalTest::create_key(mock_real_key_rockey_local_t real_key) {
 	auto protect_key_rockey_local = std::make_shared<const ProtectKeyRockeyLocal>(real_key);
-	protect_key_rockey_local->set_logout_after_check(true);
 
 	return protect_key_rockey_local;
 }
@@ -48,13 +47,14 @@ TEST_F(ProtectKeyRockeyLocalTest, find_key) {
 
 #pragma region Protected
 const protect_keys_t ProtectKeyRockeyLocalTest::createKeys(void) const {
-	auto protectKey = ProtectKeyRockeyLocalTest::create_key(_feature);
-	const auto checkMethod = protectKey->create_check_method_login(_feature, false);
+	auto protect_key = ProtectKeyRockeyLocalTest::create_key(_feature);
+	protect_key->set_logout_after_check(true);
+	const auto checkMethod = protect_key->create_check_method_login(_feature, false);
 	checkMethod->set_check_method_for_license(true);
 	checkMethod->set_logout_after_check(true);
 
 	protect_keys_t protect_keys;
-	protect_keys.push_back(protectKey);
+	protect_keys.push_back(protect_key);
 
 	return protect_keys;
 }

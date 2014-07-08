@@ -4,17 +4,18 @@
 #include "MockRealKeyRockeyNet.h"
 
 #pragma region Constructor Destructor
-MockRealKeyRockeyNet::MockRealKeyRockeyNet(const rockey_feature_t feature_id, const check_methods_memory_t check_methods_memory)
+MockRealKeyRockeyNet::MockRealKeyRockeyNet(const rockey_feature_t feature_id, const check_methods_memory_t check_methods_memory, const bool is_key_nfr)
 	: MockRealKeyRockey(feature_id, check_methods_memory)
 {
+	set_is_key_nfr(is_key_nfr);
 }
 MockRealKeyRockeyNet::~MockRealKeyRockeyNet() {
 }
 #pragma endregion
 
 #pragma region Public
-void MockRealKeyRockeyNet::set_licenses_amount(const uint16_t amount) const {
-
+void MockRealKeyRockeyNet::set_licenses_amount(const size_t amount) const {
+	set_max_logins_amount(amount);
 }
 #pragma endregion
 
