@@ -227,9 +227,7 @@ void ProtectKey::check_granules(void) const {
 	}
 }
 void ProtectKey::try_to_logout(void) const {
-	if (_logout_after_check) {
-		logout(false);
-	}
+	logout(_logout_after_check);
 }
 const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::wstring session_id) {
 	protect_key_t protect_key = nullptr;
