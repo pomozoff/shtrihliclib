@@ -54,6 +54,7 @@ const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_me
 		auto offset = check_method->offset();
 		auto length = check_method->value().size();
 		auto memory_type = _real_key->hasp_memory_type(check_method->memory_type());
+		buffer.resize(length);
 		_real_key->_hasp_read(handle, memory_type, offset, length, buffer);
 	}
 	return buffer;
@@ -194,7 +195,7 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 	return read_licenses_amount;
 }
 const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method) const {
-	value_t buffer;
+	value_t buffer(read_write_memory_size);
 	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
 		return nullptr;
 	}
