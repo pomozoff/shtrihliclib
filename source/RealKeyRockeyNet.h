@@ -23,11 +23,11 @@ class RealKeyRockeyNet : public RealKeyRockey {
 		static const size_t _key_type = 6;
 		static const size_t _memory_size = 120;
 
+		const bool _is_terminal_mode;
 		const HINSTANCE _library_handle;
 		const FARPROC _net_rockey_function_pointer;
 		const FARPROC _set_ini_path_function_pointer;
 
-		const bool _is_terminal_mode;
 		const bool is_terminal_mode_detected(void) const;
 
 		const HINSTANCE load_library(const LPCWCH library_name) const;
