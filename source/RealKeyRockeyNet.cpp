@@ -38,7 +38,7 @@ const rockey_long_t RealKeyRockeyNet::prepared_feature_id(const rockey_feature_t
 }
 const uint16_t RealKeyRockeyNet::call_rockey(uint16_t function, uint16_t* handle, uint32_t* lp1, uint32_t* lp2, uint16_t* p1, uint16_t* p2, uint16_t* p3, uint16_t* p4, uint8_t* buffer) const {
 	if (!_net_rockey_function_pointer) {
-		return false;
+		return ERR_NO_DRIVER;
 	}
 	net_rockey_t net_rockey_function_pointer = (net_rockey_t)_net_rockey_function_pointer;
 	return net_rockey_function_pointer(function, handle, lp1, lp2, p1, p2, p3, p4, buffer);
