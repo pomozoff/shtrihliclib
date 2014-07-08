@@ -17,7 +17,7 @@ RealKeyRockeyNet::RealKeyRockeyNet(char* ini_path)
 	, _net_rockey_function_pointer(get_function_pointer(_library_handle, "NetRockey"))
 	, _set_ini_path_function_pointer(get_function_pointer(_library_handle, "SetIniPathName"))
 {
-	if (ini_path != NULL) {
+	if (ini_path != NULL && _set_ini_path_function_pointer != NULL) {
 		set_ini_path_t set_ini_path_function_pointer = (set_ini_path_t)_set_ini_path_function_pointer;
 		set_ini_path_function_pointer(ini_path);
 	}
@@ -37,6 +37,9 @@ const rockey_long_t RealKeyRockeyNet::prepared_feature_id(const rockey_feature_t
 	return feature_id + (_is_terminal_mode ? 0 : 0x10000);
 }
 const uint16_t RealKeyRockeyNet::call_rockey(uint16_t function, uint16_t* handle, uint32_t* lp1, uint32_t* lp2, uint16_t* p1, uint16_t* p2, uint16_t* p3, uint16_t* p4, uint8_t* buffer) const {
+	if (!_net_rockey_function_pointer) {
+		return false;
+	}
 	net_rockey_t net_rockey_function_pointer = (net_rockey_t)_net_rockey_function_pointer;
 	return net_rockey_function_pointer(function, handle, lp1, lp2, p1, p2, p3, p4, buffer);
 }
