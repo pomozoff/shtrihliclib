@@ -24,7 +24,9 @@ static const unsigned char vendor_code[] =
 	"EShMnka+RgIOZHi31cxMPGe82hSedsutwyE6r+3X6L9ymvLBdWz5F/P+QVQ=";
 static const char* scope = 
 	"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-	"<haspscope/>";
+	"<haspscope>"
+	"<hasp type = \"HASP-SL\"/>"
+	"</haspscope>";
 
 #pragma endregion
 
