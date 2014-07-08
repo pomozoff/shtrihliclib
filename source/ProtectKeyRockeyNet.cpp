@@ -15,6 +15,10 @@ ProtectKeyRockeyNet::~ProtectKeyRockeyNet(void) {
 
 #pragma region IKeyChecker Interface
 const std::string ProtectKeyRockeyNet::get_key_type(void) const {
-	return "Rockey 4 Net";
+	std::string key_type = "Rockey 4 Net";
+	if (is_key_nfr()) {
+		key_type.append(" NFR");
+	}
+	return key_type;
 }
 #pragma endregion
