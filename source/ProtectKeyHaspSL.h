@@ -24,6 +24,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		virtual const bool is_able_to_login(const check_method_login_t check_method) const override final;
 		virtual const bool is_same_memory(const check_method_memory_t check_method) const override final;
 		virtual const bool logout_key(const check_method_login_t check_method) const override final;
+		virtual const std::string get_key_type(void) const override final;
 
 		/* IProtectKey Interface */
 		//virtual const bool decrypt(byte_t* buffer, const size_t length) const override final;

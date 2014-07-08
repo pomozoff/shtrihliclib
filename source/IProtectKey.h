@@ -23,6 +23,9 @@ class IProtectKey {
 
 		virtual const check_number_t max_check_number(void) const = 0;
 
+		virtual const std::string get_key_type(void) const = 0;
+		virtual const std::string get_key_number(void) const = 0;
+
 		void set_decrypt_method(const check_method_login_t decrypt_method) const;
 	protected:
 		IProtectKey(void);

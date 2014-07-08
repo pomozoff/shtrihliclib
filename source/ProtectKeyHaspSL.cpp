@@ -113,6 +113,9 @@ const bool ProtectKeyHaspSL::decrypt(byte_t* buffer, const size_t length) const 
 	return HASP_STATUS_OK == status;
 }
 */
+const std::string ProtectKeyHaspSL::get_key_type(void) const {
+	return "HASP SL";
+}
 #pragma endregion
 
 #pragma region KeyChecker Interface

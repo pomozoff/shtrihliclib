@@ -215,6 +215,9 @@ const bool ProtectKey::is_same_memory(const check_method_memory_t check_method) 
 const bool ProtectKey::logout_key(const check_method_login_t check_method) const {
 	return false;
 }
+const std::string ProtectKey::get_key_number(void) const {
+	return _key_number;
+}
 #pragma endregion
 
 #pragma region Protected

@@ -51,6 +51,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool is_able_to_login(const check_method_login_t check_method) const override;
 		virtual const bool is_same_memory(const check_method_memory_t check_method) const override;
 		virtual const bool logout_key(const check_method_login_t check_method) const override;
+		virtual const std::string get_key_number(void) const override final;
 
 		/* Accessors */
 		const bool logout_after_check(void) const;
