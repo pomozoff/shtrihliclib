@@ -187,16 +187,18 @@ const bool ProtectKey::check(void) const {
 	bool result = false;
 	bool is_check_nfr_true = false;
 	for (auto&& element : _check_methods) {
-		if (_is_key_nfr && is_check_nfr_true) {
-			return true;
+		if (result && is_check_nfr_true) {
+			break;
 		}
 		is_check_nfr_true = element->is_check_method_for_nfr();
 		result = element->check(shared_from_this());
-		_is_key_nfr = result && is_check_nfr_true;
 
 		if (!result && !is_check_nfr_true) {
 			break;
 		}
+	}
+	if (result) {
+		_is_key_nfr = is_check_nfr_true;
 	}
 	return result;
 }
