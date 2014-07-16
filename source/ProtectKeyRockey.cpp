@@ -44,8 +44,6 @@ const bool ProtectKeyRockey::is_able_to_login(const check_method_login_t check_m
 	if (isSuccess) {
 		_last_loggedin_method = check_method;
 	}
-	call_delegate(isSuccess);
-
 	return isSuccess;
 }
 const bool ProtectKeyRockey::is_same_memory(const check_method_memory_t check_method) const {

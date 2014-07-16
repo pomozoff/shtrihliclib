@@ -143,8 +143,9 @@ void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
-	bool result = check_license_with_methods() || recheck_key();
-	return process_check_result(result);
+	bool isSuccess = check_license_with_methods();
+	call_delegate(isSuccess);
+	return process_check_result(isSuccess) || recheck_key();
 }
 const bool ProtectKey::is_key_nfr(void) const {
 	return _is_key_nfr;
@@ -301,9 +302,10 @@ const bool ProtectKey::recheck_key(void) const {
 	bool result = check();
 	if (result) {
 		check_granules();
-		_key_delegate = temp_delegate;
 	}
 	try_to_logout();
+
+	_key_delegate = temp_delegate;
 
 	return result;
 }

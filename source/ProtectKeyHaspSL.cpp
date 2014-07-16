@@ -73,7 +73,6 @@ const bool ProtectKeyHaspSL::is_able_to_login(const check_method_login_t check_m
 		_last_loggedin_method = check_method;
 		isSuccess = get_license(check_method);
 	}
-	call_delegate(isSuccess);
 	return isSuccess;
 }
 const bool ProtectKeyHaspSL::is_same_memory(const check_method_memory_t check_method) const {
