@@ -9,6 +9,8 @@ class LicenseBlock;
 class LicenseBlockManager;
 
 class ProtectKeyHaspSL final : public ProtectKey {
+	private:
+		static const check_number_t _max_check_number = 10;
 	public:
 		ProtectKeyHaspSL(const real_key_hasp_t key, const size_t session_id_hash);
 		~ProtectKeyHaspSL(void);
@@ -36,7 +38,7 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		virtual const check_number_t max_check_number(void) const override;
 	private:
 		const real_key_hasp_t _real_key;
-		const check_number_t _max_check_number = 3;
+		const size_t _key_polling_period_seconds = 17;
 
 		const std::string key_id(const hasp_handle_t handle) const;
 
@@ -47,10 +49,11 @@ class ProtectKeyHaspSL final : public ProtectKey {
 		const size_t licenses_amount(const check_method_login_t check_method) const;
 		const bool get_license(const check_method_login_t check_method) const;
 
-		const license_block_manager_t make_license_block_manager(const check_method_login_t check_method) const;
+		const license_block_manager_t make_license_block_manager(const check_method_login_t check_method, const time_t loggedin_period_seconds) const;
 		void free_licnese(void) const;
 
 		void process_result(const hasp_status_t status) const;
+		const time_t get_random_timeout_seconds(void) const;
 };
 
 #endif // __PROTECTKEYHASPSL_H__

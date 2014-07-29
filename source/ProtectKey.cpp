@@ -4,6 +4,7 @@
 #include <iterator>
 #include <algorithm>
 #include <functional>
+#include <thread>
 
 #include <openssl/aes.h>
 #include <openssl/rand.h>
@@ -25,15 +26,17 @@ static const uint16_t AES_key_length = 256;
 static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
 
 #pragma region Constructor Destructor
-ProtectKey::ProtectKey(const KeyType keytype)
-	: _key_delegate(NULL)
+ProtectKey::ProtectKey(const KeyType keytype, const check_number_t check_number)
+	: _keytype(keytype)
 #ifdef _DEBUG
 	, _license_timeout(10)  // поиск ключа каждые 10 секунд
 #else
 	, _license_timeout(60 * 30)  // поиск ключа каждые полчаса
 #endif
-	, _keytype(keytype)
+	, _current_check_number(check_number)
+	, _key_delegate(NULL)
 {
+	std::srand((unsigned int)std::time(NULL));
 }
 ProtectKey::~ProtectKey(void) {
 	_granules.clear();
@@ -53,11 +56,6 @@ const size_t ProtectKey::hash_from_session_id(const std::wstring session_id) {
 const protect_key_t ProtectKey::create_key(const KeyType key_type, const platform_t platform) {
 	return create_key(key_type, platform->session_id());
 }
-void ProtectKey::call_delegate(bool isSuccess) const {
-	if (_key_delegate) {
-		_key_delegate->did_check_protect_key(isSuccess);
-	}
-}
 const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, IProtectKeyDelegate& key_delegate) {
 	iprotect_key_weak_t iprotect_key;
 
@@ -71,22 +69,14 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 	};
 
 	for (auto&& protect_key : keys_list) {
-		// Устанавливаем текущее значение попыток поиска лицензий
-		// в максимальное допустимое значение, т.к. ключ должен
-		// быть найден с первого раза
-		protect_key->_current_check_number = protect_key->max_check_number();
-
 		protect_key->_key_delegate = NULL;
 
 		bool is_key_found = protect_key->check();
 		if (is_key_found) {
+			protect_key->set_current_check_number(0);
 			protect_key->check_granules();
 			protect_key->_key_delegate = &key_delegate;
 		}
-
-		protect_key->try_to_logout();
-		protect_key->_current_check_number = 0;
-
 		if (is_key_found) {
 			iprotect_key = protect_key;
 			break;
@@ -139,13 +129,21 @@ const time_t ProtectKey::nfr_end_date(void) const {
 void ProtectKey::set_nfr_end_date(const time_t nfr_end_date) const {
 	_nfr_end_date = nfr_end_date;
 }
+void ProtectKey::set_current_check_number(const check_number_t number) const {
+	_current_check_number = number;
+}
 #pragma endregion
 
 #pragma region IProtectKey Interface
 const bool ProtectKey::check_license(void) const {
 	bool isSuccess = check_license_with_methods();
-	call_delegate(isSuccess);
-	return process_check_result(isSuccess) || recheck_key();
+	if (_key_delegate) {
+		_key_delegate->did_check_protect_key(isSuccess);
+	}
+	bool result = process_check_result(isSuccess) || recheck_key();
+	try_to_logout();
+	
+	return result;
 }
 const bool ProtectKey::is_key_nfr(void) const {
 	return _is_key_nfr;
@@ -187,19 +185,30 @@ void ProtectKey::decrypt(const byte_t* encrypted_buffer, const size_t encrypted_
 const bool ProtectKey::check(void) const {
 	bool result = false;
 	bool is_check_nfr_true = false;
-	for (auto&& element : _check_methods) {
-		if (result && is_check_nfr_true) {
-			break;
-		}
-		is_check_nfr_true = element->is_check_method_for_nfr();
-		result = element->check(shared_from_this());
 
-		if (!result && !is_check_nfr_true) {
-			break;
+	while (_current_check_number <= max_check_number()) {
+		for (auto&& element : _check_methods) {
+			if (result && is_check_nfr_true) {
+				break;
+			}
+			is_check_nfr_true = element->is_check_method_for_nfr();
+			result = element->check(shared_from_this());
+
+			if (!result && !is_check_nfr_true) {
+				break;
+			}
 		}
-	}
-	if (result) {
-		_is_key_nfr = is_check_nfr_true;
+
+		try_to_logout();
+
+		if (result) {
+			_is_key_nfr = is_check_nfr_true;
+		}
+		
+		_current_check_number++;
+		if (_current_check_number < max_check_number()) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(_wait_period_milsec + (std::rand() % _wait_period_milsec + 1)));
+		}
 	}
 	return result;
 }
@@ -303,8 +312,6 @@ const bool ProtectKey::recheck_key(void) const {
 	if (result) {
 		check_granules();
 	}
-	try_to_logout();
-
 	_key_delegate = temp_delegate;
 
 	return result;

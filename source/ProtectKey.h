@@ -58,6 +58,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		void set_logout_after_check(const bool logout_after_check) const;
 		const time_t nfr_end_date(void) const;
 		void set_nfr_end_date(const time_t nfr_end_date) const;
+		void set_current_check_number(const check_number_t number) const;
 	protected:
 		const KeyType _keytype;
 		time_t _license_timeout = 60; // Одна минута
@@ -66,12 +67,11 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable std::wstring _error_string;
 		mutable size_t _error_code;
 		mutable features_t _features;
+		mutable check_number_t _current_check_number;
 
-		ProtectKey(const KeyType keytype);
+		ProtectKey(const KeyType keytype, const check_number_t check_number);
 
 		static const protect_key_t create_key(const KeyType key_type, const std::wstring session_id);
-
-		void call_delegate(bool isSuccess) const;
 
 		void check_granules(void) const;
 		void try_to_logout(void) const;
@@ -84,15 +84,15 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 	private:
 		ProtectKey& operator=(const ProtectKey &tmp);
 
+		const time_t _wait_period_milsec = 500;
+
 		mutable IProtectKeyDelegate* _key_delegate;
 		mutable granules_t _granules;
 		mutable bool _logout_after_check = false;
 		bool _is_key_base = false;
 
-		mutable time_t _nfr_end_date = time(NULL);
+		mutable time_t _nfr_end_date = std::time(NULL);
 		mutable bool _is_key_nfr = false;
-
-		mutable check_number_t _current_check_number = 0;
 
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;

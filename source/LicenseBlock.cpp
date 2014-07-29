@@ -8,10 +8,10 @@
 #include "ProtectKey.h"
 
 #pragma region Constructor Destructor
-LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t timeout, const size_t session_id_hash) :
+LicenseBlock::LicenseBlock(const value_t block, const offset_t offset, const time_t loggedin_period_seconds, const size_t session_id_hash) :
 _block(block),
 _offset_in_manager(offset),
-_timeout(timeout),
+_loggedin_period_seconds(loggedin_period_seconds),
 _current_session_id_hash(session_id_hash)
 {
 }
@@ -20,20 +20,16 @@ LicenseBlock::~LicenseBlock(void) {
 #pragma endregion
 
 #pragma region Public
-const value_t LicenseBlock::block_from_string(const std::wstring session_id, const time_t time_logged_in) {
+const value_t LicenseBlock::block_from_string(const std::wstring session_id, const time_t loggedin_until_value) {
 	auto hash = ProtectKey::hash_from_session_id(session_id);
-	return block_from_hash(hash, time_logged_in);
+	return block_from_hash(hash, loggedin_until_value);
 }
 
 const size_t LicenseBlock::position_in_manager(void) const {
 	return _offset_in_manager / sizeof_block;
 }
 const bool LicenseBlock::is_expired(void) const {
-	auto block_is_valid = is_valid();
-	auto time_is_out = (difftime(time(NULL), logged_in_time()) > _timeout);
-	auto result = (!block_is_valid) || time_is_out;
-
-	return result;
+	return (!is_valid()) || (std::time(NULL) > loggedin_until());
 }
 const bool LicenseBlock::is_it_my_block(void) const {
 	if (!is_valid()) {
@@ -50,7 +46,7 @@ void LicenseBlock::update_block(const time_t time) const {
 	_block = block_from_hash(_current_session_id_hash, time);
 }
 void LicenseBlock::make_expired(void) const {
-	update_block(0);
+	update_block(std::time(NULL) - _loggedin_period_seconds);
 }
 #pragma endregion
 
@@ -60,6 +56,16 @@ const offset_t LicenseBlock::offset_in_manager(void) const {
 }
 const value_t& LicenseBlock::block(void) const {
 	return _block;
+}
+const time_t LicenseBlock::loggedin_period_seconds(void) const {
+	return _loggedin_period_seconds;
+}
+const time_t LicenseBlock::loggedin_until(void) const {
+	time_t loggedin_until_value = 0;
+	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, loggedin_until_value)) {
+		return 0;
+	}
+	return loggedin_until_value;
 }
 #pragma endregion
 
@@ -91,11 +97,11 @@ const bool LicenseBlock::get_data_from_buffer_at_offset(const value_t buffer, co
 
 	return true;
 }
-const value_t LicenseBlock::block_from_hash(const size_t hash, const time_t time_logged_in) {
+const value_t LicenseBlock::block_from_hash(const size_t hash, const time_t loggedin_until_value) {
 	value_t buffer(sizeof_block);
 
 	place_data_to_buffer_at_offset(buffer, 0, hash);
-	place_data_to_buffer_at_offset(buffer, sizeof_hash, time_logged_in);
+	place_data_to_buffer_at_offset(buffer, sizeof_hash, loggedin_until_value);
 
 	size_t crc = hash_value(buffer, 0, sizeof_data);
 	place_data_to_buffer_at_offset(buffer, sizeof_data, crc);
@@ -124,12 +130,5 @@ const bool LicenseBlock::is_valid() const {
 		return false;
 	}
 	return computed_hash == block_hash;
-}
-const time_t LicenseBlock::logged_in_time(void) const {
-	time_t logged_in = 0;
-	if (!get_data_from_buffer_at_offset(_block, sizeof_hash, logged_in)) {
-		return 0;
-	}
-	return logged_in;
 }
 #pragma endregion

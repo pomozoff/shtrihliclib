@@ -7,11 +7,11 @@ class LicenseBlock final {
 		static const size_t sizeof_hash = sizeof(size_t);
 		static const size_t sizeof_data = sizeof_hash + sizeof(time_t);
 	public:
-		LicenseBlock(const value_t block, const offset_t offset, const time_t timeout, const size_t session_id_hash);
+		LicenseBlock(const value_t block, const offset_t offset, const time_t loggedin_period_seconds, const size_t session_id_hash);
 		~LicenseBlock(void);
 
 		static const size_t sizeof_block = sizeof_data + sizeof_hash;
-		static const value_t block_from_string(const std::wstring session_id, const time_t time_logged_in);
+		static const value_t block_from_string(const std::wstring session_id, const time_t loggedin_until_value);
 
 		const size_t position_in_manager(void) const;
 		const bool is_expired(void) const;
@@ -23,13 +23,15 @@ class LicenseBlock final {
 		/* Accessors */
 		const offset_t offset_in_manager(void) const;
 		const value_t& block(void) const;
+		const time_t loggedin_period_seconds(void) const;
+		const time_t loggedin_until(void) const;
 	protected:
 	private:
 		LicenseBlock& operator=(const LicenseBlock &tmp);
 
 		mutable value_t _block;
 		const offset_t _offset_in_manager;
-		const time_t _timeout;
+		const time_t _loggedin_period_seconds;
 		const size_t _current_session_id_hash;
 
 		template <typename T>
@@ -37,11 +39,10 @@ class LicenseBlock final {
 		template <typename T>
 		static const bool get_data_from_buffer_at_offset(const value_t buffer, const offset_t offset, T& data);
 
-		static const value_t block_from_hash(const size_t hash, const time_t time_logged_in);
+		static const value_t block_from_hash(const size_t hash, const time_t loggedin_until_value);
 		static const size_t hash_value(const value_t buffer, const offset_t offset, const size_t size);
 
 		const bool is_valid(void) const;
-		const time_t logged_in_time(void) const;
 };
 
 #endif // __LICENSEBLOCK_H__

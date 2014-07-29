@@ -32,14 +32,12 @@ static const char* scope =
 
 #pragma region Constructor Destructor
 ProtectKeyHaspSL::ProtectKeyHaspSL(const real_key_hasp_t key, const size_t session_id_hash)
-	: ProtectKey(KeyType::HaspSL)
+	: ProtectKey(KeyType::HaspSL, 0)
 	, _session_id_hash(session_id_hash)
 	, _real_key(key)
 {
 #ifdef _DEBUG
-	_license_timeout = 10; // поиск ключа каждые 10 секунд
-#else
-	_license_timeout = 30; // поиск ключа каждые 30 секунд
+	_license_timeout = _key_polling_period_seconds;
 #endif
 }
 ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
@@ -116,7 +114,7 @@ const bool ProtectKeyHaspSL::decrypt(byte_t* buffer, const size_t length) const 
 }
 */
 const std::string ProtectKeyHaspSL::get_key_type(void) const {
-	return "HASP SL";
+	return "Hasp SL";
 }
 #pragma endregion
 
@@ -195,16 +193,16 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 	}
 	return read_licenses_amount;
 }
-const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method) const {
+const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method, const time_t loggedin_period_seconds) const {
 	value_t buffer(read_write_memory_size);
 	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
 		return nullptr;
 	}
-	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, _license_timeout, licenses_amount(check_method), _session_id_hash);
+	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, loggedin_period_seconds, licenses_amount(check_method), _session_id_hash);
 	return license_block_manager;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {
-	auto license_block_manager = make_license_block_manager(check_method);
+	auto license_block_manager = make_license_block_manager(check_method, get_random_timeout_seconds());
 	if (!license_block_manager) {
 		return false;
 	}
@@ -221,7 +219,7 @@ void ProtectKeyHaspSL::free_licnese(void) const {
 	if (!login(_last_loggedin_method, handle)) {
 		return;
 	}
-	auto license_block_manager = make_license_block_manager(_last_loggedin_method);
+	auto license_block_manager = make_license_block_manager(_last_loggedin_method, 0);
 	if (!license_block_manager) {
 		return;
 	}
@@ -243,6 +241,9 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 			break;
 		case HASP_NO_DRIVER:
 			_error_string = L"Не обнаружен драйвер HASP";
+			break;
+		case HASP_TOO_MANY_USERS:
+			_error_string = L"Ключ занят другим пользователем";
 			break;
 		case HASP_CONTAINER_NOT_FOUND:
 			_error_string = L"Не найден ключ HASP";
@@ -275,5 +276,8 @@ void ProtectKeyHaspSL::process_result(const hasp_status_t status) const {
 			_error_string = L"Ошибка";
 			break;
 	}
+}
+const time_t ProtectKeyHaspSL::get_random_timeout_seconds(void) const {
+	return (_max_check_number * _key_polling_period_seconds + (std::rand() % _key_polling_period_seconds + 1));
 }
 #pragma endregion

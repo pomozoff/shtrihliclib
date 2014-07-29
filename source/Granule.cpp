@@ -82,7 +82,7 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 		if (2 == _value.size()) {
 			nfr_end_date = make_unix_time_from_old_format(_value);
 		} else {
-			nfr_end_date = time(NULL);
+			nfr_end_date = std::time(NULL);
 		}
 		_protect_key->set_nfr_end_date(nfr_end_date);
 	}

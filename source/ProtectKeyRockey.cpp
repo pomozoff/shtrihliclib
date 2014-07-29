@@ -10,7 +10,7 @@
 
 #pragma region Constructor Destructor
 ProtectKeyRockey::ProtectKeyRockey(const real_key_rockey_t key, const KeyType keytype)
-	: ProtectKey(keytype)
+	: ProtectKey(keytype, _max_check_number)
 	, _real_key(key)
 {
 }

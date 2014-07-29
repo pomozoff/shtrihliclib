@@ -9,6 +9,8 @@ class LicenseBlock;
 class LicenseBlockManager;
 
 class ProtectKeyRockey : public ProtectKey {
+	private:
+		static const check_number_t _max_check_number = 3;
 	public:
 		ProtectKeyRockey(const real_key_rockey_t key, const KeyType keytype);
 		~ProtectKeyRockey(void);
@@ -26,7 +28,6 @@ class ProtectKeyRockey : public ProtectKey {
 		virtual const check_number_t max_check_number(void) const override;
 	private:
 		const real_key_rockey_t _real_key;
-		const check_number_t _max_check_number = 3;
 
 		const rockey_status_t read_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, value_t& buffer) const;
 		const rockey_status_t write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const;
