@@ -75,6 +75,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		void check_granules(void) const;
 		void try_to_logout(void) const;
+		virtual void init_key(void) const;
 
 		/* KeyChecker Interface */
 		virtual const bool check(void) const override final;

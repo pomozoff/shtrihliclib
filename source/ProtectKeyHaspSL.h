@@ -33,6 +33,8 @@ class ProtectKeyHaspSL final : public ProtectKey {
 	protected:
 		const size_t _session_id_hash;
 
+		virtual void init_key(void) const override final;
+
 		/* KeyChecker Interface */
 		virtual const key_handle_t get_handle(const check_method_login_t check_method) const override final;
 		virtual const check_number_t max_check_number(void) const override;

@@ -46,6 +46,12 @@ ProtectKeyHaspSL::~ProtectKeyHaspSL(void) {
 }
 #pragma endregion
 
+#pragma region protect
+void ProtectKeyHaspSL::init_key(void) const {
+	_current_check_number = 0;
+}
+#pragma endregion
+
 #pragma region ProtectKey Interface
 const value_t ProtectKeyHaspSL::read_memory(const check_method_memory_t check_method) const {
 	value_t buffer;

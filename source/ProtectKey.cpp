@@ -70,6 +70,7 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 
 	for (auto&& protect_key : keys_list) {
 		protect_key->_key_delegate = NULL;
+		protect_key->init_key();
 
 		bool is_key_found = protect_key->check();
 		if (is_key_found) {
@@ -240,6 +241,9 @@ void ProtectKey::check_granules(void) const {
 }
 void ProtectKey::try_to_logout(void) const {
 	logout(_logout_after_check);
+}
+void ProtectKey::init_key(void) const {
+	_current_check_number = max_check_number();
 }
 const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::wstring session_id) {
 	protect_key_t protect_key = nullptr;
