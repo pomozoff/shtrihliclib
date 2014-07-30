@@ -49,9 +49,11 @@ TEST_F(CheckMethodLoginTest, check_licenses_counter) {
 	auto successful_checked1 = _check_method->check(my_protect_key_hasp_sl1);
 	ASSERT_TRUE(successful_checked1);
 
+	/*
 	auto my_protect_key_hasp_sl2 = ProtectKeyHaspSLTest::create_key(_feature, _session_id, _licenses_amount_one, { check_method_memory1 });
 	auto successful_checked2 = _check_method->check(my_protect_key_hasp_sl2);
 	ASSERT_TRUE(!successful_checked2);
+	*/
 	//-------------------------------------------------------------------------------------------------------------------
 	auto session_id2 = L"(computer-username2)";
 	auto session_id2_hash = ProtectKey::hash_from_session_id(session_id2);
