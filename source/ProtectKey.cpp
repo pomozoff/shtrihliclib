@@ -141,8 +141,8 @@ const bool ProtectKey::check_license(void) const {
 	if (_key_delegate) {
 		_key_delegate->did_check_protect_key(isSuccess);
 	}
-	bool result = process_check_result(isSuccess) || recheck_key();
 	try_to_logout();
+	bool result = process_check_result(isSuccess) || recheck_key();
 	
 	return result;
 }
@@ -317,6 +317,7 @@ const bool ProtectKey::recheck_key(void) const {
 		check_granules();
 	}
 	_key_delegate = temp_delegate;
+	try_to_logout();
 
 	return result;
 }
