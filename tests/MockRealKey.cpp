@@ -17,7 +17,7 @@ const bool MockRealKey::is_enabled(void) const {
 void MockRealKey::set_enabled(const bool is_enabled) const {
 	_is_enabled = is_enabled;
 }
-const bool  MockRealKey::add_logged_in_user(void) const {
+const bool MockRealKey::add_logged_in_user(void) const {
 	auto successful_login = _logged_in_users_amount < static_cast<int>(_max_logins_amount);
 	if (successful_login) {
 		_logged_in_users_amount++;

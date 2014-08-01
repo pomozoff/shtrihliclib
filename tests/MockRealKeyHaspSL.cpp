@@ -25,6 +25,9 @@ void MockRealKeyHaspSL::set_licenses_amount(const size_t amount) const {
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 0] = amount / one_byte;
 	_ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 1] = amount % one_byte;
 }
+const size_t MockRealKeyHaspSL::licenses_amount(void) const {
+	return _ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 0] * 0xff + _ro_buffer[ProtectKeyHaspSL::offset_licenses_amount + 1];
+}
 #pragma endregion
 
 #pragma region RealKeyHasp
