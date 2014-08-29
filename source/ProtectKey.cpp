@@ -78,6 +78,7 @@ const iprotect_key_weak_t ProtectKey::find_key(const protect_keys_t& keys_list, 
 			protect_key->check_granules();
 			protect_key->_key_delegate = &key_delegate;
 		}
+		protect_key->try_to_logout();
 		if (is_key_found) {
 			iprotect_key = protect_key;
 			break;
@@ -203,12 +204,12 @@ const bool ProtectKey::check(void) const {
 			}
 		}
 
-		try_to_logout();
-
 		if (result) {
 			_is_key_nfr = is_check_nfr_true;
+			break;
 		}
-		
+
+		try_to_logout();
 		_current_check_number++;
 		if (_current_check_number < max_check_number()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(_wait_period_milsec + (std::rand() % _wait_period_milsec + 1)));
