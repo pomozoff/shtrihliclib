@@ -75,7 +75,7 @@ const bool Granule::is_same_memory(const check_method_memory_t check_method) con
 		_value = _protect_key->read_memory(check_method);
 		result = _value.size() > 0;
 	} else {
-		_protect_key->is_same_memory(check_method);
+		result = _protect_key->is_same_memory(check_method);
 	}
 	if (_is_granule_nfr_date) {
 		time_t nfr_end_date;

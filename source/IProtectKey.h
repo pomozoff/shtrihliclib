@@ -15,6 +15,7 @@ class IProtectKey {
 
 		virtual const time_t check_license_timeout(void) const = 0;
 		virtual const granule_t granule_with_name(const std::wstring& granule_name) const = 0;
+		virtual const bool is_granule_present(const granule_t& granule) const = 0;
 		virtual const time_t get_nfr_end_date(void) const = 0;
 
 		//virtual const bool decrypt(byte_t* buffer, const size_t length) const = 0;

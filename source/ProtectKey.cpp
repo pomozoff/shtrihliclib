@@ -103,17 +103,20 @@ const bool ProtectKey::copy_block_to_buffer(const value_t& source, value_t& dest
 }
 const granule_t ProtectKey::create_granule(const std::wstring name) const {
 	auto granule = std::make_shared<const Granule>(name, shared_from_this());
-	_granules.push_back(granule);
+	_granules[granule] = false;
 	return granule;
 }
 void ProtectKey::removeGranules(void) const {
 	_granules.clear();
 }
 const granule_t ProtectKey::granule_with_name(const std::wstring& granule_name) const {
-	auto iterator = std::find_if(_granules.begin(), _granules.end(), [&granule_name] (const granule_t& granule) {
-		return granule->name() == granule_name;
+	auto iterator = std::find_if(_granules.begin(), _granules.end(), [&granule_name] (const std::pair<const granule_t, bool>& pair) {
+		return pair.first->name() == granule_name;
 	});
-	return iterator != _granules.end() ? *iterator : nullptr;
+	return iterator != _granules.end() ? iterator->first : nullptr;
+}
+const bool ProtectKey::is_granule_present(const granule_t& granule) const {
+	return nullptr == granule ? false : _granules[granule];
 }
 #pragma endregion
 
@@ -236,7 +239,7 @@ const std::string ProtectKey::get_key_number(void) const {
 #pragma region Protected
 void ProtectKey::check_granules(void) const {
 	for (auto&& element : _granules) {
-		element->check();
+		element.second = element.first->check();
 	}
 }
 void ProtectKey::try_to_logout(void) const {

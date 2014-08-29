@@ -14,7 +14,7 @@ class Granule;
 using protect_key_t = std::shared_ptr<const ProtectKey>;
 using protect_key_weak_t = std::weak_ptr<const ProtectKey>;
 using protect_keys_t = std::vector<const protect_key_t>;
-using granules_t = std::vector<const granule_t>;
+using granules_t = std::map<const granule_t, bool>;
 using iprotect_key_t = std::shared_ptr<const IProtectKey>;
 using iprotect_key_weak_t = std::weak_ptr<const IProtectKey>;
 
@@ -37,6 +37,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const value_t read_memory(const check_method_memory_t check_method) const = 0;
 
 		virtual const granule_t granule_with_name(const std::wstring& granule_name) const;
+		virtual const bool is_granule_present(const granule_t& granule) const override final;
 
 		/* IProtectKey Interface */
 		virtual const bool check_license(void) const override final;
