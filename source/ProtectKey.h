@@ -36,7 +36,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		virtual const value_t read_memory(const check_method_memory_t check_method) const = 0;
 
-		virtual const granule_t granule_with_name(const std::wstring& granule_name) const;
+		virtual const granule_t granule_with_name(const std::wstring& granule_name) const override final;
 		virtual const bool is_granule_present(const granule_t& granule) const override final;
 
 		/* IProtectKey Interface */
