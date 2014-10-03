@@ -120,7 +120,7 @@ const bool ProtectKeyHaspSL::decrypt(byte_t* buffer, const size_t length) const 
 }
 */
 const std::string ProtectKeyHaspSL::get_key_type(void) const {
-	return "Hasp SL";
+	return "Sentinel";
 }
 #pragma endregion
 
