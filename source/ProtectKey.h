@@ -69,6 +69,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable size_t _error_code;
 		mutable features_t _features;
 		mutable check_number_t _current_check_number;
+		mutable bool _first_key_check = true;
 
 		ProtectKey(const KeyType keytype, const check_number_t check_number);
 

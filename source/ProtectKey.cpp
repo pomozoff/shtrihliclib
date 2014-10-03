@@ -205,6 +205,7 @@ const bool ProtectKey::check(void) const {
 		}
 
 		if (result) {
+			_first_key_check = false;
 			_is_key_nfr = is_check_nfr_true;
 			break;
 		}
@@ -248,6 +249,7 @@ void ProtectKey::try_to_logout(void) const {
 }
 void ProtectKey::init_key(void) const {
 	_current_check_number = max_check_number();
+	_first_key_check = true;
 }
 const protect_key_t ProtectKey::create_key(const KeyType key_type, const std::wstring session_id) {
 	protect_key_t protect_key = nullptr;

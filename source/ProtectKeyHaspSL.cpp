@@ -182,6 +182,8 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method, hasp
 	if (success) {
 		_real_key->_hasp_legacy_set_idletime(handle, 1);
 		add_handle(check_method, handle);
+	} else if (_first_key_check && status != HASP_TOO_MANY_USERS) {
+		_current_check_number = _max_check_number;
 	}
 	return success;
 }
