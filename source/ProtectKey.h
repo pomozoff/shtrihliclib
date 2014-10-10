@@ -32,7 +32,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		static const bool copy_block_to_buffer(const value_t& source, value_t& destination, const size_t length, const offset_t source_offset, const offset_t destination_offset);
 
 		const granule_t create_granule(const std::wstring id) const;
-		void removeGranules(void) const;
+		void remove_granules(void) const;
 
 		virtual const value_t read_memory(const check_method_memory_t check_method) const = 0;
 

@@ -107,7 +107,7 @@ const granule_t ProtectKey::create_granule(const std::wstring name) const {
 	_granules[granule] = false;
 	return granule;
 }
-void ProtectKey::removeGranules(void) const {
+void ProtectKey::remove_granules(void) const {
 	_granules.clear();
 }
 const granule_t ProtectKey::granule_with_name(const std::wstring& granule_name) const {
