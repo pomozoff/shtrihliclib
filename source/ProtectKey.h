@@ -43,6 +43,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		virtual const bool check_license(void) const override final;
 		virtual const bool is_key_nfr(void) const override final;
 		virtual const bool is_key_base(void) const override final;
+		virtual const size_t licenses_amount(void) const override final;
+
 		virtual const time_t check_license_timeout(void) const override final;
 		virtual void encrypt(const byte_t* input_buffer, const size_t input_length, byte_t** iv_enc, size_t& iv_length, byte_t** encrypted_buffer, size_t& encrypted_length) const override final;
 		virtual void decrypt(const byte_t* encrypted_buffer, const size_t encrypted_length, byte_t* iv_dec, byte_t** decrypted_buffer) const override final;
@@ -70,6 +72,7 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 		mutable features_t _features;
 		mutable check_number_t _current_check_number;
 		mutable bool _first_key_check = true;
+		mutable size_t _licenses_amount = 0;
 
 		ProtectKey(const KeyType keytype, const check_number_t check_number);
 
@@ -96,6 +99,8 @@ class ProtectKey : public IProtectKey, public KeyChecker, public std::enable_sha
 
 		mutable time_t _nfr_end_date = std::time(NULL);
 		mutable bool _is_key_nfr = false;
+
+		virtual const size_t read_licenses_amount(const check_method_login_t check_method) const = 0;
 
 		const bool check_license_with_methods(void) const;
 		const bool recheck_key(void) const;

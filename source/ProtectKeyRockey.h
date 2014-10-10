@@ -33,7 +33,7 @@ class ProtectKeyRockey : public ProtectKey {
 		const rockey_status_t write_memory(const check_method_login_t check_method, const rockey_size_t offset, const rockey_size_t length, const value_t& buffer) const;
 
 		const bool login(const check_method_login_t check_method, rockey_handle_t& handle) const;
-		const size_t licenses_amount(const check_method_login_t check_method) const;
+		virtual const size_t read_licenses_amount(const check_method_login_t check_method) const override final;
 
 		void process_result(const rockey_status_t status) const;
 };

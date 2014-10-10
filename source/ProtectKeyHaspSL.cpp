@@ -187,7 +187,7 @@ const bool ProtectKeyHaspSL::login(const check_method_login_t check_method, hasp
 	}
 	return success;
 }
-const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_method) const {
+const size_t ProtectKeyHaspSL::read_licenses_amount(const check_method_login_t check_method) const {
 	const size_t sizeof_buffer = 2;
 	const size_t one_byte = 256;
 
@@ -195,18 +195,18 @@ const size_t ProtectKeyHaspSL::licenses_amount(const check_method_login_t check_
 	auto check_method_memory = std::make_shared<const CheckMethodMemory>(offset_licenses_amount, buffer, check_method);
 	auto data = read_memory(check_method_memory);
 
-	size_t read_licenses_amount = 0;
+	_licenses_amount = 0;
 	if (sizeof_buffer == data.size()) {
-		read_licenses_amount = data[0] * one_byte + data[1];
+		_licenses_amount = data[0] * one_byte + data[1];
 	}
-	return read_licenses_amount;
+	return _licenses_amount;
 }
 const license_block_manager_t ProtectKeyHaspSL::make_license_block_manager(const check_method_login_t check_method, const time_t loggedin_period_seconds) const {
 	value_t buffer(read_write_memory_size);
 	if (read_rw_memory(check_method, 0, read_write_memory_size, buffer) != HASP_STATUS_OK) {
 		return nullptr;
 	}
-	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, loggedin_period_seconds, licenses_amount(check_method), _session_id_hash);
+	auto license_block_manager = std::make_shared<const LicenseBlockManager>(buffer, loggedin_period_seconds, read_licenses_amount(check_method), _session_id_hash);
 	return license_block_manager;
 }
 const bool ProtectKeyHaspSL::get_license(const check_method_login_t check_method) const {

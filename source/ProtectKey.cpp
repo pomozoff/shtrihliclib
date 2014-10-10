@@ -156,6 +156,9 @@ const bool ProtectKey::is_key_nfr(void) const {
 const bool ProtectKey::is_key_base(void) const {
 	return _is_key_base;
 }
+const size_t ProtectKey::licenses_amount(void) const {
+	return _licenses_amount;
+}
 const time_t ProtectKey::check_license_timeout(void) const {
 	return _license_timeout;
 }

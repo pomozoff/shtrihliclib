@@ -12,6 +12,7 @@ class IProtectKey {
 		virtual const bool check_license(void) const = 0;
 		virtual const bool is_key_nfr(void) const = 0;
 		virtual const bool is_key_base(void) const = 0;
+		virtual const size_t licenses_amount(void) const = 0;
 
 		virtual const time_t check_license_timeout(void) const = 0;
 		virtual const granule_t granule_with_name(const std::wstring& granule_name) const = 0;

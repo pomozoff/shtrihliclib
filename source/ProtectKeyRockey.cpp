@@ -102,6 +102,9 @@ const bool ProtectKeyRockey::login(const check_method_login_t check_method, rock
 	}
 	return success;
 }
+const size_t ProtectKeyRockey::read_licenses_amount(const check_method_login_t check_method) const {
+	return 0;
+}
 void ProtectKeyRockey::process_result(const rockey_status_t status) const {
 	_error_code = status;
 	switch (status)
