@@ -23,7 +23,7 @@
 #include "RealKeyRockeyNet.h"
 
 static const uint16_t AES_key_length = 256;
-static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj";
+static const std::string AES_key_str = "XHQEwGsbezV1ngPFfmLzNhRUy7nTapOj"; // temporary AES key
 
 #pragma region Constructor Destructor
 ProtectKey::ProtectKey(const KeyType keytype, const check_number_t check_number)
